@@ -33,7 +33,7 @@
   }
 
   /* 查音高：(弦, 徽名) → 频率
-   * 按音：f = 散音 / (1 - 徽位比例)，物理公式（APK HuiPitchTable + SimulatorGeometry）
+   * 按音：f = 散音 / 徽位比例（徽位比例 = 从岳山到按音点的弦长比例）
    * 泛音：f = 散音 × 谐波次数（按徽位查 harmonicOrder）
    * 徽位比例表来自 APK HuiPitchTable.ratio（15 项精确分数） */
   const HUI_RATIO = {
@@ -48,7 +48,7 @@
   };
   function huiToRatio(hui) {
     if (!hui) return null;
-    if (hui === '徽外') return 0.9167;
+    if (hui === '徽外') return 0.891;
     if (HUI_RATIO[hui]) return HUI_RATIO[hui];
     // 解析「X徽Y分」「X徽半」：徽内位置 = 徽位比例 + 分内偏移
     // APK _parseHuiDigits：一=2分位(0.1), 二=4分位(0.2), ..., 半=10分位(0.5), 十=20分位(1.0)
@@ -89,10 +89,11 @@
       const hit = same.find(p => p.hui === n) || same.find(p => p.hui === 7);
       return hit ? hit.f * (open / 65.406) : open * 2;
     }
-    // 按音：f = 散音 / (1 - 徽位比例)
-    if (hui === '徽外') return open / (1 - 0.9167);
+    // 按音：f = 散音 / 徽位比例
+    // 徽位比例 = 从岳山到按音点的弦长比例（九徽=2/3 → 散音×1.5 纯五度）
+    // 验证：pitch.json 弦6九徽=196.00Hz, 130.82/(2/3)=196.22 ✓
     const ratio = huiToRatio(hui);
-    if (ratio != null) return open / Math.max(0.0001, 1 - ratio);
+    if (ratio != null) return open / Math.max(0.0001, ratio);
     // 兜底：七徽
     return open / 0.5;
   }
