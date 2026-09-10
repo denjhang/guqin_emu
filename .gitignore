@@ -31,3 +31,6 @@ node_modules/
 # h5 运行时
 site/h5/audio/
 research/.sbtoken
+reference/Guqin-Dataset/Guqin_Dataset_v1/
+reference/Guqin-Dataset/paper/
+reference/jianzipu/scripts/aux.ipynb

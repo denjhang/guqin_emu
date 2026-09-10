@@ -167,5 +167,20 @@
     strings.forEach(s => { loadSample('open', s); loadSample('pressed', s); loadSample('harmonic', s); });
   }
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, OPEN };
+  /* 刹音（伏/剌伏）：80ms 内收掉所有在响声部——对应右手捂弦止振 */
+  function damp() {
+    const c = ensureCtx();
+    const t = c.currentTime;
+    voices.forEach(v => {
+      try {
+        v.g.gain.cancelScheduledValues(t);
+        v.g.gain.setValueAtTime(v.g.gain.value, t);
+        v.g.gain.linearRampToValueAtTime(0, t + 0.08);
+        v.s.stop(t + 0.1);
+      } catch (e) { /* 已结束 */ }
+    });
+    voices.clear();
+  }
+
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN };
 })();

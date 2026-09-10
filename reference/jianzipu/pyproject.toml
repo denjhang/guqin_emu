@@ -1,0 +1,41 @@
+[project]
+name = "jianzipu"
+version = "0.4.2"
+description = "根据古琴减字谱读法渲染减字图像"
+authors = [
+    {name = "alephpi", email = "maosicheng98@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyparsing>=3.1.1",
+    "numpy>=1.25.2",
+    "pyyaml>=6.0.3",
+    "pandas>=3.0.1",
+    "fonttools>=4.62.1",
+    "ufo2ft>=3.7.2",
+    "ufolib2>=0.18.1",
+]
+classifiers = [
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Natural Language :: Chinese (Simplified)",
+    "Natural Language :: Chinese (Traditional)",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Text Processing :: Fonts"
+]
+
+[dependency-groups]
+dev = [
+    "janus-swi>=1.5.2",
+    "jupyter>=1.1.1",
+    "pypinyin>=0.55.0",
+    "pytest>=7.4.0",
+    "rich>=14.3.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

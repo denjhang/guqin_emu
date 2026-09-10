@@ -49,9 +49,21 @@
       const from = lastFreq || A.OPEN[s - 1];
       const toHui = act.toHui;
       let target = toHui ? A.freqOf(s, toHui, false) : from * (act.dir === 'up' ? 1.122 : 1 / 1.122);
+      if (act.bounce) {
+        // 逗/唤：半音急滑即回（逗=急上复下，唤=急下复上）
+        const peak = from * (act.dir === 'up' ? 1.0595 : 1 / 1.0595);
+        A.play(s, false, false, from, { glideTo: peak, glideSec: 0.12, dur: 0.3, gain: 0.5 });
+        later(() => A.play(s, false, false, peak, { glideTo: from, glideSec: 0.12, dur: 0.3, gain: 0.45 }), 130);
+        return;
+      }
       A.play(s, false, false, from, { glideTo: target, glideSec: Math.max(0.4, dur * 0.7), dur, gain: 0.55 });
       lastFreq = target; lastHui = toHui || lastHui;
       if (toHui) lastHuiByString[s] = toHui;       // 走手音后左手在新徽位
+      return;
+    }
+    if (act.type === 'damp') {
+      // 伏/剌伏：刹音，止住所有余振动
+      if (A.damp) A.damp();
       return;
     }
     if (act.type === 'chord') {
@@ -69,9 +81,16 @@
       return;
     }
     if (act.type === 'pluck') {
-      pluckOne(act, dur, act.mods);
-      // 连弹（抹挑七/勾剔二）：同弦两触，第二触约 90ms 后（同弦重触自然掐断前音）
-      if (act.double) later(() => pluckOne(act, Math.max(0.4, dur * 0.6), act.mods), 90);
+      const reps = Math.max(1, act.reps || 1);
+      pluckOne(act, dur / reps * 1.5, act.mods);
+      if (act.double && reps === 1) {
+        // 连弹（抹挑七/勾剔二）：同弦两触，第二触约 90ms 后（同弦重触自然掐断前音）
+        later(() => pluckOne(act, Math.max(0.4, dur * 0.6), act.mods), 90);
+      }
+      for (let k = 1; k < reps; k++) {
+        // 轮/琐：同弦快弹，75ms 间隔（同弦重触自然形成斩截感）
+        later(() => pluckOne(act, 0.45, act.mods), k * 75);
+      }
     }
   }
 

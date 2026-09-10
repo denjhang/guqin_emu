@@ -18,34 +18,26 @@
   function label(pid) { return partsById[pid] ? partsById[pid].label : ''; }
   function cat(pid) { return partsById[pid] ? (partsById[pid].categories || []) : []; }
 
-  // 数字串("七十" "十八" "八半") → 徽位名（"七徽" "十徽八分" "八徽半"）
-  function huiName(str) {
-    if (!str) return null;
-    if (str === '徽外' || str === '外') return '徽外';
-    const m = str.match(/^(十)?([一二三四五六七八九]?)半?$/);
-    if (str === '半') return null;
-    if (str.endsWith('半')) {
-      const head = str.slice(0, -1);
-      return (head.length === 2 ? head[0] + '徽' + head[1] + '分' : head + '徽半').replace('徽半', '徽半');
-    }
-    if (str.length === 1) return str + '徽';
-    if (str.length === 2) {
-      if (str[0] === '十') return '十徽' + (str[1] === '' ? '' : ''); // "十八"→十徽八分
-      return str[0] + '徽' + str[1] + '分';
-    }
-    return null;
-  }
-  // 兼容写法：两字数字统一映射（"十八"=十徽八分，"八半"=八徽半）
+  // 数字串 → 徽位名。消歧规则照抄 alephpi/jianzipu 文法：
+  // 十一/十二/十三 总是理解为十一徽/十二徽/十三徽（十徽一二三分不常用），
+  // 其余两位数 X Y = X徽Y分（"十八"=十徽八分），后缀半 = 徽半
+  function huiName(str) { return digitsToHui(str); }
   function digitsToHui(s) {
     if (!s) return null;
-    if (s === '外') return '徽外';
-    if (s.includes('半')) {
-      const h = s.replace('半', '');
-      return (h.length === 2) ? h[0] + '徽' + h[1] + '分' : h + '徽半';
+    if (s === '外' || s.includes('外')) return '徽外';
+    if (s.endsWith('半')) {
+      const h = s.slice(0, -1);
+      const m = h.match(/^(十一|十二|十三|十|[一二三四五六七八九])$/);
+      if (m) return h + '徽半';
+      return null;
     }
-    if (s.length === 1) return s + '徽';
-    if (s[0] === '十') return '十徽' + s[1] + '分';
-    return s[0] + '徽' + s[1] + '分';
+    let m = s.match(/^(十一|十二|十三)([一二三四五六七八九])?$/);   // 十二/十二三
+    if (m) return m[1] + '徽' + (m[2] ? m[2] + '分' : '');
+    m = s.match(/^十([一二三四五六七八九])$/);                      // 十八
+    if (m) return '十徽' + m[1] + '分';
+    m = s.match(/^([一二三四五六七八九])([一二三四五六七八九])?$/);   // 七 / 七九
+    if (m) return m[1] + '徽' + (m[2] ? m[2] + '分' : '');
+    return null;
   }
   function digitToNum(ch) {
     return '零一二三四五六七八九'.indexOf(ch) >= 0 ? '零一二三四五六七八九'.indexOf(ch) : (ch === '十' ? 10 : NaN);
@@ -141,6 +133,20 @@
       ], text };
     }
 
+    // 独体装饰字（分类学对照 alephpi/jianzipu jf/mf 联袂走位类）
+    if (/^(推出|不动|分开|应合|同声|放合)$/.test(text)) {
+      return { type: 'pluck', carry: true, tech: text, text };
+    }
+    if (/^掐撮三声/.test(text)) {
+      return { type: 'pluck', carry: true, reps: 3, tech: '掐撮三声', text };
+    }
+    if (text === '逗' || text === '唤') {
+      return { type: 'slide', dir: text === '唤' ? 'down' : 'up', toHui: null, bounce: true, text };
+    }
+    if (/^(伏|剌伏)$/.test(text)) {
+      return { type: 'damp', text };   // 刹音：止住所有余振动
+    }
+
     // 纯数字字（"四"，单部件单字）：续弹——只写弦号，指法沿用前字
     if ((token.partIds || []).length === 1 && /^[一二三四五六七]$/.test(text)) {
       return { type: 'pluck', string: digitToNum(text), carryTech: true, carry: false, text };
@@ -161,12 +167,18 @@
     (token.partIds || []).forEach((pid, i) => {
       if (['绰', '注', '吟字', '猱字', '撞字'].some(c => cats[i].includes(c))) mods.push(labels[i]);
     });
+    // 轮/琐/蠲：同弦快弹多触（半轮2、轮3、短琐2、琐3、长琐5、蠲2）
+    let reps = 1;
+    if (text.includes('半轮')) reps = 2;
+    else if (text.includes('长琐')) reps = 5;
+    else if (text.includes('短琐')) reps = 2;
+    else if (/[轮琐]|蠲|涓/.test(text)) reps = text.includes('轮') || text.includes('琐') ? 3 : 2;
     return {
       type: 'pluck',
       string: p.string, hui: p.hui, finger: p.finger, tech: p.tech,
       open: p.open, harmonic: p.harmonic, mods,
       double: info.length > 1,        // 连弹：同弦快速两触
-      text
+      reps, text
     };
   }
 
@@ -175,7 +187,7 @@
     const out = [];
     let cur = { finger: null, hui: null, string: null, tech: null, open: false, harmonic: false };
     let huiDigits = '', numAfterTech = false;
-    const TECH_CATS = ['勾剔摘', '挑托', '抹', '打', '擘', '历', '涓字', '轮字', '弹字'];
+    const TECH_CATS = ['勾剔摘', '挑托', '抹', '打', '擘', '历', '涓字', '轮字', '弹字', '琐字'];
     slots.forEach((s, i) => {
       const c = cat(pids[i]); const l = label(pids[i]);
       if (s === '散') { cur.open = true; return; }

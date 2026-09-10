@@ -1,0 +1,145 @@
+GlyphTag,GlyphTagCN,GlyphNameCN,GlyphName,Variant
+hf,徽位指法,散,san3,md sm
+hf,徽位指法,大,da4,md sm
+hf,徽位指法,食,shi2,md sm
+hf,徽位指法,中,zhong1,md sm
+hf,徽位指法,名,ming2,md sm
+hf,徽位指法,跪,gui4,md sm
+xf,弦序指法,托,tuo1,md sm
+xf,弦序指法,擘,pi1,md sm
+xf,弦序指法,抹,mo3,md sm
+xf,弦序指法,挑,tiao3,md sm
+xf,弦序指法,勾,gou1,md sm
+xf,弦序指法,剔,ti1,md sm
+xf,弦序指法,打,da3,md sm
+xf,弦序指法,摘,zhai1,md sm
+xf,弦序指法,托擘,tuo1pi1,md
+xf,弦序指法,抹挑,mo3tiao3,md
+xf,弦序指法,勾剔,gou1ti1,md
+xf,弦序指法,打摘,da3zhai1,md
+xf,弦序指法,历,li4,md
+xf,弦序指法,蠲,juan1,md
+xf,弦序指法,轮,lun2,md
+xf,弦序指法,半轮,ban4lun2,md
+xf,弦序指法,琐,suo3,md
+xf,弦序指法,长琐,chang2suo3,md
+xf,弦序指法,如一,ru2yi1,md
+xf,弦序指法,伏,fu2,md
+xf,弦序指法,如一声,ru2yi1sheng1,md
+xf,弦序指法,滚,gun3,md
+xf,弦序指法,拂,fo2,md
+xf,弦序指法,至,zhi4,md
+xf,弦序指法,滚拂,gun3fo2,md
+xf,弦序指法,全扶,quan2fuu2,md
+cf,复式指法,拨,bo1,md
+cf,复式指法,剌,la4,md
+xf,弦序指法,剌伏,la4fu2,md
+xf,弦序指法,打圆,da3yuan2,md
+xf,弦序指法,搯起,tao1qi3,md
+xf,弦序指法,抓起,zhua1qi3,md
+xf,弦序指法,带起,dai4qi3,md
+xf,弦序指法,掩,yan3,md
+xf,弦序指法,虚掩,xu1yan3,md
+xf,弦序指法,推出,tui1chu1,md
+xf,弦序指法,不动,bu2dong4,md
+mf,走位指法,上,shang4,md
+mf,走位指法,下,xia4,md
+mf,走位指法,进,jin4,md
+mf,走位指法,退,tui4,md
+mf,走位指法,复,fu4,md
+mf,走位指法,进复,jin4fu4,md
+mf,走位指法,退复,tui4fu4,md
+mf,走位指法,往来,wang3lai2,md
+mf,走位指法,撞,zhuang4,md
+mf,走位指法,逗,dou4,md
+mf,走位指法,唤,huan4,md
+mf,走位指法,吟,yin2,md
+mf,走位指法,猱,nao2,md
+sf,特殊指法,注,zhu4,md
+sf,特殊指法,绰,chuo4,md
+mo,修饰,引,yin3,md
+mo,修饰,淌,tang3,md
+mo,修饰,急,ji2,md
+mo,修饰,缓,huan3,md
+mo,修饰,紧,jin3,md
+mo,修饰,慢,man4,md
+jf,联袂指法,分开,fen1kai1,md
+jf,联袂指法,同声,tong2sheng1,md
+jf,联袂指法,应合,ying4he2,md
+jf,联袂指法,放合,fang4he2,md
+jf,联袂指法,掐撮三声,qia1cuo1san1sheng1,md
+cf,复式指法,撮,cuo1,md
+cf,复式指法,掐撮,qia1cuo1,md
+cf,复式指法,双弹,shuang1tan2,md
+cf,复式指法,拨剌,bo1la4,md
+cf,复式指法,齐撮,qi2cuo1,md
+ma,记号,少息,shao3xi1,md
+ma,记号,大息,da4xi1,md
+ma,记号,入拍,ru4pai1,md
+ma,记号,入慢,ru4man4,md
+ma,记号,泛起,fan4qi3,md
+ma,记号,泛止,fan4zhi3,md
+ma,记号,间,jian1,md
+ma,记号,再作,zai4zuo4,md
+ma,记号,从头再作,cong2tou2zai4zuo4,md
+ma,记号,曲终,qu1cjung1,md
+ma,记号,操终,cao1cjung1,md
+n,数字,一,yi1,md sm tn
+n,数字,二,er4,md sm tn
+n,数字,三,san1,md sm tn
+n,数字,四,si4,md sm tn
+n,数字,五,wu3,md sm tn
+n,数字,六,liu4,md sm tn
+n,数字,七,qi1,md sm tn
+n,数字,八,ba1,md sm tn
+n,数字,九,jiu3,md sm tn
+n,数字,十,shii2,md sm tn
+n,数字,十一,shii2yi1,md sm tn
+n,数字,十二,shii2er4,md sm tn
+n,数字,十三,shii2san1,md sm tn
+n,数字,外,wai4,md sm tn
+n,数字,半,ban4,md sm tn
+o,其他,就,jiu4,md
+o,其他,按,an4,md
+o,其他,泛,fan4,md
+o,其他,徽,hui1,md
+o,其他,分,fen1,md
+o,其他,弦,xian2,md
+o,其他,不,bu2,
+o,其他,从,cong2,
+o,其他,作,zuo4,
+o,其他,入,ru4,
+o,其他,全,quan2,
+o,其他,再,zai4,
+o,其他,出,chu1,
+o,其他,动,dong4,
+o,其他,双,shuang1,
+o,其他,合,he2,
+o,其他,同,tong2,
+o,其他,圆,yuan2,
+o,其他,声,sheng1,
+o,其他,头,tou2,
+o,其他,如,ru2,
+o,其他,少,shao3,
+o,其他,带,dai4,
+o,其他,应,ying1,
+o,其他,开,kai1,
+o,其他,弹,tan2,
+o,其他,往,wang3,
+o,其他,息,xi1,
+o,其他,扶,fuu2,
+o,其他,抓,zhua1,
+o,其他,拍,pai1,
+o,其他,掐,qia1,
+o,其他,推,tui1,
+o,其他,搯,tao1,
+o,其他,操,cao1,
+o,其他,放,fang4,
+o,其他,曲,qu1,
+o,其他,来,lai2,
+o,其他,止,zhi3,
+o,其他,终,cjung1,
+o,其他,虚,xu1,
+o,其他,起,qi3,
+o,其他,长,zhang3,
+o,其他,齐,qi2,
