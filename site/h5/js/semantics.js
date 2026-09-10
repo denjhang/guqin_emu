@@ -31,6 +31,7 @@
       if (m) return h + '徽半';
       return null;
     }
+    if (s === '十') return '十徽';
     let m = s.match(/^(十一|十二|十三)([一二三四五六七八九])?$/);   // 十二/十二三
     if (m) return m[1] + '徽' + (m[2] ? m[2] + '分' : '');
     m = s.match(/^十([一二三四五六七八九])$/);                      // 十八
