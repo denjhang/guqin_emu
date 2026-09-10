@@ -45,3 +45,19 @@ data/             glyph_parts / glyph_paths / category_rules / pitch（APK 原�
 audio/            21 条 WAV 采样（APK 提取）
 scores/           谱面快照 + 索引
 ```
+
+## 更新：演奏 UI 与音色（fc59aed）
+
+- 演奏页改为 APK 式布局：顶部横向滚动谱条（自动居中跟随、已读淡出、点读），
+  下方琴面模拟器（按位朱砂点、泛音青环、散音拨弦光环、弦振动衰减动画）——`js/qin.js`
+- 音色修正：滑音指数坡（弦长物理）、绰注 0.22~0.38s 滑入、
+  吟 4.3Hz±0.6 半音 / 猱 2.4Hz±1 半音且音头 0.22s 干净后摆入
+- 字形按槽位拉伸填充（preserveAspectRatio=none），与 APK 渲染一致
+- 无弦号音符（掐起/带起/掩等）兜底沿用上一音弦位发声
+
+## 待深挖（源码线索）
+
+- APK「正在计算全曲弦徽」——GuqinPositionResolver 全曲位置求解（同音择弦逻辑）
+- 「按弦音准偏差较大」——aubio 音高检测 + 逐字练评分算法
+- `.gqp` 谱文件格式（APK 内出现「琴谱.gqp」）
+- 技法解说词典（每个技法一句文言释义，libapp.so 内 utf16 字符串）
