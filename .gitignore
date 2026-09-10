@@ -28,3 +28,5 @@ tmp/
 # 运行时产物
 node_modules/
 *.log
+# h5 运行时
+site/h5/audio/

@@ -1,0 +1,898 @@
+{
+ "id": "b0c615ce-a9c7-4cd1-9ce1-f6aa7bff4ce0",
+ "entity_type": "post",
+ "entity_id": "4d1fd60f-0726-4b16-b76c-5a1fefc46ff2",
+ "title": "新版测试",
+ "change_source": "beta_auto_approve",
+ "author_id": "07ac2f2b-88e8-4c6b-af48-c5c559aa8c41",
+ "created_at": "2026-08-22T02:35:19.573902+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosan",
+       "kind": "jianzi",
+       "text": "抹三",
+       "partIds": [
+        "019",
+        "009"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosan",
+       "kind": "jianzi",
+       "text": "抹三",
+       "partIds": [
+        "019",
+        "009"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩𝅗𝅥",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        },
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩♪",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        },
+        {
+         "duration": "eighth"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      }
+     ],
+     "sectionTempo": 80,
+     "sectionTitle": "第1段月落乌啼霜满天",
+     "startsSection": true
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "nao",
+       "kind": "jianzi",
+       "text": "猱",
+       "partIds": [
+        "128"
+       ],
+       "categorySlots": [
+        "单字"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      }
+     ],
+     "sectionTempo": 44,
+     "sectionTitle": "第2段 江枫渔火对愁眠",
+     "startsSection": true
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅝",
+       "duration": "whole",
+       "rhythmComponents": [
+        {
+         "duration": "whole"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      }
+     ],
+     "sectionTempo": 60,
+     "sectionTitle": "第3段 姑苏城外寒山寺",
+     "startsSection": true
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "mojiu",
+       "kind": "jianzi",
+       "text": "抹九",
+       "partIds": [
+        "019",
+        "015"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter",
+       "rhythmComponents": [
+        {
+         "duration": "quarter"
+        }
+       ]
+      },
+      {
+       "code": "rhythm-slot",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half",
+       "rhythmComponents": [
+        {
+         "duration": "half"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "jianziTokens": [],
+     "rhythmTokens": [],
+     "sectionTempo": 60,
+     "startsSection": true
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "新版测试",
+  "format": "lingling.gqp",
+  "tuning": "碧玉调",
+  "version": 1,
+  "localDraftId": "draft-1787365955382697",
+  "scoreOwnerId": "07ac2f2b-88e8-4c6b-af48-c5c559aa8c41",
+  "libraryItemId": "community:4d1fd60f-0726-4b16-b76c-5a1fefc46ff2:0",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "松风阁",
+  "publishedPostId": "4d1fd60f-0726-4b16-b76c-5a1fefc46ff2",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "测试",
+  "publishedPublicationSignature": "{\"score\":{\"lines\":[{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹四\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosan\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"009\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹三\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹四\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹四\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosan\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"009\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹三\"}],\"rhythmTokens\":[{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"}],\"text\":\"♩\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"},{\"duration\":\"half\"}],\"text\":\"♩𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"},{\"duration\":\"eighth\"}],\"text\":\"♩♪\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"}],\"sectionTempo\":80,\"sectionTitle\":\"第1段月落乌啼霜满天\",\"startsSection\":true},{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹四\"},{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"},{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"}],\"rhythmTokens\":[{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"单字\"],\"code\":\"nao\",\"kind\":\"jianzi\",\"partIds\":[\"128\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0}],\"text\":\"猱\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"}],\"rhythmTokens\":[{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"}],\"text\":\"♩\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"}],\"sectionTempo\":44,\"sectionTitle\":\"第2段 江枫渔火对愁眠\",\"startsSection\":true},{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mosi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹四\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"}],\"rhythmTokens\":[{\"code\":\"rhythm-slot\",\"duration\":\"whole\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"whole\"}],\"text\":\"𝅝\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"}],\"text\":\"♩\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"}],\"sectionTempo\":60,\"sectionTitle\":\"第3段 姑苏城外寒山寺\",\"startsSection\":true},{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"mojiu\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹九\"},{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"}],\"rhythmTokens\":[{\"code\":\"rhythm-slot\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"quarter\"}],\"text\":\"♩\"},{\"code\":\"rhythm-slot\",\"duration\":\"half\",\"kind\":\"rhythm\",\"rhythmComponents\":[{\"duration\":\"half\"}],\"text\":\"𝅗𝅥\"}]},{\"jianziTokens\":[],\"rhythmTokens\":[],\"sectionTempo\":60,\"startsSection\":true}]},\"scoreCardIntroduction\":\"测试\",\"tempo\":80,\"timeSignature\":\"4/4\",\"title\":\"新版测试\",\"tuning\":\"正调\"}",
+  "publishedScoreCardIntroduction": "测试"
+ }
+}

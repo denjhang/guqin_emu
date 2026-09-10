@@ -1,0 +1,992 @@
+﻿[
+  {
+    "id": "single_number",
+    "template": true,
+    "name": "单一数字模板",
+    "items": [
+      {"slot": "number","x": 0,"y": 0,"lengthX": 256,"lengthY": 256}
+    ],
+    "categories": ["组合数字"]
+  },
+  {
+    "id": "double_number",
+    "template": true,
+    "name": "双数字模板，如十徽八分，历七八",
+    "items": [
+      {"slot": "number","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["组合数字", "多位组合数字"]
+  },
+  {
+    "id": "triple_number",
+    "template": true,
+    "name": "十三徽八分",
+    "items": [
+      {"slot": "十","x": 0,"y": 0,"lengthX": 128,"lengthY": 128},
+      {"slot": "十后","x": 128,"y": 0,"lengthX": 128,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["组合数字", "多位组合数字"]
+  },
+  {
+    "id": "shangbu",
+    "template": true,
+    "name": "左手+组合数字",
+    "items": [
+      {"slot": "左手","x": 0,"y": 0,"lengthX": 128,"lengthY": 256},
+      {"slot": "组合数字","x": 128,"y": 0,"lengthX": 128,"lengthY": 256}
+    ],
+    "categories": ["上部","撮左","按音上部"]
+  },
+  {
+    "id": "shangbu",
+    "template": true,
+    "name": "散",
+    "items": [
+      {"slot": "散","x": 0,"y": 0,"lengthX": 256,"lengthY": 256}
+    ],
+    "categories": ["上部","撮左"]
+  }, 
+  {
+    "id": "fanshangbu",
+    "template": true,
+    "name": "泛+上部",
+    "items": [
+      {"slot": "泛","x": 78,"y": 0,"lengthX": 100,"lengthY": 85},
+      {"slot": "左手","x": 0,"y": 85,"lengthX": 128,"lengthY": 171},
+      {"slot": "组合数字","x": 128,"y": 85,"lengthX": 128,"lengthY": 171}
+    ],
+    "categories": ["上部","撮左"]
+  }, 
+  {
+    "id": "goutizhai_number",
+    "template": true,
+    "name": "勾、剔、摘+数字",
+    "items": [
+      {"slot": "勾剔摘","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "number","x": 55,"y": 107,"lengthX": 136,"lengthY": 120}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "tiaotuo_number",
+    "template": true,
+    "name": "挑、托+数字",
+    "items": [
+      {"slot": "挑托","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "number","x": 69,"y": 33,"lengthX": 142,"lengthY": 168}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "da_number",
+    "template": true,
+    "name": "打+数字",
+    "items": [
+      {"slot": "打","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "number","x": 25,"y": 48,"lengthX": 155,"lengthY": 137}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "pi_number",
+    "template": true,
+    "name": "擘+数字",
+    "items": [
+      {"slot": "擘","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "number","x": 70,"y": 127,"lengthX": 186,"lengthY": 129}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "mo_number",
+    "template": true,
+    "name": "抹+数字",
+    "items": [
+      {"slot": "抹","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "xuyan_number",
+    "template": true,
+    "name": "虚掩+数字",
+    "items": [
+      {"slot": "虚","x": 0,"y": 0,"lengthX": 256,"lengthY": 156},
+      {"slot": "掩","x": 53,"y": 85,"lengthX": 192,"lengthY": 70},
+      {"slot": "number","x": 0,"y": 156,"lengthX": 256,"lengthY": 100}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "yan_number",
+    "template": true,
+    "name": "掩+数字",
+    "items": [
+      {"slot": "掩","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "juan_number",
+    "name": "涓（蠲）+数字",
+    "description": "排版参考掩：涓或蠲占上半，弦号占下半。",
+    "items": [
+      {"slot": "涓字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "modified_juan_number",
+    "name": "叠、反、半、连+涓（蠲）+数字",
+    "description": "将掩所在的上半区再上下均分：修饰字和涓（蠲）各占64高，弦号仍占下半。",
+    "items": [
+      {"slot": "涓前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "涓字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "suo_number",
+    "template": true,
+    "name": "琐+数字",
+    "description": "排版参考蠲：琐占上半，弦号占下半。",
+    "items": [
+      {"slot": "琐字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "modified_suo_number",
+    "name": "长、短、背+琐+数字",
+    "description": "排版参考复合蠲：修饰字和琐上下均分上半区，弦号占下半。",
+    "items": [
+      {"slot": "琐前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "琐字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "fu_two_strings",
+    "name": "全扶、半扶+相邻双弦",
+    "description": "排版参考半蠲；全或半与扶均分上半区，底部两个相邻弦号左小右大。",
+    "items": [
+      {"slot": "扶前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "扶字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 96,"lengthY": 96},
+      {"slot": "number","x": 96,"y": 128,"lengthX": 160,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "yuan_lou_two_strings",
+    "name": "圆搂+双弦",
+    "description": "排版参考全扶；内外组合，底部两个弦号左小右大，不要求相邻。",
+    "items": [
+      {"slot": "圆搂首字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "圆搂次字","x": 24,"y": 20,"lengthX": 200,"lengthY": 98},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 96,"lengthY": 96},
+      {"slot": "number","x": 96,"y": 128,"lengthX": 160,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "xuzhuang",
+    "template": true,
+    "name": "虚撞",
+    "description": "排版与双撞一致，上下各半；只显示按弦往返动画，不触发声音变化。",
+    "items": [
+      {"slot": "虚撞前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "撞字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "shuangzhuang",
+    "template": true,
+    "name": "双撞",
+    "description": "排版参考进复，上下各半。",
+    "items": [
+      {"slot": "双撞前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "撞字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "fanzhuang",
+    "template": true,
+    "name": "反撞",
+    "description": "排版参考退复，上下各半。",
+    "items": [
+      {"slot": "反撞前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "撞字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "xiaozhuang",
+    "template": true,
+    "name": "小撞",
+    "description": "排版参考进复，上下各半；位移为普通撞的一半。",
+    "items": [
+      {"slot": "小撞前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "撞字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "lun_number",
+    "template": true,
+    "name": "轮+数字",
+    "description": "轮的排版参考掩：轮占上半，弦号占下半。",
+    "items": [
+      {"slot": "轮字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "ban_lun_number",
+    "template": true,
+    "name": "半轮+数字",
+    "description": "将轮原占的上半区域再纵分为“半、轮”两格。",
+    "items": [
+      {"slot": "半轮前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "轮字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "dao_lun_number",
+    "template": true,
+    "name": "倒轮+数字",
+    "description": "将轮原占的上半区域再纵分为“倒、轮”两格。",
+    "items": [
+      {"slot": "倒轮前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "轮字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "bei_lun_number",
+    "template": true,
+    "name": "背轮+数字",
+    "description": "将轮原占的上半区域再纵分为“背、轮”两格。",
+    "items": [
+      {"slot": "背轮前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 64},
+      {"slot": "轮字","x": 0,"y": 64,"lengthX": 256,"lengthY": 64},
+      {"slot": "number","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "cuo_left_chuo",
+    "template": true,
+    "name": "撮左边组合如“绰名九六”",
+    "items": [
+      {"slot": "绰","x": 0,"y": 0,"lengthX": 256,"lengthY": 80},
+      {"slot": "上部","x": 0,"y": 80,"lengthX": 256,"lengthY": 176}
+    ],
+    "categories": ["撮左"]
+  },
+  {
+    "id": "cuo_left_zhu",
+    "template": true,
+    "name": "撮左边组合如“注名九六”",
+    "items": [
+      {"slot": "注","x": 0,"y": 0,"lengthX": 80,"lengthY": 256},
+      {"slot": "上部","x": 80,"y": 0,"lengthX": 176,"lengthY": 256}
+    ],
+    "categories": ["撮左"]
+  },
+  {
+    "id": "oprator_cuo",
+    "template": true,
+    "name": "撮绰名九六散四",
+    "items": [
+      {"slot": "撮","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "撮左","x": 0,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 0,"y": 207,"lengthX": 112,"lengthY": 50},
+      {"slot": "撮左","x": 142,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 142,"y": 207,"lengthX": 112,"lengthY": 50}
+    ],
+    "categories": ["正撮"]
+  },
+  {
+    "id": "operator_tan",
+    "template": true,
+    "name": "弹大七六七散六",
+    "description": "输入结构采用撮；两根弦必须相邻。",
+    "items": [
+      {"slot": "弹字","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "撮左","x": 0,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 0,"y": 207,"lengthX": 112,"lengthY": 50},
+      {"slot": "撮左","x": 142,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 142,"y": 207,"lengthX": 112,"lengthY": 50}
+    ],
+    "categories": ["正弹"]
+  },
+  {
+    "name": "弹",
+    "items": [
+      {"slot": "正弹","x": 0,"y": 0,"lengthX": 256,"lengthY": 256}
+    ]
+  },
+  {
+    "name": "双弹、三弹",
+    "description": "排版采用反撮格式；两根弦必须相邻。",
+    "items": [
+      {"slot": "弹前字","x": 50,"y": 0,"lengthX": 156,"lengthY": 60},
+      {"slot": "正弹","x": 0,"y": 60,"lengthX": 256,"lengthY": 196}
+    ]
+  },
+  {
+    "name": "拨大六七七散六",
+    "description": "输入结构采用撮；两根弦必须相邻。",
+    "categories": ["拨"],
+    "items": [
+      {"slot": "拨字","x": 0,"y": 0,"lengthX": 256,"lengthY": 98},
+      {"slot": "撮左","x": 0,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 0,"y": 207,"lengthX": 112,"lengthY": 50},
+      {"slot": "撮左","x": 142,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 142,"y": 207,"lengthX": 112,"lengthY": 50}
+    ]
+  },
+  {
+    "name": "剌大六七七散六",
+    "description": "输入结构采用撮；两根弦必须相邻。",
+    "categories": ["剌"],
+    "items": [
+      {"slot": "剌字","x": 0,"y": 0,"lengthX": 256,"lengthY": 168},
+      {"slot": "撮左","x": 0,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 0,"y": 207,"lengthX": 112,"lengthY": 50},
+      {"slot": "撮左","x": 142,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 142,"y": 207,"lengthX": 112,"lengthY": 50}
+    ]
+  },
+  {
+    "name": "拨剌大六七七散六",
+    "description": "输入结构采用撮；拨、剌在撮字位置上下均分，两根弦必须相邻。",
+    "categories": ["拨剌"],
+    "items": [
+      {"slot": "拨字","x": 0,"y": 0,"lengthX": 256,"lengthY": 98},
+      {"slot": "剌字","x": 66,"y": 38,"lengthX": 124,"lengthY": 108},
+      {"slot": "撮左","x": 0,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 0,"y": 207,"lengthX": 112,"lengthY": 50},
+      {"slot": "撮左","x": 142,"y": 107,"lengthX": 112,"lengthY": 100},
+      {"slot": "number","x": 142,"y": 207,"lengthX": 112,"lengthY": 50}
+    ]
+  },
+  {
+    "id": "mo_tiao_number",
+    "template": true,
+    "name": "抹+挑+数字",
+    "items": [
+      {"slot": "抹","x": 0,"y": 0,"lengthX": 256,"lengthY": 110},
+      {"slot": "挑","x": 0,"y": 95,"lengthX": 256,"lengthY": 160},
+      {"slot": "number","x": 45,"y": 120,"lengthX": 161,"lengthY": 118}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "gou_ti_number",
+    "template": true,
+    "name": "勾+剔+数字",
+    "items": [
+      {"slot": "勾","x": 0,"y": 0,"lengthX": 256,"lengthY": 116},
+      {"slot": "剔","x": 0,"y": 53,"lengthX": 256,"lengthY": 203},
+      {"slot": "number","x": 56,"y": 137,"lengthX": 141,"lengthY": 97}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "da_zhai_number",
+    "template": true,
+    "name": "打+摘+数字",
+    "items": [
+      {"slot": "打","x": 0,"y": 0,"lengthX": 256,"lengthY": 65},
+      {"slot": "摘","x": 0,"y": 39,"lengthX": 256,"lengthY": 217},
+      {"slot": "number","x": 37,"y": 131,"lengthX": 159,"lengthY": 103}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "pi_tuo_number",
+    "template": true,
+    "name": "擘+托+数字",
+    "items": [
+      {"slot": "擘","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "托","x": 0,"y": 128,"lengthX": 256,"lengthY": 128},
+      {"slot": "number","x": 93,"y": 84,"lengthX": 148,"lengthY": 134}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "li_number",
+    "template": true,
+    "name": "历+数字",
+    "items": [
+      {"slot": "历","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"ref": "double_number","x": 85,"y": 30,"lengthX": 136,"lengthY": 215}
+    ],
+    "categories": ["下部组合","下部"]
+  },
+  {
+    "id": "cuo",
+    "template": true,
+    "name": "绰+下部",
+    "items": [
+      {"slot": "绰","x": 0,"y": 0,"lengthX": 256,"lengthY": 80},
+      {"slot": "下部组合","x": 0,"y": 80,"lengthX": 256,"lengthY": 176}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "zhu",
+    "template": true,
+    "name": "注+下部",
+    "items": [
+      {"slot": "注","x": 0,"y": 0,"lengthX": 80,"lengthY": 256},
+      {"slot": "下部组合","x": 80,"y": 0,"lengthX": 176,"lengthY": 256}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "jin_fu",
+    "name": "进复",
+    "items": [
+      {"slot": "进","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "复","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "tui_fu",
+    "name": "退复",
+    "items": [
+      {"slot": "退","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "复","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "qu_zhong",
+    "name": "曲终",
+    "description": "上下双字结构，版式与退复一致；控制符，无声音及动画语义。",
+    "items": [
+      {"slot": "曲终首字","x": 50,"y": 85,"lengthX": 156,"lengthY": 85},
+      {"slot": "曲终末字","x": 50,"y": 170,"lengthX": 156,"lengthY": 85}
+    ],
+    "categories": ["控制符"]
+  },
+  {
+    "id": "zhua_qi",
+    "name": "抓起",
+    "items": [
+      {"slot": "抓","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "起","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "dai_qi",
+    "name": "带起",
+    "items": [
+      {"slot": "带","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "起","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "qia_qi",
+    "name": "掐起",
+    "items": [
+      {"slot": "掐","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "起","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "zhua_he",
+    "name": "抓合",
+    "items": [
+      {"slot": "抓","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "合","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "fang_he",
+    "name": "放合",
+    "items": [
+      {"slot": "放","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "合","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["旁字"]
+  },
+  {
+    "id": "dai_he",
+    "name": "带合",
+    "items": [
+      {"slot": "带","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "合","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "named_yin",
+    "template": true,
+    "name": "长吟、定吟等双字吟",
+    "description": "两字竖向均分；播放语义采用吟。",
+    "items": [
+      {"slot": "吟前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "吟字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "name": "注吟、细吟",
+    "description": "左右结构，排版参考不动；播放语义采用吟。",
+    "items": [
+      {"slot": "左右吟前字","x": 50,"y": 85,"lengthX": 78,"lengthY": 171},
+      {"slot": "吟字","x": 128,"y": 85,"lengthX": 78,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "注猱",
+    "description": "沿用注吟的左右结构；播放语义采用猱。",
+    "items": [
+      {"slot": "注猱前字","x": 50,"y": 85,"lengthX": 78,"lengthY": 171},
+      {"slot": "猱字","x": 128,"y": 85,"lengthX": 78,"lengthY": 171}
+    ]
+  },
+  {
+    "id": "you_yin",
+    "template": true,
+    "name": "游吟",
+    "description": "吟在走字底中",
+    "items": [
+      {"slot": "游吟前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "游吟","x": 81,"y": 4,"lengthX": 161,"lengthY": 206}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "dang_yin",
+    "template": true,
+    "name": "荡吟",
+    "description": "荡吟",
+    "items": [
+      {"slot": "荡吟前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "荡吟","x": 81,"y": 82,"lengthX": 170,"lengthY": 170}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "dang_nao",
+    "template": true,
+    "name": "荡猱",
+    "description": "沿用当前荡吟组合；播放语义采用猱。",
+    "items": [
+      {"slot": "荡吟前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 256},
+      {"slot": "荡猱","x": 81,"y": 82,"lengthX": 170,"lengthY": 170}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "named_nao",
+    "template": true,
+    "name": "长猱、绰猱等双字猱",
+    "description": "两字竖向均分；播放语义采用猱。",
+    "items": [
+      {"slot": "猱前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "猱字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "huan_ji_yin",
+    "template": true,
+    "name": "缓急吟",
+    "description": "三字竖向均分；播放语义采用吟。",
+    "items": [
+      {"slot": "缓急吟缓","x": 0,"y": 0,"lengthX": 256,"lengthY": 85.333333},
+      {"slot": "缓急吟急","x": 0,"y": 85.333333,"lengthX": 256,"lengthY": 85.333334},
+      {"slot": "吟字","x": 0,"y": 170.666667,"lengthX": 256,"lengthY": 85.333333}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "luo_zhi_yin_nao",
+    "template": true,
+    "name": "落指吟、落指猱",
+    "description": "三字竖向均分；末字决定吟或猱语义。",
+    "items": [
+      {"slot": "落指首字","x": 0,"y": 0,"lengthX": 256,"lengthY": 85.333333},
+      {"slot": "落指次字","x": 0,"y": 85.333333,"lengthX": 256,"lengthY": 85.333334},
+      {"slot": "吟猱字","x": 0,"y": 170.666667,"lengthX": 256,"lengthY": 85.333333}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "id": "singleword",
+    "template": true,
+    "name": "单字，如三、退、复",
+    "items": [
+      {"slot": "单字","x": 0,"y": 0,"lengthX": 256,"lengthY": 256}
+    ],
+    "categories": ["下部"]
+  },
+  {
+    "name": "下部",
+    "items": [
+      {"slot": "下部", "x": 50,"y": 85,"lengthX": 156.0,"lengthY": 170}
+    ]
+  },
+  {
+    "name": "就+下部",
+    "categories": ["就"],
+    "description": "“就”位于上部；播放时忽略“就”字，由下部指法继承上一个减字的左手与徽位。",
+    "items": [
+      {"slot": "就字", "x": 50,"y": 0,"lengthX": 156.0,"lengthY": 85},
+      {"slot": "下部", "x": 50,"y": 85,"lengthX": 156.0,"lengthY": 170}
+    ]
+  },
+  {
+    "id": "to_string",
+    "name": "至某弦",
+    "categories": ["下部"],
+    "description": "承接前一减字的右手指法，自前一弦逐弦演奏至所写弦号；排版参考进复。",
+    "items": [
+      {"slot": "至", "x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "number", "x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ]
+  },
+  {
+    "id": "san_gun_single_string",
+    "name": "散滚某弦",
+    "categories": ["滚"],
+    "description": "单弦散音滚奏，可由后续“至某弦”从下一弦继续滚奏。",
+    "items": [
+      {"slot": "散", "x": 50,"y": 0,"lengthX": 156,"lengthY": 85.333333},
+      {"slot": "滚字", "x": 50,"y": 85.333333,"lengthX": 156,"lengthY": 85.333333},
+      {"slot": "number", "x": 50,"y": 170.666666,"lengthX": 156,"lengthY": 85.333334}
+    ]
+  },
+  {
+    "id": "san_fu_single_string",
+    "name": "散拂某弦",
+    "categories": ["拂"],
+    "description": "单弦散音拂奏，可由后续“至某弦”从下一弦继续拂奏。",
+    "items": [
+      {"slot": "散", "x": 50,"y": 0,"lengthX": 156,"lengthY": 85.333333},
+      {"slot": "拂字", "x": 50,"y": 85.333333,"lengthX": 156,"lengthY": 85.333333},
+      {"slot": "number", "x": 50,"y": 170.666666,"lengthX": 156,"lengthY": 85.333334}
+    ]
+  },
+  {
+    "name": "散滚某弦至某弦",
+    "categories": ["滚"],
+    "description": "散音滚奏：按所写范围逐弦摘。五字等高纵排，宽156。",
+    "items": [
+      {"slot": "散", "x": 50,"y": 0,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "滚字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "id": "san_juan_range",
+    "name": "散涓（蠲）某弦至某弦",
+    "categories": ["涓"],
+    "description": "按所写范围逐弦演奏散音涓；每根弦依次抹、勾。五字等高纵排，宽156。",
+    "items": [
+      {"slot": "散", "x": 50,"y": 0,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "涓字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "滚某弦至某弦",
+    "categories": ["滚"],
+    "description": "滚奏：按所写范围逐弦摘；省略“散”时从第二个五等分位置开始。",
+    "items": [
+      {"slot": "滚字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "就滚某弦至某弦",
+    "categories": ["滚","就"],
+    "description": "沿用通用“就”继承；若继承按音，仅范围第一弦保留按音，其余弦奏散音。",
+    "items": [
+      {"slot": "就字", "x": 50,"y": 0,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "滚字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "左手徽位+滚某弦至某弦",
+    "categories": ["滚"],
+    "description": "仅范围第一弦按所写左手徽位发音，其余弦奏散音。",
+    "items": [
+      {"slot": "按音上部", "x": 50,"y": 0,"lengthX": 156,"lengthY": 85},
+      {"slot": "滚字", "x": 50,"y": 85,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "number", "x": 50,"y": 127.5,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "至", "x": 50,"y": 170,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "number", "x": 50,"y": 212.5,"lengthX": 156,"lengthY": 42.5}
+    ]
+  },
+  {
+    "name": "散拂某弦至某弦",
+    "categories": ["拂"],
+    "description": "散音拂奏：按所写范围逐弦抹。五字等高纵排，宽156。",
+    "items": [
+      {"slot": "散", "x": 50,"y": 0,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "拂字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "拂某弦至某弦",
+    "categories": ["拂"],
+    "description": "拂奏：按所写范围逐弦抹；省略“散”时从第二个五等分位置开始。",
+    "items": [
+      {"slot": "拂字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "就拂某弦至某弦",
+    "categories": ["拂","就"],
+    "description": "沿用通用“就”继承；若继承按音，仅范围第一弦保留按音，其余弦奏散音。",
+    "items": [
+      {"slot": "就字", "x": 50,"y": 0,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "拂字", "x": 50,"y": 51.2,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 102.4,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "至", "x": 50,"y": 153.6,"lengthX": 156,"lengthY": 51.2},
+      {"slot": "number", "x": 50,"y": 204.8,"lengthX": 156,"lengthY": 51.2}
+    ]
+  },
+  {
+    "name": "左手徽位+拂某弦至某弦",
+    "categories": ["拂"],
+    "description": "仅范围第一弦按所写左手徽位发音，其余弦奏散音。",
+    "items": [
+      {"slot": "按音上部", "x": 50,"y": 0,"lengthX": 156,"lengthY": 85},
+      {"slot": "拂字", "x": 50,"y": 85,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "number", "x": 50,"y": 127.5,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "至", "x": 50,"y": 170,"lengthX": 156,"lengthY": 42.5},
+      {"slot": "number", "x": 50,"y": 212.5,"lengthX": 156,"lengthY": 42.5}
+    ]
+  },
+  {
+    "name": "掐撮三声",
+    "categories": ["掐撮"],
+    "description": "掐撮三声：按所写范围逐弦抹；省略“散”时从第二个五等分位置开始。",
+    "items": [
+      {"slot": "掐撮三声掐", "x": 50,"y": 0,"lengthX": 156,"lengthY": 45},
+      {"slot": "掐撮三声撮", "x": 0,"y": 50,"lengthX": 256,"lengthY": 206},
+      {"slot": "number", "x": 140,"y": 138,"lengthX": 108,"lengthY": 118},
+      {"slot": "声", "x": 0,"y": 138,"lengthX": 111,"lengthY": 118}
+    ]
+  },
+  {
+    "name": "上部+下部",
+    "items": [
+      {"slot": "上部","x": 50,"y": 0,"lengthX": 156.0,"lengthY": 85},
+      {"slot": "下部", "x": 50,"y": 85,"lengthX": 156.0,"lengthY": 170}
+    ]
+  },
+  {
+    "name": "括号标记",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "括号","x": 50,"y": 128,"lengthX": 156.0,"lengthY": 128}
+    ]
+  },
+  {
+    "name": "从头再作、从⌈再作、三作、四作",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "从","x": 50,"y": 0,"lengthX": 156,"lengthY": 64},
+      {"slot": "头","x": 50,"y": 64,"lengthX": 156,"lengthY": 64},
+      {"slot": "多作","x": 50,"y": 128,"lengthX": 156,"lengthY": 64},
+      {"slot": "作","x": 50,"y": 192,"lengthX": 156,"lengthY": 64}
+    ]
+  },
+  {
+    "name": "散五如一",
+    "categories": ["旁字"],
+    "items": [
+      {"slot": "散","x": 50,"y": 0,"lengthX": 156,"lengthY": 64},
+      {"slot": "number","x": 50,"y": 64,"lengthX": 156,"lengthY": 64},
+      {"slot": "如","x": 50,"y": 128,"lengthX": 156,"lengthY": 64},
+      {"slot": "number","x": 50,"y": 192,"lengthX": 156,"lengthY": 64}
+    ]
+  },
+  {
+    "name": "泛起",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "泛","x": 50,"y": 50,"lengthX": 156,"lengthY": 74},
+      {"slot": "起","x": 50,"y": 124,"lengthX": 156,"lengthY": 132}
+    ]
+  },
+  {
+    "name": "泛止",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "泛","x": 50,"y": 50,"lengthX": 156,"lengthY": 74},
+      {"slot": "止","x": 50,"y": 124,"lengthX": 156,"lengthY": 132}
+    ]
+  },
+  {
+    "name": "上、下、进、退+单一数字",
+    "description": "两字上下各半，排版与进复一致。",
+    "items": [
+      {"slot": "上下","x": 50,"y": 85,"lengthX": 156,"lengthY": 85},
+      {"slot": "number","x": 50,"y": 170,"lengthX": 156,"lengthY": 85}
+    ]
+  },
+  {
+    "name": "上、下、进、退+多位数字",
+    "items": [
+      {"slot": "上下","x": 50,"y": 0,"lengthX": 156,"lengthY": 100},
+      {"slot": "多位组合数字","x": 50,"y": 100,"lengthX": 156,"lengthY": 156}
+    ]
+  }, 
+  {
+    "name": "引上、浒上、引下、注下、淌下七六",
+    "items": [
+      {"slot": "引绰注淌浒","x": 50,"y": 0,"lengthX": 78,"lengthY": 100},
+      {"slot": "上下","x": 128,"y": 0,"lengthX": 78,"lengthY": 100},
+      {"slot": "组合数字","x": 50,"y": 100,"lengthX": 156,"lengthY": 156}
+    ]
+  },
+  {
+    "name": "正撮",
+    "items": [
+      {"slot": "正撮","x": 0,"y": 0,"lengthX": 256,"lengthY": 256}
+    ]
+  },
+  {
+    "name": "反撮",
+    "items": [
+      {"slot": "修饰","x": 50,"y": 0,"lengthX": 156,"lengthY": 60},
+      {"slot": "正撮","x": 0,"y": 60,"lengthX": 256,"lengthY": 196}
+    ]
+  },
+  {
+    "name": "推出",
+    "items": [
+      {"slot": "推","x": 50,"y": 85,"lengthX": 52,"lengthY": 171},
+      {"slot": "出","x": 102,"y": 85,"lengthX": 104,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "往来",
+    "description": "控制符；在本字时值内向后一滑音目标徽位进（退）后复，再由后一减字完成最后一次进（退），不重新拨弦。",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "往","x": 50,"y": 85,"lengthX": 52,"lengthY": 171},
+      {"slot": "来","x": 102,"y": 85,"lengthX": 104,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "应合", 
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "应","x": 50,"y": 85,"lengthX": 156,"lengthY": 171},
+      {"slot": "合","x": 88,"y": 126,"lengthX": 115,"lengthY": 130}
+    ]
+  },
+  {
+    "name": "同声",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "同","x": 50,"y": 85,"lengthX": 156,"lengthY": 171},
+      {"slot": "声","x": 71,"y": 113,"lengthX": 111,"lengthY": 143}
+    ]
+  },
+  {
+    "name": "分开",
+    "description": "拆开前一减字的同弦复合指法；如“大七抹挑六，分开”等同于“大七抹六，进，大七注挑六”。",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "分","x": 50,"y": 85,"lengthX": 156,"lengthY": 71},
+      {"slot": "开","x": 50,"y": 156,"lengthX": 156,"lengthY": 100}
+    ]
+  },
+  {
+    "name": "不动",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "不","x": 50,"y": 85,"lengthX": 78,"lengthY": 171},
+      {"slot": "动","x": 128,"y": 85,"lengthX": 78,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "剌伏",
+    "description": "上下双字结构；固定演奏剌散一散二，再伏弦止音。",
+    "items": [
+      {"slot": "剌伏首字","x": 50,"y": 85,"lengthX": 156,"lengthY": 85},
+      {"slot": "剌伏次字","x": 50,"y": 170,"lengthX": 156,"lengthY": 85}
+    ]
+  },
+  {
+    "name": "拍杀",
+    "description": "左右双字结构；固定演奏拨剌散一散二，再伏弦止音。",
+    "items": [
+      {"slot": "拍杀左字","x": 50,"y": 85,"lengthX": 78,"lengthY": 171},
+      {"slot": "拍杀右字","x": 128,"y": 85,"lengthX": 78,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "索铃",
+    "description": "上下双字结构；仅显示逐字练释义，不添加动画和声音语义。",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "索铃首字","x": 50,"y": 85,"lengthX": 156,"lengthY": 85},
+      {"slot": "索铃铃字","x": 50,"y": 150,"lengthX": 156,"lengthY": 105}
+    ]
+  },
+  {
+    "name": "铃",
+    "description": "单字输入；仅显示逐字练释义，不添加动画和声音语义。",
+    "categories": ["控制符"],
+    "items": [
+      {"slot": "铃字","x": 50,"y": 85,"lengthX": 156,"lengthY": 171}
+    ]
+  },
+  {
+    "name": "少息、大息",
+    "template": true,
+    "description": "排版类似双撞，上下各半；无播放语义，直接跳过。",
+    "categories": ["下部"],
+    "items": [
+      {"slot": "息前字","x": 0,"y": 0,"lengthX": 256,"lengthY": 128},
+      {"slot": "息字","x": 0,"y": 128,"lengthX": 256,"lengthY": 128}
+    ]
+  }
+]

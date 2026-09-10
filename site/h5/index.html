@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>减字谱引擎 H5 · 古琴</title>
+<style>
+  :root { --ink:#2b0000; --bg:#f7f3e8; --paper:#fffdf6; --accent:#8b2f2f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:"Microsoft YaHei",system-ui,sans-serif; background:var(--bg); color:var(--ink); }
+  header { background:var(--paper); border-bottom:2px solid #e4d9c3; padding:10px 16px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0; color:var(--accent); }
+  .tab { border:1px solid #d8c9a8; background:transparent; padding:6px 14px; border-radius:16px; cursor:pointer; font-size:14px; }
+  .tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .page { display:none; padding:16px; max-width:1100px; margin:0 auto; }
+  .page.show { display:block; }
+  /* 库 */
+  #scoreList { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; }
+  .score-item { background:var(--paper); border:1px solid #e0d5bb; border-radius:8px; padding:10px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:4px; }
+  .score-item:hover { border-color:var(--accent); }
+  .s-title { font-weight:bold; font-size:15px; }
+  .s-meta { font-size:12px; color:#8a7d63; }
+  .toolbar { display:flex; gap:8px; align-items:center; margin:10px 0; flex-wrap:wrap; }
+  .toolbar input[type=text], .toolbar input[type=number] { padding:6px 10px; border:1px solid #d8c9a8; border-radius:6px; }
+  .toolbar select { padding:6px; border:1px solid #d8c9a8; border-radius:6px; }
+  .btn { background:var(--accent); color:#fff; border:none; border-radius:6px; padding:7px 16px; cursor:pointer; font-size:14px; }
+  .btn.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+  /* 谱面 */
+  .score-line { display:flex; flex-wrap:wrap; gap:6px; align-items:center; background:var(--paper); border:1px solid #e8dfc8; border-radius:8px; padding:8px; margin-bottom:6px; }
+  .jz-token { border:none; background:transparent; padding:2px; cursor:pointer; border-radius:6px; line-height:0; }
+  .jz-token:hover { background:#f3e9d2; }
+  .jz-token.flash { animation:fl .35s; }
+  .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 2px var(--accent); }
+  @keyframes fl { 0%{background:var(--accent)} 100%{background:transparent} }
+  .line-btn { border:none; background:#eee6d0; border-radius:4px; cursor:pointer; padding:4px 8px; margin-left:4px; }
+  .blank { width:14px; }
+  /* 输入区 */
+  #inputPanel { background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:14px; margin-bottom:12px; }
+  #inputBox { width:100%; font-size:18px; padding:10px; border:1px solid #d8c9a8; border-radius:6px; margin:6px 0; }
+  #inputEcho { font-size:13px; color:#8a7d63; min-height:18px; }
+  .hint { font-size:12px; color:#a09478; margin-top:6px; }
+  #micBtn.rec { background:#c0392b; animation:pulse 1.2s infinite; }
+  @keyframes pulse { 50% { opacity:.6; } }
+  h2 { font-size:16px; color:var(--accent); margin:8px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>减字谱引擎 H5</h1>
+  <button class="tab active" data-tab="library">乐谱库</button>
+  <button class="tab" data-tab="score">谱面</button>
+  <button class="tab" data-tab="editor">作曲 · 输入</button>
+</header>
+
+<div class="page show" id="page-library">
+  <div class="toolbar">
+    <input type="text" id="searchBox" placeholder="搜索曲目…" style="width:220px">
+    <span id="libCount" style="font-size:13px;color:#8a7d63"></span>
+    <button class="btn ghost" id="newScoreBtn">＋ 新谱</button>
+  </div>
+  <div id="scoreList"></div>
+</div>
+
+<div class="page" id="page-score">
+  <div class="toolbar">
+    <h2 id="scoreTitle" style="flex:1">未选择曲目</h2>
+    <label>速度 <input type="number" id="tempoInput" value="60" min="20" max="200" style="width:70px"></label>
+    <button class="btn" id="playBtn">▶ 播放</button>
+    <button class="btn ghost" id="stopBtn">■ 停止</button>
+  </div>
+  <p class="hint">点击任意减字即时点读发声；播放时自动逐字高亮。</p>
+  <div id="scoreView"></div>
+</div>
+
+<div class="page" id="page-editor">
+  <div id="inputPanel">
+    <b>文字 / 语音 → 减字</b>
+    <input type="text" id="inputBox" placeholder='输入如：大七挑四 散勾三 泛起 名九勾二 撮大九四散七 上七六（空格分隔，回车录入）'>
+    <div class="toolbar" style="margin:6px 0">
+      <button class="btn" id="inputBtn">录入 →</button>
+      <button class="btn ghost" id="micBtn">🎤 语音</button>
+      <label>节奏
+        <select id="rhythmSel">
+          <option value="quarter">♪ 四分</option>
+          <option value="eighth">♪ 八分</option>
+          <option value="half">𝅗𝅥 二分</option>
+          <option value="sixteenth">♬ 十六分</option>
+          <option value="whole">𝅝 全音</option>
+        </select>
+      </label>
+    </div>
+    <div id="inputEcho">语音可说：大七挑四、散勾三、泛起…（说完自动录入）</div>
+    <p class="hint">支持：散/泛/按音（指+徽+技法+弦）、绰注吟猱撞、撮、上下滑音、掐起带起、泛起泛止少息曲终、进复退复应合分开。右键删除已录的字。</p>
+  </div>
+  <div class="toolbar">
+    <input type="text" id="editTitle" placeholder="曲名" style="width:160px">
+    <button class="btn" id="editPlayBtn">▶ 播放此谱</button>
+    <button class="btn ghost" id="saveBtn">⬇ 导出 JSON</button>
+    <button class="btn ghost" id="clearBtn">清空</button>
+  </div>
+  <div id="editorView"></div>
+</div>
+
+<script src="js/render.js"></script>
+<script src="js/semantics.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/player.js"></script>
+<script src="js/input.js"></script>
+<script src="js/speech.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

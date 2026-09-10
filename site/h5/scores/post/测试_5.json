@@ -1,0 +1,86 @@
+{
+ "id": "3d93d159-2895-4d9e-a3ad-47e5f1a691ed",
+ "entity_type": "post",
+ "entity_id": "b20287eb-7c18-4dff-8027-2b39f49bd315",
+ "title": "测试",
+ "change_source": "admin_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-09T02:24:15.052345+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moer",
+       "kind": "jianzi",
+       "text": "抹二",
+       "partIds": [
+        "019",
+        "008"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mosan",
+       "kind": "jianzi",
+       "text": "抹三",
+       "partIds": [
+        "019",
+        "009"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "测试",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "localDraftId": "draft-1786242184946718",
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰操",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "2222"
+ }
+}

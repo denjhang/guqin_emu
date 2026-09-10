@@ -1,0 +1,116 @@
+{
+ "id": "78f66472-e387-4f56-8394-74d99cfda461",
+ "entity_type": "post",
+ "entity_id": "c1aca1ca-be45-448e-8f03-054fb6f98e22",
+ "title": "好汉歌",
+ "change_source": "admin_approve",
+ "author_id": null,
+ "created_at": "2026-08-07T00:35:43.50813+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moer",
+       "kind": "jianzi",
+       "text": "抹二",
+       "partIds": [
+        "019",
+        "008"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mowu",
+       "kind": "jianzi",
+       "text": "抹五",
+       "partIds": [
+        "019",
+        "011"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moliu",
+       "kind": "jianzi",
+       "text": "抹六",
+       "partIds": [
+        "019",
+        "012"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "好汉歌",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "localDraftId": "draft-1786062875657597",
+  "scoreOwnerId": "0415db48-1e94-4aa3-8ec5-d4dc25d21349",
+  "libraryItemId": "built-in:c2bff268-9e35-4eb8-bc94-0630265b83e9",
+  "sourceItemKey": "community:10f1de8d-f5d4-4cc9-bfb9-99b7473a0cec:0",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "阳春调",
+  "publishedPostId": "c1aca1ca-be45-448e-8f03-054fb6f98e22",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "gghjknnj你手机你到哪想你想你就行那你向你学习呢那些年那些年想你想你你写你呢想你想你那些年那些年想你想你那些那些那你想你想你那些年奶凶奶凶那些你写你呢想你想你免洗面膜想你想你想你想你想你想你你奶凶奶凶那你想你想你想你你从哪呢那行那你想你想你你从哪纯牛奶想你想你想你"
+ }
+}

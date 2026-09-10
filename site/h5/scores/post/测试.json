@@ -1,0 +1,58 @@
+{
+ "id": "ce04020c-783d-4cd5-9248-b0429bd83294",
+ "entity_type": "post",
+ "entity_id": "59667931-da57-43fe-9626-4f438230da36",
+ "title": "测试",
+ "change_source": "admin_approve",
+ "author_id": null,
+ "created_at": "2026-08-07T00:39:05.315549+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "测试",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "scoreOwnerId": "0415db48-1e94-4aa3-8ec5-d4dc25d21349",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "阳春调",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "大喊大叫电话"
+ }
+}

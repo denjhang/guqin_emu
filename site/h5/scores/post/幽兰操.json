@@ -1,0 +1,88 @@
+{
+ "id": "50ff84c6-4a01-4d43-8607-b75cc9cf8f46",
+ "entity_type": "post",
+ "entity_id": "13e82eb2-3ff1-4df5-8c51-9c1b59212ffe",
+ "title": "幽兰操",
+ "change_source": "admin_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-07T02:54:13.285594+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moqi",
+       "kind": "jianzi",
+       "text": "抹七",
+       "partIds": [
+        "019",
+        "013"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "幽兰操",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "localDraftId": "draft-1786071210735061",
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "libraryItemId": "built-in:4f7fee53-422a-4577-b5ab-cf1a999f3934",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰",
+  "publishedPostId": "13e82eb2-3ff1-4df5-8c51-9c1b59212ffe",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "没没没"
+ }
+}

@@ -1,0 +1,3065 @@
+{
+ "id": "9612b0fb-73f3-4675-9a01-f145f515ea18",
+ "entity_type": "post",
+ "entity_id": "1ff408a1-aeaf-4e53-909c-9a681dfea9f0",
+ "title": "牵丝戏",
+ "change_source": "beta_auto_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-13T14:46:39.153022+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "daqijiutiaoqi",
+       "kind": "jianzi",
+       "text": "大七九挑七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "xiaqijiu",
+       "kind": "jianzi",
+       "text": "下七九",
+       "partIds": [
+        "073",
+        "013",
+        "015"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "cuozhudajiuqisanyi",
+       "kind": "jianzi",
+       "text": "撮注大九七散一",
+       "partIds": [
+        "117",
+        "026",
+        "001",
+        "015",
+        "013",
+        "006",
+        "007"
+       ],
+       "categorySlots": [
+        "撮",
+        "注",
+        "左手",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 35,
+         "lengthY": 100
+        },
+        {
+         "x": 35,
+         "y": 107,
+         "lengthX": 38.5,
+         "lengthY": 100
+        },
+        {
+         "x": 73.5,
+         "y": 107,
+         "lengthX": 38.5,
+         "lengthY": 100
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "sangousi",
+       "kind": "jianzi",
+       "text": "散勾四",
+       "partIds": [
+        "006",
+        "021",
+        "010"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "daqijiuchuotiaoqi",
+       "kind": "jianzi",
+       "text": "大七九绰挑七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "025",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "绰",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 53.125
+        },
+        {
+         "x": 50,
+         "y": 138.125,
+         "lengthX": 156,
+         "lengthY": 116.875
+        },
+        {
+         "x": 92.046875,
+         "y": 153.19091796875,
+         "lengthX": 86.53125,
+         "lengthY": 76.69921875
+        }
+       ]
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rest",
+       "text": "𝄾",
+       "isRest": true,
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "cuodajiuqisaner",
+       "kind": "jianzi",
+       "text": "撮大九七散二",
+       "partIds": [
+        "117",
+        "001",
+        "015",
+        "013",
+        "006",
+        "008"
+       ],
+       "categorySlots": [
+        "撮",
+        "左手",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 56,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "sangouwu",
+       "kind": "jianzi",
+       "text": "散勾五",
+       "partIds": [
+        "006",
+        "021",
+        "011"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "mingbabangouliu",
+       "kind": "jianzi",
+       "text": "名八半勾六",
+       "partIds": [
+        "004",
+        "014",
+        "044",
+        "021",
+        "012"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "xiashi",
+       "kind": "jianzi",
+       "text": "下十",
+       "partIds": [
+        "073",
+        "016"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "cuochuodaqijiuqisansi",
+       "kind": "jianzi",
+       "text": "撮绰大七九七散四",
+       "partIds": [
+        "117",
+        "025",
+        "001",
+        "013",
+        "015",
+        "013",
+        "006",
+        "010"
+       ],
+       "categorySlots": [
+        "撮",
+        "绰",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 31.25
+        },
+        {
+         "x": 0,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 68.75
+        },
+        {
+         "x": 56,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 56,
+         "y": 172.625,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "daiqi",
+       "kind": "jianzi",
+       "text": "带起",
+       "partIds": [
+        "092",
+        "037"
+       ],
+       "categorySlots": [
+        "单字",
+        "单字"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "fanshiqigouwu",
+       "kind": "jianzi",
+       "text": "泛食七勾五",
+       "partIds": [
+        "036",
+        "002",
+        "013",
+        "021",
+        "011"
+       ],
+       "categorySlots": [
+        "泛",
+        "左手",
+        "number",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 97.53125,
+         "y": 0,
+         "lengthX": 60.9375,
+         "lengthY": 28.22265625
+        },
+        {
+         "x": 50,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 128,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "liu",
+       "kind": "jianzi",
+       "text": "六",
+       "partIds": [
+        "012"
+       ],
+       "categorySlots": [
+        "单字"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        }
+       ]
+      },
+      {
+       "code": "daqijiuchuomoqi",
+       "kind": "jianzi",
+       "text": "大七九绰抹七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "025",
+        "019",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "绰",
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 53.125
+        },
+        {
+         "x": 50,
+         "y": 138.125,
+         "lengthX": 156,
+         "lengthY": 58.4375
+        },
+        {
+         "x": 50,
+         "y": 196.5625,
+         "lengthX": 156,
+         "lengthY": 58.4375
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "xiaqijiu",
+       "kind": "jianzi",
+       "text": "下七九",
+       "partIds": [
+        "073",
+        "013",
+        "015"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "cuozhudajiuqisanyi",
+       "kind": "jianzi",
+       "text": "撮注大九七散一",
+       "partIds": [
+        "117",
+        "026",
+        "001",
+        "015",
+        "013",
+        "006",
+        "007"
+       ],
+       "categorySlots": [
+        "撮",
+        "注",
+        "左手",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 35,
+         "lengthY": 100
+        },
+        {
+         "x": 35,
+         "y": 107,
+         "lengthX": 38.5,
+         "lengthY": 100
+        },
+        {
+         "x": 73.5,
+         "y": 107,
+         "lengthX": 38.5,
+         "lengthY": 100
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "sangousi",
+       "kind": "jianzi",
+       "text": "散勾四",
+       "partIds": [
+        "006",
+        "021",
+        "010"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "daqijiuchuotiaoqi",
+       "kind": "jianzi",
+       "text": "大七九绰挑七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "025",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "绰",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 53.125
+        },
+        {
+         "x": 50,
+         "y": 138.125,
+         "lengthX": 156,
+         "lengthY": 116.875
+        },
+        {
+         "x": 92.046875,
+         "y": 153.19091796875,
+         "lengthX": 86.53125,
+         "lengthY": 76.69921875
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "cuodajiuqisaner",
+       "kind": "jianzi",
+       "text": "撮大九七散二",
+       "partIds": [
+        "117",
+        "001",
+        "015",
+        "013",
+        "006",
+        "008"
+       ],
+       "categorySlots": [
+        "撮",
+        "左手",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 56,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "sangouwu",
+       "kind": "jianzi",
+       "text": "散勾五",
+       "partIds": [
+        "006",
+        "021",
+        "011"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "daqitiaoqi",
+       "kind": "jianzi",
+       "text": "大七挑七",
+       "partIds": [
+        "001",
+        "013",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "shangliusi",
+       "kind": "jianzi",
+       "text": "上六四",
+       "partIds": [
+        "072",
+        "012",
+        "010"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "sangousi",
+       "kind": "jianzi",
+       "text": "散勾四",
+       "partIds": [
+        "006",
+        "021",
+        "010"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "daqijiuchuotiaoqi",
+       "kind": "jianzi",
+       "text": "大七九绰挑七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "025",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "绰",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 53.125
+        },
+        {
+         "x": 50,
+         "y": 138.125,
+         "lengthX": 156,
+         "lengthY": 116.875
+        },
+        {
+         "x": 92.046875,
+         "y": 153.19091796875,
+         "lengthX": 86.53125,
+         "lengthY": 76.69921875
+        }
+       ]
+      },
+      {
+       "code": "fanmingjiutiaoliu",
+       "kind": "jianzi",
+       "text": "泛名九挑六",
+       "partIds": [
+        "036",
+        "004",
+        "015",
+        "020",
+        "012"
+       ],
+       "categorySlots": [
+        "泛",
+        "左手",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 97.53125,
+         "y": 0,
+         "lengthX": 60.9375,
+         "lengthY": 28.22265625
+        },
+        {
+         "x": 50,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 128,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "gousan",
+       "kind": "jianzi",
+       "text": "勾三",
+       "partIds": [
+        "021",
+        "009"
+       ],
+       "categorySlots": [
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "dajiutiaoqi",
+       "kind": "jianzi",
+       "text": "大九挑七",
+       "partIds": [
+        "001",
+        "015",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "shangqijiu",
+       "kind": "jianzi",
+       "text": "上七九",
+       "partIds": [
+        "072",
+        "013",
+        "015"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "cuochuodaliusiqisanyi",
+       "kind": "jianzi",
+       "text": "撮绰大六四七散一",
+       "partIds": [
+        "117",
+        "025",
+        "001",
+        "012",
+        "010",
+        "013",
+        "006",
+        "007"
+       ],
+       "categorySlots": [
+        "撮",
+        "绰",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 31.25
+        },
+        {
+         "x": 0,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 68.75
+        },
+        {
+         "x": 56,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 56,
+         "y": 172.625,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "xiaqi",
+       "kind": "jianzi",
+       "text": "下七",
+       "partIds": [
+        "073",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "daqijiupiqi",
+       "kind": "jianzi",
+       "text": "大七九擘七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "017",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "擘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.65625,
+         "y": 169.3359375,
+         "lengthX": 113.34375000000001,
+         "lengthY": 85.6640625
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "cuomingqiliuliusaner",
+       "kind": "jianzi",
+       "text": "撮名七六六散二",
+       "partIds": [
+        "117",
+        "004",
+        "013",
+        "012",
+        "012",
+        "006",
+        "008"
+       ],
+       "categorySlots": [
+        "撮",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 56,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 56,
+         "y": 157,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "sangouwu",
+       "kind": "jianzi",
+       "text": "散勾五",
+       "partIds": [
+        "006",
+        "021",
+        "011"
+       ],
+       "categorySlots": [
+        "散",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "daqijiutiaoqi",
+       "kind": "jianzi",
+       "text": "大七九挑七",
+       "partIds": [
+        "001",
+        "013",
+        "015",
+        "020",
+        "013"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "xiajiu",
+       "kind": "jianzi",
+       "text": "下九",
+       "partIds": [
+        "073",
+        "015"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "cuodababanliusanyi",
+       "kind": "jianzi",
+       "text": "撮大八半六散一",
+       "partIds": [
+        "117",
+        "001",
+        "014",
+        "044",
+        "012",
+        "006",
+        "007"
+       ],
+       "categorySlots": [
+        "撮",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 56,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 56,
+         "y": 157,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "shangqiliu",
+       "kind": "jianzi",
+       "text": "上七六",
+       "partIds": [
+        "072",
+        "013",
+        "012"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "daqichuotiaoliu",
+       "kind": "jianzi",
+       "text": "大七绰挑六",
+       "partIds": [
+        "001",
+        "013",
+        "025",
+        "020",
+        "012"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "绰",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 53.125
+        },
+        {
+         "x": 50,
+         "y": 138.125,
+         "lengthX": 156,
+         "lengthY": 116.875
+        },
+        {
+         "x": 92.046875,
+         "y": 153.19091796875,
+         "lengthX": 86.53125,
+         "lengthY": 76.69921875
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "shangliuer",
+       "kind": "jianzi",
+       "text": "上六二",
+       "partIds": [
+        "072",
+        "012",
+        "008"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "fanmingqigousan",
+       "kind": "jianzi",
+       "text": "泛名七勾三",
+       "partIds": [
+        "036",
+        "004",
+        "013",
+        "021",
+        "009"
+       ],
+       "categorySlots": [
+        "泛",
+        "左手",
+        "number",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 97.53125,
+         "y": 0,
+         "lengthX": 60.9375,
+         "lengthY": 28.22265625
+        },
+        {
+         "x": 50,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 128,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "sanfuyizhiwu",
+       "kind": "jianzi",
+       "text": "散拂一至五",
+       "partIds": [
+        "006",
+        "104",
+        "007",
+        "132",
+        "011"
+       ],
+       "categorySlots": [
+        "散",
+        "拂字",
+        "number",
+        "至",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 51.2
+        },
+        {
+         "x": 50,
+         "y": 51.2,
+         "lengthX": 156,
+         "lengthY": 51.2
+        },
+        {
+         "x": 50,
+         "y": 102.4,
+         "lengthX": 156,
+         "lengthY": 51.2
+        },
+        {
+         "x": 50,
+         "y": 153.6,
+         "lengthX": 156,
+         "lengthY": 51.2
+        },
+        {
+         "x": 50,
+         "y": 204.8,
+         "lengthX": 156,
+         "lengthY": 51.2
+        }
+       ],
+       "semanticCategories": [
+        "拂"
+       ]
+      },
+      {
+       "code": "dashimoliu",
+       "kind": "jianzi",
+       "text": "大十抹六",
+       "partIds": [
+        "001",
+        "016",
+        "019",
+        "012"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "shangbaban",
+       "kind": "jianzi",
+       "text": "上八半",
+       "partIds": [
+        "072",
+        "014",
+        "044"
+       ],
+       "categorySlots": [
+        "上下",
+        "number",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 78
+        },
+        {
+         "x": 50,
+         "y": 178,
+         "lengthX": 156,
+         "lengthY": 78
+        }
+       ]
+      },
+      {
+       "code": "cuochuodaqiliuliusanyi",
+       "kind": "jianzi",
+       "text": "撮绰大七六六散一",
+       "partIds": [
+        "117",
+        "025",
+        "001",
+        "013",
+        "012",
+        "012",
+        "006",
+        "007"
+       ],
+       "categorySlots": [
+        "撮",
+        "绰",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 31.25
+        },
+        {
+         "x": 0,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 68.75
+        },
+        {
+         "x": 56,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 56,
+         "y": 172.625,
+         "lengthX": 56.00000000000001,
+         "lengthY": 34.375
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "mingqijiugousi",
+       "kind": "jianzi",
+       "text": "名七九勾四",
+       "partIds": [
+        "004",
+        "013",
+        "015",
+        "021",
+        "010"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "number",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 128,
+         "y": 42.5,
+         "lengthX": 78,
+         "lengthY": 42.5
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "cuodaqiliuliusaner",
+       "kind": "jianzi",
+       "text": "撮大七六六散二",
+       "partIds": [
+        "117",
+        "001",
+        "013",
+        "012",
+        "012",
+        "006",
+        "008"
+       ],
+       "categorySlots": [
+        "撮",
+        "左手",
+        "number",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 56,
+         "y": 107,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 56,
+         "y": 157,
+         "lengthX": 56.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      },
+      {
+       "code": "shangqi",
+       "kind": "jianzi",
+       "text": "上七",
+       "partIds": [
+        "072",
+        "013"
+       ],
+       "categorySlots": [
+        "上下",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 100
+        },
+        {
+         "x": 50,
+         "y": 100,
+         "lengthX": 156,
+         "lengthY": 156
+        }
+       ]
+      },
+      {
+       "code": "fanshiqigousan",
+       "kind": "jianzi",
+       "text": "泛食七勾三",
+       "partIds": [
+        "036",
+        "002",
+        "013",
+        "021",
+        "009"
+       ],
+       "categorySlots": [
+        "泛",
+        "左手",
+        "number",
+        "勾剔摘",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 97.53125,
+         "y": 0,
+         "lengthX": 60.9375,
+         "lengthY": 28.22265625
+        },
+        {
+         "x": 50,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 128,
+         "y": 28.22265625,
+         "lengthX": 78,
+         "lengthY": 56.77734375
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 83.515625,
+         "y": 156.0546875,
+         "lengthX": 82.87500000000001,
+         "lengthY": 79.6875
+        }
+       ]
+      },
+      {
+       "code": "mingshitiaowu",
+       "kind": "jianzi",
+       "text": "名十挑五",
+       "partIds": [
+        "004",
+        "016",
+        "020",
+        "011"
+       ],
+       "categorySlots": [
+        "左手",
+        "number",
+        "挑托",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 128,
+         "y": 0,
+         "lengthX": 78,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        },
+        {
+         "x": 92.046875,
+         "y": 106.9140625,
+         "lengthX": 86.53125,
+         "lengthY": 111.56249999999999
+        }
+       ]
+      },
+      {
+       "code": "yin",
+       "kind": "jianzi",
+       "text": "吟",
+       "partIds": [
+        "084"
+       ],
+       "categorySlots": [
+        "单字"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 170
+        }
+       ]
+      },
+      {
+       "code": "cuochuomingjiuwusansan",
+       "kind": "jianzi",
+       "text": "撮绰名九五散三",
+       "partIds": [
+        "117",
+        "025",
+        "004",
+        "015",
+        "011",
+        "006",
+        "009"
+       ],
+       "categorySlots": [
+        "撮",
+        "绰",
+        "左手",
+        "number",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 0,
+         "y": 0,
+         "lengthX": 256,
+         "lengthY": 256
+        },
+        {
+         "x": 0,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 31.25
+        },
+        {
+         "x": 0,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 68.75
+        },
+        {
+         "x": 56,
+         "y": 138.25,
+         "lengthX": 56.00000000000001,
+         "lengthY": 68.75
+        },
+        {
+         "x": 0,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        },
+        {
+         "x": 142,
+         "y": 107,
+         "lengthX": 112.00000000000001,
+         "lengthY": 100
+        },
+        {
+         "x": 142,
+         "y": 207,
+         "lengthX": 112.00000000000001,
+         "lengthY": 50
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      },
+      {
+       "code": "eighth",
+       "kind": "rhythm",
+       "text": "♪",
+       "duration": "eighth"
+      }
+     ]
+    },
+    {
+     "jianziTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      },
+      {
+       "code": "half",
+       "kind": "rhythm",
+       "text": "𝅗𝅥",
+       "duration": "half"
+      },
+      {
+       "code": "quarter",
+       "kind": "rhythm",
+       "text": "♩",
+       "duration": "quarter"
+      },
+      {
+       "code": "quarter",
+       "kind": "rest",
+       "text": "𝄽",
+       "isRest": true,
+       "duration": "quarter"
+      },
+      {
+       "code": "measure-bar",
+       "kind": "measureBar",
+       "text": "|"
+      }
+     ]
+    }
+   ]
+  },
+  "tempo": 60,
+  "title": "牵丝戏",
+  "format": "lingling.gqp",
+  "tuning": "无媒调",
+  "version": 1,
+  "localDraftId": "draft-1786632128933618",
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "libraryItemId": "community:1ff408a1-aeaf-4e53-909c-9a681dfea9f0:0",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰",
+  "publishedPostId": "1ff408a1-aeaf-4e53-909c-9a681dfea9f0",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "粉丝点的牵丝戏片段",
+  "publishedPublicationSignature": "{\"score\":{\"lines\":[{\"jianziTokens\":[{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"挑托\",\"number\"],\"code\":\"daqijiutiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"大七九挑七\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"xiaqijiu\",\"kind\":\"jianzi\",\"partIds\":[\"073\",\"013\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"下七九\"},{\"categorySlots\":[\"撮\",\"注\",\"左手\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuozhudajiuqisanyi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"026\",\"001\",\"015\",\"013\",\"006\",\"007\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":35.0,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":38.5,\"lengthY\":100.0,\"x\":35.0,\"y\":107.0},{\"lengthX\":38.5,\"lengthY\":100.0,\"x\":73.5,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮注大九七散一\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangousi\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾四\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"绰\",\"挑托\",\"number\"],\"code\":\"daqijiuchuotiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"025\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":53.125,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":116.875,\"x\":50.0,\"y\":138.125},{\"lengthX\":86.53125,\"lengthY\":76.69921875,\"x\":92.046875,\"y\":153.19091796875}],\"text\":\"大七九绰挑七\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"isRest\":true,\"kind\":\"rest\",\"text\":\"𝄾\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"撮\",\"左手\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuodajiuqisaner\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"001\",\"015\",\"013\",\"006\",\"008\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":56.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮大九七散二\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangouwu\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"011\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾五\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"勾剔摘\",\"number\"],\"code\":\"mingbabangouliu\",\"kind\":\"jianzi\",\"partIds\":[\"004\",\"014\",\"044\",\"021\",\"012\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"名八半勾六\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"xiashi\",\"kind\":\"jianzi\",\"partIds\":[\"073\",\"016\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"下十\"},{\"categorySlots\":[\"撮\",\"绰\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuochuodaqijiuqisansi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"025\",\"001\",\"013\",\"015\",\"013\",\"006\",\"010\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":112.00000000000001,\"lengthY\":31.25,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":68.75,\"x\":0.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":172.625},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮绰大七九七散四\"},{\"categorySlots\":[\"单字\",\"单字\"],\"code\":\"daiqi\",\"kind\":\"jianzi\",\"partIds\":[\"092\",\"037\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"带起\"},{\"categorySlots\":[\"泛\",\"左手\",\"number\",\"勾剔摘\",\"number\"],\"code\":\"fanshiqigouwu\",\"kind\":\"jianzi\",\"partIds\":[\"036\",\"002\",\"013\",\"021\",\"011\"],\"slotTransforms\":[{\"lengthX\":60.9375,\"lengthY\":28.22265625,\"x\":97.53125,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":50.0,\"y\":28.22265625},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":128.0,\"y\":28.22265625},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"泛食七勾五\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"单字\"],\"code\":\"liu\",\"kind\":\"jianzi\",\"partIds\":[\"012\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0}],\"text\":\"六\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"绰\",\"抹\",\"number\"],\"code\":\"daqijiuchuomoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"025\",\"019\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":53.125,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":58.4375,\"x\":50.0,\"y\":138.125},{\"lengthX\":156.0,\"lengthY\":58.4375,\"x\":50.0,\"y\":196.5625}],\"text\":\"大七九绰抹七\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"xiaqijiu\",\"kind\":\"jianzi\",\"partIds\":[\"073\",\"013\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"下七九\"},{\"categorySlots\":[\"撮\",\"注\",\"左手\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuozhudajiuqisanyi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"026\",\"001\",\"015\",\"013\",\"006\",\"007\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":35.0,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":38.5,\"lengthY\":100.0,\"x\":35.0,\"y\":107.0},{\"lengthX\":38.5,\"lengthY\":100.0,\"x\":73.5,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮注大九七散一\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangousi\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾四\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"绰\",\"挑托\",\"number\"],\"code\":\"daqijiuchuotiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"025\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":53.125,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":116.875,\"x\":50.0,\"y\":138.125},{\"lengthX\":86.53125,\"lengthY\":76.69921875,\"x\":92.046875,\"y\":153.19091796875}],\"text\":\"大七九绰挑七\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"撮\",\"左手\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuodajiuqisaner\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"001\",\"015\",\"013\",\"006\",\"008\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":56.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮大九七散二\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangouwu\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"011\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾五\"},{\"categorySlots\":[\"左手\",\"number\",\"挑托\",\"number\"],\"code\":\"daqitiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":128.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"大七挑七\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"shangliusi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"012\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"上六四\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangousi\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"010\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾四\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"绰\",\"挑托\",\"number\"],\"code\":\"daqijiuchuotiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"025\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":53.125,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":116.875,\"x\":50.0,\"y\":138.125},{\"lengthX\":86.53125,\"lengthY\":76.69921875,\"x\":92.046875,\"y\":153.19091796875}],\"text\":\"大七九绰挑七\"},{\"categorySlots\":[\"泛\",\"左手\",\"number\",\"挑托\",\"number\"],\"code\":\"fanmingjiutiaoliu\",\"kind\":\"jianzi\",\"partIds\":[\"036\",\"004\",\"015\",\"020\",\"012\"],\"slotTransforms\":[{\"lengthX\":60.9375,\"lengthY\":28.22265625,\"x\":97.53125,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":50.0,\"y\":28.22265625},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":128.0,\"y\":28.22265625},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"泛名九挑六\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"勾剔摘\",\"number\"],\"code\":\"gousan\",\"kind\":\"jianzi\",\"partIds\":[\"021\",\"009\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"勾三\"},{\"categorySlots\":[\"左手\",\"number\",\"挑托\",\"number\"],\"code\":\"dajiutiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"015\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":128.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"大九挑七\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"shangqijiu\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"上七九\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"},{\"categorySlots\":[\"撮\",\"绰\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuochuodaliusiqisanyi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"025\",\"001\",\"012\",\"010\",\"013\",\"006\",\"007\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":112.00000000000001,\"lengthY\":31.25,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":68.75,\"x\":0.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":172.625},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮绰大六四七散一\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"xiaqi\",\"kind\":\"jianzi\",\"partIds\":[\"073\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"下七\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"擘\",\"number\"],\"code\":\"daqijiupiqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"017\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":113.34375000000001,\"lengthY\":85.6640625,\"x\":92.65625,\"y\":169.3359375}],\"text\":\"大七九擘七\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"}]},{\"jianziTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"categorySlots\":[\"撮\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuomingqiliuliusaner\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"004\",\"013\",\"012\",\"012\",\"006\",\"008\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":157.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮名七六六散二\"},{\"categorySlots\":[\"散\",\"勾剔摘\",\"number\"],\"code\":\"sangouwu\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"021\",\"011\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"散勾五\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"挑托\",\"number\"],\"code\":\"daqijiutiaoqi\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"015\",\"020\",\"013\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"大七九挑七\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"xiajiu\",\"kind\":\"jianzi\",\"partIds\":[\"073\",\"015\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"下九\"},{\"categorySlots\":[\"撮\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuodababanliusanyi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"001\",\"014\",\"044\",\"012\",\"006\",\"007\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":157.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮大八半六散一\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"shangqiliu\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\",\"012\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"上七六\"},{\"categorySlots\":[\"左手\",\"number\",\"绰\",\"挑托\",\"number\"],\"code\":\"daqichuotiaoliu\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"013\",\"025\",\"020\",\"012\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":128.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":53.125,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":116.875,\"x\":50.0,\"y\":138.125},{\"lengthX\":86.53125,\"lengthY\":76.69921875,\"x\":92.046875,\"y\":153.19091796875}],\"text\":\"大七绰挑六\"}],\"rhythmTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"}]},{\"jianziTokens\":[{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"shangliuer\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"012\",\"008\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"上六二\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"categorySlots\":[\"泛\",\"左手\",\"number\",\"勾剔摘\",\"number\"],\"code\":\"fanmingqigousan\",\"kind\":\"jianzi\",\"partIds\":[\"036\",\"004\",\"013\",\"021\",\"009\"],\"slotTransforms\":[{\"lengthX\":60.9375,\"lengthY\":28.22265625,\"x\":97.53125,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":50.0,\"y\":28.22265625},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":128.0,\"y\":28.22265625},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"泛名七勾三\"},{\"categorySlots\":[\"散\",\"拂字\",\"number\",\"至\",\"number\"],\"code\":\"sanfuyizhiwu\",\"kind\":\"jianzi\",\"partIds\":[\"006\",\"104\",\"007\",\"132\",\"011\"],\"semanticCategories\":[\"拂\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":51.2,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":51.2,\"x\":50.0,\"y\":51.2},{\"lengthX\":156.0,\"lengthY\":51.2,\"x\":50.0,\"y\":102.4},{\"lengthX\":156.0,\"lengthY\":51.2,\"x\":50.0,\"y\":153.6},{\"lengthX\":156.0,\"lengthY\":51.2,\"x\":50.0,\"y\":204.8}],\"text\":\"散拂一至五\"},{\"categorySlots\":[\"左手\",\"number\",\"抹\",\"number\"],\"code\":\"dashimoliu\",\"kind\":\"jianzi\",\"partIds\":[\"001\",\"016\",\"019\",\"012\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":128.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"大十抹六\"},{\"categorySlots\":[\"上下\",\"number\",\"number\"],\"code\":\"shangbaban\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"014\",\"044\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":100.0},{\"lengthX\":156.0,\"lengthY\":78.0,\"x\":50.0,\"y\":178.0}],\"text\":\"上八半\"},{\"categorySlots\":[\"撮\",\"绰\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuochuodaqiliuliusanyi\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"025\",\"001\",\"013\",\"012\",\"012\",\"006\",\"007\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":112.00000000000001,\"lengthY\":31.25,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":68.75,\"x\":0.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":34.375,\"x\":56.0,\"y\":172.625},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮绰大七六六散一\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"}],\"rhythmTokens\":[{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"}]},{\"jianziTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"categorySlots\":[\"左手\",\"number\",\"number\",\"勾剔摘\",\"number\"],\"code\":\"mingqijiugousi\",\"kind\":\"jianzi\",\"partIds\":[\"004\",\"013\",\"015\",\"021\",\"010\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":42.5,\"x\":128.0,\"y\":42.5},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"名七九勾四\"},{\"categorySlots\":[\"撮\",\"左手\",\"number\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuodaqiliuliusaner\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"001\",\"013\",\"012\",\"012\",\"006\",\"008\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":56.00000000000001,\"lengthY\":100.0,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":50.0,\"x\":56.0,\"y\":157.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮大七六六散二\"},{\"categorySlots\":[\"上下\",\"number\"],\"code\":\"shangqi\",\"kind\":\"jianzi\",\"partIds\":[\"072\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":100.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":156.0,\"x\":50.0,\"y\":100.0}],\"text\":\"上七\"},{\"categorySlots\":[\"泛\",\"左手\",\"number\",\"勾剔摘\",\"number\"],\"code\":\"fanshiqigousan\",\"kind\":\"jianzi\",\"partIds\":[\"036\",\"002\",\"013\",\"021\",\"009\"],\"slotTransforms\":[{\"lengthX\":60.9375,\"lengthY\":28.22265625,\"x\":97.53125,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":50.0,\"y\":28.22265625},{\"lengthX\":78.0,\"lengthY\":56.77734375,\"x\":128.0,\"y\":28.22265625},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":82.87500000000001,\"lengthY\":79.6875,\"x\":83.515625,\"y\":156.0546875}],\"text\":\"泛食七勾三\"},{\"categorySlots\":[\"左手\",\"number\",\"挑托\",\"number\"],\"code\":\"mingshitiaowu\",\"kind\":\"jianzi\",\"partIds\":[\"004\",\"016\",\"020\",\"011\"],\"slotTransforms\":[{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":50.0,\"y\":0.0},{\"lengthX\":78.0,\"lengthY\":85.0,\"x\":128.0,\"y\":0.0},{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":86.53125,\"lengthY\":111.56249999999999,\"x\":92.046875,\"y\":106.9140625}],\"text\":\"名十挑五\"},{\"categorySlots\":[\"单字\"],\"code\":\"yin\",\"kind\":\"jianzi\",\"partIds\":[\"084\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":170.0,\"x\":50.0,\"y\":85.0}],\"text\":\"吟\"},{\"categorySlots\":[\"撮\",\"绰\",\"左手\",\"number\",\"number\",\"散\",\"number\"],\"code\":\"cuochuomingjiuwusansan\",\"kind\":\"jianzi\",\"partIds\":[\"117\",\"025\",\"004\",\"015\",\"011\",\"006\",\"009\"],\"slotTransforms\":[{\"lengthX\":256.0,\"lengthY\":256.0,\"x\":0.0,\"y\":0.0},{\"lengthX\":112.00000000000001,\"lengthY\":31.25,\"x\":0.0,\"y\":107.0},{\"lengthX\":56.00000000000001,\"lengthY\":68.75,\"x\":0.0,\"y\":138.25},{\"lengthX\":56.00000000000001,\"lengthY\":68.75,\"x\":56.0,\"y\":138.25},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":0.0,\"y\":207.0},{\"lengthX\":112.00000000000001,\"lengthY\":100.0,\"x\":142.0,\"y\":107.0},{\"lengthX\":112.00000000000001,\"lengthY\":50.0,\"x\":142.0,\"y\":207.0}],\"text\":\"撮绰名九五散三\"}],\"rhythmTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"},{\"code\":\"quarter\",\"duration\":\"quarter\",\"kind\":\"rhythm\",\"text\":\"♩\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"},{\"code\":\"eighth\",\"duration\":\"eighth\",\"kind\":\"rhythm\",\"text\":\"♪\"}]},{\"jianziTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}],\"rhythmTokens\":[{\"code\":\"measure-bar\",\"kind\":\"measureBar\",\"text\":\"|\"}]}]},\"scoreCardIntroduction\":\"粉丝点的牵丝戏片段\",\"tempo\":60,\"timeSignature\":\"4/4\",\"title\":\"牵丝戏\",\"tuning\":\"无媒调\"}",
+  "publishedScoreCardIntroduction": "粉丝点的牵丝戏片段",
+  "publishedScoreCardBackgroundUrl": "https://spb-3t41ic9ypkmna1yz.supabase.opentrust.net/storage/v1/object/public/post-images/e45ccb79-d5e5-4498-bc67-1da56a344441/1ff408a1-aeaf-4e53-909c-9a681dfea9f0/score-card.jpg?v=1786632272721317"
+ }
+}
