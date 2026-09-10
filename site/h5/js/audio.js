@@ -64,23 +64,30 @@
     const gain = opts.gain || 0.8;
     const dur = opts.dur || Math.min(buf.duration, 3.2);
 
-    if (opts.attack) { // 绰/注：自下方/上方大二度滑入，先快后慢（指数坡）
+    /* 弯音实现依据 APK 逆向（2026-09 确认）：
+     * libapp.so 中 Dart 侧 _applyPitchAutomation 调 flutter_soloud 的
+     * setRelativePlaySpeed / fadeRelativePlaySpeed（对单 voice 速率自动化）。
+     * SoLoud 的 fade 在 C++ 层为线性插值 → APK 滑音 = 线性变速，本处同为线性坡。
+     * 与 Web Audio 的 playbackRate automation 一一同构。 */
+    if (opts.attack) { // 绰/注：自下方/上方大二度线性滑入本位
       const semi = opts.attack === '绰' ? -2 : 2;
       const glide = Math.min(0.38, Math.max(0.22, dur * 0.35));
       src.playbackRate.setValueAtTime(rate * Math.pow(2, semi / 12), t);
-      src.playbackRate.exponentialRampToValueAtTime(rate, t + glide);
-    } else if (opts.glideTo) { // 走手音：按弦长物理规律滑向目标（指数坡≈对数音分匀速）
+      src.playbackRate.linearRampToValueAtTime(rate, t + glide);
+    } else if (opts.glideTo) { // 走手音：线性变速滑向目标（对应 fadeRelativePlaySpeed）
       src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
-      src.playbackRate.exponentialRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string)), t + (opts.glideSec || 0.6));
-    } else if (opts.vibrato) { // 吟/猱：音头干净，0.25s 后摆入；吟窄而快、猱宽而慢
+      src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string)), t + (opts.glideSec || 0.6));
+    } else if (opts.vibrato) { // 吟/猱：三角波（=反复 fade 上下的等效连续物）
+      // 吟窄而快、猱宽而慢；音头干净 0.22s 后摆入。APK 深度/周期常量在 AOT
+      // 机器码中，此处取技法词典所述相对关系（猱≈吟的两倍幅度、约一半速度）。
       src.playbackRate.value = rate;
       const isNao = opts.vibrato === '猱';
       const lfo = c.createOscillator(), lg = c.createGain();
-      lfo.type = 'sine';
+      lfo.type = 'triangle';                       // 线性往复，对应连续 fade
       lfo.frequency.value = isNao ? 2.4 : 4.3;
       lg.gain.setValueAtTime(0, t);
       lg.gain.setValueAtTime(0, t + 0.22);
-      lg.gain.linearRampToValueAtTime(rate * (isNao ? 0.055 : 0.032), t + 0.55); // 猱≈1 半音、吟≈0.6 半音峰值
+      lg.gain.linearRampToValueAtTime(rate * (isNao ? 0.055 : 0.032), t + 0.55);
       lfo.connect(lg); lg.connect(src.playbackRate);
       lfo.start(t); lfo.stop(t + dur);
     } else {
