@@ -38,6 +38,27 @@
   #strip .jz-token.done { opacity:.35; }
   #strip .sep { width:2px; height:48px; background:#e4d9c3; margin:0 6px; flex:none; }
   #qinCanvas { width:100%; height:260px; display:block; margin-top:10px; border-radius:10px; }
+
+  /* 社区动态 */
+  #feedList { max-width:640px; }
+  .feed-card { background:var(--paper); border:1px solid #e0d5bb; border-radius:12px; padding:14px; margin-bottom:12px; }
+  .feed-head { display:flex; align-items:center; gap:10px; }
+  .avatar { width:40px; height:40px; border-radius:50%; background:#c9a86a; color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-family:KaiTi,serif; flex:none; }
+  .feed-meta { display:flex; flex-direction:column; }
+  .feed-meta .ftime { font-size:12px; color:#a09478; }
+  .fcat { margin-left:auto; font-size:11px; color:#8b6f47; background:#f3e9d2; padding:2px 8px; border-radius:10px; }
+  .feed-body { margin:10px 0; font-size:15px; line-height:1.6; white-space:pre-wrap; }
+  .feed-imgs { display:flex; gap:8px; flex-wrap:wrap; }
+  .feed-imgs img { width:150px; border-radius:8px; border:1px solid #e8dcc0; }
+  .feed-foot { display:flex; gap:18px; margin-top:10px; }
+  .fbtn { border:none; background:transparent; cursor:pointer; color:#8a7d63; font-size:14px; }
+  .fbtn.like.on { color:#c0392b; }
+  .feed-comments { margin-top:10px; border-top:1px dashed #e4d9c3; padding-top:8px; }
+  .fc-item { display:flex; gap:8px; padding:6px 0; font-size:14px; }
+  .fc-nick { color:var(--accent); flex:none; }
+  .fc-text { flex:1; }
+  .fc-like { color:#a09478; font-size:12px; flex:none; }
+  .fc-empty { color:#a09478; }
   #explainBox { background:#fdf6e3; border-left:4px solid var(--accent); padding:8px 12px; margin:8px 0; font-size:14px; color:#5a4a2f; border-radius:0 6px 6px 0; }
   /* 琴谱大厅 */
   #hallGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
@@ -85,6 +106,7 @@
   <h1>减字谱引擎 H5</h1>
   <button class="tab active" data-tab="library">乐谱库</button>
   <button class="tab" data-tab="hall">琴谱大厅</button>
+  <button class="tab" data-tab="community">社区</button>
   <button class="tab" data-tab="score">谱面</button>
   <button class="tab" data-tab="editor">作曲 · 输入</button>
 </header>
@@ -123,6 +145,15 @@
     <button class="btn ghost" id="newScoreBtn">＋ 新谱</button>
   </div>
   <div id="scoreList"></div>
+</div>
+
+
+<div class="page" id="page-community">
+  <div class="toolbar">
+    <span style="font-size:13px;color:#8a7d63">与琴友交流古琴大师的使用方法，获取功能指导和问题帮助</span>
+    <span id="feedCount" style="font-size:13px;color:#8a7d63;margin-left:auto"></span>
+  </div>
+  <div id="feedList"></div>
 </div>
 
 <div class="page" id="page-score">
@@ -181,6 +212,7 @@
 <script src="js/input.js"></script>
 <script src="js/speech.js"></script>
 <script src="js/hall.js"></script>
+<script src="js/community.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

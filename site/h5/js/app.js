@@ -52,6 +52,7 @@
     buildLibrary('');
     $('#searchBox').addEventListener('input', e => buildLibrary(e.target.value));
     window.Hall.build();
+    window.GuqinCommunity.boot();
     // 琴谱大厅
     $('#hallPlayBtn').addEventListener('click', () => window.Hall.play());
     $('#hallStopBtn').addEventListener('click', () => window.Hall.stop());

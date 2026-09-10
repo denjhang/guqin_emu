@@ -30,3 +30,4 @@ node_modules/
 *.log
 # h5 运行时
 site/h5/audio/
+research/.sbtoken
