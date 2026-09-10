@@ -1,0 +1,16 @@
+# 子级 gitignore：与上层 .gitignore 配合，覆盖 research/ 本地不入库项
+
+# blutter 工具链（已在上级 .gitignore 排除）
+blutter/
+blutter_new/
+
+# blutter 输出：仅保留 frida 脚本、对象列表、对象池、IDA 脚本
+blutter_out/asm/
+blutter_out/build/
+blutter_out/**/*.obj
+blutter_out/**/*.exe
+
+# Ghidra 项目与日志（含二进制）
+ghidra_bend/
+ghidra_carry/
+ghidra_jianzi/

@@ -12,7 +12,6 @@ apk/extracted/assets/flutter_assets/assets/audio/
 apk/extracted/assets/flutter_assets/assets/images/
 apk/extracted/assets/flutter_assets/assets/fonts/
 apk/extracted/assets/flutter_assets/assets/packages/
-apk/extracted/assets/flutter_assets/assets/shaders/
 apk/extracted/assets/shaders/
 
 # 网站镜像中的大媒体（首页视频 150MB+，按需重抓）
@@ -34,3 +33,23 @@ research/.sbtoken
 reference/Guqin-Dataset/Guqin_Dataset_v1/
 reference/Guqin-Dataset/paper/
 reference/jianzipu/scripts/aux.ipynb
+
+# blutter 工具链：源码 + 构建 + Dart SDK（数百 MB，可重建）
+research/blutter/
+research/blutter_new/
+# blutter 输出：仅保留 frida 脚本、对象列表、对象池、IDA 脚本；
+# 反汇编按类分文件 1200+ 个不入库（可由 blutter 工具重生）
+research/blutter_out/asm/
+research/blutter_out/build/
+research/blutter_out/**/*.obj
+research/blutter_out/**/*.exe
+
+# Ghidra 项目与日志（可重生，且包含二进制）
+research/ghidra_bend/
+research/ghidra_carry/
+research/ghidra_jianzi/
+
+# Frida 动态分析运行时产物
+research/hook_events.jsonl
+research/hook_events.prev.jsonl
+research/hook_stdout.log
