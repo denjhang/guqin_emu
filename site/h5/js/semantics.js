@@ -208,6 +208,11 @@
       }
     });
     if (huiDigits) cur.hui = digitsToHui(huiDigits);
+    // 没徽位、没泛音、没散音标记，但有弦号和技法 → 默认散音
+    // （如"擘六"：只有技法+弦号，无左手无徽位 → 散音擘六弦）
+    if (!cur.hui && !cur.harmonic && !cur.open && cur.string && cur.tech) {
+      cur.open = true;
+    }
     if (cur.string || cur.tech || cur.open || cur.harmonic) out.push(cur);
     return out;
   }
