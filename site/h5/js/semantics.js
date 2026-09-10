@@ -169,11 +169,15 @@
     const strHaver = info.find(p => p.string != null);
     if (strHaver) info.forEach(p => { if (p.string == null) p.string = strHaver.string; });
     if (!info.length) {
-      // 抓起/掐起/带起/掩等：左手松开按弦 → 散音（carry + open=true）
-      // 保留左手指，供 player 按指查回原弦（如大九历七六后名十掐起应回5弦）
-      if (/起|掩/.test(text)) {
-        const fm = text.match(/^(名|大|食|中|跪)/);
-        return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, finger: fm ? fm[1] : null, text };
+      // 抓起/掩：左手松开按弦 → 散音（carry + open=true）
+      // 掐起/带起：手指按住弦拨响 → 按音（carry + open=false，沿用徽位）
+      if (/抓起|掩/.test(text)) {
+        return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, text };
+      }
+      if (/掐起|带起/.test(text)) {
+        // 提取徽位数字（名十掐起 → 十徽）
+        const huiMatch = text.match(/([一二三四五六七八九十]+(?:半)?)/);
+        return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: false, hui: huiMatch ? digitsToHui(huiMatch[1]) : null, text };
       }
       // 落指吟/定吟/落指猱等：左手保持按音，拨弦加吟猱（carry + open=false）
       if (/吟|猱/.test(text)) {
