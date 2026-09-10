@@ -57,8 +57,8 @@
     const isCat = (i, c) => slots[i] === c || cats[i].includes(c);
     const findSlot = c => slots.findIndex((s, i) => s === c);
 
-    // 控制符
-    if (slots.includes('控制符') || /^(泛起|泛止|少息|曲终|从头|再作|段落)/.test(text)) {
+    // 控制符（反复/起止等结构记号，不发声、不占时长）
+    if (slots.includes('控制符') || /^(泛起|泛止|少息|曲终|从头|再作|段落|括号|从括号再作)$/.test(text)) {
       return { type: 'ctrl', text, ctrl: text };
     }
 
@@ -115,11 +115,21 @@
     }
 
     // 滚/拂[散] X [至 Y]、历 XY：连刷多根弦；单弦滚/拂=散音单弹
-    const sweep = text.match(/^(?:散)?[滚拂]([一二三四五六七])至([一二三四五六七])/)
+    // 散历/滚拂 = 散音扫弦；带徽位前缀（如大九历七六）= 按音扫弦
+    const sweepOpen = text.match(/^(?:散)?[滚拂]([一二三四五六七])至([一二三四五六七])/)
       || text.match(/^(?:散)?历([一二三四五六七])([一二三四五六七])/);
-    if (sweep) {
-      const from = digitToNum(sweep[1]), to = digitToNum(sweep[2]);
-      return { type: 'sweep', from, to, tech: text.replace(/^散/, '')[0], text };
+    if (sweepOpen) {
+      const from = digitToNum(sweepOpen[1]), to = digitToNum(sweepOpen[2]);
+      return { type: 'sweep', from, to, open: true, tech: text.replace(/^散/, '')[0], text };
+    }
+    // 带徽位的历：大九历七六 → 按九徽扫七、六弦
+    const sweepPressed = text.match(/^(.+?)历([一二三四五六七])([一二三四五六七])$/);
+    if (sweepPressed) {
+      const prefix = sweepPressed[1];
+      const from = digitToNum(sweepPressed[2]), to = digitToNum(sweepPressed[3]);
+      const huiMatch = prefix.match(/([一二三四五六七八九十]+(?:半)?)$/);
+      const hui = huiMatch ? digitsToHui(huiMatch[1]) : null;
+      return { type: 'sweep', from, to, open: false, hui, tech: '历', text };
     }
     const roll1 = text.match(/^(?:散)?[滚拂]([一二三四五六七])$/);
     if (roll1) {
@@ -160,7 +170,11 @@
     if (strHaver) info.forEach(p => { if (p.string == null) p.string = strHaver.string; });
     if (!info.length) {
       // 抓起/掐起/带起/掩等：左手松开按弦 → 散音（carry + open=true）
-      if (/起|掩/.test(text)) return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, text };
+      // 保留左手指，供 player 按指查回原弦（如大九历七六后名十掐起应回5弦）
+      if (/起|掩/.test(text)) {
+        const fm = text.match(/^(名|大|食|中|跪)/);
+        return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, finger: fm ? fm[1] : null, text };
+      }
       // 落指吟/定吟/落指猱等：左手保持按音，拨弦加吟猱（carry + open=false）
       if (/吟|猱/.test(text)) {
         const vib = text.includes('猱') ? '猱' : '吟';

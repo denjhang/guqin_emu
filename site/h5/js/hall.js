@@ -129,9 +129,16 @@
     // 展平为带行边界的字序列
     const flat = [];
     (score.lines || []).forEach((line, li) => {
-      const jt = (line.jianziTokens || []).filter(t => t.kind !== 'blank');
-      const rt = (line.rhythmTokens || []).filter(t => t.kind !== 'blank');
-      jt.forEach((tok, i) => flat.push({ tok, r: rt[i] || rt[rt.length - 1], lineBreakAfter: false, li }));
+      const jt = line.jianziTokens || [];
+      const rt = line.rhythmTokens || [];
+      let lastR = null;
+      jt.forEach((tok, i) => {
+        if (tok.kind === 'blank') return;
+        // 节奏按位置对齐：blank 节奏沿用前一非空节奏
+        const r = (rt[i] && rt[i].kind !== 'blank') ? rt[i] : lastR;
+        if (rt[i] && rt[i].kind !== 'blank') lastR = rt[i];
+        flat.push({ tok, r, lineBreakAfter: false, li });
+      });
       if (flat.length) flat[flat.length - 1].lineBreakAfter = true;
     });
     // 按 CELLS_PER_ROW 切行，源谱行边界提前断行

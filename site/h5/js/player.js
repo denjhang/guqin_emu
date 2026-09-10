@@ -6,27 +6,49 @@
   let timers = [], playing = false, runId = 0, onTokenCb = null, onEndCb = null;
   let lastFreq = 0, lastString = 1, lastHui = null, harmonicCtx = false;
   const lastHuiByString = {};   // 每弦最后徽位：续弹/换指法时左手保持原位
+  const lastStringByFinger = {}; // 每左手指最后按的弦：掐起等按指查回原弦
 
   function later(fn, ms) { const id = setTimeout(fn, Math.max(0, ms)); timers.push(id); return id; }
 
-  /* 展开谱面为事件列表（带秒时间），供播放与进度条 */
+  /* 展开谱面为事件列表（带秒时间），供播放与进度条
+   * - 节奏按位置对齐：jt[i] 对应 rt[i]，blank 节奏沿用前值
+   * - 括号/从括号再作：结构记号，零时长；从括号再作展开括号后的反复段
+   * - ctrl 类（泛起/泛止/少息等）零时长 */
   function buildTimeline(score, defaultTempo) {
     const events = [];
     let t = 0.4;
     let tempo = defaultTempo || 60;
-    let pendingHui = null;      // 上一个按音徽位（走手音基准）
+    let bracketIdx = -1;   // 最近一个「括号」在 events 中的位置（反复段起点）
     for (const line of score.lines || []) {
       if (line.sectionTempo) tempo = line.sectionTempo;
       const jt = (line.jianziTokens || []);
-      const rt = (line.rhythmTokens || []).filter(r => r.kind !== 'blank');
-      const sound = jt.filter(tok => tok.kind !== 'blank');
-      // 节奏与发声字按非空位置对齐；对不齐时从后往前以节奏为准
-      let ri = 0;
-      for (const tok of sound) {
-        const rhythm = rt[ri++] || rt[rt.length - 1] || { duration: 'quarter' };
+      const rt = (line.rhythmTokens || []);
+      let lastDur = { duration: 'quarter' };
+      for (let i = 0; i < jt.length; i++) {
+        const tok = jt[i];
+        if (tok.kind === 'blank') continue;
+        const r = rt[i];
+        // 节奏按位置对齐：blank 节奏沿用前一非空节奏
+        const rhythm = (r && r.kind !== 'blank' && r.duration) ? r : lastDur;
+        if (r && r.kind !== 'blank' && r.duration) lastDur = r;
         const beat = (DUR[rhythm.duration] || 1);
         const sec = beat * 60 / tempo;
         const act = window.JianziSemantics.parseToken(tok);
+
+        if (act.type === 'ctrl') {
+          if (act.ctrl === '括号') {
+            bracketIdx = events.length;   // 反复段从括号后的第一个事件开始
+          } else if (act.ctrl === '从括号再作' && bracketIdx >= 0) {
+            // 展开反复段：复制括号后到再作前的所有事件
+            const repeat = events.slice(bracketIdx);
+            for (const ev of repeat) {
+              events.push({ ...ev, t, token: ev.token, action: ev.action });
+              t += ev.dur;
+            }
+          }
+          // 结构记号本身不占时长
+          continue;
+        }
         events.push({ t, dur: sec, token: tok, action: act, tempo });
         t += sec;
       }
@@ -71,13 +93,20 @@
       return;
     }
     if (act.type === 'sweep') {
-      // 滚/拂/历：连刷散弦，间隔 80ms
+      // 滚/拂/历：连刷多弦，间隔 80ms
+      // open=true 散音扫弦；open=false 按音扫弦（用 act.hui）
       const step = act.to >= act.from ? 1 : -1;
+      const A = window.GuqinAudio;
       for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step) {
         const del = Math.abs(s - act.from) * 80;
-        const f = () => window.GuqinAudio.play(s, false, true, window.GuqinAudio.OPEN[s - 1], { dur: 0.7, gain: 0.6 });
+        const freq = act.open ? A.OPEN[s - 1] : A.freqOf(s, act.hui || '七徽', false);
+        const f = () => A.play(s, false, act.open, freq, { dur: 0.7, gain: 0.6 });
         del === 0 ? f() : later(f, del);
       }
+      // 记录最后一根弦的状态，供后续 carry 技法沿用
+      lastString = act.to;
+      lastFreq = act.open ? A.OPEN[act.to - 1] : A.freqOf(act.to, act.hui || '七徽', false);
+      if (!act.open && act.hui) lastHuiByString[act.to] = act.hui;
       return;
     }
     if (act.type === 'pluck') {
@@ -99,8 +128,9 @@
     const harm = p.harmonic || harmonicCtx && !p.open;
     const allMods = (mods || []).concat(p.mods || []);
     // 抓起/掐起/带起/掩：左手松开按弦 → 弦长恢复全弦 → 散音
+    // 有左手指时按指查回原弦（如大九历七六后名十掐起应回5弦，而非扫弦末弦6）
     if (p.carry && p.open) {
-      const s = p.string || lastString || 1;
+      const s = p.string || (p.finger && lastStringByFinger[p.finger]) || lastString || 1;
       const f = A.OPEN[s - 1];
       if (f) A.play(s, false, true, f, { dur, gain: 0.6 });
       lastFreq = f; lastString = s;
@@ -139,6 +169,7 @@
     A.play(p.string, harm, p.open, freq, opts);
     lastFreq = freq; lastString = p.string; lastHui = p.hui;
     if (p.hui) lastHuiByString[p.string] = p.hui;   // 按音记录徽位，续弹继承
+    if (p.finger) lastStringByFinger[p.finger] = p.string;  // 记录该指所在弦，供掐起查回
   }
 
   /* 播放整谱 */
