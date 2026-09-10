@@ -5,17 +5,42 @@
   let corpus = [];           // 全部谱面（来自 all_raw.json）
   let current = null;        // 当前谱对象
   let editorScore = null;    // 编辑中的谱
+  let techDict = [];         // 技法解说词典
+
+  /* 依 token 文本查技法解说（APK 内置词典） */
+  function explainToken(text) {
+    if (!text) return null;
+    for (const t of techDict) {
+      if (text.includes(t.key)) return { key: t.key, text: t.text };
+    }
+    // 变体吟类
+    const m = text.match(/(急|注|略|绰|长|游|荡)吟/);
+    if (m) return { key: m[0], text: '揉弦的一种：' + m[0] + '——' + (m[1] === '游' || m[1] === '荡' ? '连贯、柔缓且幅度较大。' : '用法似常吟而略有变化，幅度稍大。') };
+    if (text.includes('吟')) return { key: '吟', text: techDict.find(t => t.key === '吟').text };
+    if (text.includes('猱')) return { key: '猱', text: techDict.find(t => t.key === '猱').text };
+    if (text.includes('绰')) return { key: '绰', text: '左手向下滑入本位，得声由低而上。' };
+    if (text.includes('注')) return { key: '注', text: '左手向上滑入本位，得声由高而下。' };
+    return null;
+  }
+  function showExplain(text) {
+    const box = $('#explainBox');
+    const e = explainToken(text);
+    box.textContent = e ? `〔${e.key}〕${e.text}` : `〔${text}〕`;
+    box.style.display = 'block';
+  }
 
   async function loadJSON(url) { const r = await fetch(url); return r.json(); }
 
   async function boot() {
-    const [glyphPaths, glyphParts, , pitch, all] = await Promise.all([
+    const [glyphPaths, glyphParts, , pitch, all, techniques] = await Promise.all([
       loadJSON('data/glyph_paths.json'),
       loadJSON('data/glyph_parts.json'),
       loadJSON('data/category_rules.json'),
       loadJSON('data/pitch.json'),
       loadJSON('scores/all_raw.json'),
+      loadJSON('data/techniques.json'),
     ]);
+    techDict = techniques;
     corpus = all;
     window.JianziRender.init(glyphPaths, glyphParts);
     window.JianziSemantics.init(glyphParts);
@@ -91,7 +116,7 @@
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
           const act = window.GuqinPlayer.tapToken(tok);
-          fireStage(act); flash(el);
+          fireStage(act); flash(el); showExplain(tok.text);
         });
         strip.appendChild(el);
       });
