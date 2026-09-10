@@ -95,12 +95,11 @@
         }
       });
       push();
-      const hasOpen = groups.some(g => g.open && g.digits.length);
       const pairs = groups.map(g => {
         let huiD = g.digits, string = null;
         if (g.open) { string = g.digits.length ? digitToNum(g.digits[g.digits.length - 1]) : null; huiD = []; }
-        else if (hasOpen) { /* 全部数字当徽位 */ }
         else if (g.digits.length >= 2) { string = digitToNum(g.digits[g.digits.length - 1]); huiD = g.digits.slice(0, -1); }
+        else if (g.digits.length === 1) { string = digitToNum(g.digits[0]); huiD = []; }
         if (!(string >= 1 && string <= 7)) string = null;   // 八/九等非弦号
         return { finger: g.finger, open: g.open, harmonic: false,
                  hui: huiD.length ? digitsToHui(huiD.join('')) : null, string };
