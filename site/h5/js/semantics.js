@@ -84,11 +84,11 @@
                toHui: nums ? digitsToHui(nums) : null, mods: [labels[0]], text };
     }
 
-    // 撮（双音）：[修饰*] 撮 + 两组位置
+    // 撮/拨（双音）：[修饰*] 撮|拨[剌] + 两组位置
     // 有「散」组时：按音组的全部数字是徽位（弦号由散弦相邻推导），如 撮大九四散七
     // 全按音时：每组末位数字是弦号，如 撮食七一大七二
-    if (slots.includes('撮')) {
-      const idx = slots.findIndex(s => s === '撮');
+    if (slots.includes('撮') || slots.includes('拨字')) {
+      const idx = slots.findIndex(s => s === '撮' || s === '拨字');
       const groups = [];
       let cur = null;
       const push = () => { if (cur) groups.push(cur); cur = null; };
@@ -109,6 +109,7 @@
         if (g.open) { string = g.digits.length ? digitToNum(g.digits[g.digits.length - 1]) : null; huiD = []; }
         else if (hasOpen) { /* 全部数字当徽位 */ }
         else if (g.digits.length >= 2) { string = digitToNum(g.digits[g.digits.length - 1]); huiD = g.digits.slice(0, -1); }
+        if (!(string >= 1 && string <= 7)) string = null;   // 八/九等非弦号
         return { finger: g.finger, open: g.open, harmonic: false,
                  hui: huiD.length ? digitsToHui(huiD.join('')) : null, string };
       });
@@ -121,22 +122,41 @@
       return { type: 'chord', positions: pairs, mods: labels.slice(0, idx), text };
     }
 
-    // 滚/拂 X 至 Y、历 XY：连刷多根弦
-    const sweep = text.match(/^[滚拂]([一二三四五六七])至([一二三四五六七])/)
-      || text.match(/^历([一二三四五六七])([一二三四五六七])/);
+    // 滚/拂[散] X [至 Y]、历 XY：连刷多根弦；单弦滚/拂=散音单弹
+    const sweep = text.match(/^(?:散)?[滚拂]([一二三四五六七])至([一二三四五六七])/)
+      || text.match(/^(?:散)?历([一二三四五六七])([一二三四五六七])/);
     if (sweep) {
       const from = digitToNum(sweep[1]), to = digitToNum(sweep[2]);
-      return { type: 'sweep', from, to, tech: text[0], text };
+      return { type: 'sweep', from, to, tech: text.replace(/^散/, '')[0], text };
+    }
+    const roll1 = text.match(/^(?:散)?[滚拂]([一二三四五六七])$/);
+    if (roll1) {
+      return { type: 'pluck', string: digitToNum(roll1[1]), open: true, text };
+    }
+    // 散X如一：「如一」为齐鸣记号，配对弦在上下文（前一撮），此处至少弹出本弦散音
+    const ru = text.match(/^散([一二三四五六七])如一$/);
+    if (ru) {
+      return { type: 'chord', positions: [
+        { finger: null, open: true, harmonic: false, hui: null, string: digitToNum(ru[1]) }
+      ], text };
+    }
+
+    // 纯数字字（"四"，单部件单字）：续弹——只写弦号，指法沿用前字
+    if ((token.partIds || []).length === 1 && /^[一二三四五六七]$/.test(text)) {
+      return { type: 'pluck', string: digitToNum(text), carryTech: true, carry: false, text };
     }
 
     // 常规单音：散 / 泛 / 按音
     const info = extractPositions(slots, token.partIds);
+    // 连弹（抹挑七/勾剔二）：拆出的前段没有弦号，从后面带弦号的位置回填
+    const strHaver = info.find(p => p.string != null);
+    if (strHaver) info.forEach(p => { if (p.string == null) p.string = strHaver.string; });
     if (!info.length) {
       // 掐起/掩/带起等左手发声技法：沿用本弦
       if (/起|掩/.test(text)) return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, text };
       return { type: 'rest', text };
     }
-    const p = info[0];
+    const p = info[info.length - 1];
     const mods = [];
     (token.partIds || []).forEach((pid, i) => {
       if (['绰', '注', '吟字', '猱字', '撞字'].some(c => cats[i].includes(c))) mods.push(labels[i]);
@@ -144,7 +164,9 @@
     return {
       type: 'pluck',
       string: p.string, hui: p.hui, finger: p.finger, tech: p.tech,
-      open: p.open, harmonic: p.harmonic, mods, text
+      open: p.open, harmonic: p.harmonic, mods,
+      double: info.length > 1,        // 连弹：同弦快速两触
+      text
     };
   }
 
@@ -160,8 +182,8 @@
       if (s === '泛') { cur.harmonic = true; return; }
       if (s === '左手') { cur.finger = l; return; }
       if (s === 'number' || c.includes('十后')) {
-        if (numAfterTech || cur.tech) { cur.string = digitToNum(l); }
-        else huiDigits += l;
+        if ((numAfterTech || cur.tech) && /^[一二三四五六七]$/.test(l)) { cur.string = digitToNum(l); }
+        else huiDigits += l;   // 八/九/十等只可能是徽分数字
         return;
       }
       if (s === '外') { huiDigits += '外'; return; }
