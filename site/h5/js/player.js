@@ -103,7 +103,7 @@
     if (p.carry || p.string == null) {
       const s = lastString || 1;
       const f = A.OPEN[s - 1];   // 散音频率，不是 lastFreq
-      if (f) A.play(s, false, false, f, { dur, gain: 0.6 });
+      if (f) A.play(s, false, true, f, { dur, gain: 0.6 });  // open=true 用散音采样
       return;
     }
     // 徽位解析：本字 > 该弦最后徽位（续弹只写弦号时左手保持原位）> 七徽

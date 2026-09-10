@@ -67,7 +67,9 @@ scores/           谱面快照 + 索引
 jianzipu 引擎完整还原（详见 `research/project_memory.md`），关键差距：
 
 ### 已修复
-- **抓起/掐起/带起/掩**：原 H5 复用上一按音 `lastFreq`，实际左手松开按弦 → 弦长恢复散音 → 音高 = 散音 `OPEN[s-1]`
+- **抓起/掐起/带起/掩**：原 H5 复用上一按音 `lastFreq`，实际左手松开按弦 → 弦长恢复散音 → 音高 = 散音 `OPEN[s-1]`，并改用散音采样 `open=true`
+- **按音音高公式**：原 H5 `pitch.json` 用平均律半音表（9 徽 = 散音×1.5），实际 APK 用 `HuiPitchTable` 物理公式 `f = 散音 / (1 - 徽位比例)`（9 徽 = 散音×3）。重写 `freqOf` 改用 APK 的 15 项精确比例表
+- **泛音音高公式**：原 H5 查 `pitch.json` harmonics 表，改用 APK `harmonicOrder` 按徽位查谐波次数（7 徽=2 倍、4/10 徽=4 倍、1/13 徽=8 倍等）
 
 ### 待对照修复（APK `JianziSemanticParser` 行为）
 - **抓起 vs 掐起 vs 带起 vs 掩**：APK `_inferLeft` 区分大/名/中/食/跪指，H5 不区分

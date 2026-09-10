@@ -32,55 +32,67 @@
     return kind === 'open' ? open : open * 2;   // 按音/泛音采样录于七徽
   }
 
-  /* 查音高表：(弦, 徽名) → 频率。查找顺序：
-   * 1. 精确命中；2. 同弦相邻 x 坐标对数插值（分数徽如七徽七分，误差≈3音分）；
-   * 3. 基徽降级；4. 七徽兜底（续弦音由调用方传真实徽位，此处仅极端兜底） */
-  /* HUI_MARKS 顺序为一徽→十三徽（x 从岳山侧递减）：
-   * 一92.11 二87.34 三83.51 四77.78 五68.23 六60.58 七49 八37.65 九30 十20.8
-   * 十一14.72 十二10.7 十三6.13；分位向下一徽（n+1，x 更小）方向插值 */
-  const HUI_X = { '一': 92.11, '二': 87.34, '三': 83.51, '四': 77.78, '五': 68.23, '六': 60.58, '七': 49,
-                  '八': 37.65, '九': 30, '十': 20.8, '十一': 14.72, '十二': 10.7, '十三': 6.13 };
-  function huiToX(hui) {
+  /* 查音高：(弦, 徽名) → 频率
+   * 按音：f = 散音 / (1 - 徽位比例)，物理公式（APK HuiPitchTable + SimulatorGeometry）
+   * 泛音：f = 散音 × 谐波次数（按徽位查 harmonicOrder）
+   * 徽位比例表来自 APK HuiPitchTable.ratio（15 项精确分数） */
+  const HUI_RATIO = {
+    '一徽': 0.125,     '二徽': 0.1667,   '三徽': 0.2,      '四徽': 0.25,
+    '五徽': 0.3333,   '六徽': 0.4,      '七徽': 0.5,      '八徽': 0.6,
+    '九徽': 0.6667,   '十徽': 0.75,     '十一徽': 0.8,    '十二徽': 0.8333,
+    '十三徽': 0.8889, '十三徽二分': 0.9, '十三徽半': 0.9167
+  };
+  // 徽位 → 泛音谐波次数（APK harmonicOrder，对称徽位谐波数相同）
+  const HUI_HARMONIC = {
+    1: 8, 2: 6, 3: 5, 4: 4, 5: 3, 6: 5, 7: 2, 8: 5, 9: 3, 10: 4, 11: 5, 12: 6, 13: 8
+  };
+  function huiToRatio(hui) {
     if (!hui) return null;
-    if (hui === '徽外') return 4.1;
-    const m = hui.match(/^([一二三四五六七八九十]{1,2})徽([一二三四五六七八九]分|半)?$/);
+    if (hui === '徽外') return 0.9167;
+    if (HUI_RATIO[hui]) return HUI_RATIO[hui];
+    // 解析「X徽Y分」「X徽半」：徽内位置 = 徽位比例 + 分内偏移
+    const m = hui.match(/^([一二三四五六七八九十]+)徽([一二三四五六七八九]分|半)?$/);
     if (!m) return null;
-    let n = 0; const cn = m[1];
-    if (cn === '十') n = 10;
-    else if (cn.length === 2 && cn[0] === '十') n = 11 + '一二三四五六七八九'.indexOf(cn[1]);  // 十一~十九
-    else n = '一二三四五六七八九'.indexOf(cn) + 1;   // 徽号一基：一=1…九=9
-    if (n < 1) return null;
-    const base = HUI_X[['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三'][n]];
-    const next = HUI_X[['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四'][n + 1] || '十四'] || 0;
+    const baseKey = m[1] + '徽';
+    const base = HUI_RATIO[baseKey];
+    if (base == null) return null;
+    if (!m[2]) return base;
+    // 找下一个徽（n+1）的比例，按 1/10 分内插
+    const order = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三'];
+    const idx = order.indexOf(m[1]);
+    if (idx < 0) return base;
+    const nextKey = (order[idx + 1] || '十三外') + '徽';
+    const next = HUI_RATIO[nextKey] || (idx === order.length - 1 ? 0.9167 : base + 0.05);
     let frac = 0;
-    if (m[2] === '半') frac = 0.05;
-    else if (m[2]) frac = ('一二三四五六七八九'.indexOf(m[2][0]) + 1) / 10;
+    if (m[2] === '半') frac = 0.5;
+    else { frac = ('一二三四五六七八九'.indexOf(m[2][0]) + 1) / 10; }
     return base + (next - base) * frac;
   }
+  function huiOrderNum(hui) {
+    const m = hui && hui.match(/^([一二三四五六七八九十]+)徽/);
+    if (!m) return null;
+    const order = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三'];
+    const idx = order.indexOf(m[1]);
+    return idx >= 0 ? idx + 1 : null;
+  }
   function freqOf(string, hui, harmonic) {
-    const table = harmonic ? pitch.harmonics : pitch.positions;
-    const same = table.filter(p => p.s === string);
-    let hit = same.find(p => p.hui === hui);
-    if (!hit && !harmonic && hui) {
-      const x = huiToX(hui);
-      if (x !== null) {
-        const lo = same.filter(p => p.x !== undefined && p.x <= x).sort((a, b) => b.x - a.x)[0];
-        const hi = same.filter(p => p.x !== undefined && p.x > x).sort((a, b) => a.x - b.x)[0];
-        if (lo && hi) {
-          const u = (x - lo.x) / (hi.x - lo.x);
-          const f = lo.f * Math.pow(hi.f / lo.f, u);   // 对数插值
-          const openWeb = [65.406, 73.416, 87.307, 97.999, 110, 130.813, 146.832][string - 1];
-          return f * (OPEN[string - 1] / openWeb);
-        }
-      }
+    const open = OPEN[string - 1];
+    if (harmonic) {
+      // 泛音：f = 散音 × 谐波次数（按徽位查表，7徽=2倍八度，4/10徽=4倍，1/13徽=8倍等）
+      if (hui === '徽外') return open * 1.5;  // 徽外无泛音点，用 3:2 近似
+      const n = huiOrderNum(hui);
+      if (n && HUI_HARMONIC[n]) return open * HUI_HARMONIC[n];
+      // 未知徽位：查旧 pitch.harmonics 表兜底
+      const same = pitch.harmonics.filter(p => p.s === string);
+      const hit = same.find(p => p.hui === n) || same.find(p => p.hui === 7);
+      return hit ? hit.f * (open / 65.406) : open * 2;
     }
-    if (!hit) {
-      const base = hui && hui.match(/^([一二三四五六七八九十]+)/);
-      if (base) hit = same.find(p => p.hui === base[1] + '徽');
-    }
-    if (!hit) hit = same.find(p => p.hui === '七徽');
-    const openWeb = [65.406, 73.416, 87.307, 97.999, 110, 130.813, 146.832][string - 1];
-    return hit.f * (OPEN[string - 1] / openWeb);
+    // 按音：f = 散音 / (1 - 徽位比例)
+    if (hui === '徽外') return open / (1 - 0.9167);
+    const ratio = huiToRatio(hui);
+    if (ratio != null) return open / Math.max(0.0001, 1 - ratio);
+    // 兜底：七徽
+    return open / 0.5;
   }
 
   /* 播放一个音。时长语义对照网页版 part-07 pluck()：
