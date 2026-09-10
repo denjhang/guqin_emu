@@ -183,12 +183,20 @@
     strip.innerHTML = '';
     (score.lines || []).forEach((line, li) => {
       if (li > 0) { const sep = document.createElement('div'); sep.className = 'sep'; strip.appendChild(sep); }
-      (line.jianziTokens || []).forEach(tok => {
+      const rt = line.rhythmTokens || [];
+      let lastR = null;
+      (line.jianziTokens || []).forEach((tok, idx) => {
         if (tok.kind === 'blank') return;
+        const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
+        if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
         const el = document.createElement('button');
         el.className = 'jz-token';
-        el.innerHTML = window.JianziRender.renderToken(tok, 52);
-        el.title = tok.text;
+        const beats = window.GuqinPlayer.rhythmToBeats(r);
+        const rtxt = r ? r.text : '';
+        el.innerHTML = '<span class="jz-rhythm">' + rtxt + '</span>' +
+          (beats ? '<span class="jz-beats">' + beats + '</span>' : '<span class="jz-beats"></span>') +
+          '<span class="jz-glyph">' + window.JianziRender.renderToken(tok, 52) + '</span>';
+        el.title = tok.text + (beats ? '（' + beats + '）' : '');
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
           const act = window.GuqinPlayer.tapToken(tok);
@@ -223,12 +231,20 @@
     (score.lines || []).forEach(line => {
       const div = document.createElement('div');
       div.className = 'score-line';
+      const rt = line.rhythmTokens || [];
+      let lastR = null;
       (line.jianziTokens || []).forEach((tok, idx) => {
         if (tok.kind === 'blank') { div.appendChild(Object.assign(document.createElement('span'), { className: 'blank', textContent: ' ' })); return; }
+        const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
+        if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
         const el = document.createElement('button');
         el.className = 'jz-token';
         el.dataset.idx = idx;
-        el.innerHTML = window.JianziRender.renderToken(tok, 56);
+        const beats = window.GuqinPlayer.rhythmToBeats(r);
+        const rtxt = r ? r.text : '';
+        el.innerHTML = '<span class="jz-rhythm">' + rtxt + '</span>' +
+          (beats ? '<span class="jz-beats">' + beats + '</span>' : '<span class="jz-beats"></span>') +
+          '<span class="jz-glyph">' + window.JianziRender.renderToken(tok, 56) + '</span>';
         el.title = tok.text;
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
@@ -307,11 +323,19 @@
     editorScore.lines.forEach((line, li) => {
       const div = document.createElement('div');
       div.className = 'score-line edit-line';
+      const rt = line.rhythmTokens || [];
+      let lastR = null;
       (line.jianziTokens || []).forEach((tok, idx) => {
         if (tok.kind === 'blank') return;
+        const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
+        if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
         const el = document.createElement('button');
         el.className = 'jz-token';
-        el.innerHTML = window.JianziRender.renderToken(tok, 56);
+        const beats = window.GuqinPlayer.rhythmToBeats(r);
+        const rtxt = r ? r.text : '';
+        el.innerHTML = '<span class="jz-rhythm">' + rtxt + '</span>' +
+          (beats ? '<span class="jz-beats">' + beats + '</span>' : '<span class="jz-beats"></span>') +
+          '<span class="jz-glyph">' + window.JianziRender.renderToken(tok, 56) + '</span>';
         el.title = tok.text;
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();

@@ -15,21 +15,36 @@
     return ctx;
   }
   function init(pitchData) { pitch = pitchData; }
-  const key = (kind, s) => `audio/${kind}/string_${s}.wav`;
+  const key = (kind, s, huiIdx) => kind === 'harmonic' ? `audio/harmonic/h${huiIdx}_s${s}.mp3` : `audio/${kind}/string_${s}.wav`;
+  // 徽位 → 泛音采样序号 1-7（对称徽位共用：8↔6, 9↔5, 10↔4, 11↔3, 12↔2, 13↔1）
+  function harmIndex(hui) {
+    const n = huiOrderNum(hui);
+    if (n == null) return 7;   // 未知徽位兜底用七徽
+    if (n >= 1 && n <= 7) return n;
+    if (n >= 8 && n <= 13) return 14 - n;
+    return 7;
+  }
+  // 泛音采样序号 → 谐波次数（决定采样基准音高）
+  const HARM_ORDER = { 1: 8, 2: 6, 3: 5, 4: 4, 5: 3, 6: 5, 7: 2 };
 
-  async function loadSample(kind, s) {
-    const k = key(kind, s);
+  async function loadSample(kind, s, huiIdx) {
+    const k = key(kind, s, huiIdx);
     if (bank[k]) return bank[k];
     const c = ensureCtx();
-    const resp = await fetch(k);
+    let uri = k;
+    // h1_s3 只有 wav 版本
+    if (k === 'audio/harmonic/h1_s3.mp3') uri = 'audio/harmonic/h1_s3.wav';
+    const resp = await fetch(uri);
     const ab = await resp.arrayBuffer();
     const buf = await c.decodeAudioData(ab);
     bank[k] = buf;
     return buf;
   }
-  function baseFreq(kind, s) {
+  function baseFreq(kind, s, huiIdx) {
     const open = OPEN[s - 1];
-    return kind === 'open' ? open : open * 2;   // 按音/泛音采样录于七徽
+    if (kind === 'open') return open;
+    if (kind === 'harmonic') return open * (HARM_ORDER[huiIdx] || 2);
+    return open * 2;   // 按音采样录于七徽
   }
 
   /* 查音高：(弦, 徽名) → 频率
@@ -108,14 +123,15 @@
   async function play(string, harmonic, open, targetFreq, opts = {}) {
     const c = ensureCtx();
     const kind = open ? 'open' : (harmonic ? 'harmonic' : 'pressed');
-    const buf = await loadSample(kind, string);
-    const key = kind + ':' + string;
+    const huiIdx = harmonic ? harmIndex(opts.hui) : null;
+    const buf = await loadSample(kind, string, huiIdx);
+    const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : '');
     const t = c.currentTime + 0.01;
-    let rate = (targetFreq / baseFreq(kind, string)) * (opts.rate || 1);
+    let rate = (targetFreq / baseFreq(kind, string, huiIdx)) * (opts.rate || 1);
     const gain = (opts.gain || 0.85) * (open ? 0.7 : 1);
 
     // 同 key 重触：掐断旧音
-    const prev = voices.get(key);
+    const prev = voices.get(vkey);
     if (prev) {
       try {
         prev.g.gain.cancelScheduledValues(t);
@@ -133,7 +149,7 @@
     let useBuf = buf;
     if (effective > availPlay * 0.98 && window.GuqinSustain) {
       // 采样不够长：粒子余音合成（原速域烘 effective*rate 秒）
-      const ext = window.GuqinSustain.sustained(c, key, buf, effective * rate);
+      const ext = window.GuqinSustain.sustained(c, vkey, buf, effective * rate);
       if (ext) useBuf = ext;
     }
     const playDur = Math.min(effective, useBuf.duration / rate);
@@ -142,7 +158,7 @@
     const src = c.createBufferSource(), g = c.createGain();
     src.buffer = useBuf;
     src.connect(g); g.connect(c.destination);
-    voices.set(key, { s: src, g });
+    voices.set(vkey, { s: src, g });
 
     if (opts.attack) { // 绰/注：线性滑入（SoLoud fadeRelativePlaySpeed 语义）
       const semi = opts.attack === '绰' ? -2 : 2;
@@ -151,7 +167,7 @@
       src.playbackRate.linearRampToValueAtTime(rate, t + glide);
     } else if (opts.glideTo) {
       src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
-      src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string)), t + (opts.glideSec || 0.6));
+      src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string, huiIdx)), t + (opts.glideSec || 0.6));
     } else if (opts.vibrato) {
       src.playbackRate.value = rate;
       const isNao = opts.vibrato === '猱';
@@ -172,14 +188,14 @@
     g.gain.setValueAtTime(gain, t + Math.max(0.05, playDur - tail * 0.4));
     g.gain.exponentialRampToValueAtTime(0.0001, t + playDur + tail * 0.5);
     src.start(t); src.stop(t + playDur + tail * 0.5 + 0.05);
-    src.onended = () => { if (voices.get(key) && voices.get(key).s === src) voices.delete(key); };
+    src.onended = () => { if (voices.get(vkey) && voices.get(vkey).s === src) voices.delete(vkey); };
     return { src, gain: g };
   }
 
-  /* 预热：加载指定弦的采样 */
+  /* 预热：加载指定弦的采样（泛音只预载七徽，其余按需加载） */
   function preload(strings) {
     strings = strings || [1, 2, 3, 4, 5, 6, 7];
-    strings.forEach(s => { loadSample('open', s); loadSample('pressed', s); loadSample('harmonic', s); });
+    strings.forEach(s => { loadSample('open', s); loadSample('pressed', s); loadSample('harmonic', s, 7); });
   }
 
   /* 刹音（伏/剌伏）：80ms 内收掉所有在响声部——对应右手捂弦止振 */

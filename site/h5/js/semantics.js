@@ -125,11 +125,17 @@
 
     // 滚/拂[散] X [至 Y]、历 XY：连刷多根弦；单弦滚/拂=散音单弹
     // 散历/滚拂 = 散音扫弦；带徽位前缀（如大九历七六）= 按音扫弦
-    const sweepOpen = text.match(/^(?:散)?[滚拂]([一二三四五六七])至([一二三四五六七])/)
-      || text.match(/^(?:散)?历([一二三四五六七])([一二三四五六七])/);
+    const sweepOpen = text.match(/^散[滚拂]([一二三四五六七])至([一二三四五六七])/)
+      || text.match(/^散历([一二三四五六七])([一二三四五六七])/);
     if (sweepOpen) {
       const from = digitToNum(sweepOpen[1]), to = digitToNum(sweepOpen[2]);
-      return { type: 'sweep', from, to, open: true, tech: text.replace(/^散/, '')[0], text };
+      return { type: 'sweep', from, to, open: true, tech: text[1] || text[0], text };
+    }
+    const sweepClosed = text.match(/^[滚拂]([一二三四五六七])至([一二三四五六七])/)
+      || text.match(/^历([一二三四五六七])([一二三四五六七])/);
+    if (sweepClosed) {
+      const from = digitToNum(sweepClosed[1]), to = digitToNum(sweepClosed[2]);
+      return { type: 'sweep', from, to, open: false, tech: text[0], text };
     }
     // 带徽位的历：大九历七六 → 按九徽扫七、六弦
     const sweepPressed = text.match(/^(.+?)历([一二三四五六七])([一二三四五六七])$/);

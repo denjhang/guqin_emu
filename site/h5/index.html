@@ -27,7 +27,10 @@
   .btn.ghost { background:transparent; color:var(--accent); border:1px solid var(--accent); }
   /* 谱面 */
   .score-line { display:flex; flex-wrap:wrap; gap:6px; align-items:center; background:var(--paper); border:1px solid #e8dfc8; border-radius:8px; padding:8px; margin-bottom:6px; }
-  .jz-token { border:none; background:transparent; padding:2px; cursor:pointer; border-radius:6px; line-height:0; }
+  .jz-token { border:none; background:transparent; padding:2px; cursor:pointer; border-radius:6px; display:inline-flex; flex-direction:column; align-items:center; gap:1px; line-height:1; vertical-align:top; }
+  .jz-glyph { display:block; line-height:0; }
+  .jz-rhythm { font-size:14px; color:#6b5a3a; line-height:1; white-space:nowrap; }
+  .jz-beats { font-size:10px; color:#8a7d63; line-height:1; white-space:nowrap; }
   .jz-token:hover { background:#f3e9d2; }
   .jz-token.flash { animation:fl .35s; }
   .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 2px var(--accent); }
@@ -36,7 +39,7 @@
   #strip { display:flex; gap:8px; align-items:center; width:max-content; padding:0 40vw; }
   #strip .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 3px var(--accent); border-radius:8px; }
   #strip .jz-token.done { opacity:.35; }
-  #strip .sep { width:2px; height:48px; background:#e4d9c3; margin:0 6px; flex:none; }
+  #strip .sep { width:2px; align-self:stretch; min-height:56px; background:#e4d9c3; margin:0 6px; flex:none; }
   #qinCanvas { width:100%; height:260px; display:block; margin-top:10px; border-radius:10px; }
 
   /* 社区动态 */
@@ -86,6 +89,7 @@
   .hall-cell { border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; padding:4px 3px; border-radius:8px; line-height:1; }
   .hall-cell:hover { background:#f3e9d2; }
   .hall-cell .rhythm { font-size:15px; color:#6b5a3a; min-height:20px; }
+  .hall-cell .beats { font-size:10px; color:#8a7d63; line-height:1; white-space:nowrap; }
   .hall-cell.flash { background:#f3e0d2; }
   .hall-cell.playing { background:#f8d9d9; box-shadow:0 0 0 3px var(--accent); }
   .hall-cell.done { opacity:.35; }

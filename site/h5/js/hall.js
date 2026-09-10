@@ -66,7 +66,7 @@
     list.forEach(({ s, n }) => {
       const favs = favorites();
       const isCat = s.profile_nickname !== undefined || s.author_name !== undefined;
-      const cat = isCat ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) } : (catByEntity[s.entity_id] || {});
+      const cat = isCat ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) } : (catByEntity[s.entity_id] || {});
       const card = document.createElement('button');
       card.className = 'hall-card';
       const cover = cat.cover
@@ -95,7 +95,7 @@
     hallScore = s;
     $('#hallTitle').textContent = s.title.replace(/^《|》$/g, '');
     const isCat2 = s.profile_nickname !== undefined || s.author_name !== undefined;
-    const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) }
+    const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) }
       : (catalog.find(c => c.id === s.entity_id) || {});
     $('#hallAuthor').textContent = cat.author || authorOf(s);
     const favs = favorites();
@@ -159,10 +159,14 @@
         rEl.className = 'rhythm';
         rEl.textContent = r ? r.text : '♪';
         rEl.title = r ? (r.duration || '') : '';
+        const bEl = document.createElement('span');
+        bEl.className = 'beats';
+        const beats = r ? window.GuqinPlayer.rhythmToBeats(r) : '';
+        bEl.textContent = beats;
         const jEl = document.createElement('span');
         jEl.className = 'jianzi';
         jEl.innerHTML = window.JianziRender.renderToken(tok, 46);
-        cell.appendChild(rEl); cell.appendChild(jEl);
+        cell.appendChild(rEl); cell.appendChild(bEl); cell.appendChild(jEl);
         cell.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
           window.GuqinPlayer.tapToken(tok);

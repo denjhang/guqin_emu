@@ -3,6 +3,25 @@
 (function () {
   'use strict';
   const DUR = { whole: 4, half: 2, quarter: 1, eighth: 0.5, sixteenth: 0.25, thirtySecond: 0.125 };
+  // 节奏 token → 总拍数（数值）。多组件时值求和，附点递增
+  function rhythmBeats(rhythm) {
+    if (!rhythm || rhythm.kind === 'blank' || !rhythm.duration) return 0;
+    const comps = rhythm.rhythmComponents || [{ duration: rhythm.duration }];
+    let total = 0;
+    for (const c of comps) total += (DUR[c.duration] || 0);
+    const dots = rhythm.dotCount || 0;
+    if (dots > 0 && comps.length) {
+      const base = DUR[comps[comps.length - 1].duration] || 0;
+      total += base * (1 - Math.pow(0.5, dots));
+    }
+    return total;
+  }
+  // 节奏 token → 拍数字符串（统一用小数，如 0.5、0.25、1.25）
+  function rhythmToBeats(rhythm) {
+    const total = rhythmBeats(rhythm);
+    if (total <= 0) return '';
+    return total.toFixed(3).replace(/\.?0+$/, '') + '拍';
+  }
   let timers = [], playing = false, runId = 0, onTokenCb = null, onEndCb = null;
   let lastFreq = 0, lastString = 1, lastHui = null, harmonicCtx = false;
   const lastHuiByString = {};   // 每弦最后徽位：续弹/换指法时左手保持原位
@@ -32,7 +51,7 @@
         // 节奏按位置对齐：blank 节奏沿用前一非空节奏
         const rhythm = (r && r.kind !== 'blank' && r.duration) ? r : lastDur;
         if (r && r.kind !== 'blank' && r.duration) lastDur = r;
-        const beat = (DUR[rhythm.duration] || 1);
+        const beat = rhythmBeats(rhythm) || 1;
         const sec = beat * 60 / tempo;
         const act = window.JianziSemantics.parseToken(tok);
 
@@ -65,7 +84,10 @@
               t += ev.dur;
             }
           }
-          // 结构记号本身不占时长，但占 DOM 位（domIdx 已递增）
+          // 泛起/泛止：零时长事件入队，播放时切换 harmonicCtx
+          if (act.ctrl === '泛起' || act.ctrl === '泛止') {
+            events.push({ t, dur: 0, token: tok, action: act, tempo, domIdx: myDom });
+          }
           continue;
         }
         events.push({ t, dur: sec, token: tok, action: act, tempo, domIdx: myDom });
@@ -113,19 +135,21 @@
     }
     if (act.type === 'sweep') {
       // 滚/拂/历：连刷多弦，间隔 80ms
-      // open=true 散音扫弦；open=false 按音扫弦（用 act.hui）
+      // open=true 散音扫弦；harmonicCtx=true 泛音扫弦；否则按音扫弦（用 act.hui）
       const step = act.to >= act.from ? 1 : -1;
       const A = window.GuqinAudio;
+      const isHarm = harmonicCtx && !act.open;
+      const swHui = act.hui || lastHui || '七徽';
       for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step) {
         const del = Math.abs(s - act.from) * 80;
-        const freq = act.open ? A.OPEN[s - 1] : A.freqOf(s, act.hui || '七徽', false);
-        const f = () => A.play(s, false, act.open, freq, { dur: 0.7, gain: 0.6 });
+        const freq = act.open ? A.OPEN[s - 1] : A.freqOf(s, swHui, isHarm);
+        const f = () => A.play(s, isHarm, act.open, freq, { dur: 0.7, gain: 0.6, hui: swHui });
         del === 0 ? f() : later(f, del);
       }
       // 记录最后一根弦的状态，供后续 carry 技法沿用
       lastString = act.to;
-      lastFreq = act.open ? A.OPEN[act.to - 1] : A.freqOf(act.to, act.hui || '七徽', false);
-      if (!act.open && act.hui) lastHuiByString[act.to] = act.hui;
+      lastFreq = act.open ? A.OPEN[act.to - 1] : A.freqOf(act.to, swHui, isHarm);
+      if (!act.open) { lastHui = swHui; lastHuiByString[act.to] = swHui; }
       return;
     }
     if (act.type === 'pluck') {
@@ -160,7 +184,7 @@
       const s = p.string || lastString || 1;
       const hui = p.hui || lastHuiByString[s] || lastHui || '七徽';
       const freq = A.freqOf(s, hui, harm);
-      const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85 };
+      const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85, hui };
       if (allMods.includes('吟')) opts.vibrato = '吟';
       else if (allMods.includes('猱')) opts.vibrato = '猱';
       A.play(s, harm, false, freq, opts);
@@ -175,10 +199,10 @@
       lastFreq = f; lastString = s;
       return;
     }
-    // 徽位解析：本字 > 该弦最后徽位（续弹只写弦号时左手保持原位）> 七徽
-    const hui = p.hui || lastHuiByString[p.string] || '七徽';
+    // 徽位解析：本字 > 该弦最后徽位 > 全局最后徽位（续弹只写弦号时左手保持原位）> 七徽
+    const hui = p.hui || lastHuiByString[p.string] || lastHui || '七徽';
     const freq = p.open ? A.OPEN[p.string - 1] : A.freqOf(p.string, hui, harm);
-    const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85 };
+    const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85, hui };
     if (allMods.length) {
       if (allMods.includes('绰')) opts.attack = '绰';
       else if (allMods.includes('注')) opts.attack = '注';
@@ -186,8 +210,8 @@
       else if (allMods.includes('猱')) opts.vibrato = '猱';
     }
     A.play(p.string, harm, p.open, freq, opts);
-    lastFreq = freq; lastString = p.string; lastHui = p.hui;
-    if (p.hui) lastHuiByString[p.string] = p.hui;   // 按音记录徽位，续弹继承
+    lastFreq = freq; lastString = p.string;
+    if (p.hui) { lastHui = p.hui; lastHuiByString[p.string] = p.hui; }   // 按音记录徽位，续弹继承
   }
 
   /* 播放整谱 */
@@ -228,5 +252,5 @@
   }
   function isPlaying() { return playing; }
 
-  window.GuqinPlayer = { buildTimeline, play, stop, tapToken, isPlaying };
+  window.GuqinPlayer = { buildTimeline, play, stop, tapToken, isPlaying, rhythmToBeats };
 })();
