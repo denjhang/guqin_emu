@@ -6,7 +6,6 @@
   let timers = [], playing = false, runId = 0, onTokenCb = null, onEndCb = null;
   let lastFreq = 0, lastString = 1, lastHui = null, harmonicCtx = false;
   const lastHuiByString = {};   // 每弦最后徽位：续弹/换指法时左手保持原位
-  const lastStringByFinger = {}; // 每左手指最后按的弦：掐起等按指查回原弦
 
   function later(fn, ms) { const id = setTimeout(fn, Math.max(0, ms)); timers.push(id); return id; }
 
@@ -128,9 +127,9 @@
     const harm = p.harmonic || harmonicCtx && !p.open;
     const allMods = (mods || []).concat(p.mods || []);
     // 抓起/掐起/带起/掩：左手松开按弦 → 弦长恢复全弦 → 散音
-    // 有左手指时按指查回原弦（如大九历七六后名十掐起应回5弦，而非扫弦末弦6）
+    // 弦号沿用 lastString（扫弦/连弹后的末弦），不按指回查
     if (p.carry && p.open) {
-      const s = p.string || (p.finger && lastStringByFinger[p.finger]) || lastString || 1;
+      const s = p.string || lastString || 1;
       const f = A.OPEN[s - 1];
       if (f) A.play(s, false, true, f, { dur, gain: 0.6 });
       lastFreq = f; lastString = s;
@@ -169,7 +168,6 @@
     A.play(p.string, harm, p.open, freq, opts);
     lastFreq = freq; lastString = p.string; lastHui = p.hui;
     if (p.hui) lastHuiByString[p.string] = p.hui;   // 按音记录徽位，续弹继承
-    if (p.finger) lastStringByFinger[p.finger] = p.string;  // 记录该指所在弦，供掐起查回
   }
 
   /* 播放整谱 */
