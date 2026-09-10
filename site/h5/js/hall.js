@@ -4,6 +4,8 @@
   'use strict';
   const $ = s => document.querySelector(s);
   let corpus = [], scoresById = {}, favKey = 'h5-hall-favorites-v1';
+  let catalog = [];   // 服务器曲库目录（真实作者/封面/点赞）
+  function setCatalog(c) { catalog = c || []; }
   let hallScore = null, hallTokens = [], hallPlaying = false;
 
   function favorites() {
@@ -26,29 +28,60 @@
     return `<img class="cover-img" src="img/score_card_default_background.png" alt="默认封面">`;
   }
 
+  let hallScores = [];   // 大厅主数据：目录（真实作者/封面）+ corpus 补充
+  function setHallScores(a) { hallScores = a || []; }
+
   function build() {
     scoresById = {};
     const box = $('#hallGrid');
-    const list = corpus
-      .map(s => { const sc = s.score_content.score; let n = 0; sc.lines.forEach(l => (l.jianziTokens || []).forEach(t => t.kind === 'jianzi' && n++)); return { s, n }; })
-      .filter(x => x.n >= 20)
+    const catIds = new Set(), catPosts = new Set();
+    hallScores.forEach(c => { if (c.id) catIds.add(c.id); if (c.source_post_id) catPosts.add(c.source_post_id); });
+    const catTitles = new Set(hallScores.map(h => h.title));
+    const extra = corpus.filter(s => !catIds.has(s.entity_id) && !catPosts.has(s.entity_id) && !catTitles.has(s.title));
+    // 目录中谱面为空的条目：按标题从 corpus 回填（取字数最多的版本）
+    const byTitle = {};
+    corpus.forEach(s => {
+      const sc = s.score_content && s.score_content.score; if (!sc || !sc.lines) return;
+      let n = 0; sc.lines.forEach(l => (l.jianziTokens || []).forEach(t => t.kind === 'jianzi' && n++));
+      if (!byTitle[s.title] || byTitle[s.title].n < n) byTitle[s.title] = { n, s };
+    });
+    const all = hallScores.map(s => {
+      const copy = { ...s, entity_type: 'library_item' };
+      const sc = copy.score_content && copy.score_content.score;
+      let n = 0; if (sc && sc.lines) sc.lines.forEach(l => (l.jianziTokens || []).forEach(t => t.kind === 'jianzi' && n++));
+      if (n === 0 && byTitle[s.title]) copy.score_content = byTitle[s.title].s.score_content;
+      return copy;
+    }).concat(extra.map(s => ({ ...s, entity_type: s.entity_type })));
+    const list = all
+      .map(s => { const sc = s.score_content && s.score_content.score; let n = 0; if (sc && sc.lines) sc.lines.forEach(l => (l.jianziTokens || []).forEach(t => t.kind === 'jianzi' && n++)); return { s, n }; })
+      .filter(x => x.n >= 10)
       .sort((a, b) => b.n - a.n);
     list.forEach(x => scoresById[x.s.id] = x.s);
     box.innerHTML = '';
+    const catByEntity = {};
+    catalog.forEach(c => {
+      if (c.id) catByEntity[c.id] = c;
+      if (c.sourcePost) catByEntity['post:' + c.sourcePost] = c;
+    });
     list.forEach(({ s, n }) => {
       const favs = favorites();
+      const isCat = s.profile_nickname !== undefined || s.author_name !== undefined;
+      const cat = isCat ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '' } : (catByEntity[s.entity_id] || {});
       const card = document.createElement('button');
       card.className = 'hall-card';
+      const cover = cat.cover
+        ? `<img class="cover-img" src="${cat.cover}" alt="封面" loading="lazy">`
+        : coverHTML();
       card.innerHTML = `
-        <span class="cover">${coverHTML()}</span>
+        <span class="cover">${cover}</span>
         <span class="hc-title"></span>
         <span class="hc-meta">
-          <span class="hc-author">${authorOf(s)}</span>
-          <span class="hc-fav">♥ ${favCount(s) + (favs[s.id] ? 1 : 0)}</span>
+          <span class="hc-author">${cat.author || authorOf(s)}</span>
+          <span class="hc-fav">♥ ${(cat.likes || 0) + (favs[s.id] ? 1 : 0)}</span>
         </span>`;
       card.querySelector('.hc-title').textContent = s.title.replace(/^《|》$/g, '');
+      if (cat.desc) card.title = cat.desc;
       card.addEventListener('click', () => openHall(s));
-      // 收藏角标
       if (favs[s.id]) { const b = document.createElement('span'); b.className = 'hc-faved'; b.textContent = '已收藏'; card.querySelector('.cover').appendChild(b); }
       box.appendChild(card);
     });
@@ -59,10 +92,14 @@
   function openHall(s) {
     hallScore = s;
     $('#hallTitle').textContent = s.title.replace(/^《|》$/g, '');
-    $('#hallAuthor').textContent = authorOf(s);
+    const isCat2 = s.profile_nickname !== undefined || s.author_name !== undefined;
+    const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '' }
+      : (catalog.find(c => c.id === s.entity_id) || {});
+    $('#hallAuthor').textContent = cat.author || authorOf(s);
     const favs = favorites();
-    updateFavBtn(!!favs[s.id], favCount(s));
-    $('#hallCover').innerHTML = coverHTML();
+    updateFavBtn(!!favs[s.id], (cat.likes || 0) + (favs[s.id] ? 1 : 0));
+    $('#hallCover').innerHTML = cat.cover ? `<img class="cover-img" src="${cat.cover}" alt="封面">` : coverHTML();
+    $('#hallDesc').textContent = cat.desc || '';
     $('#hallCover').style.display = '';
     buildHallStrip(s.score_content.score);
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === 'hallview'));
@@ -166,6 +203,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-editor'));
   }
 
-  window.Hall = { build, openHall, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, _coverHTML: coverHTML, _authorOf: authorOf };
+  window.Hall = { build, openHall, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, setCatalog, setHallScores, _coverHTML: coverHTML, _authorOf: authorOf };
   window.HallFire = null; // 由 app 注入琴面联动
 })();

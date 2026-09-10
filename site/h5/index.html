@@ -76,6 +76,7 @@
   .hall-info h2 { margin:0 0 4px; color:var(--accent); }
   .hall-author { font-size:13px; color:#8a7d63; }
   .hall-author::before { content:"👤 "; opacity:.6; }
+  .hall-desc { font-size:12px; color:#a09478; margin-top:2px; }
   #hallStripWrap { overflow-y:auto; max-height:420px; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; }
   .hall-row { display:flex; gap:4px; align-items:flex-end; padding:4px 8px; }
   .hall-row + .hall-row { border-top:1px dashed #eadfc4; }
@@ -125,6 +126,7 @@
     <div class="hall-info">
       <h2 id="hallTitle">—</h2>
       <div id="hallAuthor" class="hall-author"></div>
+      <div id="hallDesc" class="hall-desc"></div>
       <div class="toolbar" style="margin:8px 0 0">
         <button class="btn" id="hallPlayBtn">▶ 播放模式</button>
         <button class="btn ghost" id="hallStopBtn">■ 停止</button>

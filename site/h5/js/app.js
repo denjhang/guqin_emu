@@ -43,6 +43,8 @@
     techDict = techniques;
     corpus = all;
     window.Hall.setCorpus(corpus);
+    try { window.Hall.setCatalog(await loadJSON('community/catalog.json')); } catch (e) { console.warn('catalog 加载失败', e); }
+    try { window.Hall.setHallScores(await loadJSON('community/hall_scores.json')); } catch (e) { console.warn('hall_scores 加载失败', e); }
     window.JianziRender.init(glyphPaths, glyphParts);
     window.JianziSemantics.init(glyphParts);
     window.JianziInput.init(glyphParts, corpus);
