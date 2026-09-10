@@ -6,7 +6,7 @@
   let corpus = [], scoresById = {}, favKey = 'h5-hall-favorites-v1';
   let catalog = [];   // 服务器曲库目录（真实作者/封面/点赞）
   function setCatalog(c) { catalog = c || []; }
-  let hallScore = null, hallTokens = [], hallPlaying = false;
+  let hallScore = null, hallTokens = [], hallPlaying = false, lastScrolledRow = null;
 
   function favorites() {
     try { return JSON.parse(localStorage.getItem(favKey) || '{}'); } catch (e) { return {}; }
@@ -179,6 +179,7 @@
     if (!hallScore) return;
     window.GuqinPlayer.stop();
     document.querySelectorAll('.hall-cell.playing,.hall-cell.done').forEach(e => e.classList.remove('playing', 'done'));
+    lastScrolledRow = null;
     const tempo = +($('#hallTempo').value) || null;
     const sc = tempo ? { lines: hallScore.score_content.score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : hallScore.score_content.score;
     const wrap = $('#hallStripWrap');
@@ -186,10 +187,17 @@
       hallTokens.forEach((t, k) => { t.classList.toggle('done', k < i); t.classList.toggle('playing', k === i); });
       const el = hallTokens[i];
       if (el) {
-        // 多行纵向跟随：当前字滚入可视区
-        const elTop = el.offsetTop, elH = el.offsetHeight;
-        if (elTop < wrap.scrollTop + wrap.clientHeight * 0.15 || elTop + elH > wrap.scrollTop + wrap.clientHeight * 0.85)
-          wrap.scrollTo({ top: elTop - wrap.clientHeight * 0.35, behavior: 'smooth' });
+        // 多行纵向跟随：只在换行时滚动一次；坐标用视口相对换算（offsetTop 参照不可靠）
+        const row = el.closest('.hall-row');
+        if (row && row !== lastScrolledRow) {
+          lastScrolledRow = row;
+          const wr = wrap.getBoundingClientRect(), rr = row.getBoundingClientRect();
+          const rel = rr.top - wr.top + wrap.scrollTop;   // 行相对滚动容器顶部
+          const pad = 24;
+          if (rel < wrap.scrollTop + pad || rel + rr.height > wrap.scrollTop + wrap.clientHeight - pad) {
+            wrap.scrollTo({ top: Math.max(0, rel - wrap.clientHeight * 0.28), behavior: 'smooth' });
+          }
+        }
       }
     }, () => {
       hallTokens.forEach(t => t.classList.remove('playing'));
