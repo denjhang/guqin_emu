@@ -66,7 +66,7 @@
     list.forEach(({ s, n }) => {
       const favs = favorites();
       const isCat = s.profile_nickname !== undefined || s.author_name !== undefined;
-      const cat = isCat ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '' } : (catByEntity[s.entity_id] || {});
+      const cat = isCat ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) } : (catByEntity[s.entity_id] || {});
       const card = document.createElement('button');
       card.className = 'hall-card';
       const cover = cat.cover
@@ -78,9 +78,11 @@
         <span class="hc-meta">
           <span class="hc-author">${cat.author || authorOf(s)}</span>
           <span class="hc-fav">♥ ${(cat.likes || 0) + (favs[s.id] ? 1 : 0)}</span>
-        </span>`;
+        </span>
+        <span class="hc-date">${cat.updated || (s.created_at || '').slice(0, 10)}</span>
+        ${cat.desc ? '<span class="hc-desc"></span>' : ''}`;
       card.querySelector('.hc-title').textContent = s.title.replace(/^《|》$/g, '');
-      if (cat.desc) card.title = cat.desc;
+      if (cat.desc) card.querySelector('.hc-desc').textContent = cat.desc;
       card.addEventListener('click', () => openHall(s));
       if (favs[s.id]) { const b = document.createElement('span'); b.className = 'hc-faved'; b.textContent = '已收藏'; card.querySelector('.cover').appendChild(b); }
       box.appendChild(card);
@@ -93,7 +95,7 @@
     hallScore = s;
     $('#hallTitle').textContent = s.title.replace(/^《|》$/g, '');
     const isCat2 = s.profile_nickname !== undefined || s.author_name !== undefined;
-    const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '' }
+    const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('/h5/community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) }
       : (catalog.find(c => c.id === s.entity_id) || {});
     $('#hallAuthor').textContent = cat.author || authorOf(s);
     const favs = favorites();
