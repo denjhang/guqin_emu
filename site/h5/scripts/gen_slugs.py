@@ -39,21 +39,23 @@ def to_slug(title):
 
 def main():
     items = []  # {id, title}
-    seen_titles = set()
+    seen_ids = set()
     if os.path.exists(ALL_RAW):
         arr = json.load(open(ALL_RAW, encoding='utf-8'))
         for s in arr:
             sid = s.get('id'); title = s.get('title') or ''
-            if sid and title:
+            if sid and title and sid not in seen_ids:
                 items.append({'id': sid, 'title': title})
-                seen_titles.add(title)
+                seen_ids.add(sid)
     if os.path.exists(HALL):
         try:
             arr = json.load(open(HALL, encoding='utf-8'))
             for s in arr:
                 sid = s.get('id'); title = s.get('title') or ''
-                if sid and title and title not in seen_titles:
+                # 按 id 去重（不是按标题）；同名不同 id 会得到 -N 后缀
+                if sid and title and sid not in seen_ids:
                     items.append({'id': sid, 'title': title})
+                    seen_ids.add(sid)
         except Exception as e:
             print('hall_scores 读取失败:', e, file=sys.stderr)
 
