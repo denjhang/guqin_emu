@@ -21,17 +21,9 @@
     return s.source_author_name ? s.source_author_name + ' 琴友' : '琴友分享';
   }
 
-  /* 默认封面：APK 内置 score_card_default_background.png + 标题竖排文字 */
-  function coverSVG(s) {
-    const ch = s.title.replace(/^《|》$/g, '')[0] || '琴';
-    const title = s.title.replace(/^《|》$/g, '');
-    const short = title.length > 8 ? title.slice(0, 8) + '…' : title;
-    return `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <image href="img/score_card_default_small.png" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid slice"/>
-      <rect x="0" y="0" width="120" height="120" fill="rgba(20,8,4,.28)"/>
-      <text x="60" y="64" font-size="42" text-anchor="middle" fill="#f3e6c8" font-family="Kaiti SC,STKaiti,KaiTi,serif" style="text-shadow:0 1px 2px rgba(0,0,0,.5)">${ch}</text>
-      <text x="60" y="94" font-size="12" text-anchor="middle" fill="rgba(243,230,200,.92)" font-family="sans-serif">${short}</text>
-    </svg>`;
+  /* 封面：APK 原版默认封面图（score_card_default_background.png），不生成任何图 */
+  function coverHTML() {
+    return `<img class="cover-img" src="img/score_card_default_small.png" alt="默认封面">`;
   }
 
   function build() {
@@ -48,7 +40,7 @@
       const card = document.createElement('button');
       card.className = 'hall-card';
       card.innerHTML = `
-        <span class="cover">${coverSVG(s)}</span>
+        <span class="cover">${coverHTML()}</span>
         <span class="hc-title"></span>
         <span class="hc-meta">
           <span class="hc-author">${authorOf(s)}</span>
@@ -70,7 +62,7 @@
     $('#hallAuthor').textContent = authorOf(s);
     const favs = favorites();
     updateFavBtn(!!favs[s.id], favCount(s));
-    $('#hallCover').innerHTML = coverSVG(s);
+    $('#hallCover').innerHTML = coverHTML();
     $('#hallCover').style.display = '';
     buildHallStrip(s.score_content.score);
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === 'hallview'));
@@ -174,6 +166,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-editor'));
   }
 
-  window.Hall = { build, openHall, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, _coverSVG: coverSVG, _authorOf: authorOf };
+  window.Hall = { build, openHall, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, _coverHTML: coverHTML, _authorOf: authorOf };
   window.HallFire = null; // 由 app 注入琴面联动
 })();
