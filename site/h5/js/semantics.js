@@ -99,8 +99,17 @@
       const pairs = groups.map(g => {
         let huiD = g.digits, string = null;
         if (g.open) { string = g.digits.length ? digitToNum(g.digits[g.digits.length - 1]) : null; huiD = []; }
-        else if (g.digits.length >= 2) { string = digitToNum(g.digits[g.digits.length - 1]); huiD = g.digits.slice(0, -1); }
-        else if (g.digits.length === 1) { string = digitToNum(g.digits[0]); huiD = []; }
+        else {
+          // 多数字徽位：十一/十二/十三 总是徽位（dev_guide：十徽一分等罕用，故十一=十一徽）
+          const joined = g.digits.join('');
+          const multi = joined.match(/^(十一|十二|十三)/);
+          if (multi) {
+            huiD = [multi[1]];
+            const rest = joined.slice(multi[1].length);
+            if (rest) string = digitToNum(rest);
+          } else if (g.digits.length >= 2) { string = digitToNum(g.digits[g.digits.length - 1]); huiD = g.digits.slice(0, -1); }
+          else if (g.digits.length === 1) { string = digitToNum(g.digits[0]); huiD = []; }
+        }
         if (!(string >= 1 && string <= 7)) string = null;   // 八/九等非弦号
         return { finger: g.finger, open: g.open, harmonic: false,
                  hui: huiD.length ? digitsToHui(huiD.join('')) : null, string };
