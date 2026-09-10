@@ -61,26 +61,31 @@
     src.connect(g); g.connect(c.destination);
     const t = c.currentTime + 0.01;
     let rate = (targetFreq / baseFreq(kind, string)) * (opts.rate || 1);
+    const gain = opts.gain || 0.8;
+    const dur = opts.dur || Math.min(buf.duration, 3.2);
 
-    if (opts.attack) { // 绰/注：±大二度滑入
+    if (opts.attack) { // 绰/注：自下方/上方大二度滑入，先快后慢（指数坡）
       const semi = opts.attack === '绰' ? -2 : 2;
+      const glide = Math.min(0.38, Math.max(0.22, dur * 0.35));
       src.playbackRate.setValueAtTime(rate * Math.pow(2, semi / 12), t);
-      src.playbackRate.exponentialRampToValueAtTime(rate, t + 0.5);
-    } else if (opts.glideTo) { // 走手音滑向目标频率
-      src.playbackRate.setValueAtTime(rate, t);
-      src.playbackRate.linearRampToValueAtTime(opts.glideTo / baseFreq(kind, string), t + (opts.glideSec || 0.6));
-    } else if (opts.vibrato) { // 吟/猱：轻微音高摆动
+      src.playbackRate.exponentialRampToValueAtTime(rate, t + glide);
+    } else if (opts.glideTo) { // 走手音：按弦长物理规律滑向目标（指数坡≈对数音分匀速）
+      src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
+      src.playbackRate.exponentialRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string)), t + (opts.glideSec || 0.6));
+    } else if (opts.vibrato) { // 吟/猱：音头干净，0.25s 后摆入；吟窄而快、猱宽而慢
       src.playbackRate.value = rate;
+      const isNao = opts.vibrato === '猱';
       const lfo = c.createOscillator(), lg = c.createGain();
-      lfo.frequency.value = opts.vibrato === '猱' ? 3.2 : 5.0;
-      lg.gain.value = rate * (opts.vibrato === '猱' ? 0.028 : 0.014);
+      lfo.type = 'sine';
+      lfo.frequency.value = isNao ? 2.4 : 4.3;
+      lg.gain.setValueAtTime(0, t);
+      lg.gain.setValueAtTime(0, t + 0.22);
+      lg.gain.linearRampToValueAtTime(rate * (isNao ? 0.055 : 0.032), t + 0.55); // 猱≈1 半音、吟≈0.6 半音峰值
       lfo.connect(lg); lg.connect(src.playbackRate);
-      lfo.start(t); lfo.stop(t + (opts.dur || 2));
+      lfo.start(t); lfo.stop(t + dur);
     } else {
       src.playbackRate.value = rate;
     }
-    const gain = opts.gain || 0.8;
-    const dur = opts.dur || Math.min(buf.duration, 3.2);
     g.gain.setValueAtTime(0, t);
     g.gain.linearRampToValueAtTime(gain, t + 0.012);
     g.gain.setValueAtTime(gain, t + Math.max(0.05, dur - 0.4));

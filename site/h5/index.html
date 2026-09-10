@@ -31,6 +31,15 @@
   .jz-token:hover { background:#f3e9d2; }
   .jz-token.flash { animation:fl .35s; }
   .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 2px var(--accent); }
+  /* 顶部滚动谱条 + 琴面（复刻 APK 演奏页布局） */
+  #stripWrap { overflow-x:auto; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; scrollbar-width:thin; }
+  #strip { display:flex; gap:8px; align-items:center; width:max-content; padding:0 40vw; }
+  #strip .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 3px var(--accent); border-radius:8px; }
+  #strip .jz-token.done { opacity:.35; }
+  #strip .sep { width:2px; height:48px; background:#e4d9c3; margin:0 6px; flex:none; }
+  #qinCanvas { width:100%; height:260px; display:block; margin-top:10px; border-radius:10px; }
+  #fullScoreBox { margin-top:10px; }
+  #fullScoreBox summary { cursor:pointer; color:#8a7d63; font-size:13px; }
   @keyframes fl { 0%{background:var(--accent)} 100%{background:transparent} }
   .line-btn { border:none; background:#eee6d0; border-radius:4px; cursor:pointer; padding:4px 8px; margin-left:4px; }
   .blank { width:14px; }
@@ -68,8 +77,15 @@
     <button class="btn" id="playBtn">▶ 播放</button>
     <button class="btn ghost" id="stopBtn">■ 停止</button>
   </div>
-  <p class="hint">点击任意减字即时点读发声；播放时自动逐字高亮。</p>
-  <div id="scoreView"></div>
+  <div id="stripWrap">
+    <div id="strip"></div>
+  </div>
+  <p class="hint">上方谱条自动跟随播放滚动，点任意减字可点读；下方琴面实时演示按弦与拨弦位置。</p>
+  <canvas id="qinCanvas"></canvas>
+  <details id="fullScoreBox">
+    <summary>整谱网格视图</summary>
+    <div id="scoreView"></div>
+  </details>
 </div>
 
 <div class="page" id="page-editor">
@@ -104,6 +120,7 @@
 <script src="js/render.js"></script>
 <script src="js/semantics.js"></script>
 <script src="js/audio.js"></script>
+<script src="js/qin.js"></script>
 <script src="js/player.js"></script>
 <script src="js/input.js"></script>
 <script src="js/speech.js"></script>

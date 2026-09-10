@@ -22,6 +22,7 @@
     window.JianziInput.init(glyphParts, corpus);
     window.GuqinAudio.init(pitch);
     window.GuqinAudio.preload();
+    window.GuqinStage.init(document.getElementById('qinCanvas'), pitch);
     buildLibrary('');
     $('#searchBox').addEventListener('input', e => buildLibrary(e.target.value));
     $('#playBtn').addEventListener('click', playCurrent);
@@ -70,8 +71,49 @@
   function openScore(s) {
     current = s;
     $('#scoreTitle').textContent = s.title;
+    renderStrip(s.score_content.score);
     renderScore(s.score_content.score, '#scoreView');
     switchTab('score');
+  }
+
+  /* 顶部横向谱条（APK 演奏页样式） */
+  function renderStrip(score) {
+    const strip = $('#strip');
+    strip.innerHTML = '';
+    (score.lines || []).forEach((line, li) => {
+      if (li > 0) { const sep = document.createElement('div'); sep.className = 'sep'; strip.appendChild(sep); }
+      (line.jianziTokens || []).forEach(tok => {
+        if (tok.kind === 'blank') return;
+        const el = document.createElement('button');
+        el.className = 'jz-token';
+        el.innerHTML = window.JianziRender.renderToken(tok, 52);
+        el.title = tok.text;
+        el.addEventListener('click', () => {
+          window.GuqinAudio.ensureCtx();
+          const act = window.GuqinPlayer.tapToken(tok);
+          fireStage(act); flash(el);
+        });
+        strip.appendChild(el);
+      });
+    });
+    strip.scrollLeft = 0;
+  }
+
+  /* 把解析出的动作喂给琴面动画 */
+  function fireStage(act) {
+    const notes = [];
+    if (act.type === 'pluck') notes.push(act);
+    else if (act.type === 'chord') (act.positions || []).forEach(n => notes.push(n));
+    else if (act.type === 'sweep') {
+      const step = act.to >= act.from ? 1 : -1;
+      for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step)
+        notes.push({ string: s, open: true });
+    }
+    notes.forEach((n, i) => {
+      if (!n.string) return;
+      const fire = () => window.GuqinStage.press({ string: n.string, hui: n.hui || null, open: n.open, harmonic: n.harmonic });
+      i === 0 ? fire() : setTimeout(fire, i * 80);
+    });
   }
 
   function renderScore(score, sel) {
@@ -111,12 +153,26 @@
   function playScore(score, tempoOverride) {
     window.GuqinPlayer.stop(); clearHighlight();
     const tempo = tempoOverride ? +tempoOverride : null;
-    // 用 override 改写各行 tempo
     const sc = tempo ? { lines: score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : score;
-    const tokens = $(current && score === current.score_content.score ? '#scoreView' : '#editorView');
-    const tks = [...tokens.querySelectorAll('.jz-token')];
+    const isCurrent = current && score === current.score_content.score;
+    const strip = $('#strip');
+    const tks = isCurrent ? [...strip.querySelectorAll('.jz-token')] : [...$('#editorView').querySelectorAll('.jz-token')];
     window.GuqinPlayer.play(sc, tempo,
-      (i) => { clearHighlight(); const el = tks[i]; if (el) { el.classList.add('playing'); el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } },
+      (i, ev) => {
+        clearHighlight();
+        const el = tks[i];
+        if (el) {
+          el.classList.add('playing');
+          if (isCurrent) {
+            el.classList.remove('done');
+            // 手动居中：避免 scrollIntoView 连带滚动整页
+            const wrap = document.getElementById('stripWrap');
+            wrap.scrollTo({ left: el.offsetLeft - (wrap.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+            tks.forEach((t, k) => { if (k < i) t.classList.add('done'); });
+          } else el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+        fireStage(ev.action);
+      },
       () => clearHighlight());
   }
   function clearHighlight() { document.querySelectorAll('.jz-token.playing').forEach(e => e.classList.remove('playing')); }
@@ -206,6 +262,7 @@
   function switchTab(name) {
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-' + name));
+    if (name === 'score') requestAnimationFrame(() => window.GuqinStage.resize());
   }
 
   document.addEventListener('DOMContentLoaded', boot);

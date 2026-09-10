@@ -74,13 +74,14 @@
   function pluckOne(p, dur, mods) {
     const A = window.GuqinAudio;
     const harm = p.harmonic || harmonicCtx && !p.open;
-    if (p.carry || (!p.string && lastString)) {
-      // 掐起/掩等：沿用上一音的弦与徽
-      const s = lastString, h = lastHui;
-      if (s) A.play(s, false, false, lastFreq || A.OPEN[s - 1], { dur, gain: 0.6 });
+    // 掐起/掩等左手发声：沿用上一音；完全没有上文时落到 1 弦七徽
+    if (p.carry || p.string == null) {
+      const s = lastString || 1;
+      const h = p.hui || lastHui || '七徽';
+      const f = lastFreq || A.freqOf(s, h, harm);
+      if (f) A.play(s, false, false, f, { dur, gain: 0.6 });
       return;
     }
-    if (!p.string) return;
     const freq = p.open ? A.OPEN[p.string - 1] : A.freqOf(p.string, p.hui || '七徽', harm);
     const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85 };
     if (mods) {

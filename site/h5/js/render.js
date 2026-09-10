@@ -35,7 +35,7 @@
         `<path d="${escapeXml(p.d)}" fill="${p.fill || '#2b0000'}"` +
         (p.transform ? ` transform="${escapeXml(p.transform)}"` : '') + '/>'
       ).join('');
-      inner += `<svg x="${+st.x}" y="${+st.y}" width="${+st.lengthX}" height="${+st.lengthY}" viewBox="${vb}" preserveAspectRatio="xMidYMid meet" overflow="visible">${paths}</svg>`;
+      inner += `<svg x="${+st.x}" y="${+st.y}" width="${+st.lengthX}" height="${+st.lengthY}" viewBox="${vb}" preserveAspectRatio="none" overflow="visible">${paths}</svg>`;
     });
     return `<svg class="jz" width="${size}" height="${size}" viewBox="0 0 256 256" role="img" aria-label="${escapeXml(token.text || '')}">${inner}</svg>`;
   }
