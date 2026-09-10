@@ -261,7 +261,8 @@
     window.GuqinPlayer.play(sc, tempo,
       (i, ev) => {
         clearHighlight();
-        const el = tks[i];
+        const di = ev.domIdx != null ? ev.domIdx : i;
+        const el = tks[di];
         if (el) {
           el.classList.add('playing');
           if (isCurrent) {
@@ -269,7 +270,7 @@
             // 手动居中：避免 scrollIntoView 连带滚动整页
             const wrap = document.getElementById('stripWrap');
             wrap.scrollTo({ left: el.offsetLeft - (wrap.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
-            tks.forEach((t, k) => { if (k < i) t.classList.add('done'); });
+            tks.forEach((t, k) => { if (k < di) t.classList.add('done'); });
           } else el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
         fireStage(ev.action);

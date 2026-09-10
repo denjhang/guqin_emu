@@ -18,6 +18,7 @@
     let t = 0.4;
     let tempo = defaultTempo || 60;
     let bracketIdx = -1;   // 最近一个「括号」在 events 中的位置（反复段起点）
+    let domIdx = 0;        // 非空 token 的全局序号，与 DOM 渲染顺序一致
     for (const line of score.lines || []) {
       if (line.sectionTempo) tempo = line.sectionTempo;
       const jt = (line.jianziTokens || []);
@@ -26,6 +27,7 @@
       for (let i = 0; i < jt.length; i++) {
         const tok = jt[i];
         if (tok.kind === 'blank') continue;
+        const myDom = domIdx++;      // 每个非空 token 占一个 DOM 位
         const r = rt[i];
         // 节奏按位置对齐：blank 节奏沿用前一非空节奏
         const rhythm = (r && r.kind !== 'blank' && r.duration) ? r : lastDur;
@@ -45,10 +47,14 @@
             prev.action.to = toNum;
             prev.action.text = (prev.action.text || '') + tok.text;
           }
-          continue;  // 「至」本身不占时长，合并到前一事件
+          continue;  // 「至」本身不占时长，合并到前一事件（沿用前一 domIdx）
         }
 
         if (act.type === 'ctrl') {
+          if (act.ctrl === '少息') {
+            t += sec;   // 休止记号占时长（按当前节奏），不发声
+            continue;
+          }
           if (act.ctrl === '括号') {
             bracketIdx = events.length;   // 反复段从括号后的第一个事件开始
           } else if (act.ctrl === '从括号再作' && bracketIdx >= 0) {
@@ -59,10 +65,10 @@
               t += ev.dur;
             }
           }
-          // 结构记号本身不占时长
+          // 结构记号本身不占时长，但占 DOM 位（domIdx 已递增）
           continue;
         }
-        events.push({ t, dur: sec, token: tok, action: act, tempo });
+        events.push({ t, dur: sec, token: tok, action: act, tempo, domIdx: myDom });
         t += sec;
       }
     }
