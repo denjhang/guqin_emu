@@ -39,6 +39,30 @@
   #strip .sep { width:2px; height:48px; background:#e4d9c3; margin:0 6px; flex:none; }
   #qinCanvas { width:100%; height:260px; display:block; margin-top:10px; border-radius:10px; }
   #explainBox { background:#fdf6e3; border-left:4px solid var(--accent); padding:8px 12px; margin:8px 0; font-size:14px; color:#5a4a2f; border-radius:0 6px 6px 0; }
+  /* 琴谱大厅 */
+  #hallGrid { display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+  .hall-card { background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:8px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:6px; }
+  .hall-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+  .hall-card .cover { position:relative; border-radius:6px; overflow:hidden; line-height:0; }
+  .hall-card .cover svg { width:100%; height:auto; }
+  .hc-faved { position:absolute; top:6px; right:6px; background:var(--accent); color:#fff; font-size:11px; padding:2px 6px; border-radius:8px; line-height:normal; }
+  .hc-title { font-weight:bold; font-size:14px; }
+  .hc-meta { display:flex; justify-content:space-between; font-size:12px; color:#8a7d63; }
+  .hall-head { display:flex; gap:14px; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:12px; margin-bottom:10px; align-items:center; }
+  .hall-cover { width:96px; border-radius:8px; overflow:hidden; flex:none; line-height:0; border:1px solid #e8dcc0; }
+  .hall-cover svg { width:100%; height:auto; }
+  .hall-info h2 { margin:0 0 4px; color:var(--accent); }
+  .hall-author { font-size:13px; color:#8a7d63; }
+  .hall-author::before { content:"👤 "; opacity:.6; }
+  #hallStripWrap { overflow-x:auto; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; }
+  #hallStrip { display:flex; gap:4px; align-items:flex-end; width:max-content; padding:0 40vw; }
+  .hall-cell { border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; padding:4px 3px; border-radius:8px; line-height:1; }
+  .hall-cell:hover { background:#f3e9d2; }
+  .hall-cell .rhythm { font-size:15px; color:#6b5a3a; min-height:20px; }
+  .hall-cell.flash { background:#f3e0d2; }
+  .hall-cell.playing { background:#f8d9d9; box-shadow:0 0 0 3px var(--accent); }
+  .hall-cell.done { opacity:.35; }
+  #hallFavBtn.liked { background:#c0392b; border-color:#c0392b; color:#fff; }
   #fullScoreBox { margin-top:10px; }
   #fullScoreBox summary { cursor:pointer; color:#8a7d63; font-size:13px; }
   @keyframes fl { 0%{background:var(--accent)} 100%{background:transparent} }
@@ -58,9 +82,37 @@
 <header>
   <h1>减字谱引擎 H5</h1>
   <button class="tab active" data-tab="library">乐谱库</button>
+  <button class="tab" data-tab="hall">琴谱大厅</button>
   <button class="tab" data-tab="score">谱面</button>
   <button class="tab" data-tab="editor">作曲 · 输入</button>
 </header>
+
+<div class="page" id="page-hall">
+  <div class="toolbar">
+    <span style="font-size:13px;color:#8a7d63">灵感值得被听见。收藏喜欢的琴友分享，稍后再看。</span>
+    <span id="hallCount" style="font-size:13px;color:#8a7d63;margin-left:auto"></span>
+  </div>
+  <div id="hallGrid"></div>
+</div>
+
+<div class="page" id="page-hallview">
+  <div class="hall-head">
+    <span id="hallCover" class="hall-cover"></span>
+    <div class="hall-info">
+      <h2 id="hallTitle">—</h2>
+      <div id="hallAuthor" class="hall-author"></div>
+      <div class="toolbar" style="margin:8px 0 0">
+        <button class="btn" id="hallPlayBtn">▶ 播放模式</button>
+        <button class="btn ghost" id="hallStopBtn">■ 停止</button>
+        <button class="btn ghost" id="hallEditBtn">✎ 编辑模式</button>
+        <button class="btn ghost" id="hallFavBtn">♡ 收藏</button>
+        <label style="font-size:13px">速度 <input type="number" id="hallTempo" value="60" min="20" max="200" style="width:60px"></label>
+      </div>
+    </div>
+  </div>
+  <div id="hallStripWrap"><div id="hallStrip"></div></div>
+  <p class="hint">播放模式下谱条自动跟随；上行为节奏音符，下行为减字。点任意减字可点读。此视图无琴面模拟器。</p>
+</div>
 
 <div class="page show" id="page-library">
   <div class="toolbar">
@@ -126,6 +178,7 @@
 <script src="js/player.js"></script>
 <script src="js/input.js"></script>
 <script src="js/speech.js"></script>
+<script src="js/hall.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

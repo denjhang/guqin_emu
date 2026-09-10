@@ -42,6 +42,7 @@
     ]);
     techDict = techniques;
     corpus = all;
+    window.Hall.setCorpus(corpus);
     window.JianziRender.init(glyphPaths, glyphParts);
     window.JianziSemantics.init(glyphParts);
     window.JianziInput.init(glyphParts, corpus);
@@ -50,6 +51,19 @@
     window.GuqinStage.init(document.getElementById('qinCanvas'), pitch);
     buildLibrary('');
     $('#searchBox').addEventListener('input', e => buildLibrary(e.target.value));
+    window.Hall.build();
+    // 琴谱大厅
+    $('#hallPlayBtn').addEventListener('click', () => window.Hall.play());
+    $('#hallStopBtn').addEventListener('click', () => window.Hall.stop());
+    $('#hallFavBtn').addEventListener('click', () => window.Hall.toggleFav());
+    $('#hallEditBtn').addEventListener('click', () => window.Hall.toEditor());
+    document.addEventListener('hall-edit', e => {
+      editorScore = e.detail;
+      $('#editTitle').value = editorScore.title || '';
+      renderEditor();
+      switchTab('editor');
+    });
+    // 大厅点读不联动琴面（该视图无琴面）
     $('#playBtn').addEventListener('click', playCurrent);
     $('#stopBtn').addEventListener('click', () => { window.GuqinPlayer.stop(); clearHighlight(); });
     $('#tempoInput').addEventListener('change', () => {});
