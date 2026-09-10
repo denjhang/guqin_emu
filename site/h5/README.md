@@ -61,3 +61,18 @@ scores/           谱面快照 + 索引
 - 「按弦音准偏差较大」——aubio 音高检测 + 逐字练评分算法
 - `.gqp` 谱文件格式（APK 内出现「琴谱.gqp」）
 - 技法解说词典（每个技法一句文言释义，libapp.so 内 utf16 字符串）
+
+## 逆向成果对照（blutter 反编译 libapp.so · Dart 3.12.2）
+
+jianzipu 引擎完整还原（详见 `research/project_memory.md`），关键差距：
+
+### 已修复
+- **抓起/掐起/带起/掩**：原 H5 复用上一按音 `lastFreq`，实际左手松开按弦 → 弦长恢复散音 → 音高 = 散音 `OPEN[s-1]`
+
+### 待对照修复（APK `JianziSemanticParser` 行为）
+- **抓起 vs 掐起 vs 带起 vs 掩**：APK `_inferLeft` 区分大/名/中/食/跪指，H5 不区分
+- **走手音徽位推断**：APK `_inferHui` 用中文数字 1/20 细分系统（一=2,二=4,...,半=10），H5 `digitsToHui` 是十分制
+- **徽位音高表**：APK `HuiPitchTable` 15 项精确比例（如 8 徽=3/5, 11 徽=4/5），H5 `pitch.json` 是 10 分制插值
+- **三分损益 12 律**：APK 完整 12 律比例（姑洗 81/64、应钟 243/128），H5 只有黄钟基频
+- **104 种复合指法**：APK 有完整释义字典，H5 只识别基础指法 + 少量复合
+- **同音择弦**：APK `GuqinPositionResolver` 全曲位置求解，H5 无

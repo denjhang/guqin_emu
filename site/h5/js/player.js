@@ -97,11 +97,12 @@
   function pluckOne(p, dur, mods) {
     const A = window.GuqinAudio;
     const harm = p.harmonic || harmonicCtx && !p.open;
-    // 掐起/掩等左手发声：沿用上一音；完全没有上文时落到 1 弦七徽
+    // 抓起/掐起/带起/掩等左手发声：左手松开按弦 → 弦长恢复散音状态 → 散音频率
+    // 传统古琴指法：抓起是左手大指/名指在原徽位拨弦，但发音瞬间左手已松开，
+    // 弦长 = 全弦长 → 音高 = 散音，而非按音 lastFreq
     if (p.carry || p.string == null) {
       const s = lastString || 1;
-      const h = p.hui || lastHuiByString[s] || '七徽';
-      const f = lastFreq || A.freqOf(s, h, harm);
+      const f = A.OPEN[s - 1];   // 散音频率，不是 lastFreq
       if (f) A.play(s, false, false, f, { dur, gain: 0.6 });
       return;
     }
