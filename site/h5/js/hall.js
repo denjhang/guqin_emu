@@ -23,7 +23,7 @@
 
   /* 封面：APK 原版默认封面图（score_card_default_background.png），不生成任何图 */
   function coverHTML() {
-    return `<img class="cover-img" src="img/score_card_default_small.png" alt="默认封面">`;
+    return `<img class="cover-img" src="img/score_card_default_background.png" alt="默认封面">`;
   }
 
   function build() {
