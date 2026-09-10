@@ -169,12 +169,12 @@
     const strHaver = info.find(p => p.string != null);
     if (strHaver) info.forEach(p => { if (p.string == null) p.string = strHaver.string; });
     if (!info.length) {
-      // 抓起/掩：左手松开按弦 → 散音（carry + open=true）
-      // 掐起/带起：手指按住弦拨响 → 按音（carry + open=false，沿用徽位）
-      if (/抓起|掩/.test(text)) {
+      // APK openStringCarryTechnique = [抓起, 带起, 推出, 放合] → 散音 carry
+      // 掐起/掩/搯起/虚掩 → 按音（手指按住弦拨响，沿用徽位）
+      if (/抓起|带起|推出|放合/.test(text)) {
         return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, text };
       }
-      if (/掐起|带起/.test(text)) {
+      if (/掐起|搯起|掩|虚掩/.test(text)) {
         // 提取徽位数字（名十掐起 → 十徽）
         const huiMatch = text.match(/([一二三四五六七八九十]+(?:半)?)/);
         return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: false, hui: huiMatch ? digitsToHui(huiMatch[1]) : null, text };
@@ -232,10 +232,12 @@
       }
     });
     if (huiDigits) cur.hui = digitsToHui(huiDigits);
-    // 没徽位、没泛音、没散音标记，但有弦号和技法 → 默认散音
-    // （如"擘六"：只有技法+弦号，无左手无徽位 → 散音擘六弦）
+    // 无左手标记、无徽位、无散音标记时：
+    //   擘/托/打（拇指、中指）→ 散音（古琴中这些技法常弹散音）
+    //   抹/挑/勾/剔/摘（食、名指）→ 按音，沿用前一按音徽位（APK _inferLeft 默认"按"）
     if (!cur.hui && !cur.harmonic && !cur.open && cur.string && cur.tech) {
-      cur.open = true;
+      if (cur.tech === '擘' || cur.tech === '托' || cur.tech === '打') cur.open = true;
+      // else: open=false, hui=null → player 沿用 lastHuiByString[string]
     }
     if (cur.string || cur.tech || cur.open || cur.harmonic) out.push(cur);
     return out;

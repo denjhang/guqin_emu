@@ -34,6 +34,20 @@
         const sec = beat * 60 / tempo;
         const act = window.JianziSemantics.parseToken(tok);
 
+        // 「至X」延续前一散音滚拂/涓扫弦：散涓二 至三 → 扫二至三
+        const zhiMatch = (tok.text || '').match(/^至([一二三四五六七])$/);
+        if (zhiMatch && events.length) {
+          const prev = events[events.length - 1];
+          const toNum = '零一二三四五六七'.indexOf(zhiMatch[1]);
+          if (prev.action.type === 'pluck' && prev.action.open && /[滚拂涓]/.test(prev.action.tech || '')) {
+            prev.action = { type: 'sweep', from: prev.action.string, to: toNum, open: true, tech: prev.action.tech, text: prev.token.text + tok.text };
+          } else if (prev.action.type === 'sweep' && prev.action.open) {
+            prev.action.to = toNum;
+            prev.action.text = (prev.action.text || '') + tok.text;
+          }
+          continue;  // 「至」本身不占时长，合并到前一事件
+        }
+
         if (act.type === 'ctrl') {
           if (act.ctrl === '括号') {
             bracketIdx = events.length;   // 反复段从括号后的第一个事件开始
