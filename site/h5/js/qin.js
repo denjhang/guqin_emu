@@ -19,7 +19,7 @@
     else if (cn.length === 1) n = c2n(cn);
     if (!n || n < 1 || n > 13) return 49;
     let pct = marks[n - 1];
-    if (m[2]) { const frac = c2n(m[2]) / 10; pct += (marks[n] - marks[n - 1]) * frac; }
+    if (m[2]) { const frac = (c2n(m[2]) + 1) / 10; pct += (marks[n] - marks[n - 1]) * frac; }
     if (m[3]) pct += (marks[n] - marks[n - 1]) * 0.05;
     return pct;
   }

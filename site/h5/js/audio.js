@@ -32,19 +32,53 @@
     return kind === 'open' ? open : open * 2;   // 按音/泛音采样录于七徽
   }
 
-  /* 查音高表：按音/泛音 (弦, 徽名) → 频率（含三分损益修正） */
+  /* 查音高表：(弦, 徽名) → 频率。查找顺序：
+   * 1. 精确命中；2. 同弦相邻 x 坐标对数插值（分数徽如七徽七分，误差≈3音分）；
+   * 3. 基徽降级；4. 七徽兜底（续弦音由调用方传真实徽位，此处仅极端兜底） */
+  /* HUI_MARKS 顺序为一徽→十三徽（x 从岳山侧递减）：
+   * 一92.11 二87.34 三83.51 四77.78 五68.23 六60.58 七49 八37.65 九30 十20.8
+   * 十一14.72 十二10.7 十三6.13；分位向下一徽（n+1，x 更小）方向插值 */
+  const HUI_X = { '一': 92.11, '二': 87.34, '三': 83.51, '四': 77.78, '五': 68.23, '六': 60.58, '七': 49,
+                  '八': 37.65, '九': 30, '十': 20.8, '十一': 14.72, '十二': 10.7, '十三': 6.13 };
+  function huiToX(hui) {
+    if (!hui) return null;
+    if (hui === '徽外') return 4.1;
+    const m = hui.match(/^([一二三四五六七八九十]{1,2})徽([一二三四五六七八九]分|半)?$/);
+    if (!m) return null;
+    let n = 0; const cn = m[1];
+    if (cn === '十') n = 10;
+    else if (cn.length === 2 && cn[0] === '十') n = 11 + '一二三四五六七八九'.indexOf(cn[1]);  // 十一~十九
+    else n = '一二三四五六七八九'.indexOf(cn) + 1;   // 徽号一基：一=1…九=9
+    if (n < 1) return null;
+    const base = HUI_X[['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三'][n]];
+    const next = HUI_X[['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四'][n + 1] || '十四'] || 0;
+    let frac = 0;
+    if (m[2] === '半') frac = 0.05;
+    else if (m[2]) frac = ('一二三四五六七八九'.indexOf(m[2][0]) + 1) / 10;
+    return base + (next - base) * frac;
+  }
   function freqOf(string, hui, harmonic) {
     const table = harmonic ? pitch.harmonics : pitch.positions;
-    const huiN = hui ? hui.replace(/[徽分]/g, '') : '';
-    let hit = table.find(p => p.s === string && p.hui === hui);
-    if (!hit) { // 模糊：八徽半/分数徽降级
-      const base = hui && hui.match(/^([一二三四五六七八九十]+)/);
-      if (base) hit = table.find(p => p.s === string && p.hui === base[1] + '徽');
+    const same = table.filter(p => p.s === string);
+    let hit = same.find(p => p.hui === hui);
+    if (!hit && !harmonic && hui) {
+      const x = huiToX(hui);
+      if (x !== null) {
+        const lo = same.filter(p => p.x !== undefined && p.x <= x).sort((a, b) => b.x - a.x)[0];
+        const hi = same.filter(p => p.x !== undefined && p.x > x).sort((a, b) => a.x - b.x)[0];
+        if (lo && hi) {
+          const u = (x - lo.x) / (hi.x - lo.x);
+          const f = lo.f * Math.pow(hi.f / lo.f, u);   // 对数插值
+          const openWeb = [65.406, 73.416, 87.307, 97.999, 110, 130.813, 146.832][string - 1];
+          return f * (OPEN[string - 1] / openWeb);
+        }
+      }
     }
     if (!hit) {
-      hit = table.find(p => p.s === string && p.hui === '七徽');
+      const base = hui && hui.match(/^([一二三四五六七八九十]+)/);
+      if (base) hit = same.find(p => p.hui === base[1] + '徽');
     }
-    // 三分损益修正：网页表为 12-TET（C2 基），按弦比例平移到 sanfen 基准
+    if (!hit) hit = same.find(p => p.hui === '七徽');
     const openWeb = [65.406, 73.416, 87.307, 97.999, 110, 130.813, 146.832][string - 1];
     return hit.f * (OPEN[string - 1] / openWeb);
   }
