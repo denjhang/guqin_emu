@@ -392,4 +392,18 @@
   }
 
   document.addEventListener('DOMContentLoaded', boot);
+
+  // 音源切换
+  document.addEventListener('DOMContentLoaded', () => {
+    const sel = document.getElementById('sourceSel');
+    if (!sel) return;
+    sel.value = window.GuqinAudio.getSource();
+    sel.addEventListener('change', () => {
+      window.GuqinAudio.setSource(sel.value);
+      // 清空采样缓存，下次播放重新加载新音源
+      if (window.GuqinPlayer && window.GuqinPlayer.isPlaying && window.GuqinPlayer.isPlaying()) {
+        window.GuqinPlayer.stop();
+      }
+    });
+  });
 })();

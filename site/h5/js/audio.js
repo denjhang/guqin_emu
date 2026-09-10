@@ -1,13 +1,13 @@
-/* 音频引擎：21 条真实采样（每弦 散/按七徽/七徽泛音）+ 变调播放
- * 采样基准音高（README，三分损益十二律正调定弦）：
- *   open = [65.41, 73.59, 88.40, 98.12, 110.38, 130.82, 147.17]
- *   pressed/harmonic 采样录于七徽（弦长 1/2）→ 基准 = 散音 × 2
+/* 音频引擎：双音源整套切换
+ * APK 音源：每弦 散/按七徽/七徽泛音 各 1 条（共 21 条），变调播放
+ * 教授音源：王悠荻真实录音——散音 7、按音 105（按徽位）、泛音 49（按徽位）
  * 播放 rate = 目标频率 / 采样基准频率 */
 (function () {
   'use strict';
   let ctx = null, bank = {};
   let OPEN = [65.41, 73.59, 88.40, 98.12, 110.38, 130.82, 147.17];
-  let pitch = null; // {positions:[{s,hui,f}], harmonics:[...]}
+  let pitch = null;
+  let soundSource = 'apk';   // 'apk' | 'prof'
 
   function ensureCtx() {
     if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -15,36 +15,82 @@
     return ctx;
   }
   function init(pitchData) { pitch = pitchData; }
-  const key = (kind, s, huiIdx) => kind === 'harmonic' ? `audio/harmonic/h${huiIdx}_s${s}.mp3` : `audio/${kind}/string_${s}.wav`;
+  function setSource(src) {
+    soundSource = (src === 'prof') ? 'prof' : 'apk';
+    try { localStorage.setItem('guqin_source', soundSource); } catch (e) {}
+  }
+  function getSource() { return soundSource; }
+  // 徽位名 → 教授按音采样后缀：十徽→h10, 四徽六分→h4-6, 徽外→hout
+  function huiToProfSuffix(hui) {
+    if (!hui) return 'h7';
+    if (hui === '徽外') return 'hout';
+    const m = hui.match(/^([一二三四五六七八九十]+)徽([一二三四五六七八九]分|半)?$/);
+    if (!m) return 'h7';
+    const n = huiOrderNum(hui);
+    if (n == null) return 'h7';
+    if (!m[2]) return 'h' + n;
+    const fenMap = { '一分': 1, '二分': 2, '三分': 3, '四分': 4, '五分': 5, '六分': 6, '七分': 7, '八分': 8, '九分': 9, '半': 10 };
+    const f = fenMap[m[2]];
+    return f ? 'h' + n + '-' + f : 'h' + n;
+  }
+  // 采样 key：apk 全用 string_N.wav；prof 散=prof_sN.m4a, 按=sN-hui.mp3, 泛=hHui_sN.mp3
+  function key(kind, s, huiIdx, hui) {
+    if (soundSource === 'prof') {
+      if (kind === 'open') return `audio/open/prof_s${s}.m4a`;
+      if (kind === 'pressed') return `audio/prof-pressed/s${s}-${huiToProfSuffix(hui)}.mp3`;
+      return `audio/harmonic/h${huiIdx}_s${s}.mp3`;   // 教授泛音
+    }
+    return `audio/${kind}/string_${s}.wav`;   // APK 散/按/泛 全七徽
+  }
   // 徽位 → 泛音采样序号 1-7（对称徽位共用：8↔6, 9↔5, 10↔4, 11↔3, 12↔2, 13↔1）
   function harmIndex(hui) {
     const n = huiOrderNum(hui);
-    if (n == null) return 7;   // 未知徽位兜底用七徽
+    if (n == null) return 7;
     if (n >= 1 && n <= 7) return n;
     if (n >= 8 && n <= 13) return 14 - n;
     return 7;
   }
-  // 泛音采样序号 → 谐波次数（决定采样基准音高）
   const HARM_ORDER = { 1: 8, 2: 6, 3: 5, 4: 4, 5: 3, 6: 5, 7: 2 };
 
-  async function loadSample(kind, s, huiIdx) {
-    const k = key(kind, s, huiIdx);
+  async function loadSample(kind, s, huiIdx, hui) {
+    const k = key(kind, s, huiIdx, hui);
     if (bank[k]) return bank[k];
     const c = ensureCtx();
     let uri = k;
-    // h1_s3 只有 wav 版本
     if (k === 'audio/harmonic/h1_s3.mp3') uri = 'audio/harmonic/h1_s3.wav';
-    const resp = await fetch(uri);
-    const ab = await resp.arrayBuffer();
-    const buf = await c.decodeAudioData(ab);
-    bank[k] = buf;
-    return buf;
+    try {
+      const resp = await fetch(uri);
+      if (!resp.ok) throw new Error('not found');
+      const ab = await resp.arrayBuffer();
+      const buf = await c.decodeAudioData(ab);
+      bank[k] = buf;
+      return buf;
+    } catch (e) {
+      // 教授按音精确徽位采样不存在 → 回退整徽 → 七徽
+      if (soundSource === 'prof' && kind === 'pressed') {
+        const hn = huiOrderNum(hui) || 7;
+        const candidates = [`audio/prof-pressed/s${s}-h${hn}.mp3`, `audio/prof-pressed/s${s}-h7.mp3`];
+        for (const cand of candidates) {
+          if (cand === k) continue;
+          if (bank[cand]) { bank[k] = bank[cand]; return bank[cand]; }
+          try {
+            const r = await fetch(cand);
+            if (r.ok) {
+              const b = await c.decodeAudioData(await r.arrayBuffer());
+              bank[cand] = b; bank[k] = b; return b;
+            }
+          } catch (_) {}
+        }
+      }
+      throw e;
+    }
   }
-  function baseFreq(kind, s, huiIdx) {
+  function baseFreq(kind, s, huiIdx, hui) {
     const open = OPEN[s - 1];
     if (kind === 'open') return open;
     if (kind === 'harmonic') return open * (HARM_ORDER[huiIdx] || 2);
-    return open * 2;   // 按音采样录于七徽
+    if (soundSource === 'prof') return freqOf(s, hui, false);   // 教授按音录于实际徽位
+    return open * 2;   // APK 按音录于七徽
   }
 
   /* 查音高：(弦, 徽名) → 频率
@@ -124,10 +170,14 @@
     const c = ensureCtx();
     const kind = open ? 'open' : (harmonic ? 'harmonic' : 'pressed');
     const huiIdx = harmonic ? harmIndex(opts.hui) : null;
-    const buf = await loadSample(kind, string, huiIdx);
-    const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : '');
+    const hui = opts.hui;
+    const buf = await loadSample(kind, string, huiIdx, hui);
+    const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : (kind === 'pressed' ? ':' + (hui || 'x') : ''));
     const t = c.currentTime + 0.01;
-    let rate = (targetFreq / baseFreq(kind, string, huiIdx)) * (opts.rate || 1);
+    // 教授音源：每条采样录于对应徽位，自然音高即正确，rate=1（参考站 SM.tuning 默认 1）
+    // APK 音源：散/按/泛 全录于七徽，需按目标频率变调
+    let rate = soundSource === 'prof' ? 1 : (targetFreq / baseFreq(kind, string, huiIdx, hui));
+    rate *= (opts.rate || 1);
     const gain = (opts.gain || 0.85) * (open ? 0.7 : 1);
 
     // 同 key 重触：掐断旧音
@@ -166,8 +216,9 @@
       src.playbackRate.setValueAtTime(rate * Math.pow(2, semi / 12), t);
       src.playbackRate.linearRampToValueAtTime(rate, t + glide);
     } else if (opts.glideTo) {
+      const baseRate = soundSource === 'prof' ? 1 : baseFreq(kind, string, huiIdx, hui);
       src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
-      src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string, huiIdx)), t + (opts.glideSec || 0.6));
+      src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseRate), t + (opts.glideSec || 0.6));
     } else if (opts.vibrato) {
       src.playbackRate.value = rate;
       const isNao = opts.vibrato === '猱';
@@ -192,10 +243,14 @@
     return { src, gain: g };
   }
 
-  /* 预热：加载指定弦的采样（泛音只预载七徽，其余按需加载） */
+  /* 预热：加载指定弦的采样 */
   function preload(strings) {
     strings = strings || [1, 2, 3, 4, 5, 6, 7];
-    strings.forEach(s => { loadSample('open', s); loadSample('pressed', s); loadSample('harmonic', s, 7); });
+    strings.forEach(s => {
+      loadSample('open', s);
+      loadSample('pressed', s, null, '七徽');
+      loadSample('harmonic', s, 7);
+    });
   }
 
   /* 刹音（伏/剌伏）：80ms 内收掉所有在响声部——对应右手捂弦止振 */
@@ -213,5 +268,11 @@
     voices.clear();
   }
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN };
+  // 从 localStorage 恢复音源选择
+  try {
+    const saved = localStorage.getItem('guqin_source');
+    if (saved === 'prof' || saved === 'apk') soundSource = saved;
+  } catch (e) {}
+
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource };
 })();
