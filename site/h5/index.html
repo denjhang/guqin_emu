@@ -54,8 +54,9 @@
   .hall-info h2 { margin:0 0 4px; color:var(--accent); }
   .hall-author { font-size:13px; color:#8a7d63; }
   .hall-author::before { content:"👤 "; opacity:.6; }
-  #hallStripWrap { overflow-x:auto; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; }
-  #hallStrip { display:flex; gap:4px; align-items:flex-end; width:max-content; padding:0 40vw; }
+  #hallStripWrap { overflow-y:auto; max-height:420px; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; }
+  .hall-row { display:flex; gap:4px; align-items:flex-end; padding:4px 8px; }
+  .hall-row + .hall-row { border-top:1px dashed #eadfc4; }
   .hall-cell { border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; padding:4px 3px; border-radius:8px; line-height:1; }
   .hall-cell:hover { background:#f3e9d2; }
   .hall-cell .rhythm { font-size:15px; color:#6b5a3a; min-height:20px; }
@@ -111,7 +112,7 @@
     </div>
   </div>
   <div id="hallStripWrap"><div id="hallStrip"></div></div>
-  <p class="hint">播放模式下谱条自动跟随；上行为节奏音符，下行为减字。点任意减字可点读。此视图无琴面模拟器。</p>
+  <p class="hint">多行谱面：上行为节奏音符，下行为减字，每行十字自动换行。播放时纵向跟随；点任意减字可点读。此视图无琴面模拟器。</p>
 </div>
 
 <div class="page show" id="page-library">

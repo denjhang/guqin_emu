@@ -21,18 +21,16 @@
     return s.source_author_name ? s.source_author_name + ' 琴友' : '琴友分享';
   }
 
-  /* 默认封面： deterministic 渐变 + 首字大字 */
+  /* 默认封面：APK 内置 score_card_default_background.png + 标题竖排文字 */
   function coverSVG(s) {
-    let h = 0; for (const c of s.title) h = (h * 33 + c.codePointAt(0)) >>> 0;
-    const hue = h % 360, hue2 = (hue + 40) % 360;
     const ch = s.title.replace(/^《|》$/g, '')[0] || '琴';
-    return `<svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
-      <defs><linearGradient id="g${h}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="hsl(${hue},38%,88%)"/><stop offset="1" stop-color="hsl(${hue2},30%,72%)"/>
-      </linearGradient></defs>
-      <rect width="120" height="160" fill="url(#g${h})"/>
-      <text x="60" y="86" font-size="56" text-anchor="middle" fill="rgba(43,0,0,.82)" font-family="serif">${ch}</text>
-      <text x="60" y="140" font-size="13" text-anchor="middle" fill="rgba(43,0,0,.6)" font-family="sans-serif">${s.title.length > 8 ? s.title.slice(0, 8) + '…' : s.title}</text>
+    const title = s.title.replace(/^《|》$/g, '');
+    const short = title.length > 8 ? title.slice(0, 8) + '…' : title;
+    return `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <image href="img/score_card_default_small.png" x="0" y="0" width="120" height="120" preserveAspectRatio="xMidYMid slice"/>
+      <rect x="0" y="0" width="120" height="120" fill="rgba(20,8,4,.28)"/>
+      <text x="60" y="64" font-size="42" text-anchor="middle" fill="#f3e6c8" font-family="Kaiti SC,STKaiti,KaiTi,serif" style="text-shadow:0 1px 2px rgba(0,0,0,.5)">${ch}</text>
+      <text x="60" y="94" font-size="12" text-anchor="middle" fill="rgba(243,230,200,.92)" font-family="sans-serif">${short}</text>
     </svg>`;
   }
 
@@ -80,19 +78,34 @@
     requestAnimationFrame(() => window.GuqinStage.resize && window.GuqinStage.resize());
   }
 
-  /* 上音符 / 下减字 双行谱条 */
+  /* 多行谱面：上音符 / 下减字，每行 N 字自动换行（复刻 APK 查看视图） */
+  const CELLS_PER_ROW = 10;
   function buildHallStrip(score) {
-    const strip = $('#hallStrip');
-    strip.innerHTML = '';
+    const sheet = $('#hallStrip');
+    sheet.innerHTML = '';
     hallTokens = [];
+    // 展平为带行边界的字序列
+    const flat = [];
     (score.lines || []).forEach((line, li) => {
-      if (li > 0) { const sep = document.createElement('div'); sep.className = 'sep'; strip.appendChild(sep); }
       const jt = (line.jianziTokens || []).filter(t => t.kind !== 'blank');
       const rt = (line.rhythmTokens || []).filter(t => t.kind !== 'blank');
-      jt.forEach((tok, i) => {
+      jt.forEach((tok, i) => flat.push({ tok, r: rt[i] || rt[rt.length - 1], lineBreakAfter: false, li }));
+      if (flat.length) flat[flat.length - 1].lineBreakAfter = true;
+    });
+    // 按 CELLS_PER_ROW 切行，源谱行边界提前断行
+    const rows = [];
+    let row = [];
+    flat.forEach(cell => {
+      row.push(cell);
+      if (cell.lineBreakAfter || row.length >= CELLS_PER_ROW) { rows.push(row); row = []; }
+    });
+    if (row.length) rows.push(row);
+    rows.forEach(cells => {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'hall-row';
+      cells.forEach(({ tok, r }) => {
         const cell = document.createElement('button');
         cell.className = 'hall-cell';
-        const r = rt[i] || rt[rt.length - 1];
         const rEl = document.createElement('span');
         rEl.className = 'rhythm';
         rEl.textContent = r ? r.text : '♪';
@@ -105,12 +118,13 @@
           window.GuqinAudio.ensureCtx();
           window.GuqinPlayer.tapToken(tok);
           const act = window.JianziSemantics.parseToken(tok);
-          window.HallFire && window.HallFire(act);
+          if (window.HallFire) window.HallFire(act);
           cell.classList.add('flash'); setTimeout(() => cell.classList.remove('flash'), 350);
         });
-        strip.appendChild(cell);
+        rowEl.appendChild(cell);
         hallTokens.push(cell);
       });
+      sheet.appendChild(rowEl);
     });
   }
 
@@ -140,7 +154,12 @@
     window.GuqinPlayer.play(sc, tempo, (i) => {
       hallTokens.forEach((t, k) => { t.classList.toggle('done', k < i); t.classList.toggle('playing', k === i); });
       const el = hallTokens[i];
-      if (el) wrap.scrollTo({ left: el.offsetLeft - (wrap.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+      if (el) {
+        // 多行纵向跟随：当前字滚入可视区
+        const elTop = el.offsetTop, elH = el.offsetHeight;
+        if (elTop < wrap.scrollTop + wrap.clientHeight * 0.15 || elTop + elH > wrap.scrollTop + wrap.clientHeight * 0.85)
+          wrap.scrollTo({ top: elTop - wrap.clientHeight * 0.35, behavior: 'smooth' });
+      }
     }, () => {
       hallTokens.forEach(t => t.classList.remove('playing'));
     });
