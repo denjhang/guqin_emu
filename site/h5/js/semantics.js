@@ -134,11 +134,12 @@
     }
 
     // 独体装饰字（分类学对照 alephpi/jianzipu jf/mf 联袂走位类）
+    // carry + open=false：左手保持按音，沿用前一音弦位徽位拨弦
     if (/^(推出|不动|分开|应合|同声|放合)$/.test(text)) {
-      return { type: 'pluck', carry: true, tech: text, text };
+      return { type: 'pluck', carry: true, open: false, tech: text, text };
     }
     if (/^掐撮三声/.test(text)) {
-      return { type: 'pluck', carry: true, reps: 3, tech: '掐撮三声', text };
+      return { type: 'pluck', carry: true, open: false, reps: 3, tech: '掐撮三声', text };
     }
     if (text === '逗' || text === '唤') {
       return { type: 'slide', dir: text === '唤' ? 'down' : 'up', toHui: null, bounce: true, text };
@@ -158,8 +159,13 @@
     const strHaver = info.find(p => p.string != null);
     if (strHaver) info.forEach(p => { if (p.string == null) p.string = strHaver.string; });
     if (!info.length) {
-      // 掐起/掩/带起等左手发声技法：沿用本弦
-      if (/起|掩/.test(text)) return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, text };
+      // 抓起/掐起/带起/掩等：左手松开按弦 → 散音（carry + open=true）
+      if (/起|掩/.test(text)) return { type: 'pluck', tech: text.replace(/^(名|大|食|中|跪)/, ''), carry: true, open: true, text };
+      // 落指吟/定吟/落指猱等：左手保持按音，拨弦加吟猱（carry + open=false）
+      if (/吟|猱/.test(text)) {
+        const vib = text.includes('猱') ? '猱' : '吟';
+        return { type: 'pluck', carry: true, open: false, mods: [vib], text };
+      }
       return { type: 'rest', text };
     }
     const p = info[info.length - 1];

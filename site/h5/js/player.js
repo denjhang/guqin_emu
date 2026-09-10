@@ -97,24 +97,44 @@
   function pluckOne(p, dur, mods) {
     const A = window.GuqinAudio;
     const harm = p.harmonic || harmonicCtx && !p.open;
-    // 抓起/掐起/带起/掩等左手发声：左手松开按弦 → 弦长恢复散音状态 → 散音频率
-    // 传统古琴指法：抓起是左手大指/名指在原徽位拨弦，但发音瞬间左手已松开，
-    // 弦长 = 全弦长 → 音高 = 散音，而非按音 lastFreq
-    if (p.carry || p.string == null) {
+    const allMods = (mods || []).concat(p.mods || []);
+    // 抓起/掐起/带起/掩：左手松开按弦 → 弦长恢复全弦 → 散音
+    if (p.carry && p.open) {
+      const s = p.string || lastString || 1;
+      const f = A.OPEN[s - 1];
+      if (f) A.play(s, false, true, f, { dur, gain: 0.6 });
+      lastFreq = f; lastString = s;
+      return;
+    }
+    // 落指吟/定吟/推出等：左手保持按音，沿用前一音弦位+徽位拨弦
+    if (p.carry) {
+      const s = p.string || lastString || 1;
+      const hui = p.hui || lastHuiByString[s] || lastHui || '七徽';
+      const freq = A.freqOf(s, hui, harm);
+      const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85 };
+      if (allMods.includes('吟')) opts.vibrato = '吟';
+      else if (allMods.includes('猱')) opts.vibrato = '猱';
+      A.play(s, harm, false, freq, opts);
+      lastFreq = freq; lastString = s; lastHui = hui;
+      lastHuiByString[s] = hui;
+      return;
+    }
+    if (p.string == null) {
       const s = lastString || 1;
-      const f = A.OPEN[s - 1];   // 散音频率，不是 lastFreq
-      if (f) A.play(s, false, true, f, { dur, gain: 0.6 });  // open=true 用散音采样
+      const f = A.OPEN[s - 1];
+      if (f) A.play(s, false, true, f, { dur, gain: 0.6 });
+      lastFreq = f; lastString = s;
       return;
     }
     // 徽位解析：本字 > 该弦最后徽位（续弹只写弦号时左手保持原位）> 七徽
     const hui = p.hui || lastHuiByString[p.string] || '七徽';
     const freq = p.open ? A.OPEN[p.string - 1] : A.freqOf(p.string, hui, harm);
     const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85 };
-    if (mods) {
-      if (mods.includes('绰')) opts.attack = '绰';
-      else if (mods.includes('注')) opts.attack = '注';
-      else if (mods.includes('吟')) opts.vibrato = '吟';
-      else if (mods.includes('猱')) opts.vibrato = '猱';
+    if (allMods.length) {
+      if (allMods.includes('绰')) opts.attack = '绰';
+      else if (allMods.includes('注')) opts.attack = '注';
+      else if (allMods.includes('吟')) opts.vibrato = '吟';
+      else if (allMods.includes('猱')) opts.vibrato = '猱';
     }
     A.play(p.string, harm, p.open, freq, opts);
     lastFreq = freq; lastString = p.string; lastHui = p.hui;
