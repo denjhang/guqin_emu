@@ -6,6 +6,7 @@
   let current = null;        // 当前谱对象
   let editorScore = null;    // 编辑中的谱
   let techDict = [];         // 技法解说词典
+  let slugMap = { byId: {}, bySlug: {} }; // 拼音 slug 映射
 
   /* 依 token 文本查技法解说（APK 内置词典） */
   function explainToken(text) {
@@ -42,6 +43,16 @@
     ]);
     techDict = techniques;
     corpus = all;
+    // 乐谱拼音 slug 映射（id ↔ 拼音）
+    try {
+      const sl = await loadJSON('data/score_slugs.json');
+      slugMap = sl || { byId: {}, bySlug: {} };
+    } catch (e) { slugMap = { byId: {}, bySlug: {} }; console.warn('score_slugs 加载失败', e); }
+    // 暴露 slug 工具给 Hall 等模块用
+    window.GuqinHash = {
+      slugOf: id => slugMap.byId[String(id)] || null,
+      idFromSlug: slug => slugMap.bySlug[slug] || null,
+    };
     window.Hall.setCorpus(corpus);
     try { window.Hall.setCatalog(await loadJSON('community/catalog.json')); } catch (e) { console.warn('catalog 加载失败', e); }
     try { window.Hall.setHallScores(await loadJSON('community/hall_scores.json')); } catch (e) { console.warn('hall_scores 加载失败', e); }
@@ -54,6 +65,12 @@
     buildLibrary('');
     $('#searchBox').addEventListener('input', e => buildLibrary(e.target.value));
     window.Hall.build();
+    // 刷新后依 hash 还原当前谱（库 / 大厅）
+    const h = parseHash();
+    if (h) {
+      if (h.type === 'score') openScoreById(h.id, true);
+      else if (h.type === 'hall') window.Hall.openHallById(h.id, true);
+    }
     window.GuqinCommunity.boot();
     // 琴谱大厅
     $('#hallPlayBtn').addEventListener('click', () => window.Hall.play());
@@ -110,13 +127,55 @@
     $('#libCount').textContent = `共 ${list.length} 首`;
   }
 
-  function openScore(s) {
+  /* URL hash：#/score/<拼音slug> 静态链接，刷新不丢页面 */
+  function scoreById(id) {
+    return corpus.find(x => String(x.id) === String(id));
+  }
+  function slugOfScore(id) {
+    return (window.GuqinHash && window.GuqinHash.slugOf(id)) || id;
+  }
+  function openScore(s, fromHash) {
     current = s;
     $('#scoreTitle').textContent = s.title;
     renderStrip(s.score_content.score);
     renderScore(s.score_content.score, '#scoreView');
     switchTab('score');
+    if (!fromHash && s.id != null) {
+      const slug = slugOfScore(s.id);
+      const hash = '#/score/' + encodeURIComponent(slug);
+      if (location.hash !== hash) location.hash = hash;
+    }
   }
+  function openScoreById(id, fromHash) {
+    const s = scoreById(id);
+    if (s) { openScore(s, fromHash); return true; }
+    return false;
+  }
+  /* 解析 hash → {type, id}；slug 反查不到时退化为直接当 id 用（向后兼容） */
+  function parseHash() {
+    const s = location.hash.match(/^#\/score\/(.+)$/);
+    if (s) {
+      const seg = decodeURIComponent(s[1]);
+      const id = (window.GuqinHash && window.GuqinHash.idFromSlug(seg)) || seg;
+      return { type: 'score', id };
+    }
+    const h = location.hash.match(/^#\/hall\/(.+)$/);
+    if (h) {
+      const seg = decodeURIComponent(h[1]);
+      const id = (window.GuqinHash && window.GuqinHash.idFromSlug(seg)) || seg;
+      return { type: 'hall', id };
+    }
+    return null;
+  }
+  window.addEventListener('hashchange', () => {
+    const p = parseHash();
+    if (!p) return;
+    if (p.type === 'score' && (!current || String(current.id) !== String(p.id))) openScoreById(p.id, true);
+    else if (p.type === 'hall') {
+      const cur = window.Hall.currentId ? window.Hall.currentId() : null;
+      if (!cur || String(cur) !== String(p.id)) window.Hall.openHallById(p.id, true);
+    }
+  });
 
   /* 顶部横向谱条（APK 演奏页样式） */
   function renderStrip(score) {

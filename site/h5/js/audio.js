@@ -51,13 +51,15 @@
     if (hui === '徽外') return 0.9167;
     if (HUI_RATIO[hui]) return HUI_RATIO[hui];
     // 解析「X徽Y分」「X徽半」：徽内位置 = 徽位比例 + 分内偏移
+    // APK _parseHuiDigits：一=2分位(0.1), 二=4分位(0.2), ..., 半=10分位(0.5), 十=20分位(1.0)
+    // 即每徽 20 等分，每分 = 1/20 徽间距
     const m = hui.match(/^([一二三四五六七八九十]+)徽([一二三四五六七八九]分|半)?$/);
     if (!m) return null;
     const baseKey = m[1] + '徽';
     const base = HUI_RATIO[baseKey];
     if (base == null) return null;
     if (!m[2]) return base;
-    // 找下一个徽（n+1）的比例，按 1/10 分内插
+    // 找下一个徽（n+1）的比例
     const order = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三'];
     const idx = order.indexOf(m[1]);
     if (idx < 0) return base;
@@ -65,7 +67,7 @@
     const next = HUI_RATIO[nextKey] || (idx === order.length - 1 ? 0.9167 : base + 0.05);
     let frac = 0;
     if (m[2] === '半') frac = 0.5;
-    else { frac = ('一二三四五六七八九'.indexOf(m[2][0]) + 1) / 10; }
+    else { frac = ('一二三四五六七八九'.indexOf(m[2][0]) + 1) / 10; }  // 一分=0.1 徽内
     return base + (next - base) * frac;
   }
   function huiOrderNum(hui) {

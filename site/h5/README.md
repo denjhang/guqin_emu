@@ -41,10 +41,23 @@ js/audio.js       音频：采样库 + 变调播放 + 音高表
 js/player.js      播放：时间轴 + 调度 + 点读
 js/input.js       输入：文本 → 减字合成
 js/speech.js      语音识别
-data/             glyph_parts / glyph_paths / category_rules / pitch（APK 原始数据 + 音高表）
+js/hall.js        琴谱大厅：封面墙 + 阅读/播放视图
+data/             glyph_parts / glyph_paths / category_rules / pitch / score_slugs（APK 原始数据 + 音高表 + 拼音 slug 表）
 audio/            21 条 WAV 采样（APK 提取）
 scores/           谱面快照 + 索引
+scripts/          gen_slugs.py：从 corpus + hall_scores 生成拼音 slug 映射
 ```
+
+## URL 静态链接
+
+刷新不丢页面、可直接分享/收藏。URL 形如：
+
+- `#/score/<拼音>` — 乐谱库中的谱（如 `#/score/jiukuang` = 酒狂）
+- `#/hall/<拼音>`   — 琴谱大厅中的谱（如 `#/hall/gaoshanliushui` = 高山流水）
+
+同名谱自动加 `-2` / `-3` 后缀。点击库/大厅中任意乐谱 → URL 自动更新；
+手动改 URL → 切换乐谱（双向同步）。拼音 slug 由 `scripts/gen_slugs.py` 预生成
+到 `data/score_slugs.json`，运行时只读取，无依赖。
 
 ## 更新：演奏 UI 与音色（fc59aed）
 

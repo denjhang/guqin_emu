@@ -91,7 +91,7 @@
   }
 
   /* ---------- 大厅阅读视图 ---------- */
-  function openHall(s) {
+  function openHall(s, fromHash) {
     hallScore = s;
     $('#hallTitle').textContent = s.title.replace(/^《|》$/g, '');
     const isCat2 = s.profile_nickname !== undefined || s.author_name !== undefined;
@@ -107,6 +107,17 @@
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === 'hallview'));
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-hallview'));
     requestAnimationFrame(() => window.GuqinStage.resize && window.GuqinStage.resize());
+    if (!fromHash && s.id != null) {
+      const slug = (window.GuqinHash && window.GuqinHash.slugOf(s.id)) || s.id;
+      const hash = '#/hall/' + encodeURIComponent(slug);
+      if (location.hash !== hash) location.hash = hash;
+    }
+  }
+  function currentId() { return hallScore ? hallScore.id : null; }
+  function openHallById(id, fromHash) {
+    const s = scoresById[id];
+    if (s) { openHall(s, fromHash); return true; }
+    return false;
   }
 
   /* 多行谱面：上音符 / 下减字，每行 N 字自动换行（复刻 APK 查看视图） */
@@ -213,6 +224,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-editor'));
   }
 
-  window.Hall = { build, openHall, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, setCatalog, setHallScores, _coverHTML: coverHTML, _authorOf: authorOf };
+  window.Hall = { build, openHall, openHallById, currentId, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, setCatalog, setHallScores, _coverHTML: coverHTML, _authorOf: authorOf };
   window.HallFire = null; // 由 app 注入琴面联动
 })();
