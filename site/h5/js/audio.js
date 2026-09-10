@@ -49,55 +49,81 @@
     return hit.f * (OPEN[string - 1] / openWeb);
   }
 
-  /* 播放一个音
-   * opts: {gain, dur(秒), rate 额外倍率, glideTo(频率,滑向), vibrato, attack} */
+  /* 播放一个音。时长语义对照网页版 part-07 pluck()：
+   * - 有效发声长度 effectiveHold = max(音长, SUSTAIN_MIN=0.9s)，封顶采样自然长度
+   * - 长音：采样经 rate 变调后若不够长，用粒子余音合成延长（GuqinSustain）
+   * - 同 key 重触：30ms 掐断旧振动（voices 表）
+   * - 散音整体增益 ×0.7（OPEN_GAIN_FACTOR）
+   * opts: {gain, dur, glideTo, vibrato, attack} */
+  const voices = new Map();   // 同 key 重触掐断（对照源码 voices.get(key)）
   async function play(string, harmonic, open, targetFreq, opts = {}) {
     const c = ensureCtx();
     const kind = open ? 'open' : (harmonic ? 'harmonic' : 'pressed');
     const buf = await loadSample(kind, string);
-    const src = c.createBufferSource();
-    const g = c.createGain();
-    src.buffer = buf;
-    src.connect(g); g.connect(c.destination);
+    const key = kind + ':' + string;
     const t = c.currentTime + 0.01;
     let rate = (targetFreq / baseFreq(kind, string)) * (opts.rate || 1);
-    const gain = opts.gain || 0.8;
-    const dur = opts.dur || Math.min(buf.duration, 3.2);
+    const gain = (opts.gain || 0.85) * (open ? 0.7 : 1);
 
-    /* 弯音实现依据 APK 逆向（2026-09 确认）：
-     * libapp.so 中 Dart 侧 _applyPitchAutomation 调 flutter_soloud 的
-     * setRelativePlaySpeed / fadeRelativePlaySpeed（对单 voice 速率自动化）。
-     * SoLoud 的 fade 在 C++ 层为线性插值 → APK 滑音 = 线性变速，本处同为线性坡。
-     * 与 Web Audio 的 playbackRate automation 一一同构。 */
-    if (opts.attack) { // 绰/注：自下方/上方大二度线性滑入本位
+    // 同 key 重触：掐断旧音
+    const prev = voices.get(key);
+    if (prev) {
+      try {
+        prev.g.gain.cancelScheduledValues(t);
+        prev.g.gain.setValueAtTime(prev.g.gain.value, t);
+        prev.g.gain.linearRampToValueAtTime(0, t + 0.03);
+        prev.s.stop(t + 0.05);
+      } catch (e) { /* 已结束 */ }
+    }
+
+    // 时长：音长(秒,播放时间域)。采样可用(原速域)=buf.duration；播放域=buf.duration/rate
+    const noteDur = opts.dur || 1.2;
+    const SUSTAIN_MIN = 0.9;
+    const effective = Math.min(Math.max(noteDur, SUSTAIN_MIN), 6.0);
+    const availPlay = buf.duration / rate;             // 变调后实际可响时长
+    let useBuf = buf;
+    if (effective > availPlay * 0.98 && window.GuqinSustain) {
+      // 采样不够长：粒子余音合成（原速域烘 effective*rate 秒）
+      const ext = window.GuqinSustain.sustained(c, key, buf, effective * rate);
+      if (ext) useBuf = ext;
+    }
+    const playDur = Math.min(effective, useBuf.duration / rate);
+    const tail = 0.38;                                 // HOLD_RELEASE：松手收尾
+
+    const src = c.createBufferSource(), g = c.createGain();
+    src.buffer = useBuf;
+    src.connect(g); g.connect(c.destination);
+    voices.set(key, { s: src, g });
+
+    if (opts.attack) { // 绰/注：线性滑入（SoLoud fadeRelativePlaySpeed 语义）
       const semi = opts.attack === '绰' ? -2 : 2;
-      const glide = Math.min(0.38, Math.max(0.22, dur * 0.35));
+      const glide = Math.min(0.38, Math.max(0.22, noteDur * 0.35));
       src.playbackRate.setValueAtTime(rate * Math.pow(2, semi / 12), t);
       src.playbackRate.linearRampToValueAtTime(rate, t + glide);
-    } else if (opts.glideTo) { // 走手音：线性变速滑向目标（对应 fadeRelativePlaySpeed）
+    } else if (opts.glideTo) {
       src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
       src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseFreq(kind, string)), t + (opts.glideSec || 0.6));
-    } else if (opts.vibrato) { // 吟/猱：三角波（=反复 fade 上下的等效连续物）
-      // 吟窄而快、猱宽而慢；音头干净 0.22s 后摆入。APK 深度/周期常量在 AOT
-      // 机器码中，此处取技法词典所述相对关系（猱≈吟的两倍幅度、约一半速度）。
+    } else if (opts.vibrato) {
       src.playbackRate.value = rate;
       const isNao = opts.vibrato === '猱';
       const lfo = c.createOscillator(), lg = c.createGain();
-      lfo.type = 'triangle';                       // 线性往复，对应连续 fade
+      lfo.type = 'triangle';
       lfo.frequency.value = isNao ? 2.4 : 4.3;
       lg.gain.setValueAtTime(0, t);
       lg.gain.setValueAtTime(0, t + 0.22);
       lg.gain.linearRampToValueAtTime(rate * (isNao ? 0.055 : 0.032), t + 0.55);
       lfo.connect(lg); lg.connect(src.playbackRate);
-      lfo.start(t); lfo.stop(t + dur);
+      lfo.start(t); lfo.stop(t + playDur + tail);
     } else {
       src.playbackRate.value = rate;
     }
+    // 包络：12ms 起音 → 保持 → 尾部自然收（采样自然结束或 noteDur 后 0.38s 收）
     g.gain.setValueAtTime(0, t);
     g.gain.linearRampToValueAtTime(gain, t + 0.012);
-    g.gain.setValueAtTime(gain, t + Math.max(0.05, dur - 0.4));
-    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    src.start(t); src.stop(t + dur + 0.05);
+    g.gain.setValueAtTime(gain, t + Math.max(0.05, playDur - tail * 0.4));
+    g.gain.exponentialRampToValueAtTime(0.0001, t + playDur + tail * 0.5);
+    src.start(t); src.stop(t + playDur + tail * 0.5 + 0.05);
+    src.onended = () => { if (voices.get(key) && voices.get(key).s === src) voices.delete(key); };
     return { src, gain: g };
   }
 
