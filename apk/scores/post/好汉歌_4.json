@@ -1,0 +1,119 @@
+{
+ "id": "da2248a9-e54e-4a86-818e-3f4bf45a1bea",
+ "entity_type": "post",
+ "entity_id": "562c47fd-9288-4c73-bcb0-cb4e5629ee31",
+ "title": "好汉歌",
+ "change_source": "admin_approve",
+ "author_id": "07ac2f2b-88e8-4c6b-af48-c5c559aa8c41",
+ "created_at": "2026-07-30T03:44:45.840795+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moer",
+       "kind": "jianzi",
+       "text": "抹二",
+       "partIds": [
+        "019",
+        "008"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moliu",
+       "kind": "jianzi",
+       "text": "抹六",
+       "partIds": [
+        "019",
+        "012"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mowu",
+       "kind": "jianzi",
+       "text": "抹五",
+       "partIds": [
+        "019",
+        "011"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "好汉歌",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "localDraftId": "draft-1785382877877453",
+  "scoreOwnerId": "07ac2f2b-88e8-4c6b-af48-c5c559aa8c41",
+  "libraryItemId": "community:562c47fd-9288-4c73-bcb0-cb4e5629ee31:0",
+  "sourceItemKey": "post:c1aca1ca-be45-448e-8f03-054fb6f98e22:0",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "松风阁",
+  "sourceAuthorId": "0415db48-1e94-4aa3-8ec5-d4dc25d21349",
+  "publishedPostId": "562c47fd-9288-4c73-bcb0-cb4e5629ee31",
+  "ticksPerQuarter": 480,
+  "sourceAuthorName": "阳春调",
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "",
+  "sourceContentSignature": "[{\"rhythm\":[],\"jianzi\":[\"抹二\"]}]"
+ }
+}

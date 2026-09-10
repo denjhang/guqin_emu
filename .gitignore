@@ -1,0 +1,30 @@
+# 原始二进制
+*.apk
+*.aab
+
+# 解包产物中的大二进制（保留数据 JSON 与文档）
+apk/extracted/lib/
+apk/extracted/classes*.dex
+apk/extracted/resources.arsc
+apk/extracted/res/
+apk/extracted/META-INF/
+apk/extracted/assets/flutter_assets/assets/audio/
+apk/extracted/assets/flutter_assets/assets/images/
+apk/extracted/assets/flutter_assets/assets/fonts/
+apk/extracted/assets/flutter_assets/assets/packages/
+apk/extracted/assets/flutter_assets/assets/shaders/
+apk/extracted/assets/shaders/
+
+# 网站镜像中的大媒体（首页视频 150MB+，按需重抓）
+site/media/video/
+site/media/audio/
+site/media/og-cover.jpg
+site/media/qr-*.jpg
+
+# 本地密钥
+*.key
+tmp/
+
+# 运行时产物
+node_modules/
+*.log

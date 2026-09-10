@@ -1,0 +1,4 @@
+.global-page-back{position:fixed;top:18px;left:18px;z-index:300;width:36px;height:36px;display:grid;place-items:center;padding:0;border:0;border-radius:0;color:#5a554c;background:transparent;box-shadow:none;text-decoration:none;font:300 27px/1 Georgia,serif;cursor:pointer}
+.global-page-back:hover{color:#2c2a26;background:transparent}
+.global-page-back:focus-visible{outline:1px solid #5e4c3d;outline-offset:3px}
+@media(max-width:600px){.global-page-back{top:10px;left:10px;width:34px;height:34px;font-size:25px}}

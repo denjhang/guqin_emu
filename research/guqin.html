@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="zh-CN" class="portfolio-qin">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>{const q=new URLSearchParams(location.search);let changed=false;if(!q.has('entry')){q.set('entry','free');changed=true}if(!q.has('lang')){q.set('lang','zh');changed=true}if(changed)history.replaceState(null,'',location.pathname+'?'+q.toString()+location.hash);if(q.get('entry')==='free')document.documentElement.classList.add('direct-free');if(q.get('worldReplay')==='1')document.documentElement.classList.add('world-replay');}</script>
+<title>虚拟古琴 · 王悠荻</title>
+<meta name="description" content="王悠荻虚拟古琴：在浏览器中探索古琴按音、泛音与音位，支持触控、鼠标和键盘演奏。">
+<meta name="author" content="Wang Youdi 王悠荻">
+<meta name="date" content="2026-08-20">
+<link rel="canonical" href="https://udywang.com/guqin">
+<link rel="icon" type="image/png" href="../media/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="王悠荻 Youdi Wang">
+<meta property="og:title" content="虚拟古琴 · 王悠荻">
+<meta property="og:description" content="在浏览器中探索古琴按音、泛音与音位，支持触控、鼠标和键盘演奏。">
+<meta property="og:image" content="https://udywang.com/media/og-cover.jpg">
+<meta property="og:url" content="https://udywang.com/guqin">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="虚拟古琴 · 王悠荻">
+<meta name="twitter:description" content="在浏览器中探索古琴按音、泛音与音位。">
+<meta name="twitter:image" content="https://udywang.com/media/og-cover.jpg">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   视觉换成《琴境 · UI界面设计》那一套：深色木纹琴面、珍珠徽点、金铜印章、
+   碧色高亮。只换皮相——元素、层级、文案、按键、音色、判定一律照旧。
+   （他们那份设计里弦是「一弦最细、七弦最粗」，与实琴相反，
+     这一条不跟——弦的粗细是琴的事实，不是视觉偏好。）
+   ═══════════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#eee9df; --muted:#aaa49b;
+  --bg:#111214; --panel:#1b1c1e; --panel2:#292a2c;
+  --line:rgba(255,255,255,.1); --line2:rgba(255,255,255,.18);
+  --gold:#c9a66b; --gold2:#e5c48e; --jade:#54b59f; --green:#65d69e; --red:#b75b51;
+  --t1:#f0e9df; --t2:#aaa59d; --t3:#85817b;
+  --font:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,serif;
+  --fontD:"Songti SC","Noto Serif SC",serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font-family:"PingFang SC","Hiragino Sans GB",var(--font);
+  -webkit-font-smoothing:antialiased;overscroll-behavior:none;user-select:none;
+  -webkit-user-select:none;-webkit-touch-callout:none}
+#app{height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 22%, rgba(117,84,57,.2), transparent 52%),
+    linear-gradient(180deg,#202124 0,#121315 68%,#0d0e0f 100%)}
+#app::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.1;z-index:0;
+  background-image:repeating-linear-gradient(90deg,transparent 0 3px,rgba(255,255,255,.03) 4px)}
+#systemNotice{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));z-index:90;
+  width:min(560px,calc(100% - 24px));padding:13px 42px 13px 16px;transform:translate(-50%,18px);
+  border:1px solid #a57b4e;border-radius:9px;color:#f0dfbf;background:rgba(39,29,22,.96);
+  box-shadow:0 12px 32px rgba(0,0,0,.5);font-size:15px;line-height:1.5;opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s}
+#systemNotice.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#systemNotice button{position:absolute;right:7px;top:7px;padding:5px 8px;border:0;background:transparent;
+  border-radius:0;color:#d9c39e;font-size:18px;box-shadow:none}
+
+/* ── 顶栏 ── */
+#top{flex:0 0 auto;min-height:58px;display:flex;align-items:center;gap:14px;
+  padding:0 clamp(12px,2.4vw,34px);position:relative;z-index:10;
+  background:linear-gradient(#303235,#202124);border-bottom:1px solid #08090a;
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 4px 18px rgba(0,0,0,.42)}
+#gameBack{flex:0 0 auto;min-width:56px;height:38px;padding:0 8px;border:0;color:#bdb8b0;
+  background:transparent;font:500 14px/1 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+  cursor:pointer;white-space:nowrap}
+#gameBack::first-letter{font-size:24px}
+#brand{display:flex;align-items:center;gap:8px;font-family:var(--fontD);text-decoration:none;
+  font-size:17px;letter-spacing:.14em;line-height:1.2;color:var(--t1)}
+#brand::before{content:"琴";flex:0 0 auto;width:32px;height:32px;display:grid;place-items:center;
+  border:1px solid #8f7250;border-radius:7px;color:var(--gold2);
+  background:linear-gradient(145deg,#5b2c27,#321c1b);letter-spacing:0;
+  box-shadow:inset 0 0 0 3px rgba(0,0,0,.22),0 1px rgba(255,255,255,.08);
+  font:600 18px/1 var(--fontD)}
+#brand small{display:block;font-size:9px;letter-spacing:.14em;color:var(--muted);
+  margin-top:4px;font-family:var(--font)}
+#judgeFlash{min-width:132px;font-size:15px;letter-spacing:.08em;opacity:0;transition:opacity .16s;
+  color:var(--t1)}
+#judgeFlash.on{opacity:1}
+#judgeFlash small{font-size:11px;letter-spacing:0;color:var(--t3);margin-left:5px}
+.hud{display:flex;gap:clamp(14px,2.4vw,30px);align-items:center;margin-left:auto}
+.stat{text-align:right;display:grid;gap:2px}
+.stat b{display:block;font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;
+  font-family:var(--mono);color:#f4efe7}
+.stat i{font-style:normal;font-size:clamp(10px,1.15vw,12px);letter-spacing:.06em;color:#8c8984}
+.stat i.boost{color:var(--gold2);text-shadow:0 0 10px rgba(229,196,142,.35)}
+.stat.orb{width:47px;height:47px;display:grid;place-content:center;text-align:center;gap:0;
+  border:1px solid #806b4a;border-radius:50%;color:#e8d4ad;
+  background:radial-gradient(circle,#45413a,#232426 68%);box-shadow:inset 0 0 8px #090a0b}
+.stat.orb b{font-size:15px;color:#e8d4ad}
+.stat.orb i{font-size:10px;color:#8e8980}
+
+/* ── 场地：一张木面卡片 ── */
+#stage{flex:1 1 auto;position:relative;min-height:0;z-index:1;
+  margin:14px clamp(10px,2.2vw,26px) 6px;padding:10px;
+  border:1px solid #343538;border-radius:12px;
+  background:linear-gradient(145deg,#252628,#17181a);
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 16px 40px rgba(0,0,0,.35)}
+#cv{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair;
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  border:2px solid #100c0b;border-radius:46px 12px 16px 38px;
+  box-shadow:inset 0 5px 9px rgba(255,255,255,.035),
+             inset 0 -18px 28px rgba(0,0,0,.55),0 7px 14px rgba(0,0,0,.45)}
+
+/* ── 浮在琴面右下角的两个小键（原来那排底栏全撤了：选好难度直接开始） ── */
+#ctl{position:absolute;right:22px;bottom:20px;display:flex;gap:8px;z-index:12}
+#ctl button{padding:7px 14px;font-size:12px;letter-spacing:.16em;
+  background:rgba(22,23,25,.82);border-color:#4a4c50;backdrop-filter:blur(8px)}
+#ctl button:disabled{opacity:.45}
+button{font-family:var(--font);font-size:13px;letter-spacing:.1em;color:#c8c3ba;
+  background:#25262a;border:1px solid #45474b;border-radius:6px;
+  padding:9px 18px;cursor:pointer;transition:.14s;
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 2px 6px rgba(0,0,0,.3)}
+button:hover{filter:brightness(1.15);border-color:#6b6d72;color:#efe9df}
+button:disabled{color:#5d5b58;border-color:#303134;background:#1c1d1f;
+  box-shadow:none;cursor:default;filter:none}
+button.primary{border:1px solid #a07d52;color:#f5eee3;
+  background:linear-gradient(#705238,#503824);
+  box-shadow:inset 0 1px rgba(255,255,255,.12),0 4px 10px rgba(0,0,0,.35)}
+button.primary:hover{filter:brightness(1.12);transform:translateY(-1px)}
+button.primary:active{transform:translateY(1px)}
+button.primary:disabled{background:#2a2520;border-color:#463b30;color:#6b6560;transform:none}
+
+/* ── 自由试音：右上角按音／泛音切换 ── */
+#toneSw{position:absolute;top:22px;right:26px;display:none;z-index:12;
+  border:1px solid #45474b;border-radius:7px;overflow:hidden;
+  background:rgba(20,21,23,.86);backdrop-filter:blur(8px);
+  box-shadow:0 6px 18px rgba(0,0,0,.45)}
+#toneSw.on{display:flex}
+#freeReadout{min-width:210px;padding:8px 14px;display:flex;align-items:center;
+  justify-content:flex-start;text-align:left;color:#d4c6a7;font-size:12.5px;letter-spacing:.12em;
+  white-space:nowrap;border-right:1px solid #35373b}
+#freeReadout:empty{display:none}
+/* 简谱数字、八度点与泛音圈必须是三个独立层。
+   不能再用 Unicode 组合点：不同中文字体会把组合点挂到数字右侧。 */
+.free-jianpu{position:relative;display:inline-block;min-width:1em;margin-left:.08em;
+  color:inherit;font-family:Arial,sans-serif;font-size:1.18em;line-height:.78;
+  text-align:center;letter-spacing:0;vertical-align:middle}
+.free-jianpu-digit{display:block;margin:0;padding:0;line-height:.78}
+.free-jianpu-acc{position:absolute;top:-.08em;left:-.58em;font-size:.62em;line-height:1}
+.free-jianpu-dots{position:absolute;left:50%;display:flex;flex-direction:column;
+  align-items:center;gap:.10em;transform:translateX(-50%)}
+.free-jianpu-dots i{width:.17em;height:.17em;display:block;border-radius:50%;background:currentColor}
+.free-jianpu-above{bottom:calc(100% + .10em)}
+.free-jianpu-below{top:calc(100% + .10em)}
+.free-jianpu-circle{position:absolute;left:50%;bottom:calc(100% + .16em);width:.34em;height:.34em;
+  border:.085em solid currentColor;border-radius:50%;transform:translateX(-50%)}
+.free-jianpu.has-up-1 .free-jianpu-circle{bottom:calc(100% + .47em)}
+.free-jianpu.has-up-2 .free-jianpu-circle{bottom:calc(100% + .70em)}
+button.sw{border:0;border-radius:0;padding:8px 15px;font-size:12.5px;letter-spacing:.18em;
+  color:#8b877f;background:transparent;box-shadow:none}
+button.sw+button.sw{border-left:1px solid #35373b}
+button.sw:hover{background:#2a2c30;color:#d8d2c7;filter:none}
+button.sw.on{background:linear-gradient(#705238,#503824);color:#f5eee3}
+button.sw.on:hover{background:linear-gradient(#7a5a3d,#5a4029);color:#f5eee3}
+#bJianpuMap.on{background:linear-gradient(#7a5a3d,#5a4029);color:#f5eee3}
+.tone-mode-group{display:flex;border:1px solid #45474b;border-radius:8px;overflow:hidden;background:rgba(20,21,23,.88)}
+#bJianpuMap{border:1px solid #57534c;border-radius:8px;background:rgba(20,21,23,.88)}
+
+/* 首页内嵌琴面：只保留可演奏琴和琴面开关，不重复整套游戏顶栏与退出键。 */
+html.embed-home,html.embed-home body{background:transparent}
+html.embed-home #app{background:transparent}
+html.embed-home #app::before,html.embed-home #top,html.embed-home #ctl,
+html.embed-home #menu,html.embed-home #systemNotice{display:none!important}
+html.embed-home #stage{margin:0;padding:58px 1.4% 54px;border:0;border-radius:0;background:transparent;box-shadow:none}
+html.embed-home #cv{border:0;border-radius:0;clip-path:none;box-shadow:none;background:transparent}
+html.embed-home #toneSw{top:8px;left:1.4%;right:1.4%;max-width:none;border:0;background:transparent;box-shadow:none;overflow:visible;justify-content:space-between}
+html.embed-home #freeReadout{position:absolute;left:0;bottom:-46px;z-index:20;min-width:0;max-width:70%;
+  padding:8px 12px;border:1px solid rgba(201,166,107,.35);border-radius:6px;background:rgba(20,21,23,.86)}
+html.embed-home button.sw{padding:8px clamp(8px,1.4vw,15px);font-size:clamp(10px,1.2vw,12.5px);white-space:nowrap}
+@media(max-width:520px){html.embed-home #stage{padding-top:52px;padding-bottom:47px}html.embed-home #toneSw{left:2%;right:2%;top:6px}html.embed-home button.sw{padding-inline:8px;letter-spacing:.06em}html.embed-home #freeReadout{bottom:-40px;max-width:100%;font-size:11px}}
+@media(max-height:450px) and (orientation:landscape){html.embed-home #stage{padding-top:46px;padding-bottom:8px}html.embed-home #toneSw{top:3px}html.embed-home #freeReadout{bottom:-34px;padding:5px 8px}}
+
+.game-nav-actions{display:flex;align-items:center;gap:clamp(14px,2.2vw,28px)}
+.game-nav-actions button,.game-nav-actions a{position:relative;min-width:42px;height:38px;display:grid;place-items:center;padding:0;border:0;border-radius:0;color:#aaa69f;background:transparent;text-decoration:none;font-size:14px}
+.game-nav-actions a.is-current{color:#f3d69e;font-weight:650}
+.game-nav-actions a.is-current::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:2px;border-radius:2px;background:#c99f61}
+.game-nav-actions .game-help{border-radius:50%;min-width:38px;width:38px;padding:0;font:600 18px/1 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+.modal-x{position:absolute;right:12px;top:12px;z-index:3;width:32px;height:32px;padding:0;border:0;border-radius:0;box-shadow:none;font:300 22px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:transparent}
+#menuBox,#cardWrap,.game-help-card{position:relative}
+#cardWrap{width:min(640px,100%)}
+#card{width:100%}
+#gameHelp{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:22px;background:rgba(4,5,6,.78);backdrop-filter:blur(12px)}
+#gameHelp.on{display:grid}
+.game-help-card{width:min(520px,100%);padding:32px;border:1px solid #57524b;border-radius:16px;background:#1b1c1e;box-shadow:0 24px 70px rgba(0,0,0,.65)}
+.game-help-card h2{margin:0 0 18px;font:500 24px/1.3 var(--fontD);color:#f0e9df}
+.game-help-card ol{margin:0;padding-left:1.4em;color:#cbc4b9;line-height:1.9;font-size:15px}
+
+/* ── 主界面 ── */
+#menu{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  z-index:30;padding:24px;background:rgba(4,5,6,.75);backdrop-filter:blur(12px)}
+#menu.on{display:flex}
+#menuBox{width:min(500px,100%);padding:34px 40px 30px;text-align:center;
+  border:1px solid #57524b;border-radius:12px;
+  background:linear-gradient(145deg,#2a2b2d,#17181a);
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 24px 70px rgba(0,0,0,.65)}
+#menuBox::before{content:"琴";display:grid;place-items:center;width:66px;height:66px;
+  margin:0 auto 16px;border:1px solid #8c6f4d;border-radius:9px;color:#ebcb98;
+  background:linear-gradient(145deg,#542b27,#281919);
+  box-shadow:inset 0 0 0 4px rgba(0,0,0,.22);font:500 30px/1 var(--fontD)}
+#menuBox h1{font-family:var(--fontD);font-size:34px;letter-spacing:.3em;margin:0 0 8px;
+  text-indent:.3em;color:#f0e9df;font-weight:500}
+#menuBox .menu-subtitle{margin:0 0 16px;color:#a99e90;font-size:11px;letter-spacing:.18em}
+#menuBox .sub{font-size:10px;letter-spacing:.17em;color:#aaa096;margin:0 0 26px}
+button.mi{display:block;width:100%;text-align:left;padding:13px 18px;margin-bottom:10px;
+  border:1px solid #403c35;border-radius:8px;background:#121315;letter-spacing:.06em;
+  box-shadow:none}
+button.mi b{display:block;font-family:var(--fontD);font-size:17px;font-weight:500;
+  letter-spacing:.16em;margin-bottom:3px;color:#efe7da}
+button.mi i{font-style:normal;font-size:10px;letter-spacing:.1em;color:#8b877f}
+button.mi:hover{border-color:#8c6f4d;background:#191a1d;filter:none;transform:translateY(-1px)}
+button.mi:hover b{color:var(--gold2)}
+
+/* ── 主界面上那张能拨响的小琴（照琴境的做法：开局先摸一下弦） ── */
+#mqin{display:block;width:100%;height:118px;margin:2px 0 22px;cursor:crosshair;
+  touch-action:none}
+
+/* ── 难度：主界面上的三档 ── */
+#diffRow,#songRow{display:flex;gap:0;margin:0 0 8px;border:1px solid #403c35;border-radius:8px;
+  overflow:hidden;background:#121315}
+#songRow{margin-bottom:16px}
+#songRow button.df{font-family:var(--fontD);font-size:15px;letter-spacing:.14em}
+button.df{flex:1;border:0;border-radius:0;padding:9px 0;font-size:13px;letter-spacing:.2em;
+  color:#8b877f;background:transparent;box-shadow:none}
+button.df+button.df{border-left:1px solid #2b2c2f}
+button.df:hover{background:#1c1d20;color:#d8d2c7;filter:none;transform:none}
+button.df.on{background:linear-gradient(#705238,#503824);color:#f5eee3}
+button.df.on:hover{background:linear-gradient(#7a5a3d,#5a4029);color:#f5eee3}
+#diffNote{margin:0 0 18px;min-height:10px}
+#pickDiff{display:none}
+#menu.pick2 #pickSong{display:none}
+#menu.pick2 #pickDiff{display:block}
+.step{margin:0 0 7px;font-size:10px;letter-spacing:.3em;color:#8d867b}
+#chosen{margin:0 0 16px;font-family:var(--fontD);font-size:22px;letter-spacing:.18em;
+  color:var(--gold2)}
+.mrow{display:flex;gap:9px;justify-content:center}
+
+/* ── 结算：按类别的小结（逐音明细表已撤） ── */
+#byKind{margin:6px 0 2px;padding:11px 14px;text-align:center;font-size:12px;line-height:1.9;
+  color:#cfc6b8;border:1px solid #3b3c3f;border-radius:8px;background:#1a1b1d;
+  letter-spacing:.04em}
+
+/* ── 统一结算：星级是唯一评价，不展示分数与百分比 ── */
+.result-stars{display:flex;justify-content:center;gap:10px;margin:28px 0 9px;font-size:clamp(34px,7vw,50px);line-height:1}
+.result-stars .is-earned{color:#e6c781;text-shadow:0 0 18px rgba(230,199,129,.28);animation:resultStarPop .42s cubic-bezier(.2,1.6,.4,1) both}
+.result-stars .is-hollow{color:#4d473e}
+.result-star-caption{margin:0;text-align:center;color:#a79f93;font-size:13px;letter-spacing:.1em}
+.result-praise{max-width:34em;margin:22px auto 0;text-align:center;color:#eee4d4;font-size:16px;line-height:1.85}
+.result-actions button{min-width:116px}
+@keyframes resultStarPop{from{opacity:0;transform:scale(.35) rotate(-18deg)}to{opacity:1;transform:none}}
+#praise{margin:14px 0 2px;padding:13px 16px;text-align:center;font-size:13px;line-height:1.9;
+  color:#e3d9c7;border:1px solid #4d4740;border-radius:8px;
+  background:linear-gradient(145deg,rgba(201,166,107,.10),rgba(201,166,107,.03))}
+
+/* ── 结算弹窗 ── */
+#veil{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  z-index:20;padding:22px;overflow:auto;background:rgba(4,5,6,.75);backdrop-filter:blur(12px)}
+#veil.on{display:flex}
+#card{width:min(640px,100%);padding:30px 34px 26px;
+  border:1px solid #57524b;border-radius:12px;
+  background:linear-gradient(145deg,#2a2b2d,#17181a);
+  box-shadow:inset 0 1px rgba(255,255,255,.08),0 24px 70px rgba(0,0,0,.65)}
+#card h2{margin:0;font-size:10px;letter-spacing:.32em;color:#aaa096;font-weight:400;
+  text-align:center}
+.mx{display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:5px;margin-bottom:20px}
+.mx div{text-align:center;padding:9px 2px;border:1px solid #393a3c;border-radius:5px;
+  background:#1a1b1d}
+.mx b{display:block;font-family:var(--mono);font-size:17px;font-weight:500;color:#d7d0c5;
+  font-variant-numeric:tabular-nums}
+.mx i{display:block;font-style:normal;font-size:8px;letter-spacing:.08em;color:#817d76;
+  margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{font-weight:400;font-size:9px;letter-spacing:.14em;color:#817d76;text-align:left;
+  padding:0 8px 7px;border-bottom:1px solid #46433e}
+td{padding:6px 8px;border-bottom:1px solid #2c2d2f;color:#c3bcb2;
+  font-variant-numeric:tabular-nums}
+#card .foot{display:flex;gap:9px;margin-top:20px;justify-content:center}
+#tip{font-size:12px;color:#9c988f;line-height:1.85;margin-top:16px;
+  padding:12px 15px;border-left:2px solid var(--gold);background:rgba(201,166,107,.07);
+  border-radius:0 6px 6px 0}
+#tip strong{display:block;color:#e3d9c7;font-size:14px;font-weight:500;line-height:1.75}
+.P{color:var(--gold2)}.G{color:var(--green)}.O{color:#d8b06a}.M{color:var(--red);opacity:.85}
+
+@media(max-width:680px){
+  #top{min-height:54px;padding:0 9px;gap:7px}
+  #brand{font-size:0}
+  #brand::before{width:30px;height:30px;font-size:18px}
+  #brand small{display:none}
+  #judgeFlash,.hud{display:none}
+  .game-nav-actions{min-width:0;margin-left:auto;gap:clamp(9px,3.4vw,17px);overflow-x:auto;scrollbar-width:none}
+  .game-nav-actions::-webkit-scrollbar{display:none}
+  .game-nav-actions button,.game-nav-actions a{min-width:max-content;height:34px;padding:0;font-size:13px}
+  .game-nav-actions a:first-child{display:none}
+  #gameBack{min-width:36px;width:36px;height:34px;padding:0;font-size:0}
+  #gameBack::before{content:"‹";font-size:25px;line-height:1}
+  #judgeFlash{min-width:0;font-size:13px}
+  .hud{gap:10px}
+  .stat b{font-size:16px}
+  .stat.orb{width:40px;height:40px}
+  #stage{margin:8px 8px 4px;padding:6px}
+  #cv{border-radius:30px 8px 10px 24px}
+  #bottom{padding:4px 12px 10px}
+  button{padding:8px 13px;font-size:12px}
+  #hint{display:none}
+  #menuBox{padding:26px 20px 22px}
+  #card{padding:22px 16px 18px}
+}
+/* 试玩页在应用内浏览器的可用高度较矮。把选曲首页整体压紧，保证标题、琴面和
+   三个入口一次完整看见；进入游戏后琴面仍按剩余空间自适应，不改变判定坐标。 */
+@media(max-height:820px){
+  #menu{padding:10px 16px;overflow:auto}
+  #menuBox{padding:18px 30px 16px}
+  #menuBox::before{width:52px;height:52px;margin-bottom:9px;font-size:25px}
+  #menuBox h1{font-size:28px;margin-bottom:5px}
+  #menuBox .menu-subtitle{margin-bottom:9px}
+  #menuBox .sub{margin-bottom:12px}
+  #mqin{height:82px;margin:0 0 12px}
+  button.mi{padding:9px 15px;margin-bottom:7px}
+  button.mi b{font-size:15px;margin-bottom:1px}
+  #songRow{margin-bottom:10px}
+  #diffNote{margin-bottom:10px}
+  #chosen{margin-bottom:10px;font-size:19px}
+}
+@media(max-height:620px){
+  #menuBox{padding:12px 22px 11px}
+  #menuBox::before{width:42px;height:42px;margin-bottom:5px;font-size:21px}
+  #menuBox h1{font-size:24px}
+  #menuBox .menu-subtitle,#menuBox .sub{display:none}
+  #mqin{height:62px;margin-bottom:8px}
+  button.mi{padding:7px 13px;margin-bottom:5px}
+}
+@media(max-height:450px) and (orientation:landscape){
+  #top{min-height:48px;padding:0 9px;gap:7px}
+  #brand{font-size:0}
+  #brand::before{width:30px;height:30px;font-size:18px}
+  #brand small,#judgeFlash,.hud{display:none}
+  .game-nav-actions{margin-left:auto;gap:clamp(9px,3.4vw,17px);overflow:visible}
+  .game-nav-actions button,.game-nav-actions a{min-width:max-content;height:34px;padding:0;font-size:13px;white-space:nowrap}
+  .game-nav-actions a:first-child{display:none}
+  #gameBack{min-width:36px;width:36px;height:34px;padding:0;font-size:0}
+  #gameBack::before{content:"‹";font-size:25px;line-height:1}
+  #menu{padding:3px}
+  #menuBox{width:min(560px,calc(100% - 8px));padding:5px 18px 7px}
+  #menuBox::before{width:30px;height:30px;margin:0 auto 2px;border-radius:6px;font-size:18px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.22)}
+  #menuBox h1{margin:0 0 1px;font-size:20px}
+  #menuBox .menu-subtitle{margin:0 0 3px;font-size:9px}
+  #mqin{height:50px;margin:0 0 5px}
+  button.mi{padding:6px 12px;margin-bottom:4px}
+  button.mi b{margin:0;font-size:14px}
+  #chosen{margin:0 0 5px;font-size:16px}
+  #diffRow{margin-bottom:3px}
+  button.df{padding:6px 0}
+  #diffNote{min-height:3px;margin:0 0 4px}
+  .mrow{gap:5px}
+  .mrow button{padding:6px 10px}
+  #menuClose{right:5px;top:5px}
+  .game-help-card{max-height:calc(100vh - 12px);padding:16px 24px}
+  .game-help-card h2{margin-bottom:7px;font-size:19px}
+  .game-help-card ol{line-height:1.5;font-size:12px}
+  #card{max-height:calc(100vh - 12px);padding:12px 18px}
+  .result-stars{margin:8px 0 4px;font-size:30px}
+  .result-praise{margin-top:8px;font-size:13px;line-height:1.5}
+  #tip{margin-top:6px;padding:6px 10px;line-height:1.45}
+  #card .foot{margin-top:7px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important}}
+
+/* 王悠荻个人站 · 水墨纸本界面。琴体与琴面 canvas 不作任何尺寸、比例或颜色覆盖。 */
+html.portfolio-qin,html.portfolio-qin body{background:#fcf7ea;color:#2c2a26}
+html.portfolio-qin body,html.portfolio-qin #app{background:
+  linear-gradient(180deg,#fcf7ea 0%,#f6eedc 48%,#ede2ca 100%)}
+html.portfolio-qin #app::before{opacity:.035;mix-blend-mode:multiply;
+  background-image:repeating-linear-gradient(90deg,transparent 0 4px,rgba(44,42,38,.025) 5px)}
+html.portfolio-qin #top{display:none!important}
+html.direct-free #menu,html.direct-free #gameHelp{display:none!important}
+html.portfolio-qin #gameBack{color:#5a554c;font-family:"Songti SC",STSong,serif}
+html.portfolio-qin #gameBack:hover{color:#2c2a26;filter:none}
+html.portfolio-qin #brand{gap:0;color:#2c2a26;font-size:16px;letter-spacing:.22em}
+html.portfolio-qin #brand::before{display:none}
+html.portfolio-qin #brand small{margin:3px 0 0 8px;color:#948e82;font-size:8px;letter-spacing:.18em}
+html.portfolio-qin #judgeFlash,html.portfolio-qin .hud{display:none}
+html.portfolio-qin .game-nav-actions{margin-left:auto;gap:10px}
+html.portfolio-qin .game-nav-actions button{min-width:38px;height:32px;color:#5a554c;
+  border:1px solid rgba(74,64,52,.18);border-radius:2px;background:rgba(255,255,255,.56);
+  font-family:"Songti SC",STSong,serif;font-size:11px;letter-spacing:.12em;box-shadow:none}
+html.portfolio-qin .game-nav-actions button:hover{color:#fffdf6;background:#5e4c3d;border-color:#5e4c3d;filter:none}
+html.portfolio-qin #stage{margin:0;padding:92px 22px 22px;border:0;border-radius:0;background:transparent;box-shadow:none}
+html.portfolio-qin #cv{border:0;box-shadow:none}
+html.portfolio-qin #ctl,html.portfolio-qin #menu{display:none!important}
+html.portfolio-qin #toneSw{top:28px;left:var(--qin-nav-left);right:var(--qin-nav-right);max-width:none;justify-content:space-between;gap:18px;
+  border:0;background:transparent;box-shadow:none;overflow:visible;backdrop-filter:none}
+html.portfolio-qin .tone-mode-group,html.portfolio-qin .tone-left-actions{border-color:rgba(74,64,52,.16);background:rgba(255,255,255,.48);
+  box-shadow:0 10px 30px rgba(44,42,38,.1)}
+html.portfolio-qin #bJianpuMap{border-color:rgba(74,64,52,.16);background:rgba(255,255,255,.48);
+  box-shadow:none}
+html.portfolio-qin button.sw{color:#7e7460}
+html.portfolio-qin button.sw+button.sw{border-left-color:rgba(74,64,52,.13)}
+html.portfolio-qin button.sw:hover{color:#2c2a26;background:rgba(94,76,61,.08)}
+html.portfolio-qin button.sw.on,html.portfolio-qin #bJianpuMap.on{color:#fffdf6;background:#5e4c3d}
+html.portfolio-qin #systemNotice{color:#5e4c3d;border-color:rgba(94,76,61,.3);background:rgba(250,247,239,.96)}
+html.portfolio-qin #gameHelp{background:rgba(228,225,217,.74)}
+html.portfolio-qin .game-help-card{color:#2c2a26;border-color:rgba(74,64,52,.18);background:#faf7ef;
+  box-shadow:0 24px 70px rgba(44,42,38,.16)}
+html.portfolio-qin .game-help-card h2{color:#2c2a26}
+html.portfolio-qin .game-help-card ol{color:#5a554c}
+html.portfolio-qin .modal-x{color:#5a554c;background:transparent}
+/* ── 左上返回 ← 与右上退出 × ──────────────────────────────────────────
+   这两个键的位置和尺寸从此只写在变量里，顶部控制区（#toneSw）的左右让位
+   由同一组变量算出来（--qin-nav-left / --qin-nav-right）。
+   v1.87 之前是两处各写死一个数字：返回键 left:28px + 宽 42px 占到 70px，
+   而控制区从 left:40px 开始——「录制你的专属琴音」正好被箭头压住。
+   现在只要改一处，让位自动跟着变，不会再错开。 */
+:root{
+  --qin-nav-inset:28px;   /* 返回／退出键距屏幕边的距离 */
+  --qin-nav-size:42px;    /* 键的边长 */
+  --qin-nav-gap:14px;     /* 键与控制区之间至少留的空隙 */
+  --qin-nav-left:calc(var(--qin-nav-inset) + var(--qin-nav-size) + var(--qin-nav-gap));
+  --qin-nav-right:calc(var(--qin-nav-inset) + var(--qin-nav-size) + var(--qin-nav-gap));
+}
+#qinBack,#qinExit{position:fixed;top:24px;z-index:120;
+  width:var(--qin-nav-size);height:var(--qin-nav-size);padding:0;border:0;
+  border-radius:0;color:#5a554c;background:transparent;box-shadow:none;
+  font:300 29px/1 Georgia,serif;letter-spacing:0}
+#qinBack{left:var(--qin-nav-inset)}
+#qinExit{right:var(--qin-nav-inset)}
+#qinBack .qin-back-glyph{position:relative;display:block;width:17px;height:14px;margin:auto}
+#qinBack .qin-back-glyph::before{content:"";position:absolute;left:1px;top:6px;width:15px;
+  border-top:1.35px solid currentColor}
+#qinBack .qin-back-glyph::after{content:"";position:absolute;left:1.5px;top:3px;width:7px;height:7px;
+  border-left:1.35px solid currentColor;border-bottom:1.35px solid currentColor;transform:rotate(45deg)}
+#qinBack:hover,#qinExit:hover{color:#2c2a26;background:transparent;filter:none;transform:none}
+#qinBack:focus-visible,#qinExit:focus-visible{outline:1px solid #5e4c3d;outline-offset:3px}
+#recordCtl{display:flex;align-items:stretch}
+#recordButton{display:flex;align-items:center;gap:7px;min-width:0;white-space:nowrap}
+#recordButton:hover{color:#2c2a26;background:#fffaf0;filter:none;transform:none}
+#recordButton .record-dot{width:9px;height:9px;flex:0 0 auto;border-radius:50%;background:#9a3d34;box-shadow:0 0 0 1px rgba(154,61,52,.15)}
+#recordButton time{display:none;min-width:34px;font-variant-numeric:tabular-nums;letter-spacing:0}
+#recordButton.is-recording{color:#fff;border-color:#9a3d34;background:#9a3d34;box-shadow:0 8px 25px rgba(118,38,31,.26)}
+#recordButton.is-recording .record-dot{background:#fff;animation:recordPulse 1.15s ease-out infinite}
+#recordButton.is-recording time{display:inline}
+#recordButton:disabled{opacity:.72;cursor:wait}
+.tone-left-actions{display:flex;border:1px solid #45474b;border-radius:8px;overflow:hidden;background:rgba(20,21,23,.88)}
+#worldMapButton{display:flex;align-items:center;gap:7px;white-space:nowrap;border-left:1px solid #35373b}
+.tone-mode-group #bJianpuMap{border:0;border-radius:0;background:transparent}
+.map-globe{position:relative;width:15px;height:15px;flex:0 0 auto;border:1px solid currentColor;border-radius:50%;opacity:.88}
+.map-globe::before{content:"";position:absolute;left:3px;right:3px;top:-1px;bottom:-1px;border-left:1px solid currentColor;border-right:1px solid currentColor;border-radius:50%}
+.map-globe::after{content:"";position:absolute;left:1px;right:1px;top:6px;border-top:1px solid currentColor}
+#recordToast{position:fixed;left:50%;bottom:66px;z-index:250;max-width:min(420px,calc(100vw - 32px));padding:9px 14px;border:1px solid rgba(94,76,61,.18);border-radius:10px;color:#4f473f;background:rgba(250,247,239,.96);box-shadow:0 9px 30px rgba(44,42,38,.15);font:12px/1.45 system-ui,-apple-system,sans-serif;opacity:0;pointer-events:none;transform:translate(-50%,8px);transition:.2s}
+#recordToast.on{opacity:1;transform:translate(-50%,0)}
+html.world-replay .tone-left-actions,html.world-replay #bPressed,html.world-replay #bHarm,html.world-replay #qinLang,html.world-replay #recordToast,html.world-replay #qinBack,html.world-replay #qinExit,html.world-replay #guqinRelease{display:none!important}
+html.world-replay #toneSw{justify-content:flex-end!important}
+html.world-replay .tone-mode-group{width:auto!important;margin-left:auto!important}
+html.world-replay #bJianpuMap{flex:none!important;min-width:96px}
+@keyframes recordPulse{70%{box-shadow:0 0 0 7px rgba(255,255,255,0)}}
+@media(max-width:680px){
+  :root{--qin-nav-inset:12px;--qin-nav-size:38px;--qin-nav-gap:10px}
+  html.portfolio-qin #stage{padding:78px 10px 10px}
+  html.portfolio-qin #toneSw{top:18px;left:var(--qin-nav-left);right:var(--qin-nav-right);gap:10px}
+  #qinBack,#qinExit{top:12px}}
+@media(max-width:680px) and (orientation:portrait){
+  html.portfolio-qin #stage{padding-top:112px}
+  html.portfolio-qin #toneSw{left:var(--qin-nav-left);right:var(--qin-nav-right);flex-wrap:wrap}
+  .tone-left-actions{width:100%}
+  .tone-mode-group{width:100%;margin-left:0}
+  html.portfolio-qin .tone-mode-group button.sw{min-width:0;padding:7px 7px;font-size:10.5px;letter-spacing:.04em;line-height:1.25;white-space:normal}
+  html.portfolio-qin #bJianpuMap{flex:1.2}
+  html.portfolio-qin #bPressed{flex:.9}
+  html.portfolio-qin #bHarm{flex:1.05}
+  html.portfolio-qin #qinLang{flex:.72}
+}
+@media(max-height:450px) and (orientation:landscape){
+  :root{--qin-nav-inset:5px;--qin-nav-size:32px;--qin-nav-gap:8px}
+  html.portfolio-qin #stage{padding:38px 8px 2px}
+  html.portfolio-qin #toneSw{top:5px;left:var(--qin-nav-left);right:var(--qin-nav-right);gap:8px}
+  html.portfolio-qin button.sw{padding:4px 9px;font-size:10.5px;letter-spacing:.08em;min-height:27px}
+  html.portfolio-qin .tone-mode-group,html.portfolio-qin .tone-left-actions{border-radius:6px;box-shadow:0 4px 12px rgba(44,42,38,.08)}
+  #qinBack,#qinExit{top:3px;font-size:24px}
+  #recordButton{min-width:0}
+}
+#guqinRelease{position:fixed;right:14px;bottom:max(8px,env(safe-area-inset-bottom));z-index:88;
+  color:rgba(238,233,223,.52);font:8px/1.45 Georgia,"Times New Roman",serif;
+  letter-spacing:.06em;text-align:right;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.65)}
+#guqinRelease small{display:block;font:8px/1.4 "Songti SC","Noto Serif SC",serif;letter-spacing:.1em}
+@media(max-height:520px) and (orientation:landscape){#guqinRelease{right:8px;bottom:4px;font-size:7px}#guqinRelease small{font-size:7px}}
+</style>
+<link rel="stylesheet" href="../ui-nav.css?v=186">
+</head>
+<body>
+<div id="app">
+  <div id="stage">
+    <canvas id="cv" tabindex="0" role="application" aria-label="古琴演奏区。可触摸琴面演奏；主键盘或数字小键盘一至七对应一至七弦，末尾双泛音可同时按两键，空格暂停。" aria-describedby="a11yTarget"></canvas>
+    <p id="a11yTarget" class="sr-only" aria-live="polite">尚未开始</p>
+    <div id="toneSw">
+      <div class="tone-left-actions"><div id="recordCtl"><button class="sw" id="recordButton" type="button"><i class="record-dot" aria-hidden="true"></i><span id="recordLabel">录制你的专属琴音</span><time id="recordElapsed">00:00</time></button></div><button class="sw" id="worldMapButton" type="button" data-qin-zh="<i class='map-globe' aria-hidden='true'></i><span>古琴地图</span>" data-qin-en="<i class='map-globe' aria-hidden='true'></i><span>Guqin Map</span>"><i class="map-globe" aria-hidden="true"></i><span>古琴地图</span></button></div>
+      <div class="tone-mode-group"><button class="sw" id="bJianpuMap" aria-pressed="false" data-qin-zh="音位全览" data-qin-en="All positions">音位全览</button><button class="sw" id="bPressed" aria-pressed="false" data-qin-zh="按 音" data-qin-en="Pressed">按 音</button><button class="sw on" id="bHarm" aria-pressed="true" data-qin-zh="泛 音" data-qin-en="Harmonic">泛 音</button><button class="sw" id="qinLang" type="button">EN</button></div>
+    </div>
+    <div id="recordToast" role="status" aria-live="polite"></div>
+    <div id="ctl">
+      <button id="bDemo">示范</button>
+      <button id="bPause">暂停</button>
+      <button id="bExit">退出</button>
+    </div>
+    <div id="veil"><div id="cardWrap"><button id="veilClose" class="modal-x" type="button" aria-label="关闭">×</button><div id="card"></div></div></div>
+    <div id="menu">
+      <div id="menuBox">
+        <button id="menuClose" class="modal-x" type="button" aria-label="关闭">×</button>
+        <h1>虚 拟 古 琴</h1>
+        <p class="menu-subtitle">琴境 · 学琴曲</p>
+
+        <canvas id="mqin"></canvas>
+
+        <div id="pickSong">
+          <button class="mi" data-m="song"><b>《仙 翁 操》</b></button>
+          <button class="mi" data-m="qiufeng"><b>《秋 风 词》</b></button>
+          <button class="mi" data-m="rand"><b>随 机 练 习</b></button>
+        </div>
+
+        <div id="pickDiff">
+          <div id="chosen">《仙翁操》</div>
+          <div id="diffRow">
+            <button class="df on" id="dEasy">初 级</button>
+            <button class="df" id="dNormal">中 级</button>
+            <button class="df" id="dHard">高 级</button>
+          </div>
+          <p id="diffNote"></p>
+          <div class="mrow">
+            <button class="primary" id="bGo">入 局</button>
+            <button id="bDemo0">听示范</button>
+            <button id="bBack">返回选曲</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<button id="qinBack" type="button" aria-label="返回首页"><span class="qin-back-glyph" aria-hidden="true"></span></button>
+<button id="qinExit" type="button" aria-label="退出虚拟古琴">×</button>
+<footer id="guqinRelease">Virtual Guqin © 2026 Wang Youdi. All rights reserved.<small data-qin-zh="公开发布 · 2026年8月20日 · 作者：王悠荻" data-qin-en="Public release · August 20, 2026 · Author: Wang Youdi">公开发布 · 2026年8月20日 · 作者：王悠荻</small></footer>
+<div id="systemNotice" role="status" aria-live="polite"><span></span><button type="button" aria-label="关闭提示">×</button></div>
+<script src="assets/part-01.js?v=167"></script>
+<script src="assets/part-02.js?v=204"></script>
+<script src="assets/part-03.js"></script>
+<script src="assets/part-04.js?v=187"></script>
+<script src="assets/part-05.js?v=187"></script>
+<script src="assets/part-06.js?v=qiufengci-24"></script>
+<script src="assets/world-recorder.js?v=214"></script>
+<script src="assets/part-07.js?v=214"></script>
+<script src="assets/world-replay.js?v=214"></script>
+<script>
+(function(){
+  const english = new URLSearchParams(location.search).get('lang') !== 'zh';
+  document.documentElement.classList.add('portfolio-qin');
+  document.documentElement.lang = english ? 'en' : 'zh-CN';
+  document.title = english ? 'Virtual Guqin · Youdi Wang' : '虚拟古琴 · 王悠荻';
+  const metaText = english ? {
+    description:'Youdi Wang’s virtual guqin: explore pressed notes, harmonics and positions in the browser with touch, mouse or keyboard.',
+    title:'Virtual Guqin · Youdi Wang', short:'Explore guqin notes, harmonics and positions in the browser.'
+  } : {
+    description:'王悠荻虚拟古琴：在浏览器中探索古琴按音、泛音与音位，支持触控、鼠标和键盘演奏。',
+    title:'虚拟古琴 · 王悠荻', short:'在浏览器中探索古琴按音、泛音与音位。'
+  };
+  document.querySelector('meta[name="description"]').content = metaText.description;
+  document.querySelector('meta[property="og:title"]').content = metaText.title;
+  document.querySelector('meta[property="og:description"]').content = metaText.description;
+  document.querySelector('meta[name="twitter:title"]').content = metaText.title;
+  document.querySelector('meta[name="twitter:description"]').content = metaText.short;
+  document.querySelectorAll('[data-qin-zh]').forEach(function(el){
+    el.innerHTML = english ? el.dataset.qinEn : el.dataset.qinZh;
+  });
+  const exit = document.getElementById('qinExit');
+  const back = document.getElementById('qinBack');
+  const goBack = function(){ location.href = '../'; };
+  back.setAttribute('aria-label', english ? 'Back to home' : '返回首页');
+  back.onclick = goBack;
+  exit.setAttribute('aria-label', english ? 'Exit Virtual Guqin' : '退出虚拟古琴');
+  exit.onclick = goBack;
+  document.addEventListener('keydown', function(event){ if (event.key === 'Escape') exit.click(); });
+  document.getElementById('a11yTarget').textContent = english ? 'Ready' : '等待开始';
+  document.querySelector('#systemNotice button').setAttribute('aria-label', english ? 'Close notice' : '关闭提示');
+  const mapButton = document.getElementById('worldMapButton');
+  mapButton.setAttribute('aria-label', english ? 'Open the World Guqin Map' : '打开世界古琴地图');
+  mapButton.onclick = function(){ location.href = '../world-map.html?lang=' + (english ? 'en' : 'zh'); };
+  const qinLang = document.getElementById('qinLang');
+  qinLang.textContent = english ? '中文' : 'EN';
+  qinLang.setAttribute('aria-label', english ? 'Switch to Chinese' : '切换到英文');
+  qinLang.onclick = function(){ const params=new URLSearchParams(location.search);params.set('entry','free');params.set('lang',english?'zh':'en');location.search=params.toString(); };
+  document.getElementById('cv').setAttribute('aria-label', english
+    ? 'Playable guqin. Touch the seven strings at hui positions to play harmonics.'
+    : '可演奏古琴。轻触七弦与徽位交点演奏泛音。');
+  setSound('harmonic');
+  setFreeMapButton();
+})();
+</script>
+<script src="../analytics.js?v=188"></script>
+<script>
+/* 琴面打开记一次。当它是嵌在别人页面里的回放引擎时，analytics.js 会自动掐掉
+   这一类事件（见那边的 REPLAY_MUTED），这里不必再判断。 */
+if (window.GuqinStat) window.GuqinStat.once('qin_open');
+</script>
+</body>
+</html>

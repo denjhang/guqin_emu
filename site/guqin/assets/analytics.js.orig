@@ -1,0 +1,97 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   统计（v1.88）
+
+   两件不同的事，分别用不同的东西做：
+
+   1. **有多少人来过** —— Cloudflare Web Analytics。
+      不设 cookie、不存任何客户端标识、不采集个人信息，因此不需要 cookie 横幅。
+      代价是它**只有页面浏览和 Core Web Vitals，没有自定义事件**，
+      所以回答不了「多少人真的弹响了一个音」。
+
+   2. **他们进来之后干了什么** —— 自建 /api/stat，只记「日期 + 事件名 + 计数」。
+      不写 IP、不写用户 ID、不写任何可以指回个人的东西；服务端也只做 +1。
+      这样既拿到漏斗，又不给自己添一份要负责的个人信息。
+
+   ── 上线前要填一行 ──────────────────────────────────────────────────
+   到 Cloudflare 控制台 → Web Analytics → 添加站点 udywang.com，
+   把它给的那串 token 填进下面的 CF_TOKEN。留空则不加载信标，其余照常工作。
+   ═══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var CF_TOKEN = '';          /* ← 填这里 */
+  var STAT_ENDPOINT = '/api/stat';
+  var SESSION_FLAG = 'guqin-stat-once-v1';
+
+  /* ── 1. Cloudflare Web Analytics 信标 ───────────────────────────── */
+  if (CF_TOKEN) {
+    var beacon = document.createElement('script');
+    beacon.defer = true;
+    beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    beacon.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_TOKEN }));
+    document.head.appendChild(beacon);
+  }
+
+  /* ── 2. 关键行为计数 ───────────────────────────────────────────── */
+  /* 只允许这些名字。写成白名单，是为了将来谁手滑传了个带内容的字符串上去，
+     也不会变成一条「用户数据」。 */
+  var ALLOWED = {
+    qin_open: 1,          /* 琴面打开 */
+    qin_first_sound: 1,   /* 真的弹响了第一个音 —— 这一条才是转化 */
+    qin_glide: 1,         /* 拖出过一次走手音 */
+    record_start: 1,      /* 开始录制 */
+    record_done: 1,       /* 录完（还没决定去向） */
+    share_done: 1,        /* 分享到了地图 */
+    replay_play: 1,       /* 从地图／榜单／分享页放了一段 */
+    yinwei_hear: 1,       /* 音位页点了试听 */
+    page_view: 1          /* 兜底：无 CF token 时也能看到粗略页面量 */
+  };
+
+  /* 琴面被当作「回放引擎」嵌在别人页面里时（html.world-replay），页面上发生的
+     发声不是有人在弹，而是在放别人录的。这类事件必须掐掉，否则
+     「真的弹响了一个音」会被被动收听撑起来——本机跑一遍就是这么发现的。 */
+  var IS_REPLAY = document.documentElement.classList.contains('world-replay');
+  var REPLAY_MUTED = { qin_open: 1, qin_first_sound: 1, qin_glide: 1 };
+
+  var sentOnce = {};
+  try {
+    var saved = sessionStorage.getItem(SESSION_FLAG);
+    if (saved) sentOnce = JSON.parse(saved) || {};
+  } catch (error) { sentOnce = {}; }
+
+  function persist() {
+    try { sessionStorage.setItem(SESSION_FLAG, JSON.stringify(sentOnce)); } catch (error) {}
+  }
+
+  function send(name) {
+    if (!ALLOWED[name]) return;
+    if (IS_REPLAY && REPLAY_MUTED[name]) return;
+    var body = JSON.stringify({ event: name });
+    try {
+      /* sendBeacon 在页面正在关闭时也能发出去，而且不阻塞。 */
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(STAT_ENDPOINT, new Blob([body], { type: 'application/json' }));
+        return;
+      }
+    } catch (error) {}
+    try {
+      fetch(STAT_ENDPOINT, { method: 'POST', headers: { 'content-type': 'application/json' },
+        body: body, keepalive: true }).catch(function () {});
+    } catch (error) {}
+  }
+
+  var api = {
+    /* 每次都记一笔（比如每点一次试听）。 */
+    hit: function (name) { send(name); },
+    /* 一个会话内只记一笔（比如「弹响了第一个音」）。 */
+    once: function (name) {
+      if (!ALLOWED[name] || sentOnce[name]) return;
+      if (IS_REPLAY && REPLAY_MUTED[name]) return;
+      sentOnce[name] = 1; persist(); send(name);
+    }
+  };
+  window.GuqinStat = api;
+
+  /* 页面浏览兜底：CF 信标缺席时仍能看到量级。回放 iframe 不算一次浏览。 */
+  if (!CF_TOKEN && !IS_REPLAY) api.hit('page_view');
+})();

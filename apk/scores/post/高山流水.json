@@ -1,0 +1,103 @@
+{
+ "id": "704e4ca6-9a5d-4087-8dfd-94604ac8b92a",
+ "entity_type": "post",
+ "entity_id": "131740a1-0d2c-4f54-8445-bcf8cb7cbac5",
+ "title": "高山流水",
+ "change_source": "admin_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-08T10:36:02.685592+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "ruancuosanqisanba",
+       "kind": "jianzi",
+       "text": "软撮散七散八",
+       "partIds": [
+        "055",
+        "117",
+        "006",
+        "013",
+        "006",
+        "014"
+       ],
+       "categorySlots": [
+        "修饰",
+        "撮",
+        "散",
+        "number",
+        "散",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 0,
+         "lengthX": 156,
+         "lengthY": 60
+        },
+        {
+         "x": 0,
+         "y": 60,
+         "lengthX": 256,
+         "lengthY": 196
+        },
+        {
+         "x": 0,
+         "y": 141.921875,
+         "lengthX": 112.00000000000001,
+         "lengthY": 76.5625
+        },
+        {
+         "x": 0,
+         "y": 218.484375,
+         "lengthX": 112.00000000000001,
+         "lengthY": 38.28125
+        },
+        {
+         "x": 142,
+         "y": 141.921875,
+         "lengthX": 112.00000000000001,
+         "lengthY": 76.5625
+        },
+        {
+         "x": 142,
+         "y": 218.484375,
+         "lengthX": 112.00000000000001,
+         "lengthY": 38.28125
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "whole",
+       "kind": "rest",
+       "text": "𝄻",
+       "isRest": true,
+       "duration": "whole"
+      }
+     ]
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "高山流水",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰操",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "告诉"
+ }
+}

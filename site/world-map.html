@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="index,follow">
+  <title>世界古琴地图</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4">
+  <style>
+    :root{--paper:#f4f0e6;--ink:#2d2a25;--muted:#777064;--red:#74352d;--line:rgba(70,59,48,.16);--panel:rgba(250,247,239,.95)}
+    *{box-sizing:border-box}html,body{height:100%;margin:0}body{overflow:hidden;color:var(--ink);background:var(--paper);font:14px/1.5 system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC",sans-serif}button{height:36px;padding:0 13px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:#fffdf7;cursor:pointer}button.primary{color:#fff;border-color:var(--red);background:var(--red)}button:disabled{opacity:.55;cursor:not-allowed}.rank-actions button[data-like][disabled]{cursor:default}
+    #map{position:absolute;inset:0;background:#d9ddd3}.topbar{position:fixed;z-index:800;top:18px;left:18px;right:18px;display:flex;align-items:center;gap:12px;pointer-events:none}.brand,.stats,.controls,.now,.leaderboard{pointer-events:auto;border:1px solid var(--line);background:var(--panel);box-shadow:0 10px 36px rgba(47,40,33,.13);backdrop-filter:blur(14px)}.brand{min-width:220px;padding:12px 16px;border-radius:13px}.brand strong{display:block;font:500 18px/1.25 Georgia,"Songti SC",serif;letter-spacing:.12em}.brand small{color:var(--muted);letter-spacing:.07em}.stats{display:flex;gap:20px;padding:10px 15px;border-radius:13px}.stats b{display:block;font:500 17px/1.1 Georgia,serif}.stats span{font-size:10px;color:var(--muted);letter-spacing:.12em}.controls{margin-left:auto;display:flex;gap:8px;padding:7px;border-radius:12px}.map-ref{display:grid;place-items:center;height:36px;padding:0 13px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:#fffdf7;text-decoration:none;white-space:nowrap}.map-ref:hover{border-color:var(--red)}
+    .leaderboard{position:fixed;z-index:790;top:92px;right:18px;bottom:18px;width:min(380px,calc(100vw - 36px));border-radius:15px;overflow:hidden;transform:translateX(calc(100% + 40px));transition:transform .25s ease}.leaderboard.on{transform:none}.board-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px 13px;border-bottom:1px solid var(--line)}.board-head h2{min-width:0;margin:0;white-space:nowrap;font:500 19px/1.3 Georgia,"Songti SC",serif;letter-spacing:.08em}.board-head-actions{display:flex;align-items:center;gap:6px}.board-sort{width:auto;height:32px;padding:0 9px;border:1px solid rgba(116,53,45,.38)!important;border-radius:8px;color:var(--ink)!important;background:#fff8ec!important;box-shadow:0 1px 0 rgba(116,53,45,.08);font-size:12px;font-weight:600;white-space:nowrap;appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}.board-sort:hover,.board-sort:focus-visible{color:var(--red)!important;border-color:var(--red)!important;background:#f8eee2!important;outline:2px solid rgba(116,53,45,.28);outline-offset:1px}.board-sort:active{color:#fffaf0!important;border-color:var(--red)!important;background:var(--red)!important}.board-sort[aria-pressed="true"],.board-sort[aria-pressed="true"]:hover,.board-sort[aria-pressed="true"]:focus-visible,.board-sort[aria-pressed="true"]:active{color:#fffaf0!important;border-color:var(--red)!important;background:var(--red)!important;box-shadow:0 1px 0 rgba(58,22,18,.2);outline-color:rgba(116,53,45,.4)}#boardClose{width:32px;padding:0;font-size:20px}.board-list{height:calc(100% - 62px);padding:10px;overflow:auto}.rank-card{display:grid;grid-template-columns:32px 1fr;gap:10px;margin-bottom:8px;padding:12px;border:1px solid var(--line);border-radius:11px;background:#fffdf7}.rank-no{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;background:var(--red);font:14px Georgia,serif}.rank-title{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.rank-title strong{display:-webkit-box;min-width:0;max-height:2.7em;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;white-space:normal;font:500 15px/1.35 Georgia,"Songti SC",serif}.rank-title b{flex:0 0 auto;color:var(--red);font-size:12px}.rank-meta{margin:3px 0 9px;color:var(--muted);font-size:11px}.rank-actions{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;align-items:center}.rank-count-cell{display:flex;align-items:center;gap:4px;justify-content:flex-end}.rank-actions button,.rank-actions a{display:grid;place-items:center;height:32px;padding:0 9px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:#fffdf7;text-decoration:none;font-size:12px}.rank-actions .play{color:#fff;border-color:var(--red);background:var(--red)}.rank-actions .play-count{min-width:38px;text-align:right;color:var(--muted);font-size:11px;white-space:nowrap;border:0;background:transparent;padding:0;height:auto}
+    /* 删除键从整行大按钮改成播放数右边的小垃圾桶：它是低频、且只有本人看得见的操作，
+       不该和「播放」「点赞」抢同等的视觉重量。 */
+    .rank-actions .owner-trash{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;padding:0;border:1px solid transparent;border-radius:8px;color:#8a8177;background:transparent;font-size:13px;line-height:1;cursor:pointer;opacity:.72;transition:.15s}
+    .rank-actions .owner-trash:hover{color:#7f332b;border-color:rgba(127,51,43,.35);background:rgba(127,51,43,.06);opacity:1}
+    .rank-actions .owner-trash:focus-visible{outline:1px solid var(--red);outline-offset:2px}
+    .rank-inline-host{position:relative;grid-column:1/-1;width:100%;aspect-ratio:14/9;margin-top:2px;overflow:hidden;border:1px solid rgba(70,59,48,.2);border-radius:9px;background:#241817}
+    .rank-inline-host[hidden]{display:none}
+    .now{position:fixed;z-index:800;left:18px;bottom:18px;width:min(390px,calc(100vw - 36px));padding:14px 16px;border-radius:13px;transform:translateY(calc(100% + 40px));transition:.25s}.now.on{transform:none}.now-head{display:flex;align-items:center;gap:10px}.now .pulse{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(116,53,45,.4);animation:pulse 1.5s infinite}.now strong{font:500 16px Georgia,serif}.now p{margin:4px 0 0;color:var(--muted)}@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(116,53,45,0)}}
+    .qin-dot{display:grid;place-items:center;width:24px;height:24px;border:2px solid #f5eee0;border-radius:50%;color:#fff;background:var(--red);box-shadow:0 3px 12px rgba(64,31,26,.32);font:12px Georgia,serif}.qin-dot.is-shared{animation:sharedDot 1.05s ease-out 3;box-shadow:0 0 0 0 rgba(116,53,45,.58),0 3px 12px rgba(64,31,26,.32)}@keyframes sharedDot{65%{box-shadow:0 0 0 18px rgba(116,53,45,0),0 3px 12px rgba(64,31,26,.32)}}.leaflet-div-icon{border:0;background:transparent}.leaflet-popup-content-wrapper{border-radius:12px;background:#fffaf0;color:var(--ink);box-shadow:0 10px 35px rgba(44,39,33,.2)}.leaflet-popup-tip{background:#fffaf0}.leaflet-popup-content{margin:14px 15px;min-width:210px}.pop-title{font:500 16px Georgia,"Songti SC",serif}.pop-meta{margin:4px 0 11px;color:var(--muted);font-size:12px}.pop-actions{display:flex;gap:7px;flex-wrap:wrap}.pop-actions button,.pop-actions a{display:grid;place-items:center;flex:1;min-height:36px;padding:0 13px;border:1px solid var(--line);border-radius:9px;color:var(--ink);background:#fffdf7;text-decoration:none}.pop-play{color:#fff!important;border-color:var(--red)!important;background:var(--red)!important}.map-exit{width:36px;padding:0;border-radius:0;font:300 25px/1 Georgia,serif}.leaflet-control-zoom a{color:var(--ink)!important;background:#fffaf0!important}.leaflet-control-attribution{background:rgba(250,247,239,.82)!important}#audioEngine{position:fixed;width:1px;height:1px;left:-20px;bottom:-20px;border:0;opacity:0;pointer-events:none}.empty{position:fixed;z-index:780;inset:0;display:none;place-items:center;pointer-events:none}.empty.on{display:grid}.empty div{padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+    @media(max-width:760px){.topbar{top:8px;left:8px;right:8px;align-items:stretch;flex-wrap:wrap}.brand{min-width:0;flex:1}.stats{order:3;width:100%;justify-content:space-around}.controls{margin:0}.leaderboard{top:223px;right:8px;bottom:8px;width:calc(100vw - 16px)}.now{left:8px;bottom:8px;width:calc(100vw - 16px)}}
+    @media(orientation:portrait) and (min-width:761px) and (max-width:900px){html[lang="zh-CN"] .topbar{top:8px;left:8px;right:8px;align-items:stretch;flex-wrap:wrap}html[lang="zh-CN"] .brand{min-width:0;flex:1}html[lang="zh-CN"] .stats{order:3;width:100%;justify-content:space-around}html[lang="zh-CN"] .controls{margin:0}html[lang="zh-CN"] .leaderboard{top:159px;right:8px;bottom:8px;width:calc(100vw - 16px)}}
+  </style>
+  <style>
+    .map-back,.map-exit,#boardClose,.replay-visual-close{display:grid;place-items:center;width:36px;height:36px;padding:0!important;border:0!important;border-radius:0!important;color:var(--ink);background:transparent!important;box-shadow:none!important;font:300 25px/1 Georgia,"Songti SC",serif;cursor:pointer}
+    .map-back{flex:0 0 36px;pointer-events:auto}.map-back:focus-visible,.map-exit:focus-visible,#boardClose:focus-visible,.replay-visual-close:focus-visible{outline:1px solid var(--red);outline-offset:3px}
+    .replay-visual{position:fixed;inset:0;z-index:900;display:none;place-items:center;padding:18px;background:rgba(35,31,27,.44);backdrop-filter:blur(8px)}.replay-visual.on{display:grid}.replay-visual.inline{display:block;padding:0;background:transparent;backdrop-filter:none;pointer-events:none}.replay-visual.full{display:grid}
+    .replay-visual-card{position:relative;width:min(1120px,calc(100vw - 30px));height:min(76vh,720px);padding-top:45px;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:#1f1716;box-shadow:0 26px 85px rgba(35,25,22,.36);pointer-events:auto}.replay-visual.inline .replay-visual-card{width:100%;height:100%;padding-top:0;border-radius:9px;box-shadow:none}.replay-visual.inline .replay-visual-title,.replay-visual.inline .replay-visual-close{display:none!important}
+    .replay-visual-title{position:absolute;top:0;left:0;right:0;height:45px;display:flex;align-items:center;padding:0 54px 0 17px;overflow:hidden;color:#51483f;background:#faf7ef;text-overflow:ellipsis;white-space:nowrap;font:500 15px/1.2 Georgia,"Songti SC",serif;letter-spacing:.05em}
+    .replay-visual-close{position:absolute;z-index:2;top:5px;right:7px;color:#5b5249}
+    .inline-replay-expand{position:absolute;z-index:3;top:7px;left:7px;display:none;place-items:center;width:34px;height:34px;padding:0!important;border:1px solid rgba(255,250,240,.72)!important;border-radius:8px!important;color:#fffaf0!important;background:rgba(116,53,45,.94)!important;box-shadow:0 3px 12px rgba(29,15,12,.34)!important;appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}.replay-visual.inline .inline-replay-expand{display:grid}.inline-replay-expand:hover,.inline-replay-expand:focus-visible,.inline-replay-expand:active{color:#fffaf0!important;background:#74352d!important;border-color:#fffaf0!important;outline:2px solid rgba(255,250,240,.65);outline-offset:1px}.inline-replay-expand svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+    #audioEngine{position:relative!important;left:auto!important;bottom:auto!important;width:100%!important;height:100%!important;border:0!important;opacity:1!important;pointer-events:auto!important;background:#241817}
+    .replay-visual.inline #audioEngine{position:absolute!important;left:0!important;top:0!important;right:auto!important;bottom:auto!important;width:1120px!important;height:720px!important;transform:scale(var(--inline-replay-scale,1));transform-origin:0 0}
+    @media(max-width:760px){.map-back{width:32px;flex-basis:32px}.replay-visual{padding:8px}.replay-visual-card{width:calc(100vw - 16px);height:min(74vh,640px)}}
+    @media(orientation:portrait) and (min-width:761px) and (max-width:900px){html[lang="zh-CN"] .map-back{width:32px;flex-basis:32px}}
+  </style>
+<link rel="stylesheet" href="ui-nav.css?v=214">
+</head>
+<body>
+  <div id="map" aria-label="世界古琴地图" data-map-zh="世界古琴地图" data-map-en="World Guqin Map"></div>
+  <header class="topbar">
+    <button class="map-back" id="mapBack" type="button" aria-label="返回首页">←</button>
+    <div class="brand"><strong data-map-zh="世界古琴地图" data-map-en="World Guqin Map">世界古琴地图</strong><small>WORLD GUQIN MAP</small></div>
+    <div class="stats"><div><b id="performanceCount">—</b><span data-map-zh="琴音片段" data-map-en="PERFORMANCES">琴音片段</span></div><div><b id="noteCount">—</b><span data-map-zh="演奏音符" data-map-en="NOTES">演奏音符</span></div><div><b id="placeCount">—</b><span data-map-zh="地区" data-map-en="PLACES">地区</span></div></div>
+    <div class="controls"><a class="map-ref" id="yinweiLink" href="/guqin-yinwei.html" data-map-zh="音位查询" data-map-en="Note positions">音位查询</a><button id="langButton" type="button">EN</button><button id="refreshButton" type="button" data-map-zh="刷新" data-map-en="Refresh">刷新</button><button class="primary" id="boardButton" type="button" data-map-zh="排行榜" data-map-en="Leaderboard">排行榜</button><button class="map-exit" id="mapExit" type="button" aria-label="关闭世界古琴地图">×</button></div>
+  </header>
+  <aside class="leaderboard" id="leaderboard"><div class="board-head"><h2 data-map-zh="琴音排行榜" data-map-en="Guqin Leaderboard">琴音排行榜</h2><div class="board-head-actions"><button class="board-sort" id="timeSortButton" type="button" aria-pressed="false">时间</button><button id="boardClose" type="button" aria-label="关闭排行榜">×</button></div></div><div class="board-list" id="boardList"></div></aside>
+  <aside class="now" id="now"><div class="now-head"><i class="pulse"></i><strong id="nowTitle" data-map-zh="正在播放" data-map-en="Now Playing">正在播放</strong></div><p id="nowMeta"></p></aside>
+  <div class="empty" id="empty"><div data-map-zh="还没有可显示的演奏记录" data-map-en="No performances to display yet">还没有可显示的演奏记录</div></div>
+  <div class="replay-visual" id="replayVisual" aria-hidden="true"><section class="replay-visual-card" id="replayVisualCard" role="dialog" aria-modal="false" aria-labelledby="replayVisualTitle"><strong class="replay-visual-title" id="replayVisualTitle">琴音回放</strong><button class="replay-visual-close" id="replayVisualClose" type="button" aria-label="关闭回放">×</button><button class="inline-replay-expand" id="inlineReplayExpand" type="button" aria-label="放大琴面"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg></button><iframe id="audioEngine" src="guqin/?lang=zh&amp;worldReplay=1&amp;build=214" title="古琴回放琴面"></iframe></section></div>
+  <script src="vendor/leaflet/leaflet.js?v=1.9.4"></script>
+  <script src="vendor/leaflet/leaflet.ChineseTmsProviders.js?v=183"></script>
+  <script>
+  (function(){
+    'use strict';
+    const USER_KEY='world-guqin-user-id-v1',LIKED_KEY='world-guqin-liked-v1',LOCAL_KEY='world-guqin-local-performances-v1',DELETE_KEY='world-guqin-delete-credentials-v1';
+    const params=new URLSearchParams(location.search),isZh=params.get('lang')!=='en',demoMode=params.has('demo'),localMode=['127.0.0.1','localhost'].includes(location.hostname),sharedId=params.get('shared')||'';
+    const t=(zh,en)=>isZh?zh:en;
+    document.documentElement.lang=isZh?'zh-CN':'en';
+    document.title=t('世界古琴地图','World Guqin Map');
+    document.querySelectorAll('[data-map-zh]').forEach(element=>{element.textContent=isZh?element.dataset.mapZh:element.dataset.mapEn;});
+    document.getElementById('map').setAttribute('aria-label',t('世界古琴地图','World Guqin Map'));
+    document.getElementById('mapBack').setAttribute('aria-label',t('返回首页','Back to home'));
+    document.getElementById('boardClose').setAttribute('aria-label',t('关闭排行榜','Close leaderboard'));
+    document.getElementById('inlineReplayExpand').setAttribute('aria-label',t('放大琴面','Enlarge guqin replay'));
+    document.getElementById('mapExit').setAttribute('aria-label',t('关闭世界古琴地图','Close the World Guqin Map'));
+    document.getElementById('langButton').textContent=isZh?'EN':'中文';
+    document.getElementById('langButton').setAttribute('aria-label',t('切换到英文','Switch to Chinese'));
+    const map=L.map('map',{worldCopyJump:true,minZoom:2,zoomControl:false}).setView([22,12],2);
+    L.control.zoom({position:'bottomleft'}).addTo(map);
+    let domesticBasemap=false,baseLayer=null,domesticFallbackUsed=false;
+    function osmLayer(){return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});}
+    function domesticLayer(provider='GaoDe.Normal.Map'){
+      const value=L.tileLayer.chinaProvider(provider,{minZoom:2,maxZoom:18,attribution:provider.startsWith('GaoDe')?'&copy; 高德地图':'&copy; 腾讯地图'}),errors={count:0};
+      value.on('tileerror',()=>{errors.count+=1;if(errors.count<5||domesticFallbackUsed||provider!=='GaoDe.Normal.Map')return;domesticFallbackUsed=true;map.removeLayer(value);baseLayer=domesticLayer('Tencent.Normal.Map').addTo(map);document.getElementById('map').dataset.basemap='tencent';});
+      return value;
+    }
+    async function initializeBasemap(){
+      let useDomestic=params.get('map')==='cn';
+      if(params.get('map')!=='cn'&&params.get('map')!=='osm')try{const response=await fetch('api/viewer-region');if(response.ok)useDomestic=Boolean((await response.json()).domesticBasemap);}catch(error){}
+      domesticBasemap=useDomestic&&Boolean(L.tileLayer.chinaProvider);
+      baseLayer=(domesticBasemap?domesticLayer():osmLayer()).addTo(map);
+      document.getElementById('map').dataset.basemap=domesticBasemap?'gaode':'openstreetmap';
+    }
+    const layer=L.layerGroup().addTo(map),audioFrame=document.getElementById('audioEngine'),now=document.getElementById('now'),replayVisual=document.getElementById('replayVisual'),replayVisualCard=document.getElementById('replayVisualCard'),replayVisualTitle=document.getElementById('replayVisualTitle'),boardList=document.getElementById('boardList');
+    audioFrame.src='guqin/?lang='+(isZh?'zh':'en')+'&worldReplay=1&build=214';
+    audioFrame.title=t('古琴回放引擎','Guqin replay engine');
+    let performances=[],sharedFocused=false,boardSortMode='likes',timeSortDirection='desc',activeVisualItem=null,visualDisplayMode='hidden';
+    const opens=[65.406,73.416,82.407,98,110,123.471,146.832];
+    function demoEvents(strings,gaps){return strings.map((string,index)=>({type:'pluck',t:index*gaps,pos:{string,x:96,freq:opens[string-1],open:true,harm:false,hui:'',huiLabel:'',n:String(string),a:'',o:0},gain:.72,duration:120,glide:[]}));}
+    const demos=[
+      {id:'demo-beijing',userId:'qin_beijing',nickname:'松间·琴客',recordedAt:'2026-08-19T09:16:00Z',durationMs:4900,eventCount:6,likeCount:28,playCount:163,appVersion:'v2.14',soundMode:'open',location:{country:'CN',region:'北京',city:'北京',latitude:39.9,longitude:116.4},events:demoEvents([1,3,4,5,4,3],700)},
+      {id:'demo-paris',userId:'qin_paris',nickname:'Écho de soie',recordedAt:'2026-08-19T10:08:00Z',durationMs:5600,eventCount:7,likeCount:19,playCount:108,appVersion:'v2.14',soundMode:'open',location:{country:'FR',region:'Île-de-France',city:'Paris',latitude:48.86,longitude:2.35},events:demoEvents([7,6,5,3,2,3,1],690)},
+      {id:'demo-newyork',userId:'qin_newyork',nickname:'Moonlit Strings',recordedAt:'2026-08-19T11:21:00Z',durationMs:4300,eventCount:5,likeCount:12,playCount:76,appVersion:'v2.14',soundMode:'open',location:{country:'US',region:'New York',city:'New York',latitude:40.71,longitude:-74.01},events:demoEvents([2,4,6,5,3],760)},
+      {id:'demo-tokyo',userId:'qin_tokyo',nickname:'竹里清音',recordedAt:'2026-08-19T12:42:00Z',durationMs:5200,eventCount:6,likeCount:9,playCount:51,appVersion:'v2.14',soundMode:'open',location:{country:'JP',region:'Tokyo',city:'Tokyo',latitude:35.68,longitude:139.69},events:demoEvents([6,5,4,2,3,1],720)}
+    ];
+    function escapeHtml(value){return String(value||'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+    function randomId(){if(crypto.randomUUID)return crypto.randomUUID().replace(/-/g,'');const b=crypto.getRandomValues(new Uint8Array(18));return Array.from(b,x=>x.toString(16).padStart(2,'0')).join('');}
+    async function fetchTimed(url,options={},timeoutMs=12000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);try{return await fetch(url,Object.assign({},options,{signal:controller.signal}));}finally{clearTimeout(timer);}}
+    function userId(){let value='';try{value=localStorage.getItem(USER_KEY)||'';}catch(error){}if(!/^[a-zA-Z0-9_-]{12,64}$/.test(value)){value=randomId();try{localStorage.setItem(USER_KEY,value);}catch(error){}}return value;}
+    function likedSet(){try{return new Set(JSON.parse(localStorage.getItem(LIKED_KEY)||'[]'));}catch(error){return new Set();}}
+    function saveLiked(set){try{localStorage.setItem(LIKED_KEY,JSON.stringify([...set].slice(-2000)));}catch(error){}}
+    function deleteCredentials(){try{const value=JSON.parse(localStorage.getItem(DELETE_KEY)||'{}');return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}catch(error){return{};}}
+    function saveDeleteCredentials(value){try{localStorage.setItem(DELETE_KEY,JSON.stringify(value));}catch(error){}}
+    function localPerformances(){if(!localMode)return[];try{const rows=JSON.parse(localStorage.getItem(LOCAL_KEY)||'[]');return Array.isArray(rows)?rows:[];}catch(error){return[];}}
+    function saveLocalPerformances(rows){if(!localMode)return;try{localStorage.setItem(LOCAL_KEY,JSON.stringify(rows.slice(-100)));}catch(error){}}
+    function engine(){return audioFrame.contentWindow&&audioFrame.contentWindow.GuqinWorldReplay;}
+    function prime(){try{engine()&&engine().prime();}catch(error){}}
+    let replayPaused=false,legacyAudioItemId='',legacyAudioState='idle';
+    function legacyAudioLabel(){if(legacyAudioState==='playing')return t('暂停','Pause');if(legacyAudioState==='paused')return t('继续','Resume');if(legacyAudioState==='ended')return t('重新播放','Play again');if(legacyAudioState==='loading')return t('载入中…','Loading…');return t('播放','Play');}
+    function syncLegacyAudioButtons(){document.querySelectorAll('[data-replay-item]').forEach(button=>{if(button.dataset.replayItem===legacyAudioItemId)button.textContent=legacyAudioLabel();});document.documentElement.dataset.worldReplayAudioState=legacyAudioState;}
+    function setLegacyAudioState(item,state){legacyAudioItemId=item&&item.id||legacyAudioItemId;legacyAudioState=state;syncLegacyAudioButtons();}
+    function finishLegacyAudio(){if(!legacyAudioItemId)return;legacyAudioState='ended';syncLegacyAudioButtons();now.classList.remove('on');}
+    function inlineHost(itemId=activeVisualItem&&activeVisualItem.id){return[...document.querySelectorAll('[data-inline-host]')].find(host=>host.dataset.inlineHost===itemId)||null;}
+    function hideInlineHosts(){document.querySelectorAll('[data-inline-host]').forEach(host=>{host.hidden=true;});}
+    function clearReplayGeometry(){['left','top','right','bottom','width','height','clipPath'].forEach(name=>replayVisual.style[name]='');replayVisual.style.removeProperty('--inline-replay-scale');}
+    function positionInlineReplay(){
+      if(visualDisplayMode!=='inline')return;const host=inlineHost();
+      if(!host||host.hidden){replayVisual.style.visibility='hidden';return;}
+      const rect=host.getBoundingClientRect(),viewport=boardList.getBoundingClientRect(),topClip=Math.max(0,viewport.top-rect.top),rightClip=Math.max(0,rect.right-viewport.right),bottomClip=Math.max(0,rect.bottom-viewport.bottom),leftClip=Math.max(0,viewport.left-rect.left);
+      replayVisual.style.left=rect.left+'px';replayVisual.style.top=rect.top+'px';replayVisual.style.right='auto';replayVisual.style.bottom='auto';replayVisual.style.width=rect.width+'px';replayVisual.style.height=rect.height+'px';replayVisual.style.setProperty('--inline-replay-scale',String(rect.width/1120));replayVisual.style.clipPath=`inset(${topClip}px ${rightClip}px ${bottomClip}px ${leftClip}px round 9px)`;replayVisual.style.visibility=rect.bottom<=viewport.top||rect.top>=viewport.bottom?'hidden':'visible';
+    }
+    function prepareReplayTitle(item){replayVisualTitle.dataset.name=itemTitle(item);paintReplayTitle(item);}
+    function showInlineReplay(item,card){
+      replayPaused=false;activeVisualItem=item;visualDisplayMode='inline';prepareReplayTitle(item);hideInlineHosts();
+      const host=card&&card.querySelector('[data-inline-host]');if(!host)return showReplayVisual(item);host.hidden=false;
+      replayVisual.classList.remove('full');replayVisual.classList.add('on','inline');replayVisual.setAttribute('aria-hidden','false');replayVisualCard.setAttribute('aria-modal','false');requestAnimationFrame(positionInlineReplay);
+    }
+    function showReplayVisual(item,preservePlayback=false){
+      if(!preservePlayback)replayPaused=false;activeVisualItem=item;visualDisplayMode='full';prepareReplayTitle(item);hideInlineHosts();clearReplayGeometry();replayVisual.style.visibility='visible';replayVisual.classList.remove('inline');replayVisual.classList.add('on','full');replayVisual.setAttribute('aria-hidden','false');replayVisualCard.setAttribute('aria-modal','true');
+    }
+    function expandInlineReplay(){if(visualDisplayMode==='inline'&&activeVisualItem)showReplayVisual(activeVisualItem,true);}
+    function resetReplayVisual(){activeVisualItem=null;visualDisplayMode='hidden';hideInlineHosts();clearReplayGeometry();replayVisual.style.visibility='';replayVisual.classList.remove('on','inline','full');replayVisual.setAttribute('aria-hidden','true');replayVisualCard.setAttribute('aria-modal','false');}
+    function hideReplayVisual(){try{engine()&&engine().stop();}catch(error){}replayPaused=false;resetReplayVisual();finishLegacyAudio();now.classList.remove('on');}
+    /* v1.89：暂停／继续的按钮做在琴面那一层（居中的圆按钮），四处入口行为一致。
+       这里只负责把标题文字跟着改，并在父页面自己触发暂停时把那个按钮显示出来。 */
+    function paintReplayTitle(item){replayVisualTitle.textContent=(replayPaused?t('已暂停 · ','Paused · '):t('正在回放 · ','Now Playing · '))+(item?itemTitle(item):replayVisualTitle.dataset.name||'');}
+    function toggleReplayPause(){const replay=engine();if(!replay||!replayVisual.classList.contains('on'))return;try{if(replayPaused){replay.resume();replayPaused=false;if(replay.setPauseOverlay)replay.setPauseOverlay(false);}else{replay.pause();replayPaused=true;if(replay.setPauseOverlay)replay.setPauseOverlay(true);}paintReplayTitle(null);}catch(error){}}
+    function dateText(value){try{return new Intl.DateTimeFormat(isZh?'zh-CN':'en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(value));}catch(error){return '';}}
+    function locationText(item){const loc=item.location||{};return [loc.city,loc.region,loc.country].filter((v,i,a)=>v&&a.indexOf(v)===i).join(' · ')||t('未知地区','Unknown area');}
+    function nickname(item){return item.nickname||t('无名琴友','Anonymous player');}
+    function itemTitle(item){return nickname(item);}
+    function publishedAt(item){const value=new Date(item.receivedAt||item.recordedAt||0).getTime();return Number.isFinite(value)?value:0;}
+    function popularityCompare(a,b){return(Number(b.likeCount)||0)-(Number(a.likeCount)||0)||publishedAt(b)-publishedAt(a)||String(a.id||'').localeCompare(String(b.id||''));}
+    function orderedPerformances(){
+      if(boardSortMode==='time')return[...performances].sort((a,b)=>(timeSortDirection==='desc'?publishedAt(b)-publishedAt(a):publishedAt(a)-publishedAt(b))||popularityCompare(a,b));
+      return[...performances].sort(popularityCompare);
+    }
+    function syncBoardSortButtons(){
+      const timeButton=document.getElementById('timeSortButton'),timeActive=boardSortMode==='time';
+      timeButton.textContent=timeActive?(timeSortDirection==='desc'?t('新→旧','New→Old'):t('旧→新','Old→New')):t('时间','Time');
+      timeButton.setAttribute('aria-pressed',String(timeActive));
+      timeButton.setAttribute('aria-label',timeActive?(timeSortDirection==='desc'?t('当前从新到旧；再次点击改为从旧到新','Newest to oldest; click again for oldest to newest'):t('当前从旧到新；再次点击改为从新到旧','Oldest to newest; click again for newest to oldest')):t('按时间排序，从新到旧','Sort by time, newest first'));
+    }
+    // v2.05 才开始记录可还原按音/泛音琴面的完整数字演奏数据。
+    // 更早已经发布到地图的作品只按原录音时序发声，不再强行套用新版琴面视频。
+    function supportsVisualReplay(item){const match=String(item&&item.appVersion||'').match(/^v(\d+)\.(\d+)/i);return!!match&&(Number(match[1])>2||(Number(match[1])===2&&Number(match[2])>=5));}
+    function updateStats(items){document.getElementById('performanceCount').textContent=items.length.toLocaleString();document.getElementById('noteCount').textContent=items.reduce((sum,item)=>sum+(Number(item.eventCount)||0),0).toLocaleString();document.getElementById('placeCount').textContent=new Set(items.map(locationText)).size.toLocaleString();}
+    function markerIcon(shared){return L.divIcon({className:'',html:'<span class="qin-dot'+(shared?' is-shared':'')+'">琴</span>',iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-11]});}
+    function outsideChina(lat,lng){return lng<72.004||lng>137.8347||lat<0.8293||lat>55.8271;}
+    function transformLat(x,y){let ret=-100+2*x+3*y+.2*y*y+.1*x*y+.2*Math.sqrt(Math.abs(x));ret+=(20*Math.sin(6*x*Math.PI)+20*Math.sin(2*x*Math.PI))*2/3;ret+=(20*Math.sin(y*Math.PI)+40*Math.sin(y/3*Math.PI))*2/3;ret+=(160*Math.sin(y/12*Math.PI)+320*Math.sin(y*Math.PI/30))*2/3;return ret;}
+    function transformLng(x,y){let ret=300+x+2*y+.1*x*x+.1*x*y+.1*Math.sqrt(Math.abs(x));ret+=(20*Math.sin(6*x*Math.PI)+20*Math.sin(2*x*Math.PI))*2/3;ret+=(20*Math.sin(x*Math.PI)+40*Math.sin(x/3*Math.PI))*2/3;ret+=(150*Math.sin(x/12*Math.PI)+300*Math.sin(x/30*Math.PI))*2/3;return ret;}
+    function wgs84ToGcj02(lat,lng){if(outsideChina(lat,lng))return[lat,lng];const a=6378245,ee=.00669342162296594323,dLat=transformLat(lng-105,lat-35),dLng=transformLng(lng-105,lat-35),rad=lat/180*Math.PI,magic=1-ee*Math.sin(rad)*Math.sin(rad),sqrt=Math.sqrt(magic);return[lat+dLat*180/((a*(1-ee))/(magic*sqrt)*Math.PI),lng+dLng*180/(a/sqrt*Math.cos(rad)*Math.PI)];}
+    function displayPoint(lat,lng){return domesticBasemap?wgs84ToGcj02(lat,lng):[lat,lng];}
+    function renderBoard(){
+      const list=document.getElementById('boardList'),liked=likedSet();
+      syncBoardSortButtons();
+      const ordered=orderedPerformances();
+      const credentials=deleteCredentials();
+      list.innerHTML=ordered.length?ordered.map((item,index)=>`<article class="rank-card" data-id="${escapeHtml(item.id)}"><div class="rank-no">${index+1}</div><div><div class="rank-title"><strong>${escapeHtml(itemTitle(item))}</strong><b>♥ ${Number(item.likeCount)||0}</b></div><div class="rank-meta">${escapeHtml(locationText(item))} · ${Number(item.eventCount)||0} ${t('音','notes')} · ${escapeHtml(dateText(item.recordedAt))}</div><div class="rank-actions"><button class="play" type="button" data-play="1" data-replay-item="${escapeHtml(item.id)}">${t('播放','Play')}</button><button type="button" data-like="1" ${liked.has(item.id)?'disabled':''}>${liked.has(item.id)?t('已点赞','Liked'):t('点赞','Like')}</button><span class="rank-count-cell"><span class="play-count" data-play-count="${escapeHtml(item.id)}" title="${t('播放次数','Play count')}">▶ ${Number(item.playCount)||0}</span>${credentials[item.id]?`<button class="owner-trash" type="button" data-delete="1" title="${t('删除我分享的这段演奏','Delete this performance of mine')}" aria-label="${t('删除我分享的这段演奏','Delete this performance of mine')}">🗑</button>`:''}</span></div></div><div class="rank-inline-host" data-inline-host="${escapeHtml(item.id)}" aria-label="${t('排行榜内嵌琴面','Inline guqin replay')}"${visualDisplayMode==='inline'&&activeVisualItem&&activeVisualItem.id===item.id?'':' hidden'}></div></article>`).join(''):`<div class="rank-meta">${t('暂无琴音片段','No performances yet')}</div>`;
+      list.querySelectorAll('.rank-card').forEach(card=>{const item=performances.find(value=>value.id===card.dataset.id);card.querySelector('[data-play]').addEventListener('click',event=>void playItem(item,event.currentTarget));card.querySelector('[data-like]').addEventListener('click',event=>void likeItem(item,event.currentTarget));const remove=card.querySelector('[data-delete]');if(remove)remove.addEventListener('click',event=>void deleteItem(item,event.currentTarget));});
+      syncLegacyAudioButtons();
+      if(visualDisplayMode==='inline'&&activeVisualItem)requestAnimationFrame(positionInlineReplay);
+    }
+    function render(items){
+      performances=items;layer.clearLayers();updateStats(items);renderBoard();const bounds=[];let sharedTarget=null;
+      items.forEach(item=>{const lat=Number(item.location&&item.location.latitude),lng=Number(item.location&&item.location.longitude);if(!Number.isFinite(lat)||!Number.isFinite(lng))return;const point=displayPoint(lat,lng),isShared=item.id===sharedId;bounds.push(point);const marker=L.marker(point,{icon:markerIcon(isShared),title:t('播放 ','Play ')+itemTitle(item),alt:t('琴声位置：','Guqin location: ')+locationText(item)}).addTo(layer);if(isShared)sharedTarget={point,marker};marker.bindPopup(`<div class="pop-title">${escapeHtml(itemTitle(item))}</div><div class="pop-meta">${escapeHtml(locationText(item))} · ${Number(item.eventCount)||0} ${t('音','notes')}<br>${escapeHtml(dateText(item.recordedAt))} · ♥ <span data-count>${Number(item.likeCount)||0}</span> · ▶ <span data-plays>${Number(item.playCount)||0}</span></div><div class="pop-actions"><button class="pop-play" type="button" data-replay-item="${escapeHtml(item.id)}">${t('播放','Play')}</button><button class="pop-like" type="button">${t('点赞','Like')}</button></div>`);marker.on('popupopen',event=>{const root=event.popup.getElement(),play=root.querySelector('.pop-play'),like=root.querySelector('.pop-like');play.addEventListener('click',()=>void playItem(item,play));syncLegacyAudioButtons();if(likedSet().has(item.id)){like.disabled=true;like.textContent=t('已点赞','Liked');}like.addEventListener('click',()=>void likeItem(item,like,root.querySelector('[data-count]')));});});
+      document.getElementById('empty').classList.toggle('on',!bounds.length);if(bounds.length===1)map.setView(bounds[0],7);else if(bounds.length>1&&localMode)map.fitBounds(bounds,{padding:[70,70],maxZoom:6});
+      if(sharedTarget&&!sharedFocused){sharedFocused=true;map.stop();map.flyTo(sharedTarget.point,Math.max(12,map.getZoom()),{animate:true,duration:1.05});map.once('moveend',()=>sharedTarget.marker.openPopup());}
+    }
+    async function detail(item){if(item.events)return item;const response=await fetch('api/performances?id='+encodeURIComponent(item.id));if(!response.ok)throw new Error('detail_'+response.status);const value=(await response.json()).performance;item.events=value.events;return Object.assign(item,value);}
+    function syncRenderedPlayCount(item){document.querySelectorAll('[data-play-count]').forEach(node=>{if(node.dataset.playCount===item.id)node.textContent='▶ '+(Number(item.playCount)||0);});document.querySelectorAll('.leaflet-popup-content [data-plays]').forEach(node=>{node.textContent=String(Number(item.playCount)||0);});}
+    async function recordPlay(item){
+      const previous=Number(item.playCount)||0;item.playCount=previous+1;if(visualDisplayMode==='hidden')renderBoard();else syncRenderedPlayCount(item);
+      if(item.id.startsWith('demo-'))return;
+      if(item.id.startsWith('local-')){const rows=localPerformances(),row=rows.find(value=>value.id===item.id);if(row){row.playCount=item.playCount;saveLocalPerformances(rows);}return;}
+      try{const response=await fetchTimed('api/plays',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({performanceId:item.id})});if(!response.ok)throw new Error('play_'+response.status);item.playCount=Number((await response.json()).playCount)||item.playCount;if(visualDisplayMode==='hidden')renderBoard();else syncRenderedPlayCount(item);}catch(error){item.playCount=previous;if(visualDisplayMode==='hidden')renderBoard();else syncRenderedPlayCount(item);}
+    }
+    async function playItem(item,button){
+      if(!supportsVisualReplay(item)&&legacyAudioItemId===item.id&&(legacyAudioState==='playing'||legacyAudioState==='paused')){const replay=engine();if(!replay)return;try{if(legacyAudioState==='playing'){if(!replay.pause())return;setLegacyAudioState(item,'paused');document.getElementById('nowTitle').textContent=t('已暂停 · ','Paused · ')+itemTitle(item);}else{if(!replay.resume())return;setLegacyAudioState(item,'playing');document.getElementById('nowTitle').textContent=t('正在播放 · ','Now Playing · ')+itemTitle(item);}now.classList.add('on');}catch(error){}return;}
+      if(legacyAudioItemId&&(legacyAudioState==='playing'||legacyAudioState==='paused')){try{engine()&&engine().stop();}catch(error){}finishLegacyAudio();}
+      const rankCard=button.closest('.rank-card');prime();button.disabled=true;button.textContent=t('载入中…','Loading…');
+      try{const performance=await detail(item),replay=engine();if(!replay||!replay.ready)throw new Error('engine_not_ready');const visual=supportsVisualReplay(performance);document.documentElement.dataset.worldReplayDisplay=visual?'visual':'audio-only';if(visual){if(rankCard&&rankCard.isConnected)showInlineReplay(item,rankCard);else showReplayVisual(item);}else{replayPaused=false;resetReplayVisual();setLegacyAudioState(item,'loading');}await replay.play(performance);if(!visual)setLegacyAudioState(item,'playing');void recordPlay(item);document.getElementById('nowTitle').textContent=t('正在播放 · ','Now Playing · ')+itemTitle(item);document.getElementById('nowMeta').textContent=locationText(item)+' · '+item.eventCount+t(' 个音 · ',' notes · ')+dateText(item.recordedAt);now.classList.add('on');if(visual)button.textContent=t('重新播放','Play again');}catch(error){hideReplayVisual();button.textContent=t('播放失败','Playback failed');}finally{button.disabled=false;}
+    }
+    async function likeItem(item,button,countNode){
+      const liked=likedSet();if(liked.has(item.id))return;button.disabled=true;
+      try{
+        let count=Number(item.likeCount)||0;
+        if(item.id.startsWith('demo-'))count+=1;else if(item.id.startsWith('local-')){count+=1;const rows=localPerformances(),row=rows.find(value=>value.id===item.id);if(row){row.likeCount=count;saveLocalPerformances(rows);item.likeCount=count;liked.add(item.id);saveLiked(liked);}}else{const response=await fetchTimed('api/likes',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({performanceId:item.id,userId:userId()})});if(!response.ok)throw new Error('like_'+response.status);count=Number((await response.json()).likeCount)||count;}
+        item.likeCount=count;liked.add(item.id);saveLiked(liked);button.textContent=t('已点赞','Liked');if(countNode)countNode.textContent=String(count);renderBoard();
+      }catch(error){button.disabled=false;button.textContent=t('重试点赞','Retry like');}
+    }
+    async function deleteItem(item,button){
+      const credentials=deleteCredentials(),token=credentials[item.id];if(!token)return;
+      if(!window.confirm(t('只删除这段由本设备分享的演奏？删除后无法恢复。','Delete this performance shared from this device? This cannot be undone.')))return;
+      button.disabled=true;button.textContent=t('删除中…','Deleting…');
+      try{
+        if(item.id.startsWith('local-'))saveLocalPerformances(localPerformances().filter(value=>value.id!==item.id));
+        else{const response=await fetchTimed('api/performances',{method:'DELETE',headers:{'content-type':'application/json'},body:JSON.stringify({id:item.id,deleteToken:token})});if(!response.ok)throw new Error('delete_'+response.status);}
+        delete credentials[item.id];saveDeleteCredentials(credentials);performances=performances.filter(value=>value.id!==item.id);render(performances);
+      }catch(error){button.disabled=false;button.textContent=t('删除失败，请重试','Delete failed. Retry');}
+    }
+    async function loadWorld(){
+      const button=document.getElementById('refreshButton');button.disabled=true;button.textContent=t('载入中…','Loading…');
+      try{if(demoMode){render(demos);button.textContent=t('刷新','Refresh');return;}const response=await fetch('api/performances?limit=800');if(!response.ok)throw new Error('list_'+response.status);const live=(await response.json()).performances||[],local=localPerformances(),ids=new Set(live.map(item=>item.id));render(localMode?demos.concat(live,local.filter(item=>!ids.has(item.id))):live);}catch(error){if(localMode){render(demos.concat(localPerformances()));}else{button.textContent=t('服务暂不可用','Unavailable');return;}}finally{button.disabled=false;}button.textContent=t('刷新','Refresh');
+    }
+    document.getElementById('refreshButton').addEventListener('click',()=>void loadWorld());
+    document.getElementById('boardButton').addEventListener('click',()=>document.getElementById('leaderboard').classList.add('on'));
+    document.getElementById('boardClose').addEventListener('click',()=>{if(visualDisplayMode==='inline')hideReplayVisual();document.getElementById('leaderboard').classList.remove('on');});
+    document.getElementById('timeSortButton').addEventListener('click',()=>{if(boardSortMode==='time')timeSortDirection=timeSortDirection==='desc'?'asc':'desc';else{boardSortMode='time';timeSortDirection='desc';}renderBoard();});
+    document.getElementById('mapBack').addEventListener('click',()=>{hideReplayVisual();location.href='/';});
+    document.getElementById('mapExit').addEventListener('click',()=>{hideReplayVisual();location.href='/';});
+    document.getElementById('replayVisualClose').addEventListener('click',hideReplayVisual);
+    document.getElementById('inlineReplayExpand').addEventListener('click',expandInlineReplay);
+    boardList.addEventListener('scroll',positionInlineReplay,{passive:true});
+    window.addEventListener('resize',()=>requestAnimationFrame(positionInlineReplay),{passive:true});
+    replayVisual.addEventListener('pointerdown',event=>{if(event.target===replayVisual&&visualDisplayMode==='full')toggleReplayPause();});
+    document.getElementById('langButton').addEventListener('click',()=>{params.set('lang',isZh?'en':'zh');location.search=params.toString();});
+    document.getElementById('yinweiLink').setAttribute('href',isZh?'/guqin-yinwei.html':'/guqin-note-positions.html');
+    try{const channel=new BroadcastChannel('world-guqin');channel.onmessage=event=>{if(!event.data)return;if(event.data.type==='shared')void loadWorld();if(event.data.type==='stop-audio-for-recording')hideReplayVisual();};}catch(error){}
+    window.addEventListener('message',event=>{if(event.origin!==location.origin||!event.data)return;if(event.data.type==='world-guqin-replay-ended'){if(replayVisual.classList.contains('on'))hideReplayVisual();else finishLegacyAudio();}if(event.data.type==='world-guqin-replay-paused-by-surface'){replayPaused=true;paintReplayTitle(null);}if(event.data.type==='world-guqin-replay-resumed-by-surface'){replayPaused=false;paintReplayTitle(null);}});
+    void initializeBasemap().then(loadWorld);
+  })();
+  </script>
+<script src="/analytics.js"></script>
+</body>
+</html>

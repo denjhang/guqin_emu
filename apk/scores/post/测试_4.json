@@ -1,0 +1,63 @@
+{
+ "id": "ce398c18-d934-44f0-8ebd-96310113abc3",
+ "entity_type": "post",
+ "entity_id": "9b4df1ba-c610-4f31-8f03-28061543f89c",
+ "title": "测试",
+ "change_source": "admin_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-09T04:20:37.450562+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moyi",
+       "kind": "jianzi",
+       "text": "抹一",
+       "partIds": [
+        "019",
+        "007"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "测试",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "libraryItemId": "community:9b4df1ba-c610-4f31-8f03-28061543f89c:0",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰操",
+  "publishedPostId": "9b4df1ba-c610-4f31-8f03-28061543f89c",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "published",
+  "scoreCardIntroduction": "1111",
+  "publishedPublicationSignature": "{\"score\":{\"lines\":[{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"moyi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"007\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹一\"}],\"rhythmTokens\":[]}]},\"scoreCardIntroduction\":\"1111\",\"tempo\":80,\"timeSignature\":\"4/4\",\"title\":\"测试\",\"tuning\":\"正调\"}",
+  "publishedScoreCardIntroduction": "1111",
+  "publishedScoreCardBackgroundUrl": "https://spb-3t41ic9ypkmna1yz.supabase.opentrust.net/storage/v1/object/public/post-images/e45ccb79-d5e5-4498-bc67-1da56a344441/9b4df1ba-c610-4f31-8f03-28061543f89c/score-card.jpg?v=1786242235000996"
+ }
+}

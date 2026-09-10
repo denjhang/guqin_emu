@@ -1,0 +1,139 @@
+{
+ "id": "6f6f3557-296a-4fae-b84a-c0fe66f3f276",
+ "entity_type": "post",
+ "entity_id": "278bb515-39dc-418b-8777-e71ae36f5909",
+ "title": "高山流水",
+ "change_source": "admin_approve",
+ "author_id": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+ "created_at": "2026-08-07T03:08:20.695958+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "mosi",
+       "kind": "jianzi",
+       "text": "抹四",
+       "partIds": [
+        "019",
+        "010"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moliu",
+       "kind": "jianzi",
+       "text": "抹六",
+       "partIds": [
+        "019",
+        "012"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moer",
+       "kind": "jianzi",
+       "text": "抹二",
+       "partIds": [
+        "019",
+        "008"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moqi",
+       "kind": "jianzi",
+       "text": "抹七",
+       "partIds": [
+        "019",
+        "013"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "高山流水",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "scoreOwnerId": "e45ccb79-d5e5-4498-bc67-1da56a344441",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "幽兰",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "好东西啊好东西"
+ }
+}

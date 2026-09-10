@@ -1,0 +1,135 @@
+{
+ "id": "d24cdff6-7d0a-4526-83d2-aaf077530a16",
+ "entity_type": "post",
+ "entity_id": "ad220157-8310-4e67-8471-3eab204e51ed",
+ "title": "我的测试",
+ "change_source": "admin_approve",
+ "author_id": "cb874556-f2ce-4a3e-b4ce-1b2cad1bdfd0",
+ "created_at": "2026-08-29T12:00:50.132292+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moyi",
+       "kind": "jianzi",
+       "text": "抹一",
+       "partIds": [
+        "019",
+        "007"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "moqi",
+       "kind": "jianzi",
+       "text": "抹七",
+       "partIds": [
+        "019",
+        "013"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      },
+      {
+       "code": "mowu",
+       "kind": "jianzi",
+       "text": "抹五",
+       "partIds": [
+        "019",
+        "011"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": [
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      },
+      {
+       "code": "blank",
+       "kind": "blank",
+       "text": " "
+      }
+     ],
+     "sectionTempo": 80,
+     "startsSection": true
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "我的测试",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "draftWorkKey": "post:ad220157-8310-4e67-8471-3eab204e51ed",
+  "scoreOwnerId": "cb874556-f2ce-4a3e-b4ce-1b2cad1bdfd0",
+  "libraryItemId": "built-in:abcc5fdb-0698-43fc-a4ab-61e0a908753d",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "李白",
+  "publishedPostId": "ad220157-8310-4e67-8471-3eab204e51ed",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "AAS",
+  "publishedPublicationSignature": "{\"score\":{\"lines\":[{\"jianziTokens\":[{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"moyi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"007\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹一\"},{\"categorySlots\":[\"抹\",\"number\"],\"code\":\"moqi\",\"kind\":\"jianzi\",\"partIds\":[\"019\",\"013\"],\"slotTransforms\":[{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":85.0},{\"lengthX\":156.0,\"lengthY\":85.0,\"x\":50.0,\"y\":170.0}],\"text\":\"抹七\"}],\"rhythmTokens\":[{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"},{\"code\":\"blank\",\"kind\":\"blank\",\"text\":\" \"}],\"sectionTempo\":80,\"startsSection\":true}]},\"scoreCardIntroduction\":\"AAS\",\"tempo\":80,\"timeSignature\":\"4/4\",\"title\":\"我的测试\",\"tuning\":\"正调\"}",
+  "publishedScoreCardIntroduction": "AAS"
+ }
+}

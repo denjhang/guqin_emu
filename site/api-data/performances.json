@@ -1,0 +1,2493 @@
+{
+ "performances": [
+  {
+   "id": "ba7e1341-37fb-46fd-a01a-64258dd71d20",
+   "userId": "27f4327091104115bee6a988b54cc383",
+   "nickname": "神人畅泛音",
+   "recordedAt": "2026-09-09T14:30:31.348Z",
+   "receivedAt": "2026-09-09T14:33:32.420Z",
+   "durationMs": 161715,
+   "eventCount": 141,
+   "likeCount": 1,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Zhejiang",
+    "city": "Hangzhou",
+    "latitude": 30.2689,
+    "longitude": 120.1604
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "333fb970-97cb-4e29-aa89-e3101f065862",
+   "userId": "0fefeec2f5024fb9add7b431eb51181e",
+   "nickname": "神人畅",
+   "recordedAt": "2026-09-09T04:07:09.509Z",
+   "receivedAt": "2026-09-09T04:09:15.838Z",
+   "durationMs": 83799,
+   "eventCount": 61,
+   "likeCount": 1,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Henan",
+    "city": "Zhengzhou",
+    "latitude": 34.7916,
+    "longitude": 113.6832
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "bf95c138-0c4e-46b6-a156-ad8b96563381",
+   "userId": "19a7e95f248945b5a2126b493dd6c845",
+   "nickname": "静夜思——忠丹秋",
+   "recordedAt": "2026-09-09T03:42:12.028Z",
+   "receivedAt": "2026-09-09T03:43:32.704Z",
+   "durationMs": 38603,
+   "eventCount": 21,
+   "likeCount": 1,
+   "playCount": 0,
+   "location": {
+    "country": "CN",
+    "region": "Xinjiang",
+    "city": "Hami",
+    "latitude": 42.8344,
+    "longitude": 93.5497
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "77af6666-75ba-4aa1-a0e0-33f91de9ad2e",
+   "userId": "19a7e95f248945b5a2126b493dd6c845",
+   "nickname": "忠丹秋——沧海一声笑",
+   "recordedAt": "2026-09-09T03:33:18.914Z",
+   "receivedAt": "2026-09-09T03:36:06.343Z",
+   "durationMs": 69737,
+   "eventCount": 49,
+   "likeCount": 1,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Xinjiang",
+    "city": "Hami",
+    "latitude": 42.8459,
+    "longitude": 93.5578
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "50293ac0-2cd1-4f33-8e12-d4c04dd77fa5",
+   "userId": "af22ad87b41f4e1eab8d998e9114c499",
+   "nickname": "云汀",
+   "recordedAt": "2026-09-09T01:17:31.809Z",
+   "receivedAt": "2026-09-09T01:18:18.645Z",
+   "durationMs": 32519,
+   "eventCount": 25,
+   "likeCount": 1,
+   "playCount": 3,
+   "location": {
+    "country": "CN",
+    "region": "Shaanxi",
+    "city": "Xi’an",
+    "latitude": 34.287,
+    "longitude": 108.8959
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "100e964b-05fa-41bb-acc3-a1e0faea7baf",
+   "userId": "efcab1d9154a42388ba606b59ef46fba",
+   "nickname": "月下·散人 97",
+   "recordedAt": "2026-09-08T11:01:08.809Z",
+   "receivedAt": "2026-09-08T11:05:58.002Z",
+   "durationMs": 267332,
+   "eventCount": 344,
+   "likeCount": 0,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2053,
+    "longitude": 121.4095
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "81169a9f-53e4-4bb2-936b-1e8067f601da",
+   "userId": "fb6f606278164c5a9b6d025db8b0ac6d",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-09-07T14:24:07.118Z",
+   "receivedAt": "2026-09-07T14:25:06.946Z",
+   "durationMs": 43147,
+   "eventCount": 48,
+   "likeCount": 0,
+   "playCount": 0,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2287,
+    "longitude": 121.4242
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "49f2d123-e033-429e-a549-3ab091b5ad24",
+   "userId": "2cd309985d204a599e7159c0ab0a2d54",
+   "nickname": "湘妃",
+   "recordedAt": "2026-09-07T14:08:08.813Z",
+   "receivedAt": "2026-09-07T14:09:05.999Z",
+   "durationMs": 34729,
+   "eventCount": 28,
+   "likeCount": 0,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.1905,
+    "longitude": 121.4912
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "c8248a34-5bcc-4b92-932e-18afc9622062",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "湘江怨",
+   "recordedAt": "2026-09-07T12:54:24.312Z",
+   "receivedAt": "2026-09-07T12:59:08.754Z",
+   "durationMs": 261744,
+   "eventCount": 227,
+   "likeCount": 1,
+   "playCount": 0,
+   "location": {
+    "country": "CN",
+    "region": "Hubei",
+    "city": "Wuhan",
+    "latitude": 30.5427,
+    "longitude": 114.2834
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "67417d3f-3129-48c2-9d98-572bc6adfeb7",
+   "userId": "812f292393524cb1b15e02860ac5dbab",
+   "nickname": "神人畅",
+   "recordedAt": "2026-09-06T14:52:29.598Z",
+   "receivedAt": "2026-09-06T14:54:36.855Z",
+   "durationMs": 110999,
+   "eventCount": 112,
+   "likeCount": 2,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.8705,
+    "longitude": 116.3811
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "6b966349-347e-4b23-b6fe-6789472e2073",
+   "userId": "9bb198da3b914fd2b857d8ba7012140f",
+   "nickname": "天地缓缓简易版",
+   "recordedAt": "2026-09-05T12:29:46.376Z",
+   "receivedAt": "2026-09-05T12:30:36.020Z",
+   "durationMs": 29207,
+   "eventCount": 29,
+   "likeCount": 1,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2626,
+    "longitude": 121.4683
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "e2477cee-a35e-4a60-a55a-2366ecaa98e4",
+   "userId": "148dd5962f5a4d48acc3184520e79a70",
+   "nickname": "栖鹤·听者 60梅花泛音",
+   "recordedAt": "2026-09-05T11:56:20.147Z",
+   "receivedAt": "2026-09-05T11:57:28.873Z",
+   "durationMs": 42026,
+   "eventCount": 67,
+   "likeCount": 0,
+   "playCount": 3,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Zhuhai",
+    "latitude": 22.2994,
+    "longitude": 113.5421
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "139bb5ef-0f5b-458c-b3de-e35f7ed6f70f",
+   "userId": "9251ab0e1d9f48198e39607bc5a0455b",
+   "nickname": "岳阳三醉",
+   "recordedAt": "2026-09-04T05:11:52.450Z",
+   "receivedAt": "2026-09-04T05:13:05.469Z",
+   "durationMs": 57133,
+   "eventCount": 55,
+   "likeCount": 2,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Shanxi",
+    "city": "Taiyuan",
+    "latitude": 37.883,
+    "longitude": 112.6034
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "038b80cc-d119-4f28-a0fd-391424971f4f",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "甲鱼宝宝",
+   "recordedAt": "2026-09-03T10:36:15.253Z",
+   "receivedAt": "2026-09-03T10:37:18.471Z",
+   "durationMs": 40455,
+   "eventCount": 44,
+   "likeCount": 0,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Shenzhen",
+    "latitude": 22.5096,
+    "longitude": 114.0745
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "7fe5f8b3-9751-4cfb-9866-11c076178769",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "甲鱼宝宝",
+   "recordedAt": "2026-09-03T10:31:02.480Z",
+   "receivedAt": "2026-09-03T10:32:15.566Z",
+   "durationMs": 38874,
+   "eventCount": 44,
+   "likeCount": 1,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Shenzhen",
+    "latitude": 22.5319,
+    "longitude": 114.1127
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "a4bb6781-27d2-4cbf-a1db-f97e11d2ce63",
+   "userId": "cdea4a84d1f24b1a826a5e5252eccbd3",
+   "nickname": "潇湘水云第一段C调 ray",
+   "recordedAt": "2026-09-02T21:31:11.862Z",
+   "receivedAt": "2026-09-02T21:33:03.854Z",
+   "durationMs": 55190,
+   "eventCount": 78,
+   "likeCount": 20,
+   "playCount": 104,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.208,
+    "longitude": 121.4975
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "76db9f5b-c87f-456d-ab89-9215ae7169c6",
+   "userId": "cdea4a84d1f24b1a826a5e5252eccbd3",
+   "nickname": "樵歌泛音 ray",
+   "recordedAt": "2026-09-02T21:24:38.506Z",
+   "receivedAt": "2026-09-02T21:25:48.373Z",
+   "durationMs": 28155,
+   "eventCount": 49,
+   "likeCount": 19,
+   "playCount": 81,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2108,
+    "longitude": 121.4507
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f057a32e-221b-42b0-ba2e-9b5a35e8ee7e",
+   "userId": "f5a740dc068e4093816deb104d8ff506",
+   "nickname": "laugh &pride",
+   "recordedAt": "2026-09-02T12:32:51.109Z",
+   "receivedAt": "2026-09-02T12:33:56.419Z",
+   "durationMs": 19861,
+   "eventCount": 24,
+   "likeCount": 2,
+   "playCount": 5,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.8851,
+    "longitude": 116.3468
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "364f0dc4-8ecc-476f-8c76-ab1fd85cbc50",
+   "userId": "0f87c3244b694ee7bd2b279f12f4efe3",
+   "nickname": "王老师生日快乐",
+   "recordedAt": "2026-09-02T11:56:27.420Z",
+   "receivedAt": "2026-09-02T11:58:44.804Z",
+   "durationMs": 36701,
+   "eventCount": 32,
+   "likeCount": 2,
+   "playCount": 4,
+   "location": {
+    "country": "HK",
+    "region": "",
+    "city": "Hong Kong",
+    "latitude": 22.3161,
+    "longitude": 114.165
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "9908666b-965f-457c-a8fa-9f5069dcf472",
+   "userId": "f7743f9c0f334006a2dd8593cdb3da46",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-09-02T04:08:16.564Z",
+   "receivedAt": "2026-09-02T04:09:49.529Z",
+   "durationMs": 62608,
+   "eventCount": 48,
+   "likeCount": 2,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Shenzhen",
+    "latitude": 22.5824,
+    "longitude": 114.0678
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "4e543cb9-4518-49f2-aec5-9405a1f9e541",
+   "userId": "fc311122b5f14841ad5f72454dc7b58d",
+   "nickname": "远山·琴客 43",
+   "recordedAt": "2026-09-01T14:39:17.015Z",
+   "receivedAt": "2026-09-01T14:39:53.457Z",
+   "durationMs": 26827,
+   "eventCount": 30,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.1782,
+    "longitude": 121.4567
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "12255c98-d632-4a00-957a-adf02c4c449b",
+   "userId": "6dd161e709a044d9843173b8fc8f9640",
+   "nickname": "秋风辞",
+   "recordedAt": "2026-09-01T12:35:00.667Z",
+   "receivedAt": "2026-09-01T12:37:34.874Z",
+   "durationMs": 123146,
+   "eventCount": 78,
+   "likeCount": 2,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.8814,
+    "longitude": 116.38
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "5d2ba552-dca4-4a4b-afd0-6da70a205a16",
+   "userId": "6dd161e709a044d9843173b8fc8f9640",
+   "nickname": "秋风辞",
+   "recordedAt": "2026-09-01T12:26:17.246Z",
+   "receivedAt": "2026-09-01T12:28:50.857Z",
+   "durationMs": 119712,
+   "eventCount": 78,
+   "likeCount": 1,
+   "playCount": 4,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.9012,
+    "longitude": 116.3571
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "ab5c9c66-b76d-421f-8627-798b5a443b35",
+   "userId": "876193343def45bb854df99b269d427e",
+   "nickname": "墨泉·山人 12",
+   "recordedAt": "2026-09-01T04:47:47.525Z",
+   "receivedAt": "2026-09-01T04:48:45.385Z",
+   "durationMs": 49871,
+   "eventCount": 27,
+   "likeCount": 2,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Hubei",
+    "city": "Wuhan",
+    "latitude": 30.61,
+    "longitude": 114.2817
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "718c44eb-bb6a-46a3-a806-cb0e0ace1aea",
+   "userId": "876193343def45bb854df99b269d427e",
+   "nickname": "非我",
+   "recordedAt": "2026-09-01T04:41:48.415Z",
+   "receivedAt": "2026-09-01T04:42:36.247Z",
+   "durationMs": 37996,
+   "eventCount": 32,
+   "likeCount": 2,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Hubei",
+    "city": "Wuhan",
+    "latitude": 30.5507,
+    "longitude": 114.2449
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "2b40e898-8a7f-484a-9da8-a104a9d71284",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "大梦的曲调",
+   "recordedAt": "2026-08-31T12:00:58.315Z",
+   "receivedAt": "2026-08-31T12:02:24.124Z",
+   "durationMs": 63394,
+   "eventCount": 49,
+   "likeCount": 2,
+   "playCount": 1,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0352,
+    "longitude": 118.7872
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "72055288-405a-4b1d-8c7a-8f30eb8120ac",
+   "userId": "1c5929ac4ec648a2a9b261a36a399eb7",
+   "nickname": "Lily",
+   "recordedAt": "2026-08-31T08:44:29.500Z",
+   "receivedAt": "2026-08-31T08:45:13.805Z",
+   "durationMs": 33788,
+   "eventCount": 53,
+   "likeCount": 2,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2606,
+    "longitude": 121.4372
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "2289f415-460f-4060-a2db-cb12333d60de",
+   "userId": "1c5929ac4ec648a2a9b261a36a399eb7",
+   "nickname": "Lily",
+   "recordedAt": "2026-08-31T08:35:29.819Z",
+   "receivedAt": "2026-08-31T08:38:58.675Z",
+   "durationMs": 81667,
+   "eventCount": 71,
+   "likeCount": 2,
+   "playCount": 2,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2168,
+    "longitude": 121.4482
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "d97c7a1a-f34c-4b0d-8758-a1df981371d1",
+   "userId": "6abe8f5d187544648f161d084148d308",
+   "nickname": "s'd'f",
+   "recordedAt": "2026-08-31T02:06:30.474Z",
+   "receivedAt": "2026-08-31T02:06:38.689Z",
+   "durationMs": 3399,
+   "eventCount": 3,
+   "likeCount": 1,
+   "playCount": 5,
+   "location": {
+    "country": "US",
+    "region": "Vermont",
+    "city": "Waitsfield",
+    "latitude": 44.158,
+    "longitude": -72.832
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "ab4bbb60-2ab0-478c-a3fd-248a930fe1a3",
+   "userId": "4df96a234cd641fe97e31d20194353b4",
+   "nickname": "半山听雨",
+   "recordedAt": "2026-08-30T22:11:25.744Z",
+   "receivedAt": "2026-08-30T22:12:14.801Z",
+   "durationMs": 38680,
+   "eventCount": 22,
+   "likeCount": 2,
+   "playCount": 10,
+   "location": {
+    "country": "US",
+    "region": "Vermont",
+    "city": "Waitsfield",
+    "latitude": 44.2114,
+    "longitude": -72.7859
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "20025332-d8c4-446c-ab16-d0fbe1c79b2b",
+   "userId": "310c41bad9cf46d19df2d5db3e067f80",
+   "nickname": "古琴吟",
+   "recordedAt": "2026-08-30T19:20:04.236Z",
+   "receivedAt": "2026-08-30T19:20:15.757Z",
+   "durationMs": 92258,
+   "eventCount": 72,
+   "likeCount": 4,
+   "playCount": 10,
+   "location": {
+    "country": "KR",
+    "region": "Seoul",
+    "city": "Seoul",
+    "latitude": 37.544,
+    "longitude": 126.9299
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "2f2efb84-b513-46be-873b-4d3e5467f3af",
+   "userId": "04bfaadd5a2e4f6ba41e4155cb68cdd9",
+   "nickname": "阿里郎 1",
+   "recordedAt": "2026-08-30T19:01:37.831Z",
+   "receivedAt": "2026-08-30T19:02:09.145Z",
+   "durationMs": 20521,
+   "eventCount": 38,
+   "likeCount": 2,
+   "playCount": 15,
+   "location": {
+    "country": "KR",
+    "region": "Seoul",
+    "city": "Seoul",
+    "latitude": 37.5445,
+    "longitude": 127.0259
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "c02003d8-3267-40c7-bda9-5b51a57f7fbe",
+   "userId": "d45fed4cd08f48b39f97b4c714b1ea1f",
+   "nickname": "李丹古琴艺术",
+   "recordedAt": "2026-08-30T15:45:15.972Z",
+   "receivedAt": "2026-08-30T15:45:43.509Z",
+   "durationMs": 14614,
+   "eventCount": 20,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.1889,
+    "longitude": 121.4696
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "d487d0ac-9efc-4951-b9e4-30c52c11dce2",
+   "userId": "93a2318cfe3f4065b0ff1cbe36d7d465",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-08-30T15:35:12.780Z",
+   "receivedAt": "2026-08-30T15:36:04.725Z",
+   "durationMs": 20242,
+   "eventCount": 23,
+   "likeCount": 1,
+   "playCount": 4,
+   "location": {
+    "country": "CN",
+    "region": "Fujian",
+    "city": "Xiamen",
+    "latitude": 24.5131,
+    "longitude": 118.1054
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "e9d74d9b-5bef-4f27-97b8-e7c45ae69773",
+   "userId": "0b24c38a46a948c180078e68361a343b",
+   "nickname": "HappyBirthday",
+   "recordedAt": "2026-08-30T13:57:48.581Z",
+   "receivedAt": "2026-08-30T13:59:41.648Z",
+   "durationMs": 34045,
+   "eventCount": 32,
+   "likeCount": 3,
+   "playCount": 5,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2159,
+    "longitude": 121.4898
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f3318483-d9c6-42b9-a5e6-82db90c481d5",
+   "userId": "4ed2579f6b34445f96fa5c6fe4ebb716",
+   "nickname": "生日快乐",
+   "recordedAt": "2026-08-30T13:47:46.076Z",
+   "receivedAt": "2026-08-30T13:48:43.018Z",
+   "durationMs": 41335,
+   "eventCount": 25,
+   "likeCount": 2,
+   "playCount": 4,
+   "location": {
+    "country": "CN",
+    "region": "Henan",
+    "city": "Zhengzhou",
+    "latitude": 34.7672,
+    "longitude": 113.7019
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "986b3674-0808-4501-85b0-cedf500358a3",
+   "userId": "bb2e43c328024ff0a83f0fc55e98ba46",
+   "nickname": "夏日尽头的我们",
+   "recordedAt": "2026-08-30T13:43:32.353Z",
+   "receivedAt": "2026-08-30T13:44:11.842Z",
+   "durationMs": 24218,
+   "eventCount": 36,
+   "likeCount": 1,
+   "playCount": 5,
+   "location": {
+    "country": "CN",
+    "region": "Hebei",
+    "city": "Shijiazhuang",
+    "latitude": 38.066,
+    "longitude": 114.4586
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "044c5335-06c2-4713-b64a-c0d5a2c8c134",
+   "userId": "6e5abc7979f546acb96da244df790df4",
+   "nickname": "沧海一声笑选段",
+   "recordedAt": "2026-08-30T13:24:18.155Z",
+   "receivedAt": "2026-08-30T13:25:07.530Z",
+   "durationMs": 19895,
+   "eventCount": 24,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0279,
+    "longitude": 118.767
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f800c178-ca84-4fde-bcb9-63dfb2d01568",
+   "userId": "848aa8feb1714d45a2a5ec3f2f5e4e48",
+   "nickname": "生日快乐!(^O^)y",
+   "recordedAt": "2026-08-30T11:48:23.306Z",
+   "receivedAt": "2026-08-30T11:48:52.106Z",
+   "durationMs": 17888,
+   "eventCount": 25,
+   "likeCount": 5,
+   "playCount": 25,
+   "location": {
+    "country": "AE",
+    "region": "Abu Dhabi",
+    "city": "Abu Dhabi",
+    "latitude": 24.4257,
+    "longitude": 54.3825
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "5c94193b-07d5-4aea-acaa-60126971f535",
+   "userId": "1441ca7746a34a31a5ba247af7850fa2",
+   "nickname": "南京",
+   "recordedAt": "2026-08-30T09:03:10.959Z",
+   "receivedAt": "2026-08-30T09:04:41.437Z",
+   "durationMs": 46077,
+   "eventCount": 40,
+   "likeCount": 1,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Hebei",
+    "city": "Shijiazhuang",
+    "latitude": 38.0673,
+    "longitude": 114.4935
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "9ae754b5-66cd-441e-98e7-f012f959875d",
+   "userId": "c70ea9f55dfd442b9a064fbaba6dc0ab",
+   "nickname": "生日快乐",
+   "recordedAt": "2026-08-30T04:44:29.875Z",
+   "receivedAt": "2026-08-30T04:45:12.020Z",
+   "durationMs": 19104,
+   "eventCount": 31,
+   "likeCount": 4,
+   "playCount": 13,
+   "location": {
+    "country": "CN",
+    "region": "Hubei",
+    "city": "Wuhan",
+    "latitude": 30.5973,
+    "longitude": 114.2274
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "de5453c4-bd85-4c26-a6e7-dd033dbc976d",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "祝王老师生日快乐！",
+   "recordedAt": "2026-08-30T04:38:02.757Z",
+   "receivedAt": "2026-08-30T04:38:47.744Z",
+   "durationMs": 20614,
+   "eventCount": 27,
+   "likeCount": 4,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.089,
+    "longitude": 118.7636
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "5b1da610-60fc-4214-9ca3-ce7e1c846d6b",
+   "userId": "c36711c7d8194ebb90cf6a8bc53cca11",
+   "nickname": "客从岭南来 泛音移植片段",
+   "recordedAt": "2026-08-30T04:37:29.237Z",
+   "receivedAt": "2026-08-30T04:38:43.509Z",
+   "durationMs": 30217,
+   "eventCount": 47,
+   "likeCount": 2,
+   "playCount": 10,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.8981,
+    "longitude": 116.4535
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "0e280b03-148a-46d2-a8c6-97347b0d2ea9",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "祝我们最亲爱的ud老师生日快乐～",
+   "recordedAt": "2026-08-30T04:15:42.495Z",
+   "receivedAt": "2026-08-30T04:16:35.328Z",
+   "durationMs": 25718,
+   "eventCount": 40,
+   "likeCount": 7,
+   "playCount": 11,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2394,
+    "longitude": 121.4962
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "547baf7b-68ca-4bb9-942f-194bfabadbd4",
+   "userId": "047b248319c349bcaff1d735bb890f0e",
+   "nickname": "生日快乐",
+   "recordedAt": "2026-08-30T04:11:40.562Z",
+   "receivedAt": "2026-08-30T04:12:33.493Z",
+   "durationMs": 27266,
+   "eventCount": 32,
+   "likeCount": 3,
+   "playCount": 15,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2109,
+    "longitude": 121.414
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "b361f136-92b9-4454-8da9-de85b89d8704",
+   "userId": "a10ab6e1532646a58afe313936d27d82",
+   "nickname": "梅花三弄泛音段",
+   "recordedAt": "2026-08-30T03:28:38.046Z",
+   "receivedAt": "2026-08-30T03:30:38.699Z",
+   "durationMs": 42933,
+   "eventCount": 57,
+   "likeCount": 3,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Shaanxi",
+    "city": "Xi’an",
+    "latitude": 34.2947,
+    "longitude": 108.912
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f8c7250a-5f78-4285-affc-a982495e90d2",
+   "userId": "a10ab6e1532646a58afe313936d27d82",
+   "nickname": "HAPPY BIRTHDAY TO YOU！",
+   "recordedAt": "2026-08-30T03:20:31.883Z",
+   "receivedAt": "2026-08-30T03:21:57.783Z",
+   "durationMs": 24159,
+   "eventCount": 25,
+   "likeCount": 3,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Shaanxi",
+    "city": "Xi’an",
+    "latitude": 34.2584,
+    "longitude": 108.8902
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "63235282-baec-4d80-abe1-182b0439a90a",
+   "userId": "e5fb16f3484f47b28aa080e5189cd902",
+   "nickname": "生日快乐",
+   "recordedAt": "2026-08-30T03:10:54.952Z",
+   "receivedAt": "2026-08-30T03:11:52.159Z",
+   "durationMs": 26567,
+   "eventCount": 25,
+   "likeCount": 3,
+   "playCount": 11,
+   "location": {
+    "country": "CN",
+    "region": "Liaoning",
+    "city": "Shenyang",
+    "latitude": 41.8153,
+    "longitude": 123.3838
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "0726b79d-1ae1-49f7-918e-e03a0962ec94",
+   "userId": "6dd161e709a044d9843173b8fc8f9640",
+   "nickname": "秋风辞",
+   "recordedAt": "2026-08-30T01:16:27.578Z",
+   "receivedAt": "2026-08-30T01:19:20.759Z",
+   "durationMs": 139724,
+   "eventCount": 87,
+   "likeCount": 1,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.9342,
+    "longitude": 116.3745
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "900899bc-b298-429b-a9a1-935830aef871",
+   "userId": "4df96a234cd641fe97e31d20194353b4",
+   "nickname": "生日快乐",
+   "recordedAt": "2026-08-29T22:50:03.181Z",
+   "receivedAt": "2026-08-29T22:50:40.078Z",
+   "durationMs": 26563,
+   "eventCount": 31,
+   "likeCount": 2,
+   "playCount": 3,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3717,
+    "longitude": -71.0338
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "87abfa18-8934-4e56-a708-018bc5baadfa",
+   "userId": "658011acded649448d248ec93e7dbf50",
+   "nickname": "Ted Hsiung",
+   "recordedAt": "2026-08-29T22:36:51.632Z",
+   "receivedAt": "2026-08-29T22:37:43.717Z",
+   "durationMs": 32788,
+   "eventCount": 22,
+   "likeCount": 5,
+   "playCount": 47,
+   "location": {
+    "country": "ZA",
+    "region": "Limpopo",
+    "city": "Thohoyandou",
+    "latitude": -22.9263,
+    "longitude": 30.4437
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "c38462a0-e8bd-47e3-8a9d-5faced2369b4",
+   "userId": "8e39d040eca64c7c94bbaf40ebb3ad0e",
+   "nickname": "笑傲江湖",
+   "recordedAt": "2026-08-29T08:08:41.707Z",
+   "receivedAt": "2026-08-29T08:09:11.492Z",
+   "durationMs": 17313,
+   "eventCount": 24,
+   "likeCount": 1,
+   "playCount": 4,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0441,
+    "longitude": 118.7712
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "bb514b12-3d63-4c78-ae87-6d87e933c8de",
+   "userId": "bbc17952f17a403c8e01f25bd1ec2753",
+   "nickname": "琵琶行（间奏）",
+   "recordedAt": "2026-08-29T07:54:50.527Z",
+   "receivedAt": "2026-08-29T07:55:33.703Z",
+   "durationMs": 29690,
+   "eventCount": 62,
+   "likeCount": 2,
+   "playCount": 10,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2333,
+    "longitude": 121.4759
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f36a0dc7-857c-4f9b-810e-780858bb45f8",
+   "userId": "bbc17952f17a403c8e01f25bd1ec2753",
+   "nickname": "诀别书",
+   "recordedAt": "2026-08-29T07:43:24.919Z",
+   "receivedAt": "2026-08-29T07:44:15.366Z",
+   "durationMs": 29991,
+   "eventCount": 40,
+   "likeCount": 2,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2581,
+    "longitude": 121.4841
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "8036f0d1-d858-48dc-985f-2dd93a255128",
+   "userId": "bbc17952f17a403c8e01f25bd1ec2753",
+   "nickname": "彩云追月",
+   "recordedAt": "2026-08-29T07:39:34.565Z",
+   "receivedAt": "2026-08-29T07:40:23.648Z",
+   "durationMs": 30308,
+   "eventCount": 47,
+   "likeCount": 1,
+   "playCount": 9,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2019,
+    "longitude": 121.4953
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "fdea77d9-57d4-4d7d-8c06-dfb16d319727",
+   "userId": "7b242c583efb417cb75c6222d7aabbad",
+   "nickname": "liushui",
+   "recordedAt": "2026-08-29T06:55:18.144Z",
+   "receivedAt": "2026-08-29T06:56:23.540Z",
+   "durationMs": 50118,
+   "eventCount": 131,
+   "likeCount": 2,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Henan",
+    "city": "Zhengzhou",
+    "latitude": 34.7736,
+    "longitude": 113.6456
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "f606c67b-861b-4332-92c8-66fc4e18d95b",
+   "userId": "7b242c583efb417cb75c6222d7aabbad",
+   "nickname": "meihua",
+   "recordedAt": "2026-08-29T06:44:33.621Z",
+   "receivedAt": "2026-08-29T06:46:00.871Z",
+   "durationMs": 73398,
+   "eventCount": 75,
+   "likeCount": 1,
+   "playCount": 9,
+   "location": {
+    "country": "CN",
+    "region": "Henan",
+    "city": "Zhengzhou",
+    "latitude": 34.7248,
+    "longitude": 113.6437
+   },
+   "appVersion": "v2.14"
+  },
+  {
+   "id": "e1cb02f7-3b47-4861-995d-247d491c4604",
+   "userId": "e177d898d0a044329e704a45a840b3c2",
+   "nickname": "仙翁操",
+   "recordedAt": "2026-08-29T03:04:50.098Z",
+   "receivedAt": "2026-08-29T03:06:36.755Z",
+   "durationMs": 76091,
+   "eventCount": 36,
+   "likeCount": 1,
+   "playCount": 5,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2034,
+    "longitude": 121.4634
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "f20757ff-f299-46cd-bce0-579751d1273b",
+   "userId": "2a1ba9a2c19a4270af7f1af275e50860",
+   "nickname": "黄莺吟",
+   "recordedAt": "2026-08-28T18:34:06.266Z",
+   "receivedAt": "2026-08-28T18:34:51.638Z",
+   "durationMs": 35581,
+   "eventCount": 26,
+   "likeCount": 1,
+   "playCount": 6,
+   "location": {
+    "country": "CA",
+    "region": "Ontario",
+    "city": "Toronto",
+    "latitude": 43.7342,
+    "longitude": -79.3706
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "8b6c8989-81b6-4782-a763-3dd622d2d4ef",
+   "userId": "2a1ba9a2c19a4270af7f1af275e50860",
+   "nickname": "流水（泛音）",
+   "recordedAt": "2026-08-28T18:12:57.652Z",
+   "receivedAt": "2026-08-28T18:14:12.386Z",
+   "durationMs": 25033,
+   "eventCount": 47,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CA",
+    "region": "Ontario",
+    "city": "Toronto",
+    "latitude": 43.7278,
+    "longitude": -79.4365
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "5be530ec-1b48-4133-85f7-f276abd11d7c",
+   "userId": "d3c626c4c9944a9fb38b70a2689ccae2",
+   "nickname": "white snow",
+   "recordedAt": "2026-08-28T16:11:55.769Z",
+   "receivedAt": "2026-08-28T16:12:53.035Z",
+   "durationMs": 28837,
+   "eventCount": 53,
+   "likeCount": 2,
+   "playCount": 10,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.9078,
+    "longitude": 116.3438
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "77f2417f-6476-44d4-8358-50e50f61970a",
+   "userId": "0800e3c59de34ddab670310188d5ce74",
+   "nickname": "神人畅1",
+   "recordedAt": "2026-08-28T16:07:58.938Z",
+   "receivedAt": "2026-08-28T16:09:23.762Z",
+   "durationMs": 54142,
+   "eventCount": 64,
+   "likeCount": 1,
+   "playCount": 25,
+   "location": {
+    "country": "US",
+    "region": "Virginia",
+    "city": "Ashburn",
+    "latitude": 39.009,
+    "longitude": -77.4587
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "80755b87-ae9b-497d-99ff-0ccc383af4ff",
+   "userId": "d3c626c4c9944a9fb38b70a2689ccae2",
+   "nickname": "白雪",
+   "recordedAt": "2026-08-28T16:01:01.019Z",
+   "receivedAt": "2026-08-28T16:01:41.617Z",
+   "durationMs": 31663,
+   "eventCount": 53,
+   "likeCount": 1,
+   "playCount": 16,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.8983,
+    "longitude": 116.3581
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "b108d15e-c744-4077-942c-73eabdfa4e5a",
+   "userId": "654e2473ac3040dc8bd8a1b5da6208d8",
+   "nickname": "渔舟唱晚",
+   "recordedAt": "2026-08-28T14:55:10.523Z",
+   "receivedAt": "2026-08-28T14:57:00.637Z",
+   "durationMs": 98768,
+   "eventCount": 126,
+   "likeCount": 2,
+   "playCount": 29,
+   "location": {
+    "country": "CN",
+    "region": "Hainan",
+    "city": "Haikou",
+    "latitude": 20.0324,
+    "longitude": 110.3867
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "144d8165-0446-4303-ac37-899dbf1d11ac",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "流水111",
+   "recordedAt": "2026-08-28T11:04:15.189Z",
+   "receivedAt": "2026-08-28T11:05:32.555Z",
+   "durationMs": 68808,
+   "eventCount": 41,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2351,
+    "longitude": 121.5005
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "a181c7e5-3995-4e95-b44a-2ebd153548ef",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "酒狂（业余版",
+   "recordedAt": "2026-08-28T11:01:18.463Z",
+   "receivedAt": "2026-08-28T11:03:55.008Z",
+   "durationMs": 111759,
+   "eventCount": 262,
+   "likeCount": 2,
+   "playCount": 3,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0473,
+    "longitude": 118.744
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "950d803f-b0d0-4038-a1ef-daf0247bb470",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "流水222",
+   "recordedAt": "2026-08-28T11:00:04.089Z",
+   "receivedAt": "2026-08-28T11:01:05.136Z",
+   "durationMs": 50502,
+   "eventCount": 68,
+   "likeCount": 1,
+   "playCount": 5,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2507,
+    "longitude": 121.4684
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "5d1dd098-9bf4-45cc-bec4-118229d5b19e",
+   "userId": "7cf56020ce4240659db582c8257953a3",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-08-28T10:56:30.426Z",
+   "receivedAt": "2026-08-28T10:57:32.905Z",
+   "durationMs": 31149,
+   "eventCount": 24,
+   "likeCount": 1,
+   "playCount": 18,
+   "location": {
+    "country": "CN",
+    "region": "Henan",
+    "city": "Zhengzhou",
+    "latitude": 34.7344,
+    "longitude": 113.6396
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "e440b3e9-f9a1-4b1c-86d2-9529997ffb8b",
+   "userId": "b1a1db4f60574443a5962316f0899449",
+   "nickname": "梁祝甲甲鱼",
+   "recordedAt": "2026-08-28T10:27:13.558Z",
+   "receivedAt": "2026-08-28T10:28:26.637Z",
+   "durationMs": 37029,
+   "eventCount": 44,
+   "likeCount": 1,
+   "playCount": 12,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.1924,
+    "longitude": 121.4668
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "1c390b23-f238-4021-a6c1-e1c1d5370a5a",
+   "userId": "3a28cd86f1f648b9a7e99f26632ee973",
+   "nickname": "g",
+   "recordedAt": "2026-08-28T06:34:42.961Z",
+   "receivedAt": "2026-08-28T06:35:32.325Z",
+   "durationMs": 40205,
+   "eventCount": 50,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Sichuan",
+    "city": "Chengdu",
+    "latitude": 30.6386,
+    "longitude": 104.0555
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "3dde0218-8aab-4d4e-9dd6-9f419d32c267",
+   "userId": "eb1304e464d04197ad7f5c57fd255c44",
+   "nickname": "听雪·知音 75",
+   "recordedAt": "2026-08-28T04:10:08.479Z",
+   "receivedAt": "2026-08-28T04:10:35.259Z",
+   "durationMs": 20082,
+   "eventCount": 32,
+   "likeCount": 0,
+   "playCount": 6,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0923,
+    "longitude": 118.7787
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "f31dfc59-bc8b-48ee-9020-c6d4ec970326",
+   "userId": "4a10c481fd31462db30d763468f8786e",
+   "nickname": "平沙落雁",
+   "recordedAt": "2026-08-28T03:52:51.697Z",
+   "receivedAt": "2026-08-28T03:54:31.213Z",
+   "durationMs": 54820,
+   "eventCount": 27,
+   "likeCount": 0,
+   "playCount": 14,
+   "location": {
+    "country": "CN",
+    "region": "Sichuan",
+    "city": "Chengdu",
+    "latitude": 30.6581,
+    "longitude": 104.0969
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "3d3a96c4-91a0-4a82-9f88-7b0c20292e3e",
+   "userId": "381b9d70521746979888599fd73c3b94",
+   "nickname": "松间·弦友 63",
+   "recordedAt": "2026-08-28T02:49:44.110Z",
+   "receivedAt": "2026-08-28T02:50:49.245Z",
+   "durationMs": 54146,
+   "eventCount": 18,
+   "likeCount": 0,
+   "playCount": 4,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2047,
+    "longitude": 121.4725
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "2b0f0b25-d08c-45aa-85fc-e1b33f478b0f",
+   "userId": "381b9d70521746979888599fd73c3b94",
+   "nickname": "松间·知音 77",
+   "recordedAt": "2026-08-28T02:46:27.785Z",
+   "receivedAt": "2026-08-28T02:46:58.293Z",
+   "durationMs": 20330,
+   "eventCount": 17,
+   "likeCount": 0,
+   "playCount": 3,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2519,
+    "longitude": 121.4263
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "a3c2c3df-0089-4b3b-abda-ece927cf4586",
+   "userId": "b2ff4058bbbd48209d4a2358301d4522",
+   "nickname": "普庵咒",
+   "recordedAt": "2026-08-27T15:39:10.928Z",
+   "receivedAt": "2026-08-27T15:42:14.612Z",
+   "durationMs": 156502,
+   "eventCount": 116,
+   "likeCount": 0,
+   "playCount": 12,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2328,
+    "longitude": 121.4977
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "4028ecf8-5129-469d-9422-fe211f08900d",
+   "userId": "ecb71b6a6b8949aba77924aad38ee83e",
+   "nickname": "《宣德》泛音版（中国音乐剧《锦衣卫之刀与花》曲目）",
+   "recordedAt": "2026-08-27T13:18:17.991Z",
+   "receivedAt": "2026-08-27T13:22:33.699Z",
+   "durationMs": 82847,
+   "eventCount": 109,
+   "likeCount": 2,
+   "playCount": 12,
+   "location": {
+    "country": "CN",
+    "region": "Shaanxi",
+    "city": "Xi’an",
+    "latitude": 34.244,
+    "longitude": 108.8853
+   },
+   "appVersion": "v2.10"
+  },
+  {
+   "id": "09a3e9e9-9606-4e4a-a6c1-3ae844132601",
+   "userId": "4df96a234cd641fe97e31d20194353b4",
+   "nickname": "酒狂啊啊啊",
+   "recordedAt": "2026-08-26T22:07:30.166Z",
+   "receivedAt": "2026-08-26T22:08:27.278Z",
+   "durationMs": 22461,
+   "eventCount": 20,
+   "likeCount": 2,
+   "playCount": 7,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.372,
+    "longitude": -71.0305
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "e08b2d95-232d-4d9b-b86d-fa4c6eb187c3",
+   "userId": "2a1ba9a2c19a4270af7f1af275e50860",
+   "nickname": "梅花三弄",
+   "recordedAt": "2026-08-26T17:23:56.344Z",
+   "receivedAt": "2026-08-26T17:24:45.944Z",
+   "durationMs": 38141,
+   "eventCount": 65,
+   "likeCount": 1,
+   "playCount": 29,
+   "location": {
+    "country": "CA",
+    "region": "Ontario",
+    "city": "Toronto",
+    "latitude": 43.6723,
+    "longitude": -79.3883
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "aa9a1243-ff39-4766-a0a3-047b25ce2154",
+   "userId": "2a1ba9a2c19a4270af7f1af275e50860",
+   "nickname": "仙翁操",
+   "recordedAt": "2026-08-26T17:13:50.613Z",
+   "receivedAt": "2026-08-26T17:15:12.699Z",
+   "durationMs": 60964,
+   "eventCount": 52,
+   "likeCount": 2,
+   "playCount": 11,
+   "location": {
+    "country": "CA",
+    "region": "Ontario",
+    "city": "Toronto",
+    "latitude": 43.7469,
+    "longitude": -79.3842
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "e899d6a2-ace8-4618-bd90-c620ff426fab",
+   "userId": "f5c254a0ef6b4b549c7407938cf3f782",
+   "nickname": "Eric W",
+   "recordedAt": "2026-08-26T16:22:45.877Z",
+   "receivedAt": "2026-08-26T16:23:27.479Z",
+   "durationMs": 25864,
+   "eventCount": 17,
+   "likeCount": 1,
+   "playCount": 10,
+   "location": {
+    "country": "TW",
+    "region": "Takao",
+    "city": "Kaohsiung",
+    "latitude": 22.6575,
+    "longitude": 120.3096
+   },
+   "appVersion": "v2.08"
+  },
+  {
+   "id": "b45b84ae-cfe9-46b3-bed8-adb0e0c69923",
+   "userId": "59f801120c6e4ac39da29efc9f003035",
+   "nickname": "一只鹅",
+   "recordedAt": "2026-08-26T08:24:58.999Z",
+   "receivedAt": "2026-08-26T08:25:32.506Z",
+   "durationMs": 10883,
+   "eventCount": 4,
+   "likeCount": 0,
+   "playCount": 12,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Jinrongjie",
+    "latitude": 39.9348,
+    "longitude": 116.4059
+   },
+   "appVersion": "v1.98"
+  },
+  {
+   "id": "c30a341a-db0a-46df-be9a-47d743e0a7ee",
+   "userId": "b2398e20a2ab4d8c95772aa3e94d7c2e",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-08-26T01:02:22.531Z",
+   "receivedAt": "2026-08-26T01:04:44.424Z",
+   "durationMs": 43825,
+   "eventCount": 52,
+   "likeCount": 2,
+   "playCount": 10,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2568,
+    "longitude": 121.4271
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "7173f1f1-a2ef-4fad-928d-22a059eeacfe",
+   "userId": "1931fdd44a7a4fc492b78c6f45cd7ec0",
+   "nickname": "笑傲江湖·居巢国无为散人",
+   "recordedAt": "2026-08-25T14:28:43.477Z",
+   "receivedAt": "2026-08-25T14:31:30.173Z",
+   "durationMs": 70649,
+   "eventCount": 72,
+   "likeCount": 2,
+   "playCount": 13,
+   "location": {
+    "country": "CN",
+    "region": "Anhui",
+    "city": "Hefei",
+    "latitude": 31.842,
+    "longitude": 117.2839
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "858d4378-955e-4f8f-b554-71ac44c6c75d",
+   "userId": "1931fdd44a7a4fc492b78c6f45cd7ec0",
+   "nickname": "居巢国无为散人",
+   "recordedAt": "2026-08-25T14:22:16.849Z",
+   "receivedAt": "2026-08-25T14:23:25.325Z",
+   "durationMs": 19672,
+   "eventCount": 12,
+   "likeCount": 3,
+   "playCount": 12,
+   "location": {
+    "country": "CN",
+    "region": "Anhui",
+    "city": "Hefei",
+    "latitude": 31.8423,
+    "longitude": 117.2741
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "48b44aab-6fd1-4117-bc28-a84d1e4b9a80",
+   "userId": "2c06af73e9954b92815d1ffd347e4880",
+   "nickname": "天地缓缓",
+   "recordedAt": "2026-08-25T12:00:04.950Z",
+   "receivedAt": "2026-08-25T12:01:53.071Z",
+   "durationMs": 43687,
+   "eventCount": 52,
+   "likeCount": 8,
+   "playCount": 63,
+   "location": {
+    "country": "CN",
+    "region": "Sichuan",
+    "city": "Chengdu",
+    "latitude": 30.6962,
+    "longitude": 104.0782
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "33714bdc-9f04-474c-abcd-649f08659823",
+   "userId": "27f4327091104115bee6a988b54cc383",
+   "nickname": "Farting by Fuxi😂😂😂",
+   "recordedAt": "2026-08-25T11:54:19.029Z",
+   "receivedAt": "2026-08-25T11:57:59.435Z",
+   "durationMs": 128898,
+   "eventCount": 93,
+   "likeCount": 2,
+   "playCount": 11,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2579,
+    "longitude": 121.4609
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "86d7f9dd-2a49-460d-a585-c0296f992173",
+   "userId": "5e64f56322b446c6945df07269e09ba0",
+   "nickname": "沧海一声笑",
+   "recordedAt": "2026-08-25T11:17:24.344Z",
+   "receivedAt": "2026-08-25T11:18:59.074Z",
+   "durationMs": 47717,
+   "eventCount": 75,
+   "likeCount": 0,
+   "playCount": 24,
+   "location": {
+    "country": "CN",
+    "region": "Beijing",
+    "city": "Beijing",
+    "latitude": 39.9365,
+    "longitude": 116.3745
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "40c9a140-efe1-4f76-868d-51e9887bfcfa",
+   "userId": "e4489191d10347d6bca87d196444051a",
+   "nickname": "雞鳴度關",
+   "recordedAt": "2026-08-25T09:19:10.696Z",
+   "receivedAt": "2026-08-25T09:20:29.121Z",
+   "durationMs": 58578,
+   "eventCount": 71,
+   "likeCount": 0,
+   "playCount": 32,
+   "location": {
+    "country": "TW",
+    "region": "Takao",
+    "city": "Kaohsiung",
+    "latitude": 22.6401,
+    "longitude": 120.325
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "f0f52f5b-47de-4e9b-9ede-226e95a15ff9",
+   "userId": "4862f9d5f0064cdcaa01a1de8ca562d8",
+   "nickname": "云外·清友 64",
+   "recordedAt": "2026-08-25T09:15:23.094Z",
+   "receivedAt": "2026-08-25T09:16:31.980Z",
+   "durationMs": 46643,
+   "eventCount": 43,
+   "likeCount": 1,
+   "playCount": 14,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Shenzhen",
+    "latitude": 22.5499,
+    "longitude": 114.1081
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "a8d7fd70-58d1-4272-80bc-0e4e9788f827",
+   "userId": "7dd104fd23a9495b8c26c4e69955d22c",
+   "nickname": "喜乐",
+   "recordedAt": "2026-08-25T01:14:45.551Z",
+   "receivedAt": "2026-08-25T01:15:17.237Z",
+   "durationMs": 21638,
+   "eventCount": 14,
+   "likeCount": 0,
+   "playCount": 8,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0875,
+    "longitude": 118.7707
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "38ad6a0f-aac1-4293-aa8a-af339a2cdb56",
+   "userId": "27f4327091104115bee6a988b54cc383",
+   "nickname": "神人畅（电音）",
+   "recordedAt": "2026-08-24T14:05:30.923Z",
+   "receivedAt": "2026-08-24T14:12:18.406Z",
+   "durationMs": 378639,
+   "eventCount": 270,
+   "likeCount": 2,
+   "playCount": 22,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2454,
+    "longitude": 121.4635
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "f1d2daed-24f3-4b09-a2cc-9e04db405366",
+   "userId": "4ca82488681f40a0af863f427f996032",
+   "nickname": "胖望",
+   "recordedAt": "2026-08-24T12:01:10.998Z",
+   "receivedAt": "2026-08-24T12:02:29.713Z",
+   "durationMs": 47902,
+   "eventCount": 82,
+   "likeCount": 1,
+   "playCount": 38,
+   "location": {
+    "country": "HK",
+    "region": "",
+    "city": "Hong Kong",
+    "latitude": 22.3153,
+    "longitude": 114.1626
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "3206c77c-d122-438b-9da7-61797ff96d09",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "新月的摇篮曲原神哥伦比娅",
+   "recordedAt": "2026-08-24T05:24:20.953Z",
+   "receivedAt": "2026-08-24T05:27:16.338Z",
+   "durationMs": 99990,
+   "eventCount": 79,
+   "likeCount": 2,
+   "playCount": 19,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0714,
+    "longitude": 118.8216
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "8d04cea9-4bec-4b50-8a0a-ab8b9d8acc06",
+   "userId": "4385f00f088e40079d3eecba7019c944",
+   "nickname": "梅花三弄泛音",
+   "recordedAt": "2026-08-24T03:39:13.298Z",
+   "receivedAt": "2026-08-24T03:40:19.446Z",
+   "durationMs": 35913,
+   "eventCount": 57,
+   "likeCount": 5,
+   "playCount": 58,
+   "location": {
+    "country": "CN",
+    "region": "Jiangsu",
+    "city": "Nanjing",
+    "latitude": 32.0522,
+    "longitude": 118.7339
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "ca911390-cd2a-4cd4-a51d-5ce1143fa90a",
+   "userId": "7fd3510bdeb04ec1a9872fb81f69c65d",
+   "nickname": "烟雨唱扬州",
+   "recordedAt": "2026-08-23T15:02:39.710Z",
+   "receivedAt": "2026-08-23T15:04:13.258Z",
+   "durationMs": 79529,
+   "eventCount": 129,
+   "likeCount": 1,
+   "playCount": 7,
+   "location": {
+    "country": "CN",
+    "region": "Fujian",
+    "city": "Xiamen",
+    "latitude": 24.5132,
+    "longitude": 118.1024
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "f0143835-74fc-4d14-8707-dd9cca555840",
+   "userId": "7fd3510bdeb04ec1a9872fb81f69c65d",
+   "nickname": "云水禅心",
+   "recordedAt": "2026-08-23T14:59:07.376Z",
+   "receivedAt": "2026-08-23T15:00:37.947Z",
+   "durationMs": 82450,
+   "eventCount": 128,
+   "likeCount": 1,
+   "playCount": 21,
+   "location": {
+    "country": "CN",
+    "region": "Fujian",
+    "city": "Xiamen",
+    "latitude": 24.4514,
+    "longitude": 118.1145
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "0d3f3ae9-a177-4f5b-9ed4-da00f9b1c89c",
+   "userId": "058e1ccb4585429c937e9ac6b24638d4",
+   "nickname": "潇湘泛音",
+   "recordedAt": "2026-08-23T14:56:51.719Z",
+   "receivedAt": "2026-08-23T14:57:44.413Z",
+   "durationMs": 21905,
+   "eventCount": 29,
+   "likeCount": 0,
+   "playCount": 19,
+   "location": {
+    "country": "CN",
+    "region": "Guangxi",
+    "city": "Nanning",
+    "latitude": 22.7981,
+    "longitude": 108.2742
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "48ad5d13-4645-481c-9492-db4196a1dd42",
+   "userId": "7fd3510bdeb04ec1a9872fb81f69c65d",
+   "nickname": "渴望（《渴望》电视剧主题曲）",
+   "recordedAt": "2026-08-23T14:54:51.274Z",
+   "receivedAt": "2026-08-23T14:57:07.105Z",
+   "durationMs": 114722,
+   "eventCount": 179,
+   "likeCount": 0,
+   "playCount": 17,
+   "location": {
+    "country": "CN",
+    "region": "Fujian",
+    "city": "Xiamen",
+    "latitude": 24.4878,
+    "longitude": 118.0341
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "a76ddc39-a3e8-4761-a52e-59a07c57a4ef",
+   "userId": "7fd3510bdeb04ec1a9872fb81f69c65d",
+   "nickname": "乌兰巴托的夜",
+   "recordedAt": "2026-08-23T14:49:49.586Z",
+   "receivedAt": "2026-08-23T14:51:12.261Z",
+   "durationMs": 72574,
+   "eventCount": 116,
+   "likeCount": 0,
+   "playCount": 23,
+   "location": {
+    "country": "CN",
+    "region": "Fujian",
+    "city": "Xiamen",
+    "latitude": 24.4603,
+    "longitude": 118.1063
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "9b00bdeb-3222-47e3-91fe-21f36c9a24bc",
+   "userId": "ae71585dffb44b0eb8e9d474b5cb72ae",
+   "nickname": "春晓吟",
+   "recordedAt": "2026-08-23T04:05:53.546Z",
+   "receivedAt": "2026-08-23T04:06:59.427Z",
+   "durationMs": 50147,
+   "eventCount": 63,
+   "likeCount": 3,
+   "playCount": 14,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2464,
+    "longitude": 121.4394
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "d7fea6e7-0cca-4c98-80fa-d29bad193753",
+   "userId": "b6c7b105a8cf47199f5ec982a49c2222",
+   "nickname": "pao_89",
+   "recordedAt": "2026-08-23T04:01:28.613Z",
+   "receivedAt": "2026-08-23T04:02:09.390Z",
+   "durationMs": 8401,
+   "eventCount": 6,
+   "likeCount": 0,
+   "playCount": 39,
+   "location": {
+    "country": "US",
+    "region": "California",
+    "city": "San Jose",
+    "latitude": 37.3672,
+    "longitude": -121.8764
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "3c3bb316-189d-4ab3-9dd3-a85b274180fd",
+   "userId": "929623d4f5984783948b12e376a0be26",
+   "nickname": "Kanoz",
+   "recordedAt": "2026-08-23T02:30:02.938Z",
+   "receivedAt": "2026-08-23T02:30:33.985Z",
+   "durationMs": 21214,
+   "eventCount": 27,
+   "likeCount": 1,
+   "playCount": 19,
+   "location": {
+    "country": "VN",
+    "region": "Hanoi",
+    "city": "Cầu Diễn",
+    "latitude": 21.017,
+    "longitude": 105.7305
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "dd26ee92-63c0-4f9f-a6e6-3ae5f5e11bdc",
+   "userId": "929623d4f5984783948b12e376a0be26",
+   "nickname": "Kanoz",
+   "recordedAt": "2026-08-23T02:20:04.099Z",
+   "receivedAt": "2026-08-23T02:20:32.058Z",
+   "durationMs": 11461,
+   "eventCount": 17,
+   "likeCount": 0,
+   "playCount": 26,
+   "location": {
+    "country": "VN",
+    "region": "Hanoi",
+    "city": "Cầu Diễn",
+    "latitude": 21.0434,
+    "longitude": 105.8076
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "e7c52e6a-d1ad-437d-bf4b-b7efff6c6e89",
+   "userId": "011639d125994712ac308d7ab92124ee",
+   "nickname": "xbb",
+   "recordedAt": "2026-08-22T06:13:51.996Z",
+   "receivedAt": "2026-08-22T06:14:25.558Z",
+   "durationMs": 21389,
+   "eventCount": 25,
+   "likeCount": 2,
+   "playCount": 45,
+   "location": {
+    "country": "AU",
+    "region": "Victoria",
+    "city": "Melbourne",
+    "latitude": -37.8244,
+    "longitude": 144.9877
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "f93a6a99-dd82-4f0e-b3f0-53bbea4558de",
+   "userId": "58d098cc87a84b0e9380fc7070f4e0f9",
+   "nickname": "Drunken Frenzy",
+   "recordedAt": "2026-08-22T06:09:20.317Z",
+   "receivedAt": "2026-08-22T06:12:19.541Z",
+   "durationMs": 28485,
+   "eventCount": 40,
+   "likeCount": 2,
+   "playCount": 58,
+   "location": {
+    "country": "CN",
+    "region": "Hubei",
+    "city": "Wuhan",
+    "latitude": 30.5428,
+    "longitude": 114.2526
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "35ad0d66-af0c-410b-8b26-59170d949180",
+   "userId": "7334dbc168e4461da04dc0a0749348da",
+   "nickname": "酒狂",
+   "recordedAt": "2026-08-22T06:09:56.604Z",
+   "receivedAt": "2026-08-22T06:10:30.841Z",
+   "durationMs": 25927,
+   "eventCount": 20,
+   "likeCount": 7,
+   "playCount": 113,
+   "location": {
+    "country": "CN",
+    "region": "Shaanxi",
+    "city": "Xi’an",
+    "latitude": 34.2377,
+    "longitude": 108.8848
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "1c8c1475-7d9c-4177-94e2-449133d8c3c6",
+   "userId": "ae71585dffb44b0eb8e9d474b5cb72ae",
+   "nickname": "幽兰·唐与电子交流一段",
+   "recordedAt": "2026-08-22T05:26:43.345Z",
+   "receivedAt": "2026-08-22T05:29:10.229Z",
+   "durationMs": 99867,
+   "eventCount": 117,
+   "likeCount": 7,
+   "playCount": 59,
+   "location": {
+    "country": "CN",
+    "region": "Heilongjiang",
+    "city": "Harbin",
+    "latitude": 45.7075,
+    "longitude": 126.6628
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "fdf97a11-5350-457e-9114-2500dc137495",
+   "userId": "4df96a234cd641fe97e31d20194353b4",
+   "nickname": "花妖啊",
+   "recordedAt": "2026-08-22T00:25:43.072Z",
+   "receivedAt": "2026-08-22T00:26:13.073Z",
+   "durationMs": 23572,
+   "eventCount": 27,
+   "likeCount": 9,
+   "playCount": 34,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3175,
+    "longitude": -71.047
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "cc55281e-f525-4817-aa29-cabb23609703",
+   "userId": "4df96a234cd641fe97e31d20194353b4",
+   "nickname": "酒狂完整版",
+   "recordedAt": "2026-08-21T23:30:14.882Z",
+   "receivedAt": "2026-08-21T23:34:02.681Z",
+   "durationMs": 210521,
+   "eventCount": 335,
+   "likeCount": 5,
+   "playCount": 39,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3418,
+    "longitude": -71.0295
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "2ddfbf60-9e65-4335-856b-4551dff12a42",
+   "userId": "287c5446f64d4346a9ba231f394efa09",
+   "nickname": "仙翁仙翁得道仙翁",
+   "recordedAt": "2026-08-21T20:52:25.916Z",
+   "receivedAt": "2026-08-21T20:56:07.667Z",
+   "durationMs": 73371,
+   "eventCount": 53,
+   "likeCount": 3,
+   "playCount": 27,
+   "location": {
+    "country": "CA",
+    "region": "British Columbia",
+    "city": "Vancouver",
+    "latitude": 49.2348,
+    "longitude": -123.1509
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "ef39e6e0-b8b9-48b6-a225-a6120e3c5437",
+   "userId": "e0cd1217dce649afa0e83a8e9683e065",
+   "nickname": "Jade Strings 67",
+   "recordedAt": "2026-08-21T20:42:33.266Z",
+   "receivedAt": "2026-08-21T20:43:45.635Z",
+   "durationMs": 40706,
+   "eventCount": 54,
+   "likeCount": 6,
+   "playCount": 63,
+   "location": {
+    "country": "TW",
+    "region": "Taiwan",
+    "city": "Taichung",
+    "latitude": 24.1664,
+    "longitude": 120.6663
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "a5856cf9-7d02-4dc8-a1be-d4edd94efe13",
+   "userId": "860b1e299cab494ba93bf98598312156",
+   "nickname": "悠弦",
+   "recordedAt": "2026-08-21T14:50:50.220Z",
+   "receivedAt": "2026-08-21T14:57:58.648Z",
+   "durationMs": 37895,
+   "eventCount": 54,
+   "likeCount": 10,
+   "playCount": 34,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2647,
+    "longitude": 121.4423
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "9b75014b-9bd6-4719-96a2-ff0461ec9f12",
+   "userId": "860b1e299cab494ba93bf98598312156",
+   "nickname": "平 沙 落雁",
+   "recordedAt": "2026-08-21T12:16:15.116Z",
+   "receivedAt": "2026-08-21T12:21:21.000Z",
+   "durationMs": 46326,
+   "eventCount": 27,
+   "likeCount": 12,
+   "playCount": 60,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2119,
+    "longitude": 121.434
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "c81d0ea6-b618-4be1-855d-99fced20f8b7",
+   "userId": "0aaeb17b4f2b4acea7480a6b3f1558c6",
+   "nickname": "清商·清友 10",
+   "recordedAt": "2026-08-21T11:18:34.741Z",
+   "receivedAt": "2026-08-21T11:19:27.503Z",
+   "durationMs": 45305,
+   "eventCount": 58,
+   "likeCount": 0,
+   "playCount": 14,
+   "location": {
+    "country": "CN",
+    "region": "Zhejiang",
+    "city": "Ningbo",
+    "latitude": 29.857,
+    "longitude": 121.5535
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "749f751e-3430-48fc-b120-deab0d277f79",
+   "userId": "0aaeb17b4f2b4acea7480a6b3f1558c6",
+   "nickname": "竹里·清友",
+   "recordedAt": "2026-08-21T11:09:26.802Z",
+   "receivedAt": "2026-08-21T11:10:56.293Z",
+   "durationMs": 54178,
+   "eventCount": 90,
+   "likeCount": 3,
+   "playCount": 49,
+   "location": {
+    "country": "CN",
+    "region": "Zhejiang",
+    "city": "Ningbo",
+    "latitude": 29.8536,
+    "longitude": 121.5122
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "03297cd1-b561-47cb-a9ba-c632889efc1f",
+   "userId": "34e8d8d0be2842bba93fe9c923e773a5",
+   "nickname": "弦龠",
+   "recordedAt": "2026-08-21T08:40:25.709Z",
+   "receivedAt": "2026-08-21T08:41:19.120Z",
+   "durationMs": 38185,
+   "eventCount": 55,
+   "likeCount": 2,
+   "playCount": 54,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2143,
+    "longitude": 121.4245
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "baa7ba26-05d4-41d5-ac52-aa848c042ccd",
+   "userId": "7724faac7ed14428a8c21ba8841b384a",
+   "nickname": "清商·听者 92",
+   "recordedAt": "2026-08-21T05:01:46.957Z",
+   "receivedAt": "2026-08-21T05:02:20.912Z",
+   "durationMs": 27790,
+   "eventCount": 29,
+   "likeCount": 1,
+   "playCount": 16,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3391,
+    "longitude": -71.0945
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "c47e7bcf-ca53-44dd-b1ea-1355c16e0cf3",
+   "userId": "36d6baaf820f44a0b9ab21d83d85e788",
+   "nickname": "甲鱼",
+   "recordedAt": "2026-08-21T04:38:13.010Z",
+   "receivedAt": "2026-08-21T04:38:30.693Z",
+   "durationMs": 10865,
+   "eventCount": 10,
+   "likeCount": 9,
+   "playCount": 72,
+   "location": {
+    "country": "CN",
+    "region": "Guangdong",
+    "city": "Shenzhen",
+    "latitude": 22.5856,
+    "longitude": 114.0867
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "f5208e0d-4336-4cbb-b4bc-838b9034b197",
+   "userId": "7724faac7ed14428a8c21ba8841b384a",
+   "nickname": "散平沙",
+   "recordedAt": "2026-08-21T04:24:22.646Z",
+   "receivedAt": "2026-08-21T04:25:22.221Z",
+   "durationMs": 39206,
+   "eventCount": 28,
+   "likeCount": 2,
+   "playCount": 18,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3684,
+    "longitude": -71.0141
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "9c284af4-4e57-46bb-831a-db180c5000ca",
+   "userId": "7724faac7ed14428a8c21ba8841b384a",
+   "nickname": "Autumn Wanderer 29",
+   "recordedAt": "2026-08-21T04:08:31.153Z",
+   "receivedAt": "2026-08-21T04:08:54.409Z",
+   "durationMs": 17368,
+   "eventCount": 14,
+   "likeCount": 2,
+   "playCount": 21,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3223,
+    "longitude": -71.0282
+   },
+   "appVersion": "v1.82"
+  },
+  {
+   "id": "fd28b495-10da-4077-8901-c29a4a27b867",
+   "userId": "7724faac7ed14428a8c21ba8841b384a",
+   "nickname": "笑傲江湖（挑战者）",
+   "recordedAt": "2026-08-21T03:02:00.748Z",
+   "receivedAt": "2026-08-21T03:02:58.569Z",
+   "durationMs": 41425,
+   "eventCount": 47,
+   "likeCount": 2,
+   "playCount": 9,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3584,
+    "longitude": -71.0598
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "1d09cd93-d909-413a-8c2b-badde385518d",
+   "userId": "7724faac7ed14428a8c21ba8841b384a",
+   "nickname": "Cloud Wanderer 48",
+   "recordedAt": "2026-08-21T02:56:50.728Z",
+   "receivedAt": "2026-08-21T02:57:43.211Z",
+   "durationMs": 44174,
+   "eventCount": 49,
+   "likeCount": 1,
+   "playCount": 2,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3584,
+    "longitude": -71.0598
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "5ec3142c-d69c-4496-b4b8-cadf3b0b8caf",
+   "userId": "3429068daf344b66be6fbf3075e73d10",
+   "nickname": "月下·山人 35",
+   "recordedAt": "2026-08-21T01:55:28.630Z",
+   "receivedAt": "2026-08-21T01:58:15.486Z",
+   "durationMs": 47675,
+   "eventCount": 68,
+   "likeCount": 8,
+   "playCount": 48,
+   "location": {
+    "country": "CA",
+    "region": "British Columbia",
+    "city": "Vancouver",
+    "latitude": 49.2497,
+    "longitude": -123.1193
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "ae4425be-c144-4100-88c5-9c232d6a938a",
+   "userId": "860b1e299cab494ba93bf98598312156",
+   "nickname": "忆故人",
+   "recordedAt": "2026-08-21T01:47:53.701Z",
+   "receivedAt": "2026-08-21T01:50:01.928Z",
+   "durationMs": 50743,
+   "eventCount": 34,
+   "likeCount": 23,
+   "playCount": 134,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2222,
+    "longitude": 121.4581
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "ce4abf11-aa79-4849-a1c5-08ac6e2b1adc",
+   "userId": "10e4cf644fc04556ad5b1cf968846fa7",
+   "nickname": "Moonlit Listener 77",
+   "recordedAt": "2026-08-21T00:30:32.405Z",
+   "receivedAt": "2026-08-21T00:30:54.724Z",
+   "durationMs": 16464,
+   "eventCount": 14,
+   "likeCount": 1,
+   "playCount": 1,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Westborough",
+    "latitude": 42.2695,
+    "longitude": -71.6162
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "f00c3357-e6b1-4aa0-a571-b916eefe1aa9",
+   "userId": "95ed610fdcd24470b161c30e99556ac1",
+   "nickname": "Crane Hermit 89",
+   "recordedAt": "2026-08-21T00:08:48.013Z",
+   "receivedAt": "2026-08-21T00:09:17.316Z",
+   "durationMs": 20121,
+   "eventCount": 22,
+   "likeCount": 3,
+   "playCount": 30,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Westborough",
+    "latitude": 42.2695,
+    "longitude": -71.6162
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "f634d94a-8ebe-4299-a23f-2234759c762a",
+   "userId": "0b24c38a46a948c180078e68361a343b",
+   "nickname": "花自飘流008",
+   "recordedAt": "2026-08-21T00:07:06.629Z",
+   "receivedAt": "2026-08-21T00:09:10.797Z",
+   "durationMs": 46792,
+   "eventCount": 28,
+   "likeCount": 9,
+   "playCount": 61,
+   "location": {
+    "country": "CN",
+    "region": "Shanghai",
+    "city": "Shanghai",
+    "latitude": 31.2222,
+    "longitude": 121.4581
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "911562cd-7ead-47e4-9fd0-74ec6232ca7d",
+   "userId": "63b1fcdfc18642e7a0dc599e6f8a05ae",
+   "nickname": "笑傲江湖",
+   "recordedAt": "2026-08-20T23:50:13.878Z",
+   "receivedAt": "2026-08-20T23:50:48.604Z",
+   "durationMs": 20090,
+   "eventCount": 24,
+   "likeCount": 2,
+   "playCount": 7,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3584,
+    "longitude": -71.0598
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "a3888175-bc33-4ca3-a5fd-beb2dea15321",
+   "userId": "05b11cd8e0cb4bf2b1b80357159eb458",
+   "nickname": "Cloud Hermit 99",
+   "recordedAt": "2026-08-20T23:42:21.559Z",
+   "receivedAt": "2026-08-20T23:42:38.545Z",
+   "durationMs": 12456,
+   "eventCount": 12,
+   "likeCount": 2,
+   "playCount": 50,
+   "location": {
+    "country": "US",
+    "region": "Oregon",
+    "city": "Portland",
+    "latitude": 45.5234,
+    "longitude": -122.6762
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "43016b4f-c84c-4183-a304-b278ede8377c",
+   "userId": "dffa77e2995e4bcc8eb86bbabc82a71f",
+   "nickname": "River Listener 22",
+   "recordedAt": "2026-08-20T23:39:03.097Z",
+   "receivedAt": "2026-08-20T23:39:34.723Z",
+   "durationMs": 24356,
+   "eventCount": 9,
+   "likeCount": 2,
+   "playCount": 5,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3584,
+    "longitude": -71.0598
+   },
+   "appVersion": "v1.80"
+  },
+  {
+   "id": "5c5104c3-b3cc-4dd9-a69f-18d1e5c523a4",
+   "userId": "dffa77e2995e4bcc8eb86bbabc82a71f",
+   "nickname": "Distant Friend 28",
+   "recordedAt": "2026-08-20T23:19:56.529Z",
+   "receivedAt": "2026-08-20T23:21:15.814Z",
+   "durationMs": 49978,
+   "eventCount": 26,
+   "likeCount": 8,
+   "playCount": 90,
+   "location": {
+    "country": "US",
+    "region": "Massachusetts",
+    "city": "Boston",
+    "latitude": 42.3584,
+    "longitude": -71.0598
+   },
+   "appVersion": "v1.80"
+  }
+ ]
+}

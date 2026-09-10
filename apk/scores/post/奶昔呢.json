@@ -1,0 +1,58 @@
+{
+ "id": "e96beb3a-8ea2-4fab-9e87-3d3f1012a4fa",
+ "entity_type": "post",
+ "entity_id": "0c6f35ed-fcef-4085-97db-3380039b21b9",
+ "title": "奶昔呢",
+ "change_source": "admin_approve",
+ "author_id": null,
+ "created_at": "2026-08-07T02:08:24.131007+00:00",
+ "score_content": {
+  "score": {
+   "lines": [
+    {
+     "jianziTokens": [
+      {
+       "code": "moqi",
+       "kind": "jianzi",
+       "text": "抹七",
+       "partIds": [
+        "019",
+        "013"
+       ],
+       "categorySlots": [
+        "抹",
+        "number"
+       ],
+       "slotTransforms": [
+        {
+         "x": 50,
+         "y": 85,
+         "lengthX": 156,
+         "lengthY": 85
+        },
+        {
+         "x": 50,
+         "y": 170,
+         "lengthX": 156,
+         "lengthY": 85
+        }
+       ]
+      }
+     ],
+     "rhythmTokens": []
+    }
+   ]
+  },
+  "tempo": 80,
+  "title": "奶昔呢",
+  "format": "lingling.gqp",
+  "tuning": "正调",
+  "version": 1,
+  "scoreOwnerId": "073ecaa9-897a-49cd-9d65-28116f654d20",
+  "timeSignature": "4/4",
+  "scoreOwnerName": "广陵",
+  "ticksPerQuarter": 480,
+  "libraryItemStatus": "draft",
+  "scoreCardIntroduction": "好的姐不行就超级你信不信不信把你那些不能信那你先不行你就大部分你继续那你超级才能你从哪呢才能从那次你那你想你猜你猜你你你从哪呢曾经从那次你你才半年才能从那次你那你想你才能吃你家你从哪呢那些年年初你猜呢你想你那些年才能那你想你猜你猜你那你想你想你发你那你想你想你发你那你先你信不信你那你想你想你的你"
+ }
+}

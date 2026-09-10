@@ -1,0 +1,79 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   全站统一导航按键（v1.86）
+
+   一条规则管两件事：
+   1. 左上角「←」返回上一级 与 右上角「×」关闭，形状、尺寸、字重一律相同；
+   2. 两者都不带圆圈、不带边框、不带底色——凡是给关闭键画圆的旧样式，
+      在这里被一并抹掉，符号也因此永远居中，不会再出现「× 不在圈里」。
+
+   这份文件放在各页样式之后引入，用 !important 压住历史遗留的圆形按键。
+   注意：只针对返回/关闭这一类符号按键，不动头像、徽点、地图标记、
+   指南针等本来就该是圆的元素。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.global-page-back,
+.page-back,
+.map-back,
+.map-exit,
+.modal-x,
+.replay-visual-close,
+.share-close,
+.p-close,
+.pu-close,
+.rv-close,
+.ar-close,
+#qinBack,
+#qinExit,
+#menuClose,
+#boardClose {
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center !important;
+  line-height: 1 !important;
+  filter: none !important;
+  cursor: pointer;
+}
+
+/* 悬停与聚焦也不长出圆圈：只让符号本身变深，外加一道方形焦点框。 */
+.global-page-back:hover,
+.page-back:hover,
+.map-back:hover,
+.map-exit:hover,
+.modal-x:hover,
+.replay-visual-close:hover,
+.share-close:hover,
+.p-close:hover,
+.pu-close:hover,
+.rv-close:hover,
+.ar-close:hover,
+#qinBack:hover,
+#qinExit:hover,
+#menuClose:hover,
+#boardClose:hover {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* 兜底：任何以「关闭 / Close / 返回 / Back」为无障碍标签的符号按键，
+   即便是历史遗留或后来新增的弹窗，也一律套用同一套无圆圈样式。 */
+button[aria-label*="关闭"],
+button[aria-label*="Close"],
+button[aria-label*="close"],
+button[aria-label*="返回"],
+button[aria-label*="Back"],
+button[aria-label*="back"] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+}

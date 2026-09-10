@@ -1,0 +1,566 @@
+[
+  {
+    "id": "001","label": "大","reading": "大","pinyin": ["da"],"svg": "assets/glyphs/大.svg",
+    "categories": ["左手","息前字"]
+  },
+  {
+    "id": "002","label": "食","reading": "食","pinyin": ["shi"],"svg": "assets/glyphs/食.svg",
+    "categories": ["左手"]
+  },
+  {
+    "id": "003","label": "中","reading": "中","pinyin": ["zhong"],"svg": "assets/glyphs/中.svg",
+    "categories": ["左手"]
+  },
+  {
+    "id": "004","label": "名","reading": "名","pinyin": ["ming"],"svg": "assets/glyphs/名.svg",
+    "categories": ["左手"]
+  },
+  {
+    "id": "005","label": "跪","reading": "跪","pinyin": ["gui"],"svg": "assets/glyphs/跪.svg",
+    "categories": ["左手"]
+  },
+  {
+    "id": "006","label": "散","reading": "散","pinyin": ["san"],"svg": "assets/glyphs/散.svg",
+    "categories": ["散"]
+  },
+  {
+    "id": "007","label": "一","reading": "一","pinyin": ["yi"],"svg": "assets/glyphs/一.svg",
+    "categories": ["number","十后","单字"]
+  },
+  {
+    "id": "008","label": "二","reading": "二","pinyin": ["er"],"svg": "assets/glyphs/二.svg",
+    "categories": ["number","十后","多作","单字"]
+  },
+  {
+    "id": "009","label": "三","reading": "三","pinyin": ["san"],"svg": "assets/glyphs/三.svg",
+    "categories": ["number","十后","多作","单字","弹前字"]
+  },
+  {
+    "id": "010","label": "四","reading": "四","pinyin": ["si"],"svg": "assets/glyphs/四.svg",
+    "categories": ["number","多作","单字"]
+  },
+  {
+    "id": "011","label": "五","reading": "五","pinyin": ["wu"],"svg": "assets/glyphs/五.svg",
+    "categories": ["number","单字"]
+  },
+  {
+    "id": "012","label": "六","reading": "六","pinyin": ["liu"],"svg": "assets/glyphs/六.svg",
+    "categories": ["number","单字"]
+  },
+  {
+    "id": "013","label": "七","reading": "七","pinyin": ["qi"],"svg": "assets/glyphs/七.svg",
+    "categories": ["number","单字"]
+  },
+  {
+    "id": "014","label": "八","reading": "八","pinyin": ["ba"],"svg": "assets/glyphs/八.svg",
+    "categories": ["number","单字"]
+  },
+  {
+    "id": "015","label": "九","reading": "九","pinyin": ["jiu"],"svg": "assets/glyphs/九.svg",
+    "categories": ["number","单字"]
+  },
+  {
+    "id": "016","label": "十","reading": "十","pinyin": ["shi"],"svg": "assets/glyphs/十.svg",
+    "categories": ["number","十","单字"]
+  },
+  {
+    "id": "017","label": "擘","reading": "擘","pinyin": ["bo","pi"],"svg": "assets/glyphs/擘.svg",
+    "categories": ["擘"]
+  },
+  {
+    "id": "018","label": "托","reading": "托","pinyin": ["tuo"],"svg": "assets/glyphs/托.svg",
+    "categories": ["挑托","托"]
+  },
+  {
+    "id": "019","label": "抹","reading": "抹","pinyin": ["mo"],"svg": "assets/glyphs/抹.svg",
+    "categories": ["抹"]
+  },
+  {
+    "id": "020","label": "挑","reading": "挑","pinyin": ["tiao"],"svg": "assets/glyphs/挑.svg",
+    "categories": ["挑托","挑"]
+  },
+  {
+    "id": "021","label": "勾","reading": "勾","pinyin": ["gou"],"svg": "assets/glyphs/勾.svg",
+    "categories": ["勾剔摘","勾"]
+  },
+  {
+    "id": "022","label": "剔","reading": "剔","pinyin": ["ti"],"svg": "assets/glyphs/剔.svg",
+    "categories": ["勾剔摘","剔"]
+  },
+  {
+    "id": "023","label": "打","reading": "打","pinyin": ["da"],"svg": "assets/glyphs/打.svg",
+    "categories": ["打"]
+  },
+  {
+    "id": "024","label": "摘","reading": "摘","pinyin": ["zhai"],"svg": "assets/glyphs/摘.svg",
+    "categories": ["勾剔摘","摘"]
+  },
+  {
+    "id": "025","label": "绰","reading": "绰","pinyin": ["chuo"],"svg": "assets/glyphs/绰.svg",
+    "categories": ["绰","引绰注淌浒","吟前字","猱前字"]
+  },
+  {
+    "id": "026","label": "注","reading": "注","pinyin": ["zhu"],"svg": "assets/glyphs/注.svg",
+    "categories": ["注","引绰注淌浒","左右吟前字","注猱前字"]
+  },
+  {
+    "id": "027","label": "历","reading": "历","pinyin": ["li"],"svg": "assets/glyphs/历.svg",
+    "categories": ["历"]
+  },
+  {
+    "id": "028","label": "涓","reading": "涓","pinyin": ["juan"],"svg": "assets/glyphs/涓.svg",
+    "categories": ["技法","涓字"]
+  },
+  {
+    "id": "029","label": "蠲","reading": "蠲","pinyin": ["juan"],"svg": "assets/glyphs/蠲.svg",
+    "categories": ["技法","涓字"]
+  },
+  {
+    "id": "030","label": "从","reading": "从","pinyin": ["cong"],"svg": "assets/glyphs/从.svg",
+    "categories": ["从"]
+  },
+  {
+    "id": "031","label": "头","reading": "头","pinyin": ["tou"],"svg": "assets/glyphs/头.svg",
+    "categories": ["头"]
+  },
+  {
+    "id": "032","label": "括号","reading": "括号","pinyin": ["kuohao"],"svg": "assets/glyphs/括号.svg",
+    "categories": ["括号","头"]
+  },
+  {
+    "id": "033","label": "再","reading": "再","pinyin": ["zai"],"svg": "assets/glyphs/再.svg",
+    "categories": ["多作"]
+  },
+  {
+    "id": "034","label": "作","reading": "作","pinyin": ["zuo"],"svg": "assets/glyphs/作.svg",
+    "categories": ["作"]
+  },
+  {
+    "id": "035","label": "如","reading": "如","pinyin": ["ru"],"svg": "assets/glyphs/如.svg",
+    "categories": ["如"]
+  },
+  {
+    "id": "036","label": "泛","reading": "泛","pinyin": ["fan"],"svg": "assets/glyphs/泛.svg",
+    "categories": ["泛"]
+  },
+  {
+    "id": "037","label": "起","reading": "起","pinyin": ["qi"],"svg": "assets/glyphs/起.svg",
+    "categories": ["单字", "起"]
+  },
+  {
+    "id": "038","label": "止","reading": "止","pinyin": ["zhi"],"svg": "assets/glyphs/止.svg",
+    "categories": ["止"]
+  },
+  {
+    "id": "039","label": "叠","reading": "叠","pinyin": ["die"],"svg": "assets/glyphs/叠.svg",
+    "categories": ["修饰","涓前字"]
+  },
+  {
+    "id": "040","label": "反","reading": "反","pinyin": ["fan"],"svg": "assets/glyphs/反.svg",
+    "categories": ["修饰","反撞前字","涓前字"]
+  },
+  {
+    "id": "041","label": "倒","reading": "倒","pinyin": ["dao"],"svg": "assets/glyphs/倒.svg",
+    "categories": ["修饰","倒轮前字"]
+  },
+  {
+    "id": "042","label": "背","reading": "背","pinyin": ["bei"],"svg": "assets/glyphs/背.svg",
+    "categories": ["修饰","背轮前字","琐前字"]
+  },
+  {
+    "id": "043","label": "全","reading": "全","pinyin": ["quan"],"svg": "assets/glyphs/全.svg",
+    "categories": ["修饰","扶前字"]
+  },
+  {
+    "id": "044","label": "半","reading": "半","pinyin": ["ban"],"svg": "assets/glyphs/半.svg",
+    "categories": ["number","修饰","半轮前字","涓前字","扶前字"]
+  },
+  {
+    "id": "045","label": "长","reading": "长","pinyin": ["chang"],"svg": "assets/glyphs/长.svg",
+    "categories": ["修饰","吟前字","猱前字","琐前字"]
+  },
+  {
+    "id": "046","label": "短","reading": "短","pinyin": ["duan"],"svg": "assets/glyphs/短.svg",
+    "categories": ["修饰","琐前字"]
+  },
+  {
+    "id": "047","label": "少","reading": "少","pinyin": ["shao"],"svg": "assets/glyphs/少.svg",
+    "categories": ["修饰","息前字","吟前字"]
+  },
+  {
+    "id": "048","label": "连","reading": "连","pinyin": ["lian"],"svg": "assets/glyphs/连.svg",
+    "categories": ["修饰","涓前字"]
+  },
+  {
+    "id": "049","label": "顿","reading": "顿","pinyin": ["dun"],"svg": "assets/glyphs/顿.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "050","label": "紧","reading": "紧","pinyin": ["jin"],"svg": "assets/glyphs/紧.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "051","label": "慢","reading": "慢","pinyin": ["man"],"svg": "assets/glyphs/慢.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "052","label": "轻","reading": "轻","pinyin": ["qing"],"svg": "assets/glyphs/轻.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "053","label": "重","reading": "重","pinyin": ["zhong"],"svg": "assets/glyphs/重.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "054","label": "硬","reading": "硬","pinyin": ["ying"],"svg": "assets/glyphs/硬.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "055","label": "软","reading": "软","pinyin": ["ruan"],"svg": "assets/glyphs/软.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "056","label": "缓","reading": "缓","pinyin": ["huan"],"svg": "assets/glyphs/缓.svg",
+    "categories": ["修饰","缓","吟前字","猱前字","缓急吟缓"]
+  },
+  {
+    "id": "057","label": "急","reading": "急","pinyin": ["ji"],"svg": "assets/glyphs/急.svg",
+    "categories": ["修饰","吟前字","猱前字","缓急吟急"]
+  },
+  {
+    "id": "140","label": "疾","reading": "疾","pinyin": ["ji"],"svg": "assets/glyphs/疾.svg",
+    "categories": ["修饰","疾"]
+  },
+  {
+    "id": "058","label": "单","reading": "单","pinyin": ["dan"],"svg": "assets/glyphs/单.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "059","label": "双","reading": "双","pinyin": ["shuang"],"svg": "assets/glyphs/双.svg",
+    "categories": ["修饰","双撞前字","吟前字","弹前字"]
+  },
+  {
+    "id": "060","label": "定","reading": "定","pinyin": ["ding"],"svg": "assets/glyphs/定.svg",
+    "categories": ["修饰","吟前字"]
+  },
+  {
+    "id": "061","label": "略","reading": "略","pinyin": ["lue"],"svg": "assets/glyphs/略.svg",
+    "categories": ["修饰","吟前字","猱前字"]
+  },
+  {
+    "id": "062","label": "落","reading": "落","pinyin": ["luo"],"svg": "assets/glyphs/落.svg",
+    "categories": ["修饰","落指首字"]
+  },
+  {
+    "id": "063","label": "飞","reading": "飞","pinyin": ["fei"],"svg": "assets/glyphs/飞.svg",
+    "categories": ["修饰","吟前字"]
+  },
+  {
+    "id": "064","label": "荡","reading": "荡","pinyin": ["dang"],"svg": "assets/glyphs/荡.svg",
+    "categories": ["修饰","荡吟前字"]
+  },
+  {
+    "id": "065","label": "迎","reading": "迎","pinyin": ["ying"],"svg": "assets/glyphs/迎.svg",
+    "categories": ["修饰","猱前字"]
+  },
+  {
+    "id": "066","label": "虚","reading": "虚","pinyin": ["xu"],"svg": "assets/glyphs/虚.svg",
+    "categories": ["修饰","虚","虚撞前字"]
+  },
+  {
+    "id": "067","label": "细","reading": "细","pinyin": ["xi"],"svg": "assets/glyphs/细.svg",
+    "categories": ["修饰","左右吟前字"]
+  },
+  {
+    "id": "068","label": "齐","reading": "齐","pinyin": ["qi"],"svg": "assets/glyphs/齐.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "069","label": "间","reading": "间","pinyin": ["jian"],"svg": "assets/glyphs/间.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "070","label": "游","reading": "游","pinyin": ["you"],"svg": "assets/glyphs/游.svg",
+    "categories": ["修饰","游吟前字"]
+  },
+  {
+    "id": "071","label": "仰","reading": "仰","pinyin": ["yang"],"svg": "assets/glyphs/仰.svg",
+    "categories": ["修饰"]
+  },
+  {
+    "id": "072","label": "上","reading": "上","pinyin": ["shang"],"svg": "assets/glyphs/上.svg",
+    "categories": ["上下"]
+  },
+  {
+    "id": "073","label": "下","reading": "下","pinyin": ["xia"],"svg": "assets/glyphs/下.svg",
+    "categories": ["上下"]
+  },
+  {
+    "id": "074","label": "不","reading": "不","pinyin": ["bu"],"svg": "assets/glyphs/不.svg",
+    "categories": ["不"]
+  },
+  {
+    "id": "075","label": "临","reading": "临","pinyin": ["lin"],"svg": "assets/glyphs/临.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "076","label": "伏","reading": "伏","pinyin": ["fu"],"svg": "assets/glyphs/伏.svg",
+    "categories": ["center9","middleRow","剌伏次字"]
+  },
+  {
+    "id": "077","label": "入","reading": "入","pinyin": ["ru"],"svg": "assets/glyphs/入.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "078","label": "出","reading": "出","pinyin": ["chu"],"svg": "assets/glyphs/出.svg",
+    "categories": ["出"]
+  },
+  {
+    "id": "079","label": "分","reading": "分","pinyin": ["fen"],"svg": "assets/glyphs/分.svg",
+    "categories": ["分"]
+  },
+  {
+    "id": "080","label": "剌","reading": "剌","pinyin": ["la"],"svg": "assets/glyphs/剌.svg",
+    "categories": ["center9","middleRow","剌字","剌伏首字"]
+  },
+  {
+    "id": "081","label": "动","reading": "动","pinyin": ["dong"],"svg": "assets/glyphs/动.svg",
+    "categories": ["动"]
+  },
+  {
+    "id": "082","label": "合","reading": "合","pinyin": ["he"],"svg": "assets/glyphs/合.svg",
+    "categories": ["单字","合"]
+  },
+  {
+    "id": "083","label": "同","reading": "同","pinyin": ["tong"],"svg": "assets/glyphs/同.svg",
+    "categories": ["同"]
+  },
+  {
+    "id": "084","label": "吟","reading": "吟","pinyin": ["yin"],"svg": "assets/glyphs/吟.svg",
+    "categories": ["单字","吟字","吟猱字","游吟","荡吟"]
+  },
+  {
+    "id": "085","label": "唤","reading": "唤","pinyin": ["huan"],"svg": "assets/glyphs/唤.svg",
+    "categories": ["center9","middleRow","单字"]
+  },
+  {
+    "id": "086","label": "圆","reading": "圆","pinyin": ["yuan"],"svg": "assets/glyphs/圆.svg",
+    "categories": ["center9","middleRow","圆搂首字"]
+  },
+  {
+    "id": "087","label": "声","reading": "声","pinyin": ["sheng"],"svg": "assets/glyphs/声.svg",
+    "categories": ["声"]
+  },
+  {
+    "id": "088","label": "复","reading": "复","pinyin": ["fu"],"svg": "assets/glyphs/复.svg",
+    "categories": ["单字","复"]
+  },
+  {
+    "id": "089","label": "外","reading": "外","pinyin": ["wai"],"svg": "assets/glyphs/外.svg",
+    "categories": ["number"]
+  },
+  {
+    "id": "090","label": "少","reading": "少","pinyin": ["shao"],"svg": "assets/glyphs/少.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "091","label": "就","reading": "就","pinyin": ["jiu"],"svg": "assets/glyphs/就.svg",
+    "categories": ["就字"]
+  },
+  {
+    "id": "092","label": "带","reading": "带","pinyin": ["dai"],"svg": "assets/glyphs/带.svg",
+    "categories": ["单字","带"]
+  },
+  {
+    "id": "093","label": "应","reading": "应","pinyin": ["ying"],"svg": "assets/glyphs/应.svg",
+    "categories": ["应"]
+  },
+  {
+    "id": "094","label": "开","reading": "开","pinyin": ["kai"],"svg": "assets/glyphs/开.svg",
+    "categories": ["开"]
+  },
+  {
+    "id": "095","label": "引","reading": "引","pinyin": ["yin"],"svg": "assets/glyphs/引.svg",
+    "categories": ["引","引绰注淌浒"]
+  },
+  {
+    "id": "096","label": "弦","reading": "弦","pinyin": ["xian"],"svg": "assets/glyphs/弦.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "097","label": "弹","reading": "弹","pinyin": ["tan"],"svg": "assets/glyphs/弹.svg",
+    "categories": ["center9","middleRow","弹字"]
+  },
+  {
+    "id": "098","label": "往","reading": "往","pinyin": ["wang"],"svg": "assets/glyphs/往.svg",
+    "categories": ["往"]
+  },
+  {
+    "id": "099","label": "徽","reading": "徽","pinyin": ["hui"],"svg": "assets/glyphs/徽.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "100","label": "息","reading": "息","pinyin": ["xi"],"svg": "assets/glyphs/息.svg",
+    "categories": ["center9","middleRow","息字"]
+  },
+  {
+    "id": "101","label": "扫","reading": "扫","pinyin": ["sao"],"svg": "assets/glyphs/扫.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "102","label": "扶","reading": "扶","pinyin": ["fu"],"svg": "assets/glyphs/扶.svg",
+    "categories": ["center9","middleRow","扶字"]
+  },
+  {
+    "id": "103","label": "抓","reading": "抓","pinyin": ["zhua"],"svg": "assets/glyphs/抓.svg",
+    "categories": ["单字","抓"]
+  },
+  {
+    "id": "104","label": "拂","reading": "拂","pinyin": ["fu"],"svg": "assets/glyphs/拂.svg",
+    "categories": ["拂字"]
+  },
+  {
+    "id": "105","label": "拍","reading": "拍","pinyin": ["pai"],"svg": "assets/glyphs/拍.svg",
+    "categories": ["center9","middleRow","拍杀左字"]
+  },
+  {
+    "id": "106","label": "拨","reading": "拨","pinyin": ["po","bo"],"svg": "assets/glyphs/拨.svg",
+    "categories": ["拨字"]
+  },
+  {
+    "id": "107","label": "指","reading": "指","pinyin": ["zhi"],"svg": "assets/glyphs/指.svg",
+    "categories": ["落指次字"]
+  },
+  {
+    "id": "108","label": "按","reading": "按","pinyin": ["an"],"svg": "assets/glyphs/按.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "109","label": "挫","reading": "挫","pinyin": ["cuo"],"svg": "assets/glyphs/挫.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "110","label": "捻","reading": "捻","pinyin": ["nian"],"svg": "assets/glyphs/捻.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "111","label": "掐","reading": "掐","pinyin": ["qia"],"svg": "assets/glyphs/掐.svg",
+    "categories": ["单字","掐撮三声掐","掐"]
+  },
+  {
+    "id": "112","label": "推","reading": "推","pinyin": ["tui"],"svg": "assets/glyphs/推.svg",
+    "categories": ["推"]
+  },
+  {
+    "id": "113","label": "掩","reading": "掩","pinyin": ["yan"],"svg": "assets/glyphs/掩.svg",
+    "categories": ["掩"]
+  },
+  {
+    "id": "114","label": "搂","reading": "搂","pinyin": ["lou"],"svg": "assets/glyphs/搂.svg",
+    "categories": ["center9","middleRow","圆搂次字"]
+  },
+  {
+    "id": "115","label": "搯","reading": "搯","pinyin": ["tao"],"svg": "assets/glyphs/搯.svg",
+    "categories": ["单字","掐撮三声掐"]
+  },
+  {
+    "id": "116","label": "撞","reading": "撞","pinyin": ["zhuang"],"svg": "assets/glyphs/撞.svg",
+    "categories": ["单字","撞字","猱前字"]
+  },
+  {
+    "id": "117","label": "撮","reading": "撮","pinyin": ["cuo"],"svg": "assets/glyphs/撮.svg",
+    "categories": ["撮","掐撮三声撮"]
+  },
+  {
+    "id": "118","label": "操","reading": "操","pinyin": ["cao"],"svg": "assets/glyphs/操.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "119","label": "放","reading": "放","pinyin": ["fang"],"svg": "assets/glyphs/放.svg",
+    "categories": ["单字","放"]
+  },
+  {
+    "id": "120","label": "曲","reading": "曲","pinyin": ["qu"],"svg": "assets/glyphs/曲.svg",
+    "categories": ["单字","曲终首字"]
+  },
+  {
+    "id": "121","label": "杀","reading": "杀","pinyin": ["sha"],"svg": "assets/glyphs/杀.svg",
+    "categories": ["center9","middleRow","拍杀右字"]
+  },
+  {
+    "id": "122","label": "来","reading": "来","pinyin": ["lai"],"svg": "assets/glyphs/来.svg",
+    "categories": ["来"]
+  },
+  {
+    "id": "123","label": "浒","reading": "浒","pinyin": ["hu"],"svg": "assets/glyphs/浒.svg",
+    "categories": ["引绰注淌浒"]
+  },
+  {
+    "id": "124","label": "淌","reading": "淌","pinyin": ["tang"],"svg": "assets/glyphs/淌.svg",
+    "categories": ["引绰注淌浒"]
+  },
+  {
+    "id": "125","label": "渡","reading": "渡","pinyin": ["du"],"svg": "assets/glyphs/渡.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "126","label": "滚","reading": "滚","pinyin": ["gun"],"svg": "assets/glyphs/滚.svg",
+    "categories": ["滚字"]
+  },
+  {
+    "id": "127","label": "牵","reading": "牵","pinyin": ["qian"],"svg": "assets/glyphs/牵.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "128","label": "猱","reading": "猱","pinyin": ["nao"],"svg": "assets/glyphs/猱.svg",
+    "categories": ["单字","猱字","吟猱字","荡猱"]
+  },
+  {
+    "id": "129","label": "琐","reading": "琐","pinyin": ["suo"],"svg": "assets/glyphs/琐.svg",
+    "categories": ["center9","middleRow","琐字"]
+  },
+  {
+    "id": "130","label": "索","reading": "索","pinyin": ["suo"],"svg": "assets/glyphs/索.svg",
+    "categories": ["单字","索铃首字"]
+  },
+  {
+    "id": "131","label": "终","reading": "终","pinyin": ["zhong"],"svg": "assets/glyphs/终.svg",
+    "categories": ["单字","曲终末字"]
+  },
+  {
+    "id": "132","label": "至","reading": "至","pinyin": ["zhi"],"svg": "assets/glyphs/至.svg",
+    "categories": ["至"]
+  },
+  {
+    "id": "133","label": "轮","reading": "轮","pinyin": ["lun"],"svg": "assets/glyphs/轮.svg",
+    "categories": ["轮字"]
+  },
+  {
+    "id": "134","label": "进","reading": "进","pinyin": ["jin"],"svg": "assets/glyphs/进.svg",
+    "categories": ["单字","上下","进"]
+  },
+  {
+    "id": "135","label": "退","reading": "退","pinyin": ["tui"],"svg": "assets/glyphs/退.svg",
+    "categories": ["单字","上下","退"]
+  },
+  {
+    "id": "136","label": "逗","reading": "逗","pinyin": ["dou"],"svg": "assets/glyphs/逗.svg",
+    "categories": ["center9","middleRow","单字"]
+  },
+  {
+    "id": "137","label": "铃","reading": "铃","pinyin": ["ling"],"svg": "assets/glyphs/铃.svg",
+    "categories": ["铃","索铃铃字","铃字"]
+  },
+  {
+    "id": "138","label": "雷","reading": "雷","pinyin": ["lei"],"svg": "assets/glyphs/雷.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "139","label": "鼓","reading": "鼓","pinyin": ["gu"],"svg": "assets/glyphs/鼓.svg",
+    "categories": ["center9","middleRow"]
+  },
+  {
+    "id": "141","label": "小","reading": "小","pinyin": ["xiao"],"svg": "assets/glyphs/小.svg",
+    "categories": ["小撞前字"]
+  }
+]
