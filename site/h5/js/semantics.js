@@ -54,7 +54,7 @@
     const text = token.text || labels.join('');
     const cats = (token.partIds || []).map(cat);
 
-    const isCat = (i, c) => slots[i] === c || cats[i].includes(c);
+    const isCat = (i, c) => slots[i] === c || (cats[i] && cats[i].includes(c));
     const findSlot = c => slots.findIndex((s, i) => s === c);
 
     // 控制符（反复/起止等结构记号，不发声、不占时长）
@@ -63,7 +63,7 @@
     }
 
     // 上下滑音（走手音）：上下[,number[,number]]
-    if (slots[0] === '上下' || cats[0].includes('上下')) {
+    if (slots[0] === '上下' || (cats[0] && cats[0].includes('上下'))) {
       const nums = labels.filter((_, i) => slots[i] === 'number' || NUM.includes(_));
       const dir = labels[0] === '上' ? 'up' : 'down';
       const to = nums.length ? digitsToHui(nums.join('')) : null;

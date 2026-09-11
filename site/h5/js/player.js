@@ -37,7 +37,7 @@
     let t = 0.4;
     let tempo = defaultTempo || 60;
     let bracketIdx = -1;   // 最近一个「括号」在 events 中的位置（反复段起点）
-    let domIdx = 0;        // 非空 token 的全局序号，与 DOM 渲染顺序一致
+    let domIdx = 0;        // 可见 token（非控制符）的全局序号，与 DOM 渲染顺序一致
     for (const line of score.lines || []) {
       if (line.sectionTempo) tempo = line.sectionTempo;
       const jt = (line.jianziTokens || []);
@@ -46,7 +46,6 @@
       for (let i = 0; i < jt.length; i++) {
         const tok = jt[i];
         if (tok.kind === 'blank') continue;
-        const myDom = domIdx++;      // 每个非空 token 占一个 DOM 位
         const r = rt[i];
         // 节奏按位置对齐：blank 节奏沿用前一非空节奏
         const rhythm = (r && r.kind !== 'blank' && r.duration) ? r : lastDur;
@@ -66,7 +65,7 @@
             prev.action.to = toNum;
             prev.action.text = (prev.action.text || '') + tok.text;
           }
-          continue;  // 「至」本身不占时长，合并到前一事件（沿用前一 domIdx）
+          continue;  // 「至」本身不占时长，合并到前一事件
         }
 
         if (act.type === 'ctrl') {
@@ -86,11 +85,12 @@
           }
           // 泛起/泛止：零时长事件入队，播放时切换 harmonicCtx
           if (act.ctrl === '泛起' || act.ctrl === '泛止') {
-            events.push({ t, dur: 0, token: tok, action: act, tempo, domIdx: myDom });
+            events.push({ t, dur: 0, token: tok, action: act, tempo, domIdx: domIdx - 1 });
           }
-          continue;
+          continue;   // 控制符不分配 domIdx
         }
-        events.push({ t, dur: sec, token: tok, action: act, tempo, domIdx: myDom });
+        const myDom = domIdx++;      // 可见 token（音符/滑音等）分配 DOM 位
+        events.push({ t, dur: sec, token: tok, action: act, tempo, domIdx: myDom, rhythm });
         t += sec;
       }
     }
@@ -98,9 +98,15 @@
   }
 
   /* 单事件发声（也是点读器的入口） */
-  function fireAction(act, dur) {
+  function fireAction(act, dur, rhythm, tempo) {
     const A = window.GuqinAudio;
+    const Stage = window.GuqinStage;
     dur = dur || 1.2;
+    tempo = tempo || 60;
+    // 从节奏 token 取出各组件拍数（扫弦/和弦按组件分配时值）
+    const compBeats = rhythm && rhythm.rhythmComponents
+      ? rhythm.rhythmComponents.map(c => DUR[c.duration] || 0)
+      : null;
     if (act.type === 'ctrl') {
       if (act.ctrl === '泛起') harmonicCtx = true;
       if (act.ctrl === '泛止') harmonicCtx = false;
@@ -110,16 +116,18 @@
       // 走手音：从上一音滑向目标徽
       const s = lastString || 1;
       const from = lastFreq || A.OPEN[s - 1];
+      const fromHui = lastHui || lastHuiByString[s] || '七徽';
       const toHui = act.toHui;
       let target = toHui ? A.freqOf(s, toHui, false) : from * (act.dir === 'up' ? 1.122 : 1 / 1.122);
+      if (Stage) Stage.press({ string: s, hui: toHui || lastHui, open: false });
       if (act.bounce) {
         // 逗/唤：半音急滑即回（逗=急上复下，唤=急下复上）
         const peak = from * (act.dir === 'up' ? 1.0595 : 1 / 1.0595);
-        A.play(s, false, false, from, { glideTo: peak, glideSec: 0.12, dur: 0.3, gain: 0.5 });
-        later(() => A.play(s, false, false, peak, { glideTo: from, glideSec: 0.12, dur: 0.3, gain: 0.45 }), 130);
+        A.play(s, false, false, from, { glideTo: peak, glideSec: 0.12, dur: 0.3, gain: 0.5, hui: fromHui });
+        later(() => A.play(s, false, false, peak, { glideTo: from, glideSec: 0.12, dur: 0.3, gain: 0.45, hui: fromHui }), 130);
         return;
       }
-      A.play(s, false, false, from, { glideTo: target, glideSec: Math.max(0.4, dur * 0.7), dur, gain: 0.55 });
+      A.play(s, false, false, from, { glideTo: target, glideSec: Math.max(0.4, dur * 0.7), dur, gain: 0.55, hui: fromHui });
       lastFreq = target; lastHui = toHui || lastHui;
       if (toHui) lastHuiByString[s] = toHui;       // 走手音后左手在新徽位
       return;
@@ -129,24 +137,38 @@
       if (A.damp) A.damp();
       return;
     }
+    // 琴面舞台：左手按位(蓝) + 右手拨弦(橙) 圆点
+    if (Stage) Stage.playAction(act, rhythm);
     if (act.type === 'chord') {
       (act.positions || []).forEach(p => pluckOne(p, dur, act.mods));
       return;
     }
     if (act.type === 'sweep') {
-      // 滚/拂/历：连刷多弦，间隔 80ms
-      // open=true 散音扫弦；harmonicCtx=true 泛音扫弦；否则按音扫弦（用 act.hui）
+      // 滚/拂/历：连刷多弦。按节奏组件分配每根弦的间隔；无组件则均分总时长
       const step = act.to >= act.from ? 1 : -1;
+      const strings = [];
+      for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step) strings.push(s);
+      const n = strings.length;
       const A = window.GuqinAudio;
       const isHarm = harmonicCtx && !act.open;
       const swHui = act.hui || lastHui || '七徽';
-      for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step) {
-        const del = Math.abs(s - act.from) * 80;
-        const freq = act.open ? A.OPEN[s - 1] : A.freqOf(s, swHui, isHarm);
-        const f = () => A.play(s, isHarm, act.open, freq, { dur: 0.7, gain: 0.6, hui: swHui });
-        del === 0 ? f() : later(f, del);
+      // 每根弦的间隔拍数：有组件且数量匹配则用组件；否则总时长均分
+      let gapBeats;
+      if (compBeats && compBeats.length === n) {
+        gapBeats = compBeats.slice();
+      } else {
+        const totalBeats = rhythmBeats(rhythm) || 1;
+        const each = totalBeats / n;
+        gapBeats = new Array(n).fill(each);
       }
-      // 记录最后一根弦的状态，供后续 carry 技法沿用
+      let cumMs = 0;
+      strings.forEach((s, i) => {
+        const freq = act.open ? A.OPEN[s - 1] : A.freqOf(s, swHui, isHarm);
+        const noteDur = Math.max(0.4, (gapBeats[i] || 0.25) * 60 / tempo);
+        const f = () => A.play(s, isHarm, act.open, freq, { dur: noteDur, gain: 0.6, hui: swHui });
+        cumMs === 0 ? f() : later(f, cumMs);
+        cumMs += (gapBeats[i] || 0.25) * 60 / tempo * 1000;
+      });
       lastString = act.to;
       lastFreq = act.open ? A.OPEN[act.to - 1] : A.freqOf(act.to, swHui, isHarm);
       if (!act.open) { lastHui = swHui; lastHuiByString[act.to] = swHui; }
@@ -156,8 +178,18 @@
       const reps = Math.max(1, act.reps || 1);
       pluckOne(act, dur / reps * 1.5, act.mods);
       if (act.double && reps === 1) {
-        // 连弹（抹挑七/勾剔二）：同弦两触，第二触约 90ms 后（同弦重触自然掐断前音）
-        later(() => pluckOne(act, Math.max(0.4, dur * 0.6), act.mods), 90);
+        // 连弹（抹挑七/勾剔二/打摘五）：同弦两触，按节奏组件分配间隔
+        // 有组件时第一音占 compBeats[0] 拍，第二音延迟 compBeats[0] 拍后触发
+        let gapMs;
+        if (compBeats && compBeats.length >= 2) {
+          gapMs = compBeats[0] * 60 / tempo * 1000;
+        } else {
+          gapMs = 90;  // 无组件信息时默认 90ms
+        }
+        const secondDur = compBeats && compBeats.length >= 2
+          ? Math.max(0.3, compBeats[1] * 60 / tempo)
+          : Math.max(0.4, dur * 0.6);
+        later(() => pluckOne(act, secondDur, act.mods), gapMs);
       }
       for (let k = 1; k < reps; k++) {
         // 轮/琐：同弦快弹，75ms 间隔（同弦重触自然形成斩截感）
@@ -225,7 +257,7 @@
     tl.events.forEach((ev, i) => {
       later(() => {
         if (!playing || myRun !== runId) return;
-        fireAction(ev.action, ev.dur);
+        fireAction(ev.action, ev.dur, ev.rhythm, ev.tempo);
         if (onTokenCb) onTokenCb(i, ev);
       }, ev.t * 1000);
     });
@@ -238,9 +270,9 @@
   }
 
   /* 点读：单个 token 即时发声 */
-  function tapToken(token) {
+  function tapToken(token, rhythm, tempo) {
     const act = window.JianziSemantics.parseToken(token);
-    fireAction(act, 1.2);
+    fireAction(act, 1.2, rhythm, tempo || 60);
     return act;
   }
 
@@ -249,6 +281,7 @@
     timers.forEach(clearTimeout); timers = [];
     lastFreq = 0; lastString = 1; lastHui = null; harmonicCtx = false;
     Object.keys(lastHuiByString).forEach(k => delete lastHuiByString[k]);
+    if (window.GuqinStage && window.GuqinStage.clear) window.GuqinStage.clear();
   }
   function isPlaying() { return playing; }
 

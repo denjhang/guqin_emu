@@ -126,7 +126,7 @@
     const sheet = $('#hallStrip');
     sheet.innerHTML = '';
     hallTokens = [];
-    // 展平为带行边界的字序列
+    // 展平为带行边界的字序列（控制符单独标记，不计入 hallTokens 序号）
     const flat = [];
     (score.lines || []).forEach((line, li) => {
       const jt = line.jianziTokens || [];
@@ -137,7 +137,10 @@
         // 节奏按位置对齐：blank 节奏沿用前一非空节奏
         const r = (rt[i] && rt[i].kind !== 'blank') ? rt[i] : lastR;
         if (rt[i] && rt[i].kind !== 'blank') lastR = rt[i];
-        flat.push({ tok, r, lineBreakAfter: false, li });
+        // 判断是否为控制符（括号/从括号再作/少息/泛起/泛止等，不占 domIdx）
+        const act = window.JianziSemantics.parseToken(tok);
+        const isCtrl = act.type === 'ctrl';
+        flat.push({ tok, r, lineBreakAfter: false, li, isCtrl });
       });
       if (flat.length) flat[flat.length - 1].lineBreakAfter = true;
     });
@@ -152,9 +155,9 @@
     rows.forEach(cells => {
       const rowEl = document.createElement('div');
       rowEl.className = 'hall-row';
-      cells.forEach(({ tok, r }) => {
+      cells.forEach(({ tok, r, isCtrl }) => {
         const cell = document.createElement('button');
-        cell.className = 'hall-cell';
+        cell.className = 'hall-cell' + (isCtrl ? ' hall-ctrl' : '');
         const rEl = document.createElement('span');
         rEl.className = 'rhythm';
         rEl.textContent = r ? r.text : '♪';
@@ -169,13 +172,13 @@
         cell.appendChild(rEl); cell.appendChild(bEl); cell.appendChild(jEl);
         cell.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
-          window.GuqinPlayer.tapToken(tok);
+          window.GuqinPlayer.tapToken(tok, r, +($('#hallTempo').value) || 60);
           const act = window.JianziSemantics.parseToken(tok);
           if (window.HallFire) window.HallFire(act);
           cell.classList.add('flash'); setTimeout(() => cell.classList.remove('flash'), 350);
         });
         rowEl.appendChild(cell);
-        hallTokens.push(cell);
+        if (!isCtrl) hallTokens.push(cell);   // 控制符不计入序号，与 domIdx 对齐
       });
       sheet.appendChild(rowEl);
     });
@@ -205,9 +208,12 @@
     const tempo = +($('#hallTempo').value) || null;
     const sc = tempo ? { lines: hallScore.score_content.score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : hallScore.score_content.score;
     const wrap = $('#hallStripWrap');
-    window.GuqinPlayer.play(sc, tempo, (i) => {
-      hallTokens.forEach((t, k) => { t.classList.toggle('done', k < i); t.classList.toggle('playing', k === i); });
-      const el = hallTokens[i];
+    window.GuqinPlayer.play(sc, tempo, (i, ev) => {
+      // 跳过零时长控制事件（泛起/泛止），只高亮实际音符
+      if (ev.dur === 0) return;
+      const di = ev.domIdx != null ? ev.domIdx : i;
+      hallTokens.forEach((t, k) => { t.classList.toggle('done', k < di); t.classList.toggle('playing', k === di); });
+      const el = hallTokens[di];
       if (el) {
         // 多行纵向跟随：只在换行时滚动一次；坐标用视口相对换算（offsetTop 参照不可靠）
         const row = el.closest('.hall-row');

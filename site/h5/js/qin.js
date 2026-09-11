@@ -1,10 +1,13 @@
 /* 琴面模拟器（复刻 APK 演奏页下半屏）：
- * 七弦 + 十三徽，演奏时左手按位动画（徽位按压点）+ 右手拨弦区闪光 + 弦振动衰减
+ * 七弦 + 十三徽，演奏时左手按位（蓝点）+ 右手拨弦（橙点）+ 弦振动衰减
+ * 支持多点触控：和弦/扫弦时多个左右手圆点同时显示
  * 坐标系：徽位用弦长百分比（HUI_MARKS），分数徽位线性插值 */
 (function () {
   'use strict';
   let cv, ctx2d, marks = [], presses = [], raf = 0;
-  const PRESS_MS = 700, VIB_MS = 900;
+  let showHuiLabels = false;
+  const PRESS_MS = 800, VIB_MS = 900;
+  const HUI_NAMES = ['一徽','二徽','三徽','四徽','五徽','六徽','七徽','八徽','九徽','十徽','十一徽','十二徽','十三徽'];
 
   function huiToPercent(hui) {
     if (!hui) return 49;                       // 七徽
@@ -47,17 +50,52 @@
     return { W, H, padL, padR, strings };
   }
 
-  /* 记录一次发声：{string, hui, open, harmonic} */
-  function press(note) {
+  /* 记录一次发声：{string, hui, open, harmonic}
+   * 左手按位（非散音）+ 右手拨弦（总是）分开记录，可同时多点显示 */
+  function playNote(note) {
     if (!note || !note.string) return;
-    presses.push({
-      string: note.string,
-      x: note.open ? null : huiToPercent(note.hui),
-      open: !!note.open, harmonic: !!note.harmonic,
-      t0: performance.now()
-    });
-    if (presses.length > 24) presses = presses.slice(-24);
+    const t0 = performance.now();
+    const huiName = note.hui || null;
+    // 右手拨弦点（一徽右侧，岳山附近）
+    presses.push({ hand: 'R', string: note.string, x: 97, open: !!note.open, harmonic: !!note.harmonic, t0 });
+    // 左手按位点（非散音时）
+    if (!note.open) {
+      presses.push({ hand: 'L', string: note.string, x: huiToPercent(note.hui), harmonic: !!note.harmonic, t0, huiName });
+    }
+    if (presses.length > 40) presses = presses.slice(-40);
   }
+
+  /* 播放一个 action（pluck/chord/sweep），展开所有弦
+   * rhythm: 节奏 token，用于扫弦按组件时序显示圆点 */
+  function playAction(action, rhythm) {
+    if (!action) return;
+    if (action.type === 'chord') {
+      (action.positions || []).forEach(p => playNote(p));
+    } else if (action.type === 'sweep') {
+      const step = action.to >= action.from ? 1 : -1;
+      const strings = [];
+      for (let s = action.from; step > 0 ? s <= action.to : s >= action.to; s += step) strings.push(s);
+      const n = strings.length;
+      // 有节奏组件且数量匹配则按组件间隔；否则均分（与音频端一致）
+      let gaps;
+      if (rhythm && rhythm.rhythmComponents && rhythm.rhythmComponents.length === n) {
+        const DUR = { whole: 4, half: 2, quarter: 1, eighth: 0.5, sixteenth: 0.25, thirtySecond: 0.125 };
+        gaps = rhythm.rhythmComponents.map(c => DUR[c.duration] || 0);
+      } else {
+        gaps = new Array(n).fill(1 / n);
+      }
+      let delay = 0;
+      strings.forEach((s, i) => {
+        setTimeout(() => playNote({ string: s, hui: action.hui, open: action.open, harmonic: action.harmonic }), delay);
+        delay += (gaps[i] || 0.25) * 200;  // 视觉用缩短的时序，保持流畅
+      });
+    } else if (action.type === 'pluck') {
+      playNote(action);
+    }
+  }
+
+  function setHuiLabels(show) { showHuiLabels = !!show; }
+  function clear() { presses = []; }
 
   function loop() {
     if (!ctx2d) return;
@@ -69,6 +107,7 @@
     const { W, H, padL, padR, strings } = geometry();
     const g = ctx2d;
     const now = performance.now();
+    const dpr = devicePixelRatio;
     g.clearRect(0, 0, W, H);
     // 琴身
     g.fillStyle = '#241612';
@@ -84,18 +123,28 @@
     marks.forEach((m, i) => {
       const x = padL + (padR - padL) * m / 100;
       g.beginPath();
-      g.arc(x, H * 0.09, i === 6 ? 7 * devicePixelRatio : 4.5 * devicePixelRatio, 0, 7);
+      g.arc(x, H * 0.09, i === 6 ? 7 * dpr : 4.5 * dpr, 0, 7);
       g.fillStyle = i === 6 ? '#e8d9a8' : '#c9b98d';
       g.fill();
     });
+    // 徽位名称（开关控制）
+    if (showHuiLabels) {
+      g.font = `${10 * dpr}px sans-serif`;
+      g.fillStyle = 'rgba(201,185,141,0.7)';
+      g.textAlign = 'center';
+      marks.forEach((m, i) => {
+        const x = padL + (padR - padL) * m / 100;
+        g.fillText(HUI_NAMES[i] || '', x, H * 0.14);
+      });
+    }
     // 弦 + 振动
     strings.forEach((s, i) => {
       const n = i + 1;
       const pr = presses.find(p => p.string === n && now - p.t0 < VIB_MS);
       let amp = 0;
-      if (pr) amp = Math.sin((now - pr.t0) / VIB_MS * Math.PI) * 3.2 * devicePixelRatio;
+      if (pr) amp = Math.sin((now - pr.t0) / VIB_MS * Math.PI) * 3.2 * dpr;
       g.strokeStyle = pr ? '#e7c079' : '#d8cdb4';
-      g.lineWidth = s.w * devicePixelRatio;
+      g.lineWidth = s.w * dpr;
       g.beginPath();
       const y = s.y;
       g.moveTo(padL, y);
@@ -107,42 +156,59 @@
       } else g.lineTo(padR, y);
       g.stroke();
     });
-    // 按位 / 拨弦指示
+    // 左右手圆点
     presses.forEach(p => {
       const age = now - p.t0;
       if (age > PRESS_MS) return;
       const alpha = 1 - age / PRESS_MS;
       const s = strings[p.string - 1];
-      if (p.open) {
-        // 右手拨弦区（一徽右侧）
-        const x = padL + (padR - padL) * 0.97;
+      const x = padL + (padR - padL) * p.x / 100;
+      if (p.hand === 'L') {
+        // 左手：蓝色按位圆点
         g.beginPath();
-        g.arc(x, s.y, (6 + age / PRESS_MS * 14) * devicePixelRatio, 0, 7);
-        g.strokeStyle = `rgba(231,192,121,${alpha * 0.9})`;
-        g.lineWidth = 2 * devicePixelRatio;
-        g.stroke();
-      } else {
-        const x = padL + (padR - padL) * p.x / 100;
-        // 按压点：朱砂圆点 + 收缩光环
-        g.beginPath();
-        g.arc(x, s.y, 7 * devicePixelRatio, 0, 7);
-        g.fillStyle = `rgba(214,69,69,${alpha})`;
+        g.arc(x, s.y, 7 * dpr, 0, 7);
+        g.fillStyle = `rgba(59,130,246,${alpha})`;
         g.fill();
         g.beginPath();
-        g.arc(x, s.y, (10 + age / PRESS_MS * 16) * devicePixelRatio, 0, 7);
-        g.strokeStyle = `rgba(230,120,120,${alpha * 0.6})`;
-        g.lineWidth = 1.5 * devicePixelRatio;
+        g.arc(x, s.y, (10 + age / PRESS_MS * 14) * dpr, 0, 7);
+        g.strokeStyle = `rgba(96,165,250,${alpha * 0.6})`;
+        g.lineWidth = 1.5 * dpr;
         g.stroke();
         if (p.harmonic) {  // 泛音：青青光环
           g.beginPath();
-          g.arc(x, s.y, 13 * devicePixelRatio, 0, 7);
+          g.arc(x, s.y, 13 * dpr, 0, 7);
           g.strokeStyle = `rgba(127,212,230,${alpha * 0.8})`;
+          g.lineWidth = 2 * dpr;
           g.stroke();
         }
+        // 徽位名称标签（原版详细显示按音位置）
+        if (p.huiName) {
+          const labelY = s.y + 22 * dpr;
+          g.font = `bold ${13 * dpr}px sans-serif`;
+          g.textAlign = 'center';
+          g.textBaseline = 'top';
+          const tw = g.measureText(p.huiName).width;
+          g.fillStyle = `rgba(30,41,59,${alpha * 0.85})`;
+          g.fillRect(x - tw / 2 - 4 * dpr, labelY - 2 * dpr, tw + 8 * dpr, 18 * dpr);
+          g.fillStyle = `rgba(191,219,254,${alpha})`;
+          g.fillText(p.huiName, x, labelY);
+          g.textBaseline = 'alphabetic';
+        }
+      } else {
+        // 右手：橙色拨弦点（扩散环）
+        g.beginPath();
+        g.arc(x, s.y, (5 + age / PRESS_MS * 12) * dpr, 0, 7);
+        g.strokeStyle = `rgba(245,158,11,${alpha * 0.9})`;
+        g.lineWidth = 2.5 * dpr;
+        g.stroke();
+        g.beginPath();
+        g.arc(x, s.y, 3 * dpr, 0, 7);
+        g.fillStyle = `rgba(251,191,36,${alpha})`;
+        g.fill();
       }
     });
     presses = presses.filter(p => now - p.t0 < PRESS_MS);
   }
 
-  window.GuqinStage = { init, press, resize };
+  window.GuqinStage = { init, press: playNote, playAction, setHuiLabels, clear, resize };
 })();

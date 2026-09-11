@@ -172,7 +172,9 @@
     const huiIdx = harmonic ? harmIndex(opts.hui) : null;
     const hui = opts.hui;
     const buf = await loadSample(kind, string, huiIdx, hui);
-    const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : (kind === 'pressed' ? ':' + (hui || 'x') : ''));
+    // APK 按音全用同一采样(string_N.wav)，vkey 不含 hui → 同弦按音互掐
+    // 教授按音每徽位独立采样，vkey 含 hui → 不同徽位可共存
+    const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : (kind === 'pressed' && soundSource === 'prof' ? ':' + (hui || 'x') : ''));
     const t = c.currentTime + 0.01;
     // 教授音源：每条采样录于对应徽位，自然音高即正确，rate=1（参考站 SM.tuning 默认 1）
     // APK 音源：散/按/泛 全录于七徽，需按目标频率变调
@@ -216,7 +218,10 @@
       src.playbackRate.setValueAtTime(rate * Math.pow(2, semi / 12), t);
       src.playbackRate.linearRampToValueAtTime(rate, t + glide);
     } else if (opts.glideTo) {
-      const baseRate = soundSource === 'prof' ? 1 : baseFreq(kind, string, huiIdx, hui);
+      // baseRate = 采样基准频率。教授音源采样录于对应徽位（baseFreq 返回该徽位频率），
+      // APK 音源全录于七徽（baseFreq 返回 open*2）。
+      // 目标播放速率 = 目标频率 / 采样基准频率
+      const baseRate = baseFreq(kind, string, huiIdx, hui);
       src.playbackRate.setValueAtTime(Math.max(0.05, rate), t);
       src.playbackRate.linearRampToValueAtTime(Math.max(0.05, opts.glideTo / baseRate), t + (opts.glideSec || 0.6));
     } else if (opts.vibrato) {

@@ -86,6 +86,11 @@
     // 大厅点读不联动琴面（该视图无琴面）
     $('#playBtn').addEventListener('click', playCurrent);
     $('#stopBtn').addEventListener('click', () => { window.GuqinPlayer.stop(); clearHighlight(); });
+    const huiBtn = $('#huiLabelBtn');
+    if (huiBtn) huiBtn.addEventListener('click', () => {
+      const on = huiBtn.classList.toggle('active');
+      window.GuqinStage.setHuiLabels(on);
+    });
     $('#tempoInput').addEventListener('change', () => {});
     // 编辑器
     $('#inputBtn').addEventListener('click', submitInput);
@@ -199,30 +204,13 @@
         el.title = tok.text + (beats ? '（' + beats + '）' : '');
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
-          const act = window.GuqinPlayer.tapToken(tok);
-          fireStage(act); flash(el); showExplain(tok.text);
+          window.GuqinPlayer.tapToken(tok, r, +($('#tempoInput').value) || 60);
+          flash(el); showExplain(tok.text);
         });
         strip.appendChild(el);
       });
     });
     strip.scrollLeft = 0;
-  }
-
-  /* 把解析出的动作喂给琴面动画 */
-  function fireStage(act) {
-    const notes = [];
-    if (act.type === 'pluck') notes.push(act);
-    else if (act.type === 'chord') (act.positions || []).forEach(n => notes.push(n));
-    else if (act.type === 'sweep') {
-      const step = act.to >= act.from ? 1 : -1;
-      for (let s = act.from; step > 0 ? s <= act.to : s >= act.to; s += step)
-        notes.push({ string: s, open: true });
-    }
-    notes.forEach((n, i) => {
-      if (!n.string) return;
-      const fire = () => window.GuqinStage.press({ string: n.string, hui: n.hui || null, open: n.open, harmonic: n.harmonic });
-      i === 0 ? fire() : setTimeout(fire, i * 80);
-    });
   }
 
   function renderScore(score, sel) {
@@ -237,8 +225,11 @@
         if (tok.kind === 'blank') { div.appendChild(Object.assign(document.createElement('span'), { className: 'blank', textContent: ' ' })); return; }
         const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
         if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
+        // 控制符（括号/从括号再作/少息/泛起/泛止等）标记为 jz-ctrl，不占 domIdx
+        const act = window.JianziSemantics.parseToken(tok);
+        const isCtrl = act.type === 'ctrl';
         const el = document.createElement('button');
-        el.className = 'jz-token';
+        el.className = 'jz-token' + (isCtrl ? ' jz-ctrl' : '');
         el.dataset.idx = idx;
         const beats = window.GuqinPlayer.rhythmToBeats(r);
         const rtxt = r ? r.text : '';
@@ -273,7 +264,7 @@
     const sc = tempo ? { lines: score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : score;
     const isCurrent = current && score === current.score_content.score;
     const strip = $('#strip');
-    const tks = isCurrent ? [...strip.querySelectorAll('.jz-token')] : [...$('#editorView').querySelectorAll('.jz-token')];
+    const tks = isCurrent ? [...strip.querySelectorAll('.jz-token:not(.jz-ctrl)')] : [...$('#editorView').querySelectorAll('.jz-token:not(.jz-ctrl)')];
     window.GuqinPlayer.play(sc, tempo,
       (i, ev) => {
         clearHighlight();
@@ -289,7 +280,6 @@
             tks.forEach((t, k) => { if (k < di) t.classList.add('done'); });
           } else el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
         }
-        fireStage(ev.action);
       },
       () => clearHighlight());
   }
@@ -339,7 +329,7 @@
         el.title = tok.text;
         el.addEventListener('click', () => {
           window.GuqinAudio.ensureCtx();
-          window.GuqinPlayer.tapToken(tok); flash(el);
+          window.GuqinPlayer.tapToken(tok, r, +($('#tempoInput').value) || 60); flash(el);
         });
         el.addEventListener('contextmenu', e => {
           e.preventDefault();
