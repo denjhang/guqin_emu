@@ -380,7 +380,18 @@
 
     const src = c.createBufferSource(), g = c.createGain();
     src.buffer = useBuf;
-    src.connect(g);
+    // APK 泛音音色整形：APK 泛音采样实为变调播放，携带大量非谐波噪声与过亮高频。
+    // 真实古琴泛音近纯正弦（笛质感）：只保留基频与前几阶泛音，滤除其余。
+    // 教授版为真实泛音采样，不做任何处理。
+    if (soundSource === 'apk' && kind === 'harmonic') {
+      const f0 = Math.max(80, targetFreq || OPEN[string - 1] * 2);
+      const hp = c.createBiquadFilter(), lp = c.createBiquadFilter();
+      hp.type = 'highpass'; hp.frequency.value = f0 * 0.55; hp.Q.value = 0.7;   // 去基频以下噪声
+      lp.type = 'lowpass';  lp.frequency.value = f0 * 4.5;  lp.Q.value = 0.5;   // 保留前 4 阶泛音，去毛刺
+      src.connect(hp); hp.connect(lp); lp.connect(g);
+    } else {
+      src.connect(g);
+    }
     // 经过混响链路：dry + wet
     g.connect(dryGain);
     g.connect(reverbNode);
