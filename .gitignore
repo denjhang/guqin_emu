@@ -29,6 +29,9 @@ node_modules/
 *.log
 # h5 运行时
 site/h5/audio/
+# 外部数据集（民歌 MusicXML 805MB zip + 解包产物，精华已提取到 data/*.json）
+site/h5/scores/external/
+*.zip
 research/.sbtoken
 reference/Guqin-Dataset/Guqin_Dataset_v1/
 reference/Guqin-Dataset/paper/

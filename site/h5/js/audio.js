@@ -7,6 +7,7 @@
   let ctx = null, bank = {};
   let OPEN = [65.41, 73.59, 88.40, 98.12, 110.38, 130.82, 147.17];
   let pitch = null;
+  let HARM_FREQ = null;   // "弦-徽序号" → {freq} 网页端权威泛音表
   let soundSource = 'apk';   // 'apk' | 'prof'
   // 混响节点
   let masterGain = null, reverbNode = null, wetGain = null, dryGain = null, reverbOn = false;
@@ -57,7 +58,11 @@
     if (wetGain) wetGain.gain.value = reverbOn ? 0.32 : 0;
   }
   function isReverbOn() { return reverbOn; }
-  function init(pitchData) { pitch = pitchData; }
+  function init(pitchData, harmData) {
+    pitch = pitchData;
+    // 网页端权威泛音表：D.HARMONICS 91 条（王悠荻实际琴面泛音频率）
+    if (harmData) HARM_FREQ = harmData;
+  }
   function setSource(src) {
     soundSource = (src === 'prof') ? 'prof' : 'apk';
     try { localStorage.setItem('guqin_source', soundSource); } catch (e) {}
@@ -214,7 +219,7 @@
   function baseFreq(kind, s, huiIdx, hui) {
     const open = OPEN[s - 1];
     if (kind === 'open') return open;
-    if (kind === 'harmonic') return open * (HARM_ORDER[huiIdx] || 2);
+    if (kind === 'harmonic') return freqOf(s, hui, true);   // 与目标频率同一张权威表
     if (soundSource === 'prof') return freqOf(s, hui, false);   // 教授按音录于实际徽位
     return open * 2;   // APK 按音录于七徽
   }
@@ -267,11 +272,15 @@
   function freqOf(string, hui, harmonic) {
     const open = OPEN[string - 1];
     if (harmonic) {
-      // 泛音：f = 散音 × 谐波次数（按徽位查表，7徽=2倍八度，4/10徽=4倍，1/13徽=8倍等）
+      // 泛音：优先查网页端权威表 D.HARMONICS（王悠荻实际琴面 91 个泛音点频率）
       if (hui === '徽外') return open * 1.5;  // 徽外无泛音点，用 3:2 近似
       const n = huiOrderNum(hui);
+      if (HARM_FREQ && n) {
+        const hit = HARM_FREQ[string + '-' + n];
+        if (hit && hit.freq) return hit.freq;
+      }
+      // 旧公式兜底（表未加载时）：f = 散音 × 谐波次数
       if (n && HUI_HARMONIC[n]) return open * HUI_HARMONIC[n];
-      // 未知徽位：查旧 pitch.harmonics 表兜底
       const same = pitch.harmonics.filter(p => p.s === string);
       const hit = same.find(p => p.hui === n) || same.find(p => p.hui === 7);
       return hit ? hit.f * (open / 65.406) : open * 2;

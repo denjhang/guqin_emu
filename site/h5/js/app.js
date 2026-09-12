@@ -80,7 +80,10 @@
     window.JianziRender.init(glyphPaths, glyphParts);
     window.JianziSemantics.init(glyphParts);
     window.JianziInput.init(glyphParts, corpus);
-    window.GuqinAudio.init(pitch);
+    // 加载网页端权威泛音表（D.HARMONICS 91 条，修复泛音音高）
+    let harmFreq = null;
+    try { harmFreq = await loadJSON('data/harmonics.json'); } catch (e) { console.warn('harmonics 加载失败', e); }
+    window.GuqinAudio.init(pitch, harmFreq);
     window.GuqinAudio.preload();
     window.GuqinStage.init(document.getElementById('qinCanvas'), pitch);
     buildLibrary('');
