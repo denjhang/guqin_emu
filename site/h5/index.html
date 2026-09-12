@@ -115,6 +115,9 @@
   .hall-cell.done { opacity:.35; }
   .hall-cell.selected { background:#d4e8f7; box-shadow:0 0 0 2px #4a90d9; }
   .hall-cell.selected.playing { background:#e8d4f7; box-shadow:0 0 0 3px var(--accent); }
+  .hall-cell.playfrom { background:#d9f7dd; box-shadow:0 0 0 3px #2e9e4f; }
+  .hall-cell.playfrom::after { content:'↓'; position:absolute; top:-2px; right:2px; font-size:11px; color:#2e9e4f; font-weight:bold; }
+  .hall-cell { position:relative; }
   .hall-cell.dragging { cursor:grabbing; }
   #hallFavBtn.liked { background:#c0392b; border-color:#c0392b; color:#fff; }
   #fullScoreBox { margin-top:10px; }

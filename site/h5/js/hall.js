@@ -7,7 +7,7 @@
   let catalog = [];   // 服务器曲库目录（真实作者/封面/点赞）
   function setCatalog(c) { catalog = c || []; }
   let hallScore = null, hallTokens = [], hallPlaying = false, lastScrolledRow = null;
-  let selStart = null, selEnd = null, isDragging = false, longPressTimer = null, pressPos = null, suppressClick = false;
+  let selStart = null, selEnd = null, playFrom = null, isDragging = false, dragMoved = false, longPressTimer = null, pressPos = null, suppressClick = false;
 
   function favorites() {
     try { return JSON.parse(localStorage.getItem(favKey) || '{}'); } catch (e) { return {}; }
@@ -178,35 +178,60 @@
           if (isCtrl) return;
           pressPos = { x: e.clientX, y: e.clientY };
           longPressTimer = setTimeout(() => {
-            isDragging = true;
-            selStart = cellIdx;
-            selEnd = cellIdx;
-            updateSelection();
+            // 长按：若已有选区且按在选区上 → 扩展/拖选；否则标记「从此播放」起点
+            if (selStart !== null && selEnd !== null && cellIdx >= Math.min(selStart, selEnd) && cellIdx <= Math.max(selStart, selEnd)) {
+              // 已在选区内长按 → 进入框选拖动模式
+              isDragging = true;
+              selStart = cellIdx;
+              selEnd = cellIdx;
+              updateSelection();
+            } else {
+              // 长按单个字：标记播放起点（点播放 → 从此处播到曲尾）
+              playFrom = cellIdx;
+              clearSelection();
+              hallTokens.forEach(t => t.classList.remove('playfrom'));
+              cell.classList.add('playfrom');
+            }
+            dragMoved = false;   // 是否发生拖动（区分框选 vs 单点起点）
             e.target.setPointerCapture && e.target.setPointerCapture(e.pointerId);
           }, 250);
         });
         cell.addEventListener('pointermove', (e) => {
-          if (!isDragging) {
-            // 未进入选区模式时，移动超过 10px 取消长按
-            if (pressPos && Math.abs(e.clientX - pressPos.x) + Math.abs(e.clientY - pressPos.y) > 10) {
+          if (longPressTimer && !isDragging && pressPos) {
+            // 未进入长按模式时，移动超过 10px 取消长按
+            if (Math.abs(e.clientX - pressPos.x) + Math.abs(e.clientY - pressPos.y) > 10) {
               clearTimeout(longPressTimer);
+              longPressTimer = null;
             }
             return;
           }
-          // 根据鼠标位置找到目标 cell
+          if (longPressTimer) return;   // 长按未触发，忽略
+          // 长按后拖动：playfrom → 变成框选起点（复用原框选逻辑）
           const hit = document.elementFromPoint(e.clientX, e.clientY);
           const targetCell = hit ? hit.closest('.hall-cell') : null;
           if (targetCell) {
             const ti = hallTokens.indexOf(targetCell);
-            if (ti >= 0) { selEnd = ti; updateSelection(); }
+            if (ti >= 0 && ti !== cellIdx) {
+              // 从「从此播放」转入框选：清除 playfrom 标记，建立选区
+              if (playFrom !== null) {
+                playFrom = null;
+                hallTokens.forEach(t => t.classList.remove('playfrom'));
+                selStart = cellIdx;
+                isDragging = true;
+              }
+              if (isDragging) { selEnd = ti; updateSelection(); }
+              dragMoved = true;
+            }
           }
         });
         cell.addEventListener('pointerup', (e) => {
           clearTimeout(longPressTimer);
+          longPressTimer = null;
           pressPos = null;
           if (isDragging) {
+            // 拖动结束：只拖了一个字（未动）→ 保持 playfrom 标记；拖了多个字 → 框选
+            if (dragMoved) { suppressClick = true; }
             isDragging = false;
-            suppressClick = true;  // 抑制后续 click
             e.target.releasePointerCapture && e.target.releasePointerCapture(e.pointerId);
             e.preventDefault();
           }
@@ -235,7 +260,8 @@
   }
   function clearSelection() {
     selStart = null; selEnd = null;
-    hallTokens.forEach(c => c.classList.remove('selected'));
+    playFrom = null;
+    hallTokens.forEach(c => { c.classList.remove('selected'); c.classList.remove('playfrom'); });
   }
 
   function updateFavBtn(liked, count) {
@@ -262,8 +288,14 @@
     const tempo = +($('#hallTempo').value) || null;
     const sc = tempo ? { lines: hallScore.score_content.score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : hallScore.score_content.score;
     const wrap = $('#hallStripWrap');
-    // 有选区时传 range
-    const range = (selStart !== null && selEnd !== null) ? { startDom: selStart, endDom: selEnd } : null;
+    // 选区（框选）优先；无选区但有「从此播放」起点 → 从该字播到曲尾
+    let range = (selStart !== null && selEnd !== null) ? { startDom: selStart, endDom: selEnd } : null;
+    if (!range && playFrom !== null) {
+      range = { startDom: playFrom, endDom: hallTokens.length - 1 };
+      document.querySelector('#hallPlayBtn').textContent = '▶ 播放（从标记处）';
+    } else {
+      document.querySelector('#hallPlayBtn').textContent = '▶ 播放模式';
+    }
     window.GuqinPlayer.play(sc, tempo, (i, ev) => {
       // 跳过零时长控制事件（泛起/泛止），只高亮实际音符
       if (ev.dur === 0) return;
