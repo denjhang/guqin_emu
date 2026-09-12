@@ -187,9 +187,8 @@
               updateSelection();
             } else {
               // 长按单个字：标记播放起点（点播放 → 从此处播到曲尾）
+              clearSelection();          // 先清旧状态（含 playFrom），再设新起点
               playFrom = cellIdx;
-              clearSelection();
-              hallTokens.forEach(t => t.classList.remove('playfrom'));
               cell.classList.add('playfrom');
             }
             dragMoved = false;   // 是否发生拖动（区分框选 vs 单点起点）
