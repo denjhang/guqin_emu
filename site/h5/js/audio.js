@@ -424,7 +424,8 @@
     // 经过混响链路：dry + wet
     g.connect(dryGain);
     g.connect(reverbNode);
-    voices.set(vkey, { s: src, g });
+    // 记录采样基准频率（= targetFreq / rate），供走手音 glide 变调用
+    voices.set(vkey, { s: src, g, base: rate > 0 ? targetFreq / rate : targetFreq });
 
     if (opts.attack) { // 绰/注：线性滑入（SoLoud fadeRelativePlaySpeed 语义）
       const semi = opts.attack === '绰' ? -2 : 2;
@@ -472,6 +473,38 @@
     });
   }
 
+  /* 走手音（上/下 X）：右手不再拨弦——把该弦正在振动的按音余音滑向目标频率。
+   * 对应真实古琴：左手按弦滑动，弦仍在振动，音高连续变化。
+   * 返回是否找到了在响的音（无则回退拨弦）。 */
+  function glide(string, toFreq, sec) {
+    const c = ensureCtx();
+    const t = c.currentTime;
+    const dur = Math.max(0.15, sec || 0.6);
+    let hit = false;
+    voices.forEach((v, k) => {
+      const isPressed = k === 'pressed:' + string || k.startsWith('pressed:' + string + ':');
+      if (!isPressed || !v.base) return;
+      hit = true;
+      try {
+        // 变调滑向目标：新 rate = 目标频率 / 采样基准频率
+        const targetRate = Math.max(0.05, toFreq / v.base);
+        const pr = v.s.playbackRate;
+        pr.cancelScheduledValues(t);
+        pr.setValueAtTime(Math.max(0.05, pr.value), t);
+        pr.linearRampToValueAtTime(targetRate, t + dur);
+        // 包络延长：保持当前余音音量，滑完后自然收
+        const cur = Math.max(0.002, v.g.gain.value);
+        const g = v.g.gain;
+        g.cancelScheduledValues(t);
+        g.setValueAtTime(cur, t);
+        g.setValueAtTime(cur, t + dur);
+        g.exponentialRampToValueAtTime(0.0001, t + dur + 0.4);
+        v.s.stop(t + dur + 0.45);   // 重新调度 stop，覆盖原结束时间
+      } catch (e) { /* 音已结束 */ }
+    });
+    return hit;
+  }
+
   /* 刹音（伏/剌伏）：80ms 内收掉所有在响声部——对应右手捂弦止振 */
   function damp() {
     const c = ensureCtx();
@@ -493,5 +526,5 @@
     if (saved === 'prof' || saved === 'apk') soundSource = saved;
   } catch (e) {}
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource, setReverb, isReverbOn, setFx };
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, glide, OPEN, setSource, getSource, setReverb, isReverbOn, setFx };
 })();

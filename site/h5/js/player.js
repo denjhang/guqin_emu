@@ -127,7 +127,13 @@
         later(() => A.play(s, false, false, peak, { glideTo: from, glideSec: 0.12, dur: 0.3, gain: 0.45, hui: fromHui }), 130);
         return;
       }
-      A.play(s, false, false, from, { glideTo: target, glideSec: Math.max(0.4, dur * 0.7), dur, gain: 0.55, hui: fromHui });
+      // 走手音：右手不再拨弦——延续该弦正在振动的余音滑向目标徽
+      // （无在响余音时才回退拨弦：点读/区间起点等场景）
+      const glideSec = Math.max(0.4, dur * 0.7);
+      const glided = A.glide ? A.glide(s, target, glideSec) : false;
+      if (!glided) {
+        A.play(s, false, false, from, { glideTo: target, glideSec, dur, gain: 0.55, hui: fromHui });
+      }
       lastFreq = target; lastHui = toHui || lastHui;
       if (toHui) lastHuiByString[s] = toHui;       // 走手音后左手在新徽位
       return;
