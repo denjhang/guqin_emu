@@ -291,7 +291,8 @@
       const rt = line.rhythmTokens || [];
       let lastR = null;
       (line.jianziTokens || []).forEach((tok, idx) => {
-        if (tok.kind === 'blank') { div.appendChild(Object.assign(document.createElement('span'), { className: 'blank', textContent: ' ' })); return; }
+        // blank 与大厅一致：不渲染占位空格（避免谱面出现意外空格）
+        if (tok.kind === 'blank') return;
         const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
         if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
         // 控制符（括号/从括号再作/少息/泛起/泛止等）标记为 jz-ctrl，不占 domIdx
