@@ -819,7 +819,6 @@
   // 音源 + 混响按钮切换（左上角）
   document.addEventListener('DOMContentLoaded', () => {
     const srcBtn = document.getElementById('sourceBtn');
-    const revBtn = document.getElementById('reverbBtn');
     if (srcBtn) {
       // 初始化音源按钮状态：点亮=教授，未点亮=APK
       const initSrc = window.GuqinAudio.getSource() || 'apk';
@@ -838,17 +837,60 @@
         }
       });
     }
-    if (revBtn) {
-      const applyRev = (on) => {
-        revBtn.textContent = on ? '🌊 混响：开' : '🌊 混响';
-        revBtn.classList.toggle('active', on);
+    // 音效按钮：点击弹出音效调整面板（混响开关/干湿/房间大小/APK 泛音滤波）
+    const fxBtn = document.getElementById('fxBtn');
+    const fxPanel = document.getElementById('fxPanel');
+    if (fxBtn && fxPanel) {
+      const A = window.GuqinAudio;
+      const $id = id => document.getElementById(id);
+      const els = {
+        on: $id('fxReverbOn'), wet: $id('fxWet'), wetV: $id('fxWetVal'),
+        room: $id('fxRoom'), roomV: $id('fxRoomVal'),
+        str: $id('fxStr'), strV: $id('fxStrVal'),
+        freq: $id('fxFreq'), freqV: $id('fxFreqVal'),
+        close: $id('fxClose'), reset: $id('fxReset'),
       };
-      applyRev(window.GuqinAudio.isReverbOn());
-      revBtn.addEventListener('click', () => {
-        const next = !window.GuqinAudio.isReverbOn();
-        window.GuqinAudio.setReverb(next);
-        applyRev(next);
+      const DEFAULTS = { reverbOn: true, wet: 0.9, room: 2.8, fxStrength: 0.8, fxFreq: 4.5 };
+      // 面板 UI ← 引擎状态
+      const syncUI = (fx) => {
+        els.on.checked = !!fx.reverbOn;
+        els.wet.value = Math.round(fx.wet * 100); els.wetV.textContent = els.wet.value + '%';
+        els.room.value = Math.round(fx.room * 10); els.roomV.textContent = fx.room.toFixed(1) + 's';
+        els.str.value = Math.round(fx.fxStrength * 100); els.strV.textContent = els.str.value + '%';
+        els.freq.value = Math.round(fx.fxFreq * 10); els.freqV.textContent = '×' + fx.fxFreq.toFixed(1);
+      };
+      syncUI(A.setFx());
+      fxBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const show = fxPanel.style.display === 'none';
+        fxPanel.style.display = show ? 'block' : 'none';
+        if (show) syncUI(A.setFx());
       });
+      els.close.addEventListener('click', () => { fxPanel.style.display = 'none'; });
+      // 点击面板外关闭
+      document.addEventListener('click', e => {
+        if (fxPanel.style.display === 'none') return;
+        if (fxPanel.contains(e.target) || fxBtn.contains(e.target)) return;
+        fxPanel.style.display = 'none';
+      });
+      els.on.addEventListener('change', () => A.setFx({ reverbOn: els.on.checked }));
+      els.wet.addEventListener('input', () => {
+        A.setFx({ wet: els.wet.value / 100 });
+        els.wetV.textContent = els.wet.value + '%';
+      });
+      els.room.addEventListener('change', () => {
+        A.setFx({ room: els.room.value / 10 });
+        els.roomV.textContent = (els.room.value / 10).toFixed(1) + 's';
+      });
+      els.str.addEventListener('input', () => {
+        A.setFx({ fxStrength: els.str.value / 100 });
+        els.strV.textContent = els.str.value + '%';
+      });
+      els.freq.addEventListener('input', () => {
+        A.setFx({ fxFreq: els.freq.value / 10 });
+        els.freqV.textContent = '×' + (els.freq.value / 10).toFixed(1);
+      });
+      els.reset.addEventListener('click', () => { syncUI(A.setFx(DEFAULTS)); });
     }
   });
 })();

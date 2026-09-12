@@ -190,9 +190,45 @@
   <button class="tab" data-tab="lab">实验室</button>
   <span style="margin-left:auto;display:flex;align-items:center;gap:6px">
     <button class="btn ghost" id="sourceBtn" title="点击切换音源：APK / 教授">音源 APK</button>
-    <button class="btn ghost" id="reverbBtn" title="混响开关">🌊 混响</button>
+    <button class="btn ghost" id="fxBtn" title="音效调整">🎛 音效</button>
   </span>
 </header>
+
+<!-- 音效调整面板：混响开关/干湿度/房间大小 + APK 泛音滤波 -->
+<div id="fxPanel" style="display:none;position:fixed;top:52px;right:12px;z-index:200;background:#fffdf7;border:1px solid var(--accent);border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.15);padding:14px 16px;width:300px">
+  <div style="display:flex;align-items:center;margin-bottom:10px">
+    <b style="color:#5a4a2f">🎛 音效</b>
+    <button class="btn ghost" id="fxClose" style="margin-left:auto;padding:2px 10px">✕</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+    <label style="font-size:13px;color:#5a4a2f;min-width:72px">混响</label>
+    <input type="checkbox" id="fxReverbOn">
+    <span style="font-size:12px;color:#8a7d63">开关（建议戴耳机对比）</span>
+  </div>
+  <div style="margin-bottom:6px">
+    <div style="font-size:13px;color:#5a4a2f">干湿度 <span id="fxWetVal" style="color:var(--accent);float:right"></span></div>
+    <input type="range" id="fxWet" min="0" max="100" step="1" style="width:100%">
+    <div style="font-size:11px;color:#8a7d63">湿声比例：小=干琴房，大=空旷</div>
+  </div>
+  <div style="margin-bottom:6px">
+    <div style="font-size:13px;color:#5a4a2f">房间大小 <span id="fxRoomVal" style="color:var(--accent);float:right"></span></div>
+    <input type="range" id="fxRoom" min="12" max="45" step="1" style="width:100%">
+    <div style="font-size:11px;color:#8a7d63">混响尾长（×0.1秒）</div>
+  </div>
+  <hr style="border:none;border-top:1px dashed #d8c9a8;margin:10px 0">
+  <div style="font-size:13px;color:#5a4a2f;margin-bottom:4px">泛音滤波（仅 APK 音源）</div>
+  <div style="margin-bottom:6px">
+    <div style="font-size:13px;color:#5a4a2f">滤波强度 <span id="fxStrVal" style="color:var(--accent);float:right"></span></div>
+    <input type="range" id="fxStr" min="0" max="100" step="1" style="width:100%">
+    <div style="font-size:11px;color:#8a7d63">0=原始 APK，100=纯净泛音</div>
+  </div>
+  <div style="margin-bottom:6px">
+    <div style="font-size:13px;color:#5a4a2f">低通频率 <span id="fxFreqVal" style="color:var(--accent);float:right"></span></div>
+    <input type="range" id="fxFreq" min="15" max="80" step="1" style="width:100%">
+    <div style="font-size:11px;color:#8a7d63">截止 = 基频 ×（×0.1）</div>
+  </div>
+  <button class="btn ghost" id="fxReset" style="width:100%;margin-top:4px">↺ 恢复默认</button>
+</div>
 
 <div class="page" id="page-hall">
   <div class="toolbar">

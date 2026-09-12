@@ -10,7 +10,7 @@
   let HARM_FREQ = null;   // "弦-徽序号" → {freq} 网页端权威泛音表
   let soundSource = 'apk';   // 'apk' | 'prof'
   // 混响节点
-  let masterGain = null, reverbNode = null, wetGain = null, wetFilter = null, dryGain = null, reverbOn = false;
+  let masterGain = null, reverbNode = null, wetGain = null, wetFilter = null, dryGain = null;
 
   function ensureCtx() {
     if (!ctx) {
@@ -22,6 +22,15 @@
   }
 
   // 轻量化混响：ConvolverNode + 合成脉冲响应（无需外部 IR 文件）
+  // 音效参数（音效面板可调，localStorage 持久化）
+  // reverb: {on, wet(0-1), room(秒,1.2-4.5)}  harmFx: {strength(0-1), lpMul(2-8)}
+  let fx = { reverbOn: true, wet: 0.9, room: 2.8, fxStrength: 0.8, fxFreq: 4.5 };
+  try {
+    const saved = localStorage.getItem('guqin_fx');
+    if (saved) fx = Object.assign(fx, JSON.parse(saved));
+  } catch (e) {}
+  function saveFx() { try { localStorage.setItem('guqin_fx', JSON.stringify(fx)); } catch (e) {} }
+
   // IR 结构：直达前 12ms 静音 + 早反射簇（模拟房间墙面离散回波）+ 低通衰减噪声尾巴
   // 纯均匀噪声尾巴能量摊在全频段，卷积后极稀，人耳几乎察觉不到——必须加早反射
   function initReverb() {
@@ -33,7 +42,7 @@
     wetGain = ctx.createGain();
     wetGain.gain.value = 0;
     reverbNode = ctx.createConvolver();
-    reverbNode.buffer = makeImpulseResponse(ctx, 2.8, 2.2);
+    reverbNode.buffer = makeImpulseResponse(ctx, fx.room, 2.2);
     // 湿声低通：混响尾音应比干声「闷」一点，营造空间距离感
     wetFilter = ctx.createBiquadFilter();
     wetFilter.type = 'lowpass';
@@ -45,12 +54,15 @@
     wetFilter.connect(wetGain);
     wetGain.connect(masterGain);
     masterGain.connect(ctx.destination);
+    applyReverb();
   }
-  // 合成脉冲响应：早反射簇（前 80ms 离散回波，房间感的主要来源）+ 噪声尾巴
+  // 合成脉冲响应：早反射簇（离散回波，房间感的主要来源）+ 噪声尾巴
+  // dur 即房间大小：尾长与早反射间隔随房间线性放大
   function makeImpulseResponse(c, dur, decay) {
     const rate = c.sampleRate;
     const len = Math.floor(rate * dur);
     const buf = c.createBuffer(2, len, rate);
+    const scale = dur / 2.8;   // 房间缩放系数
     // 早反射：左右声道错开的回波位置（ms）与增益
     const early = [
       [11, 0.42], [19, 0.35], [29, 0.30], [41, 0.24], [57, 0.20], [73, 0.16],
@@ -68,18 +80,30 @@
       // 早反射叠加（第二声道时间偏移 ±3ms 去相关，加宽立体声）
       const off = ch === 0 ? -3 : 3;
       early.forEach(([ms, amp]) => {
-        const idx = Math.floor((ms + off) / 1000 * rate);
+        const idx = Math.floor((ms * scale + off) / 1000 * rate);
         if (idx >= 0 && idx < len) data[idx] += amp;
       });
     }
     return buf;
   }
-  function setReverb(on) {
-    reverbOn = !!on;
-    if (!wetGain) { ensureCtx(); }
-    if (wetGain) wetGain.gain.value = reverbOn ? 0.9 : 0;
+  // 应用当前混响参数到节点
+  function applyReverb() {
+    if (!wetGain) return;
+    wetGain.gain.value = fx.reverbOn ? fx.wet : 0;
   }
-  function isReverbOn() { return reverbOn; }
+  function setReverb(on) { setFx({ reverbOn: !!on }); }
+  function isReverbOn() { return !!fx.reverbOn; }
+  // 音效面板统一入口：{reverbOn, wet, room, fxStrength, fxFreq}
+  function setFx(params) {
+    if (params == null) return Object.assign({}, fx);
+    const roomChanged = params.room != null && params.room !== fx.room;
+    Object.assign(fx, params);
+    saveFx();
+    if (!ctx) ensureCtx();
+    applyReverb();
+    if (roomChanged && reverbNode) reverbNode.buffer = makeImpulseResponse(ctx, fx.room, 2.2);
+    return Object.assign({}, fx);
+  }
   function init(pitchData, harmData) {
     pitch = pitchData;
     // 网页端权威泛音表：D.HARMONICS 91 条（王悠荻实际琴面泛音频率）
@@ -382,13 +406,18 @@
     src.buffer = useBuf;
     // APK 泛音音色整形：APK 泛音采样实为变调播放，携带大量非谐波噪声与过亮高频。
     // 真实古琴泛音近纯正弦（笛质感）：只保留基频与前几阶泛音，滤除其余。
+    // 强度 = 滤波/原始并联混合比（0=原始，1=全滤波）；低通倍数可调。
     // 教授版为真实泛音采样，不做任何处理。
-    if (soundSource === 'apk' && kind === 'harmonic') {
+    const st = fx.fxStrength;
+    if (soundSource === 'apk' && kind === 'harmonic' && st > 0.01) {
       const f0 = Math.max(80, targetFreq || OPEN[string - 1] * 2);
       const hp = c.createBiquadFilter(), lp = c.createBiquadFilter();
+      const fw = c.createGain(), dw = c.createGain();   // 滤声/原始声并联混合
       hp.type = 'highpass'; hp.frequency.value = f0 * 0.55; hp.Q.value = 0.7;   // 去基频以下噪声
-      lp.type = 'lowpass';  lp.frequency.value = f0 * 4.5;  lp.Q.value = 0.5;   // 保留前 4 阶泛音，去毛刺
-      src.connect(hp); hp.connect(lp); lp.connect(g);
+      lp.type = 'lowpass';  lp.frequency.value = f0 * fx.fxFreq; lp.Q.value = 0.5;   // 去毛刺
+      fw.gain.value = st; dw.gain.value = 1 - st;
+      src.connect(hp); hp.connect(lp); lp.connect(fw); fw.connect(g);
+      src.connect(dw); dw.connect(g);
     } else {
       src.connect(g);
     }
@@ -464,5 +493,5 @@
     if (saved === 'prof' || saved === 'apk') soundSource = saved;
   } catch (e) {}
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource, setReverb, isReverbOn };
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource, setReverb, isReverbOn, setFx };
 })();
