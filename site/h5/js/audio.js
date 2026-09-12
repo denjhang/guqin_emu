@@ -473,6 +473,38 @@
     });
   }
 
+  /* 吟/猱（落指吟/定吟等 carry 装饰）：对正在振动的余音加揉弦颤音，右手不弹。
+   * 返回是否找到了在响的音（无则回退拨弦）。 */
+  function vibrato(string, type, sec) {
+    const c = ensureCtx();
+    const t = c.currentTime;
+    const dur = Math.max(0.4, sec || 0.8);
+    let hit = false;
+    voices.forEach((v, k) => {
+      const isPressed = k === 'pressed:' + string || k.startsWith('pressed:' + string + ':');
+      if (!isPressed || !v.base) return;
+      hit = true;
+      try {
+        const curRate = Math.max(0.05, v.s.playbackRate.value || 1);
+        const isNao = type === '猱';
+        const lfo = c.createOscillator(), lg = c.createGain();
+        lfo.type = 'triangle';
+        lfo.frequency.value = isNao ? 2.4 : 4.3;
+        lg.gain.setValueAtTime(0, t);
+        lg.gain.linearRampToValueAtTime(curRate * (isNao ? 0.055 : 0.032), t + 0.25);
+        lfo.connect(lg); lg.connect(v.s.playbackRate);
+        lfo.start(t); lfo.stop(t + dur);
+        // 包络延长至揉弦结束
+        const cur = Math.max(0.002, v.g.gain.value);
+        v.g.gain.cancelScheduledValues(t);
+        v.g.gain.setValueAtTime(cur, t);
+        v.g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.3);
+        v.s.stop(t + dur + 0.35);
+      } catch (e) { /* 音已结束 */ }
+    });
+    return hit;
+  }
+
   /* 走手音（上/下 X）：右手不再拨弦——把该弦正在振动的按音余音滑向目标频率。
    * 对应真实古琴：左手按弦滑动，弦仍在振动，音高连续变化。
    * 返回是否找到了在响的音（无则回退拨弦）。 */
@@ -526,5 +558,5 @@
     if (saved === 'prof' || saved === 'apk') soundSource = saved;
   } catch (e) {}
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, glide, OPEN, setSource, getSource, setReverb, isReverbOn, setFx };
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, glide, vibrato, OPEN, setSource, getSource, setReverb, isReverbOn, setFx };
 })();

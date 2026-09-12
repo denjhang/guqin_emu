@@ -222,9 +222,16 @@
       const s = p.string || lastString || 1;
       const hui = p.hui || lastHuiByString[s] || lastHui || '七徽';
       const freq = A.freqOf(s, hui, harm);
+      // 落指吟/定吟：揉的是正在振动的弦（吟猱=左手揉弦，右手不弹）。
+      // 余音在响 → 直接加颤音；不在响（点读等）→ 回退拨弦。
+      const vibMod = allMods.includes('吟') ? '吟' : (allMods.includes('猱') ? '猱' : null);
+      if (vibMod && A.vibrato && A.vibrato(s, vibMod, Math.max(0.8, dur))) {
+        lastFreq = freq; lastString = s; lastHui = hui;
+        lastHuiByString[s] = hui;
+        return;
+      }
       const opts = { dur: Math.max(0.8, dur * 0.95), gain: 0.85, hui };
-      if (allMods.includes('吟')) opts.vibrato = '吟';
-      else if (allMods.includes('猱')) opts.vibrato = '猱';
+      if (vibMod) opts.vibrato = vibMod;
       A.play(s, harm, false, freq, opts);
       lastFreq = freq; lastString = s; lastHui = hui;
       lastHuiByString[s] = hui;
