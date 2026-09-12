@@ -27,8 +27,8 @@ tmp/
 # 运行时产物
 node_modules/
 *.log
-# h5 运行时
-site/h5/audio/
+# h5 运行时产物（音频采样入库：APK 21 条 + 教授散音 7 条，体积小）
+site/h5/scores/gen*.json
 # 外部数据集（民歌 MusicXML 805MB zip + 解包产物，精华已提取到 data/*.json）
 site/h5/scores/external/
 *.zip
