@@ -113,6 +113,31 @@ const server = http.createServer((req, res) => {
     return json(res, 200, { country: 'LOCAL', domesticBasemap: true });
   }
 
+  // AI 生成曲库持久化：localStorage 按端口隔离，这里落到文件系统实现唯一存储
+  if (p === '/api/gen-scores') {
+    const GEN = path.join(ROOT, 'h5/data/gen_scores.json');
+    if (req.method === 'GET') {
+      try {
+        const data = fs.readFileSync(GEN, 'utf8');
+        return json(res, 200, JSON.parse(data));
+      } catch (e) {
+        return json(res, 200, { scores: [], votes: {} });
+      }
+    }
+    if (req.method === 'POST') {
+      let body = '';
+      req.on('data', c => body += c);
+      req.on('end', () => {
+        try {
+          const payload = JSON.parse(body);
+          fs.writeFileSync(GEN, JSON.stringify(payload, null, 1));
+          json(res, 200, { ok: true, count: (payload.scores || []).length });
+        } catch (e) { json(res, 400, { error: String(e) }); }
+      });
+      return;
+    }
+  }
+
   serveStatic(req, res, p);
 });
 

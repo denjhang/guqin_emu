@@ -8,19 +8,91 @@
   let OPEN = [65.41, 73.59, 88.40, 98.12, 110.38, 130.82, 147.17];
   let pitch = null;
   let soundSource = 'apk';   // 'apk' | 'prof'
+  // 混响节点
+  let masterGain = null, reverbNode = null, wetGain = null, dryGain = null, reverbOn = false;
 
   function ensureCtx() {
-    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      initReverb();
+    }
     if (ctx.state === 'suspended') ctx.resume();
     return ctx;
   }
+
+  // 轻量化混响：ConvolverNode + 合成指数衰减脉冲响应（无需外部 IR 文件）
+  function initReverb() {
+    if (!ctx || masterGain) return;
+    masterGain = ctx.createGain();
+    masterGain.gain.value = 1.0;
+    dryGain = ctx.createGain();
+    dryGain.gain.value = 1.0;
+    wetGain = ctx.createGain();
+    wetGain.gain.value = 0;
+    reverbNode = ctx.createConvolver();
+    reverbNode.buffer = makeImpulseResponse(ctx, 2.5, 2.0);
+    // 信号流：音符 → dry → master → destination
+    //        音符 → reverb → wet → master
+    dryGain.connect(masterGain);
+    reverbNode.connect(wetGain);
+    wetGain.connect(masterGain);
+    masterGain.connect(ctx.destination);
+  }
+  // 合成脉冲响应：长度秒 + 衰减
+  function makeImpulseResponse(c, dur, decay) {
+    const rate = c.sampleRate;
+    const len = Math.floor(rate * dur);
+    const buf = c.createBuffer(2, len, rate);
+    for (let ch = 0; ch < 2; ch++) {
+      const data = buf.getChannelData(ch);
+      for (let i = 0; i < len; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+      }
+    }
+    return buf;
+  }
+  function setReverb(on) {
+    reverbOn = !!on;
+    if (!wetGain) { ensureCtx(); }
+    if (wetGain) wetGain.gain.value = reverbOn ? 0.32 : 0;
+  }
+  function isReverbOn() { return reverbOn; }
   function init(pitchData) { pitch = pitchData; }
   function setSource(src) {
     soundSource = (src === 'prof') ? 'prof' : 'apk';
     try { localStorage.setItem('guqin_source', soundSource); } catch (e) {}
   }
   function getSource() { return soundSource; }
-  // 徽位名 → 教授按音采样后缀：十徽→h10, 四徽六分→h4-6, 徽外→hout
+  // 教授按音可用采样表（按弦分组，每项 {suffix, huiNum}）
+  const PROF_PRESSED = {
+    1: [['hout',13.5],['h10',10],['h10-8',10.8],['h9',9],['h7',7],['h7-9',7.9],['h7-3',7.3],['h6-4',6.4],['h5',5],['h5-9',5.9],['h5-6',5.6],['h4',4],['h4-6',4.6],['h4-2',4.2],['h3-6',3.6]],
+    2: [['hout',13.5],['h12',12],['h10',10],['h9',9],['h7',7],['h7-9',7.9],['h7-6',7.6],['h6-4',6.4],['h6-2',6.2],['h5',5],['h5-6',5.6],['h4',4],['h4-6',4.6],['h4-4',4.4],['h3-6',3.6]],
+    3: [['hout',13.5],['h10-8',10.8],['h9',9],['h9-5',9.5],['h7',7],['h7-9',7.9],['h7-3',7.3],['h6-4',6.4],['h5',5],['h5-9',5.9],['h5-3',5.3],['h4',4],['h4-6',4.6],['h4-2',4.2],['h3-6',3.6]],
+    4: [['hout',13.5],['h10',10],['h10-8',10.8],['h9',9],['h7',7],['h7-9',7.9],['h7-6',7.6],['h6-4',6.4],['h5',5],['h5-9',5.9],['h5-6',5.6],['h4',4],['h4-6',4.6],['h4-4',4.4],['h3-6',3.6]],
+    5: [['hout',13.5],['h12',12],['h10',10],['h9',9],['h8-5',8.5],['h7',7],['h7-6',7.6],['h6-4',6.4],['h6-2',6.2],['h5',5],['h5-6',5.6],['h4',4],['h4-8',4.8],['h4-4',4.4],['h3-6',3.6]],
+    6: [['hout',13.5],['h10',10],['h10-8',10.8],['h9',9],['h7',7],['h7-9',7.9],['h7-3',7.3],['h6-4',6.4],['h5',5],['h5-9',5.9],['h5-6',5.6],['h4',4],['h4-6',4.6],['h4-2',4.2],['h3-6',3.6]],
+    7: [['hout',13.5],['h12',12],['h10',10],['h9',9],['h7',7],['h7-9',7.9],['h7-6',7.6],['h6-4',6.4],['h6-2',6.2],['h5',5],['h5-6',5.6],['h4',4],['h4-6',4.6],['h4-4',4.4],['h3-6',3.6]]
+  };
+  // 徽位名 → 数值（用于距离匹配）
+  function huiToNum(hui) {
+    if (!hui) return 7;
+    if (hui === '徽外') return 13.5;
+    const m = hui.match(/^([一二三四五六七八九十]+)徽([一二三四五六七八九]分|半)?$/);
+    if (!m) return 7;
+    const n = huiOrderNum(hui);
+    if (n == null) return 7;
+    if (!m[2]) return n;
+    const fenMap = { '一分':1,'二分':2,'三分':3,'四分':4,'五分':5,'六分':6,'七分':7,'八分':8,'九分':9,'半':10 };
+    return n + (fenMap[m[2]] || 0) / 10;
+  }
+  // 找该弦最接近目标徽位的可用采样
+  function nearestProfPressed(s, hui) {
+    const list = PROF_PRESSED[s]; if (!list) return 'h7';
+    const target = huiToNum(hui);
+    let best = list[0][0], bestDist = Infinity;
+    list.forEach(([suf, hn]) => { const d = Math.abs(hn - target); if (d < bestDist) { bestDist = d; best = suf; } });
+    return best;
+  }
   function huiToProfSuffix(hui) {
     if (!hui) return 'h7';
     if (hui === '徽外') return 'hout';
@@ -33,12 +105,15 @@
     const f = fenMap[m[2]];
     return f ? 'h' + n + '-' + f : 'h' + n;
   }
-  // 采样 key：apk 全用 string_N.wav；prof 散=prof_sN.m4a, 按=sN-hui.mp3, 泛=hHui_sN.mp3
+  // 采样 key：教授音源指向 ../guqin/audio 完整采样库（王悠荻真实录音）
+  // prof: 散=open/sN.m4a, 按=pressed/sN-hui.mp3, 泛=harm/hHui-sN.mp3
+  // apk: 每类各 string_N.wav（已从 APK 重新解包恢复）
   function key(kind, s, huiIdx, hui) {
     if (soundSource === 'prof') {
-      if (kind === 'open') return `audio/open/prof_s${s}.m4a`;
-      if (kind === 'pressed') return `audio/prof-pressed/s${s}-${huiToProfSuffix(hui)}.mp3`;
-      return `audio/harmonic/h${huiIdx}_s${s}.mp3`;   // 教授泛音
+      if (kind === 'open') return `../guqin/audio/open/s${s}.m4a`;
+      if (kind === 'pressed') return `../guqin/audio/pressed/s${s}-${huiToProfSuffix(hui)}.mp3`;
+      if (huiIdx === 1 && s === 3) return `../guqin/audio/harm/h1-s3-v204.wav`;
+      return `../guqin/audio/harm/h${huiIdx}-s${s}.mp3`;   // 教授泛音
     }
     return `audio/${kind}/string_${s}.wav`;   // APK 散/按/泛 全七徽
   }
@@ -52,12 +127,64 @@
   }
   const HARM_ORDER = { 1: 8, 2: 6, 3: 5, 4: 4, 5: 3, 6: 5, 7: 2 };
 
+  const sampleFreq = {}; // cache key → 采样实际基准频率（教授按音回退时用）
   async function loadSample(kind, s, huiIdx, hui) {
     const k = key(kind, s, huiIdx, hui);
     if (bank[k]) return bank[k];
     const c = ensureCtx();
+    // 教授按音：精确徽位采样不存在时，用最近可用采样
+    if (soundSource === 'prof' && kind === 'pressed') {
+      const suf = nearestProfPressed(s, hui);
+      const uri = `../guqin/audio/pressed/s${s}-${suf}.mp3`;
+      try {
+        const r = await fetch(uri);
+        if (r.ok) {
+          const buf = await c.decodeAudioData(await r.arrayBuffer());
+          bank[k] = buf;
+          // 记录采样实际频率，供 rate 计算
+          const sufNum = suf === 'hout' ? 13.5 : parseFloat(suf.replace('h','').replace('-','.'));
+          sampleFreq[k] = freqOf(s, numToHui(sufNum), false);
+          return buf;
+        }
+      } catch (_) {}
+      // 兜底七徽
+      const fb = `../guqin/audio/pressed/s${s}-h7.mp3`;
+      try {
+        const r = await fetch(fb);
+        if (r.ok) {
+          const buf = await c.decodeAudioData(await r.arrayBuffer());
+          bank[k] = buf;
+          sampleFreq[k] = freqOf(s, '七徽', false);
+          return buf;
+        }
+      } catch (_) {}
+      throw new Error('prof pressed sample not found: ' + k);
+    }
+    // 教授泛音：采样存在则直接用（录于实际徽位，音高天然正确）
+    if (soundSource === 'prof' && kind === 'harmonic') {
+      try {
+        const resp = await fetch(k);
+        if (resp.ok) {
+          const ab = await resp.arrayBuffer();
+          const buf = await c.decodeAudioData(ab);
+          bank[k] = buf;
+          return buf;
+        }
+      } catch (_) {}
+      // 对称徽位共用（8↔1? 不，APK 泛音 8↔6 等）：用 harmIndex 已归一，此处回退散音变调
+      const openUri = `../guqin/audio/open/s${s}.m4a`;
+      try {
+        const r = await fetch(openUri);
+        if (r.ok) {
+          const buf = await c.decodeAudioData(await r.arrayBuffer());
+          bank[k] = buf;
+          sampleFreq[k] = OPEN[s - 1];
+          return buf;
+        }
+      } catch (_) {}
+      throw new Error('prof harmonic sample not found: ' + k);
+    }
     let uri = k;
-    if (k === 'audio/harmonic/h1_s3.mp3') uri = 'audio/harmonic/h1_s3.wav';
     try {
       const resp = await fetch(uri);
       if (!resp.ok) throw new Error('not found');
@@ -66,24 +193,23 @@
       bank[k] = buf;
       return buf;
     } catch (e) {
-      // 教授按音精确徽位采样不存在 → 回退整徽 → 七徽
-      if (soundSource === 'prof' && kind === 'pressed') {
-        const hn = huiOrderNum(hui) || 7;
-        const candidates = [`audio/prof-pressed/s${s}-h${hn}.mp3`, `audio/prof-pressed/s${s}-h7.mp3`];
-        for (const cand of candidates) {
-          if (cand === k) continue;
-          if (bank[cand]) { bank[k] = bank[cand]; return bank[cand]; }
-          try {
-            const r = await fetch(cand);
-            if (r.ok) {
-              const b = await c.decodeAudioData(await r.arrayBuffer());
-              bank[cand] = b; bank[k] = b; return b;
-            }
-          } catch (_) {}
-        }
-      }
       throw e;
     }
+  }
+  // 数值徽位 → 徽名（仅用于频率查询）
+  function numToHui(n) {
+    if (n >= 13) return '徽外';
+    const order = ['一','二','三','四','五','六','七','八','九','十','十一','十二','十三'];
+    const whole = Math.floor(n);
+    const frac = n - whole;
+    const name = order[whole - 1] + '徽';
+    if (frac > 0.01) {
+      const fenMap = ['一分','二分','三分','四分','五分','六分','七分','八分','九分'];
+      const fi = Math.round(frac * 10) - 1;
+      if (fi >= 0 && fi < 9) return name + fenMap[fi];
+      if (frac > 0.45 && frac < 0.55) return name + '半';
+    }
+    return name;
   }
   function baseFreq(kind, s, huiIdx, hui) {
     const open = OPEN[s - 1];
@@ -172,13 +298,23 @@
     const huiIdx = harmonic ? harmIndex(opts.hui) : null;
     const hui = opts.hui;
     const buf = await loadSample(kind, string, huiIdx, hui);
+    const k = key(kind, string, huiIdx, hui);
     // APK 按音全用同一采样(string_N.wav)，vkey 不含 hui → 同弦按音互掐
     // 教授按音每徽位独立采样，vkey 含 hui → 不同徽位可共存
     const vkey = kind + ':' + string + (harmonic ? ':' + huiIdx : (kind === 'pressed' && soundSource === 'prof' ? ':' + (hui || 'x') : ''));
     const t = c.currentTime + 0.01;
-    // 教授音源：每条采样录于对应徽位，自然音高即正确，rate=1（参考站 SM.tuning 默认 1）
+    // 教授音源：精确徽位采样自然音高正确(rate=1)；回退到散音采样时按目标频率变调
     // APK 音源：散/按/泛 全录于七徽，需按目标频率变调
-    let rate = soundSource === 'prof' ? 1 : (targetFreq / baseFreq(kind, string, huiIdx, hui));
+    let rate;
+    if (soundSource === 'prof') {
+      if (sampleFreq[k]) {
+        rate = targetFreq / sampleFreq[k];
+      } else {
+        rate = 1;
+      }
+    } else {
+      rate = targetFreq / baseFreq(kind, string, huiIdx, hui);
+    }
     rate *= (opts.rate || 1);
     const gain = (opts.gain || 0.85) * (open ? 0.7 : 1);
 
@@ -209,7 +345,10 @@
 
     const src = c.createBufferSource(), g = c.createGain();
     src.buffer = useBuf;
-    src.connect(g); g.connect(c.destination);
+    src.connect(g);
+    // 经过混响链路：dry + wet
+    g.connect(dryGain);
+    g.connect(reverbNode);
     voices.set(vkey, { s: src, g });
 
     if (opts.attack) { // 绰/注：线性滑入（SoLoud fadeRelativePlaySpeed 语义）
@@ -279,5 +418,5 @@
     if (saved === 'prof' || saved === 'apk') soundSource = saved;
   } catch (e) {}
 
-  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource };
+  window.GuqinAudio = { init, play, preload, freqOf, ensureCtx, damp, OPEN, setSource, getSource, setReverb, isReverbOn };
 })();

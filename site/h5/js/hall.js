@@ -7,6 +7,7 @@
   let catalog = [];   // 服务器曲库目录（真实作者/封面/点赞）
   function setCatalog(c) { catalog = c || []; }
   let hallScore = null, hallTokens = [], hallPlaying = false, lastScrolledRow = null;
+  let selStart = null, selEnd = null, isDragging = false, longPressTimer = null, pressPos = null, suppressClick = false;
 
   function favorites() {
     try { return JSON.parse(localStorage.getItem(favKey) || '{}'); } catch (e) { return {}; }
@@ -93,6 +94,7 @@
   /* ---------- 大厅阅读视图 ---------- */
   function openHall(s, fromHash) {
     hallScore = s;
+    clearSelection();
     $('#hallTitle').textContent = s.title.replace(/^《|》$/g, '');
     const isCat2 = s.profile_nickname !== undefined || s.author_name !== undefined;
     const cat = isCat2 ? { author: s.profile_nickname || s.author_name || '琴友', cover: s.score_card_background_url ? ('community/covers/' + s.id + '.jpg') : null, likes: s.like_count || 0, desc: s.description || '', updated: (s.updated_at || s.created_at || '').slice(0, 10) }
@@ -170,7 +172,48 @@
         jEl.className = 'jianzi';
         jEl.innerHTML = window.JianziRender.renderToken(tok, 46);
         cell.appendChild(rEl); cell.appendChild(bEl); cell.appendChild(jEl);
-        cell.addEventListener('click', () => {
+        // 长按拖动选区 + 点击点读
+        const cellIdx = isCtrl ? -1 : hallTokens.length;  // 控制符不参与选区
+        cell.addEventListener('pointerdown', (e) => {
+          if (isCtrl) return;
+          pressPos = { x: e.clientX, y: e.clientY };
+          longPressTimer = setTimeout(() => {
+            isDragging = true;
+            selStart = cellIdx;
+            selEnd = cellIdx;
+            updateSelection();
+            e.target.setPointerCapture && e.target.setPointerCapture(e.pointerId);
+          }, 250);
+        });
+        cell.addEventListener('pointermove', (e) => {
+          if (!isDragging) {
+            // 未进入选区模式时，移动超过 10px 取消长按
+            if (pressPos && Math.abs(e.clientX - pressPos.x) + Math.abs(e.clientY - pressPos.y) > 10) {
+              clearTimeout(longPressTimer);
+            }
+            return;
+          }
+          // 根据鼠标位置找到目标 cell
+          const hit = document.elementFromPoint(e.clientX, e.clientY);
+          const targetCell = hit ? hit.closest('.hall-cell') : null;
+          if (targetCell) {
+            const ti = hallTokens.indexOf(targetCell);
+            if (ti >= 0) { selEnd = ti; updateSelection(); }
+          }
+        });
+        cell.addEventListener('pointerup', (e) => {
+          clearTimeout(longPressTimer);
+          pressPos = null;
+          if (isDragging) {
+            isDragging = false;
+            suppressClick = true;  // 抑制后续 click
+            e.target.releasePointerCapture && e.target.releasePointerCapture(e.pointerId);
+            e.preventDefault();
+          }
+        });
+        // 点击点读（仅在非拖动后触发）
+        cell.addEventListener('click', (e) => {
+          if (suppressClick) { suppressClick = false; return; }
           window.GuqinAudio.ensureCtx();
           window.GuqinPlayer.tapToken(tok, r, +($('#hallTempo').value) || 60);
           const act = window.JianziSemantics.parseToken(tok);
@@ -182,6 +225,17 @@
       });
       sheet.appendChild(rowEl);
     });
+  }
+
+  /* 选区高亮 */
+  function updateSelection() {
+    if (selStart === null || selEnd === null) return;
+    const lo = Math.min(selStart, selEnd), hi = Math.max(selStart, selEnd);
+    hallTokens.forEach((c, k) => c.classList.toggle('selected', k >= lo && k <= hi));
+  }
+  function clearSelection() {
+    selStart = null; selEnd = null;
+    hallTokens.forEach(c => c.classList.remove('selected'));
   }
 
   function updateFavBtn(liked, count) {
@@ -208,6 +262,8 @@
     const tempo = +($('#hallTempo').value) || null;
     const sc = tempo ? { lines: hallScore.score_content.score.lines.map(l => ({ ...l, sectionTempo: tempo })) } : hallScore.score_content.score;
     const wrap = $('#hallStripWrap');
+    // 有选区时传 range
+    const range = (selStart !== null && selEnd !== null) ? { startDom: selStart, endDom: selEnd } : null;
     window.GuqinPlayer.play(sc, tempo, (i, ev) => {
       // 跳过零时长控制事件（泛起/泛止），只高亮实际音符
       if (ev.dur === 0) return;
@@ -229,7 +285,7 @@
       }
     }, () => {
       hallTokens.forEach(t => t.classList.remove('playing'));
-    });
+    }, range);
   }
   function stop() { window.GuqinPlayer.stop(); hallTokens.forEach(t => t.classList.remove('playing')); }
 
@@ -241,6 +297,6 @@
     document.querySelectorAll('.page').forEach(p => p.classList.toggle('show', p.id === 'page-editor'));
   }
 
-  window.Hall = { build, openHall, openHallById, currentId, play, stop, toggleFav, toEditor, setCorpus: c => { corpus = c; }, setCatalog, setHallScores, _coverHTML: coverHTML, _authorOf: authorOf };
+  window.Hall = { build, openHall, openHallById, currentId, play, stop, toggleFav, toEditor, clearSelection, setCorpus: c => { corpus = c; }, setCatalog, setHallScores, _coverHTML: coverHTML, _authorOf: authorOf };
   window.HallFire = null; // 由 app 注入琴面联动
 })();

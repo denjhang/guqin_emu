@@ -247,43 +247,96 @@
   }
 
   /* 播放整谱 */
-  function play(score, defaultTempo, onToken, onEnd) {
+  let currentEvents = [];
+  let currentOnToken = null, currentOnEnd = null;
+  let playStartPerf = 0;   // performance.now() at play start
+  let pausedOffset = 0;     // seconds elapsed when paused
+
+  function play(score, defaultTempo, onToken, onEnd, range) {
     stop();
     const tl = buildTimeline(score, defaultTempo);
-    playing = true; onTokenCb = onToken; onEndCb = onEnd;
+    let events = tl.events;
+    if (range) {
+      const lo = Math.min(range.startDom, range.endDom);
+      const hi = Math.max(range.startDom, range.endDom);
+      events = events.filter(ev => ev.domIdx != null && ev.domIdx >= lo && ev.domIdx <= hi);
+      let tOff = 0.2;
+      events = events.map(ev => {
+        const nev = { ...ev, t: tOff };
+        tOff += ev.dur;
+        return nev;
+      });
+    }
+    currentEvents = events; currentOnToken = onToken; currentOnEnd = onEnd;
+    playing = true; pausedOffset = 0;
     const myRun = ++runId;
     window.GuqinAudio.ensureCtx();
-    const t0 = performance.now();
-    tl.events.forEach((ev, i) => {
-      later(() => {
-        if (!playing || myRun !== runId) return;
-        fireAction(ev.action, ev.dur, ev.rhythm, ev.tempo);
-        if (onTokenCb) onTokenCb(i, ev);
-      }, ev.t * 1000);
-    });
+    playStartPerf = performance.now();
+    scheduleEvents(events, myRun, 0);
+    const total = events.length ? events[events.length - 1].t + events[events.length - 1].dur : 0.5;
     later(() => {
       if (!playing || myRun !== runId) return;
       playing = false;
-      if (onEndCb) onEndCb();
-    }, tl.total * 1000 + 500);
-    return tl;
+      if (currentOnEnd) currentOnEnd();
+    }, total * 1000 + 500);
+    return { events, total };
   }
 
-  /* 点读：单个 token 即时发声 */
+  // 调度事件，支持从 offset 秒处开始（用于暂停恢复）
+  function scheduleEvents(events, myRun, offsetSec) {
+    events.forEach((ev, i) => {
+      if (ev.t < offsetSec - 0.01) return; // 已播放过的跳过
+      later(() => {
+        if (!playing || myRun !== runId) return;
+        fireAction(ev.action, ev.dur, ev.rhythm, ev.tempo);
+        if (currentOnToken) currentOnToken(i, ev);
+      }, (ev.t - offsetSec) * 1000);
+    });
+  }
+
+  function pause() {
+    if (!playing) return;
+    playing = false;
+    pausedOffset = (performance.now() - playStartPerf) / 1000;
+    timers.forEach(clearTimeout); timers = [];
+  }
+
+  function resume() {
+    if (playing || !currentEvents.length) return;
+    playing = true;
+    const myRun = ++runId;
+    playStartPerf = performance.now() - pausedOffset * 1000;
+    scheduleEvents(currentEvents, myRun, pausedOffset);
+    const total = currentEvents.length ? currentEvents[currentEvents.length - 1].t + currentEvents[currentEvents.length - 1].dur : 0.5;
+    later(() => {
+      if (!playing || myRun !== runId) return;
+      playing = false;
+      if (currentOnEnd) currentOnEnd();
+    }, (total - pausedOffset) * 1000 + 500);
+  }
+
+  /* 点读：单个 token 即时发声（每次独立，不残留播放/上一点读的上下文） */
   function tapToken(token, rhythm, tempo) {
+    // 重置泛音与位置上下文：点读不应受之前"泛起"或上一音位置影响
+    harmonicCtx = false;
+    lastFreq = 0; lastString = 1; lastHui = null;
+    Object.keys(lastHuiByString).forEach(k => delete lastHuiByString[k]);
     const act = window.JianziSemantics.parseToken(token);
     fireAction(act, 1.2, rhythm, tempo || 60);
+    // 点读后清除泛音状态，避免影响下次点读
+    harmonicCtx = false;
     return act;
   }
 
   function stop() {
     playing = false; runId++;
     timers.forEach(clearTimeout); timers = [];
+    currentEvents = []; pausedOffset = 0;
     lastFreq = 0; lastString = 1; lastHui = null; harmonicCtx = false;
     Object.keys(lastHuiByString).forEach(k => delete lastHuiByString[k]);
     if (window.GuqinStage && window.GuqinStage.clear) window.GuqinStage.clear();
   }
   function isPlaying() { return playing; }
 
-  window.GuqinPlayer = { buildTimeline, play, stop, tapToken, isPlaying, rhythmToBeats };
+  window.GuqinPlayer = { buildTimeline, play, stop, pause, resume, tapToken, isPlaying, rhythmToBeats };
 })();
