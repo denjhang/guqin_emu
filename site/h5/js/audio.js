@@ -424,8 +424,8 @@
     // 经过混响链路：dry + wet
     g.connect(dryGain);
     g.connect(reverbNode);
-    // 记录采样基准频率（= targetFreq / rate），供走手音 glide 变调用
-    voices.set(vkey, { s: src, g, base: rate > 0 ? targetFreq / rate : targetFreq });
+    // 记录采样基准频率（= targetFreq / rate）与起始信息，供走手音 glide/vibrato 变调用
+    voices.set(vkey, { s: src, g, base: rate > 0 ? targetFreq / rate : targetFreq, t0: t, bufDur: useBuf.duration });
 
     if (opts.attack) { // 绰/注：线性滑入（SoLoud fadeRelativePlaySpeed 语义）
       const semi = opts.attack === '绰' ? -2 : 2;
@@ -473,8 +473,17 @@
     });
   }
 
+  /* voice 余音可用性：采样剩余可播时间（播放时间域，秒）
+   * 采样播完/包络已收 → 0，此时走手音应回退拨弦 */
+  function voiceRemaining(v, t) {
+    if (!v.bufDur || !v.t0) return 0;
+    const curRate = Math.max(0.05, v.s.playbackRate.value || 1);
+    const remaining = v.bufDur / curRate - (t - v.t0);
+    return isFinite(remaining) ? remaining : 0;
+  }
+
   /* 吟/猱（落指吟/定吟等 carry 装饰）：对正在振动的余音加揉弦颤音，右手不弹。
-   * 返回是否找到了在响的音（无则回退拨弦）。 */
+   * 返回是否找到了可用的余音（无则回退拨弦）。 */
   function vibrato(string, type, sec) {
     const c = ensureCtx();
     const t = c.currentTime;
@@ -483,6 +492,7 @@
     voices.forEach((v, k) => {
       const isPressed = k === 'pressed:' + string || k.startsWith('pressed:' + string + ':');
       if (!isPressed || !v.base) return;
+      if (voiceRemaining(v, t) < dur * 0.5) return;   // 采样将耗尽，回退拨弦
       hit = true;
       try {
         const curRate = Math.max(0.05, v.s.playbackRate.value || 1);
@@ -494,10 +504,11 @@
         lg.gain.linearRampToValueAtTime(curRate * (isNao ? 0.055 : 0.032), t + 0.25);
         lfo.connect(lg); lg.connect(v.s.playbackRate);
         lfo.start(t); lfo.stop(t + dur);
-        // 包络延长至揉弦结束
-        const cur = Math.max(0.002, v.g.gain.value);
+        // 包络：拉回余音水平（弦仍在振动，不应已静音）再揉弦收尾
+        const cur = Math.max(0.05, v.g.gain.value);
         v.g.gain.cancelScheduledValues(t);
         v.g.gain.setValueAtTime(cur, t);
+        v.g.gain.linearRampToValueAtTime(Math.max(cur, 0.35), t + 0.06);
         v.g.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.3);
         v.s.stop(t + dur + 0.35);
       } catch (e) { /* 音已结束 */ }
@@ -516,6 +527,7 @@
     voices.forEach((v, k) => {
       const isPressed = k === 'pressed:' + string || k.startsWith('pressed:' + string + ':');
       if (!isPressed || !v.base) return;
+      if (voiceRemaining(v, t) < dur + 0.2) return;   // 采样将耗尽，回退拨弦
       hit = true;
       try {
         // 变调滑向目标：新 rate = 目标频率 / 采样基准频率
@@ -524,12 +536,13 @@
         pr.cancelScheduledValues(t);
         pr.setValueAtTime(Math.max(0.05, pr.value), t);
         pr.linearRampToValueAtTime(targetRate, t + dur);
-        // 包络延长：保持当前余音音量，滑完后自然收
-        const cur = Math.max(0.002, v.g.gain.value);
+        // 包络：拉回余音水平（弦仍在振动），滑完自然收
+        const cur = Math.max(0.05, v.g.gain.value);
         const g = v.g.gain;
         g.cancelScheduledValues(t);
         g.setValueAtTime(cur, t);
-        g.setValueAtTime(cur, t + dur);
+        g.linearRampToValueAtTime(Math.max(cur, 0.4), t + 0.05);
+        g.setValueAtTime(Math.max(cur, 0.4), t + dur);
         g.exponentialRampToValueAtTime(0.0001, t + dur + 0.4);
         v.s.stop(t + dur + 0.45);   // 重新调度 stop，覆盖原结束时间
       } catch (e) { /* 音已结束 */ }
