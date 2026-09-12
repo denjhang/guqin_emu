@@ -56,10 +56,10 @@
   @keyframes zhuang { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
   /* 顶部滚动谱条 + 琴面（复刻 APK 演奏页布局） */
   #stripWrap { overflow-x:auto; background:var(--paper); border:1px solid #e0d5bb; border-radius:10px; padding:10px 6px; scrollbar-width:thin; }
-  #strip { display:flex; gap:8px; align-items:center; width:max-content; padding:0 40vw; }
+  #strip { display:flex; gap:8px; align-items:center; width:max-content; padding:0 8px; }
   #strip .jz-token.playing { background:#f8d9d9; box-shadow:0 0 0 3px var(--accent); border-radius:8px; }
   #strip .jz-token.done { opacity:.35; }
-  #strip .sep { width:2px; align-self:stretch; min-height:56px; background:#e4d9c3; margin:0 6px; flex:none; }
+  #strip .sep { width:2px; align-self:stretch; min-height:56px; background:#e4d9c3; flex:none; }
   #qinCanvas { width:100%; height:260px; display:block; margin-top:10px; border-radius:10px; }
 
   /* 社区动态 */
@@ -374,6 +374,6 @@
 <script src="js/community.js?v=5"></script>
 <script src="js/musicxml-converter.js?v=2"></script>
 <script src="js/lab.js?v=4"></script>
-<script src="js/app.js?v=32"></script>
+<script src="js/app.js?v=33"></script>
 </body>
 </html>

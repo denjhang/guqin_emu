@@ -255,16 +255,19 @@
   function renderStrip(score) {
     const strip = $('#strip');
     strip.innerHTML = '';
+    // 与大厅规则一致：连续序列，不插行分隔条（sep 会显示为意外空格）
     (score.lines || []).forEach((line, li) => {
-      if (li > 0) { const sep = document.createElement('div'); sep.className = 'sep'; strip.appendChild(sep); }
       const rt = line.rhythmTokens || [];
       let lastR = null;
       (line.jianziTokens || []).forEach((tok, idx) => {
         if (tok.kind === 'blank') return;
         const r = (rt[idx] && rt[idx].kind !== 'blank') ? rt[idx] : lastR;
         if (rt[idx] && rt[idx].kind !== 'blank') lastR = rt[idx];
+        // 控制符标记 jz-ctrl（不占 domIdx），与 renderScore/大厅一致
+        const act = window.JianziSemantics.parseToken(tok);
+        const isCtrl = act.type === 'ctrl';
         const el = document.createElement('button');
-        el.className = 'jz-token' + tokenClass(tok);
+        el.className = 'jz-token' + (isCtrl ? ' jz-ctrl' : '') + tokenClass(tok);
         const beats = window.GuqinPlayer.rhythmToBeats(r);
         const rtxt = r ? r.text : '';
         el.innerHTML = '<span class="jz-rhythm">' + rtxt + '</span>' +
