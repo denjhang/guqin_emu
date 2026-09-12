@@ -10,7 +10,7 @@
   let HARM_FREQ = null;   // "弦-徽序号" → {freq} 网页端权威泛音表
   let soundSource = 'apk';   // 'apk' | 'prof'
   // 混响节点
-  let masterGain = null, reverbNode = null, wetGain = null, dryGain = null, reverbOn = false;
+  let masterGain = null, reverbNode = null, wetGain = null, wetFilter = null, dryGain = null, reverbOn = false;
 
   function ensureCtx() {
     if (!ctx) {
@@ -21,7 +21,9 @@
     return ctx;
   }
 
-  // 轻量化混响：ConvolverNode + 合成指数衰减脉冲响应（无需外部 IR 文件）
+  // 轻量化混响：ConvolverNode + 合成脉冲响应（无需外部 IR 文件）
+  // IR 结构：直达前 12ms 静音 + 早反射簇（模拟房间墙面离散回波）+ 低通衰减噪声尾巴
+  // 纯均匀噪声尾巴能量摊在全频段，卷积后极稀，人耳几乎察觉不到——必须加早反射
   function initReverb() {
     if (!ctx || masterGain) return;
     masterGain = ctx.createGain();
@@ -31,31 +33,51 @@
     wetGain = ctx.createGain();
     wetGain.gain.value = 0;
     reverbNode = ctx.createConvolver();
-    reverbNode.buffer = makeImpulseResponse(ctx, 2.5, 2.0);
+    reverbNode.buffer = makeImpulseResponse(ctx, 2.8, 2.2);
+    // 湿声低通：混响尾音应比干声「闷」一点，营造空间距离感
+    wetFilter = ctx.createBiquadFilter();
+    wetFilter.type = 'lowpass';
+    wetFilter.frequency.value = 3200;
     // 信号流：音符 → dry → master → destination
-    //        音符 → reverb → wet → master
+    //        音符 → reverb → wetFilter → wet → master
     dryGain.connect(masterGain);
-    reverbNode.connect(wetGain);
+    reverbNode.connect(wetFilter);
+    wetFilter.connect(wetGain);
     wetGain.connect(masterGain);
     masterGain.connect(ctx.destination);
   }
-  // 合成脉冲响应：长度秒 + 衰减
+  // 合成脉冲响应：早反射簇（前 80ms 离散回波，房间感的主要来源）+ 噪声尾巴
   function makeImpulseResponse(c, dur, decay) {
     const rate = c.sampleRate;
     const len = Math.floor(rate * dur);
     const buf = c.createBuffer(2, len, rate);
+    // 早反射：左右声道错开的回波位置（ms）与增益
+    const early = [
+      [11, 0.42], [19, 0.35], [29, 0.30], [41, 0.24], [57, 0.20], [73, 0.16],
+    ];
     for (let ch = 0; ch < 2; ch++) {
       const data = buf.getChannelData(ch);
+      // 噪声尾巴：指数衰减，高频随时间衰减更快（一阶低通模拟空气吸声）
+      let lp = 0;
       for (let i = 0; i < len; i++) {
-        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+        const t = i / len;
+        const white = (Math.random() * 2 - 1) * Math.pow(1 - t, decay) * 0.55;
+        lp += (white - lp) * (0.28 - 0.16 * t);   // 截止频率随时间下移
+        data[i] = lp;
       }
+      // 早反射叠加（第二声道时间偏移 ±3ms 去相关，加宽立体声）
+      const off = ch === 0 ? -3 : 3;
+      early.forEach(([ms, amp]) => {
+        const idx = Math.floor((ms + off) / 1000 * rate);
+        if (idx >= 0 && idx < len) data[idx] += amp;
+      });
     }
     return buf;
   }
   function setReverb(on) {
     reverbOn = !!on;
     if (!wetGain) { ensureCtx(); }
-    if (wetGain) wetGain.gain.value = reverbOn ? 0.32 : 0;
+    if (wetGain) wetGain.gain.value = reverbOn ? 0.9 : 0;
   }
   function isReverbOn() { return reverbOn; }
   function init(pitchData, harmData) {
