@@ -41,4 +41,36 @@ cd site && node server.js 8080
 - `bbbabc2` 镜像 + 逆向分析基线
 - `018858e` H5 减字谱引擎（渲染/语义/音频/播放/输入/编辑全链路）
 - `fc59aed` APK 式演奏 UI（谱条+琴面动画）与滑音/颤音音色修正
-- 本提交：blutter 反编译工具链就位（clang-cl 构建，Dart 3.12.2 libapp.so 全量符号产出）
+- blutter 反编译工具链就位（clang-cl 构建，Dart 3.12.2 libapp.so 全量符号产出）
+- `aa235c5` **媒体文件大恢复**：此前会话执行数据集清理命令时作用域误写成仓库根目录，
+  219 个媒体文件（`site/h5/audio` 21 个 APK 采样、`site/h5/img`、`site/h5/community/covers`
+  30 个封面、`site/guqin/audio` 161 个教授采样、research 附图）被整仓扫删。
+  APK 采样从 `apk/` 原包重新解包，其余从 git 索引恢复。详见下方「事故记录」。
+  同批：教授音源采样路径改指 `../guqin/audio/{open,pressed,harm}`；
+  AI 曲库 `/api/gen-scores` 落盘 + 💾同步按钮；曲名长度 1~8 字分布；
+  曲风提示词本地模糊匹配（同义词+bigram Jaccard，无外部 API）。
+- `6013f24` 随机生成引擎回退：LSTM 轮廓/曲风偏置生成的曲目质量差，
+  回退为旧版 ngram + 拱形轮廓引擎。LSTM 推理代码与曲风匹配保留未删，仅不再调用。
+
+## 事故记录（防止重演）
+
+### 2026-09-11 · 清理脚本误删整仓媒体文件
+- **起因**：为学习民歌声乐特征，写了 `download_datasets.ps1` 下载 1 万首民歌
+  musicxml 数据集（约 292MB，存 `D:\temp_extract\folk\`，不进库）。脚本第 35-36 行
+  有一段"清理非 xml/midi 文件"：`Get-ChildItem -Recurse -Include *.mp3,*.png,*.jpg,*.wav,*.pdf | Remove-Item -Force`
+- **事故**：该清理模式实际执行时作用域是**仓库根目录**而非数据集目录，
+  一次性扫删全仓 219 个媒体文件（音频采样、封面图、研究截图）。
+  因从未提交删除动作，git 日志查不到"凶手"，排查了很久。
+- **恢复**：APK 21 个采样从 `apk/` 原包重解；教授 161 个采样与封面从 git 恢复；
+  `aa235c5` 一次性提交全部恢复结果。
+- **教训**：
+  1. **删除类命令必须用绝对路径**指向目标目录，禁止对仓库根递归 `Remove-Item`
+  2. 清理外部数据集一律在**仓库外**的临时目录（`D:\temp_extract\`）进行
+  3. 大批量删除前先 `git status` 确认，删除后立即 commit，留下恢复点
+  4. 此脚本已从仓库移除，数据集留在仓库外的 `D:\temp_extract\folk\`
+
+### 数据落地（民歌学习产物，全部小型精华文件）
+- `site/h5/data/folk_titles.json`（228KB）9260 个去重民歌名 → 防雷同禁止集合
+- `site/h5/data/folk_melody_stats.json` / `guqin_melody_stats.json`（各 ~2KB）音程转移/节奏型/调式统计
+- `site/h5/data/melody_lstm_weights.json`（680KB）LSTM 权重（当前引擎已不使用，保留备用）
+- `scripts/train_melody_lstm.py` PyTorch 训练脚本（CUDA，15 epochs，loss 2.76→1.70）
