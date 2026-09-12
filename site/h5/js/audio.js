@@ -377,6 +377,28 @@
     rate *= (opts.rate || 1);
     const gain = (opts.gain || 0.85) * (open ? 0.7 : 1);
 
+    // 同弦重触：掐断该弦所有在响声部（物理规律：再拨同一根弦，先前振动消掉）
+    // 例外：散音/按音/泛音同时响不算同弦互掐（实际演奏中左手离弦瞬间允许极短重叠 30ms）
+    voices.forEach((pv, pk) => {
+      if (pk === vkey) return;   // 同 key 已在上方处理
+      const sameString = pk === kind + ':' + string
+        || pk.startsWith(kind + ':' + string + ':')
+        || pk.startsWith('open:' + string + ':') || pk === 'open:' + string
+        || pk.startsWith('pressed:' + string + ':') || pk === 'pressed:' + string
+        || pk.startsWith('harmonic:' + string + ':') || pk === 'harmonic:' + string;
+      if (!sameString) return;
+      // 泛音拨响不掐按音（左手虚按点泛音，另一指可按实音，罕见但物理可行）；其余同弦互掐
+      if (kind === 'harmonic' && pk.startsWith('pressed:')) return;
+      if (kind === 'pressed' && pk.startsWith('harmonic:')) return;
+      try {
+        pv.g.gain.cancelScheduledValues(t);
+        pv.g.gain.setValueAtTime(pv.g.gain.value, t);
+        pv.g.gain.linearRampToValueAtTime(0, t + 0.03);
+        pv.s.stop(t + 0.05);
+        voices.delete(pk);
+      } catch (e) { /* 已结束 */ }
+    });
+
     // 同 key 重触：掐断旧音
     const prev = voices.get(vkey);
     if (prev) {
