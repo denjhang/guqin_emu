@@ -305,13 +305,33 @@
       // 滑音与余音重叠。检测「发声事件 + 紧随的滑音」→ 滑音提前到拨弦起音 0.18s 后。
       const isSound = act.type === 'pluck' || act.type === 'chord' || act.type === 'sweep';
       const next = events[i + 1];
+      const isCarryVib = next && next.action.type === 'pluck' && next.action.carry
+        && !next.action.open && next.action.mods
+        && (next.action.mods.includes('吟') || next.action.mods.includes('猱'));
       const mergeSlide = isSound && next && next.action.type === 'slide'
         && !next.action.bounce && ev.dur > 0.3;
+      // 落指吟/定吟前置：真实演奏左手落指即揉，不等拍子走完（等拍子包络已衰，听不出颤音）
+      const mergeVib = isSound && isCarryVib && ev.dur > 0.3;
       later(() => {
         if (!playing || myRun !== runId) return;
         fireAction(act, ev.dur, ev.rhythm, ev.tempo);
         if (currentOnToken) currentOnToken(i, ev);
       }, (ev.t - offsetSec) * 1000);
+      if (mergeVib && !mergeSlide) {
+        // 颤音前置到拨弦起音 0.18s 后；揉弦时长 = 拨弦余下时长 + 自身拍子（延续整段余音）
+        const vibDur = Math.max(0.8, (ev.dur - 0.18) + next.dur);
+        later(() => {
+          if (!playing || myRun !== runId) return;
+          fireAction(next.action, vibDur, next.rhythm, next.tempo);
+        }, (ev.t - offsetSec) * 1000 + 180);
+        if ((next.t - offsetSec) > (ev.t - offsetSec)) {
+          later(() => {
+            if (!playing || myRun !== runId) return;
+            if (currentOnToken) currentOnToken(i + 1, next);
+          }, (next.t - offsetSec) * 1000);
+        }
+        i++;   // 跳过已前置的颤音事件
+      }
       if (mergeSlide) {
         // 滑音时长 = 拨弦余下时长 + 滑音自身拍子（连贯一气）
         const slideDur = Math.max(0.4, (ev.dur - 0.18) + next.dur);
