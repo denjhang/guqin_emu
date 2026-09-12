@@ -219,7 +219,11 @@
   function baseFreq(kind, s, huiIdx, hui) {
     const open = OPEN[s - 1];
     if (kind === 'open') return open;
-    if (kind === 'harmonic') return freqOf(s, hui, true);   // 与目标频率同一张权威表
+    if (kind === 'harmonic') {
+      // APK 泛音采样录于七徽（每弦 1 条），基准 = 七徽泛音频率，按目标徽位变调
+      if (soundSource === 'apk') return freqOf(s, '七徽', true);
+      return freqOf(s, hui, true);   // 教授泛音录于实际徽位（仅滑音用）
+    }
     if (soundSource === 'prof') return freqOf(s, hui, false);   // 教授按音录于实际徽位
     return open * 2;   // APK 按音录于七徽
   }
