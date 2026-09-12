@@ -297,14 +297,38 @@
 
   // 调度事件，支持从 offset 秒处开始（用于暂停恢复）
   function scheduleEvents(events, myRun, offsetSec) {
-    events.forEach((ev, i) => {
-      if (ev.t < offsetSec - 0.01) return; // 已播放过的跳过
+    for (let i = 0; i < events.length; i++) {
+      const ev = events[i];
+      if (ev.t < offsetSec - 0.01) continue; // 已播放过的跳过
+      const act = ev.action;
+      // 走手音前置：真实演奏中「上/下X」在拨弦激发后立即开始滑（左手不等拍子走完），
+      // 滑音与余音重叠。检测「发声事件 + 紧随的滑音」→ 滑音提前到拨弦起音 0.18s 后。
+      const isSound = act.type === 'pluck' || act.type === 'chord' || act.type === 'sweep';
+      const next = events[i + 1];
+      const mergeSlide = isSound && next && next.action.type === 'slide'
+        && !next.action.bounce && ev.dur > 0.3;
       later(() => {
         if (!playing || myRun !== runId) return;
-        fireAction(ev.action, ev.dur, ev.rhythm, ev.tempo);
+        fireAction(act, ev.dur, ev.rhythm, ev.tempo);
         if (currentOnToken) currentOnToken(i, ev);
       }, (ev.t - offsetSec) * 1000);
-    });
+      if (mergeSlide) {
+        // 滑音时长 = 拨弦余下时长 + 滑音自身拍子（连贯一气）
+        const slideDur = Math.max(0.4, (ev.dur - 0.18) + next.dur);
+        later(() => {
+          if (!playing || myRun !== runId) return;
+          fireAction(next.action, slideDur, next.rhythm, next.tempo);
+        }, (ev.t - offsetSec) * 1000 + 180);
+        // 滑音 token 的光标回调仍在原时间点触发（谱面高亮对齐）
+        if ((next.t - offsetSec) > (ev.t - offsetSec)) {
+          later(() => {
+            if (!playing || myRun !== runId) return;
+            if (currentOnToken) currentOnToken(i + 1, next);
+          }, (next.t - offsetSec) * 1000);
+        }
+        i++;   // 跳过已前置的滑音事件（下一轮处理后续事件）
+      }
+    }
   }
 
   function pause() {
