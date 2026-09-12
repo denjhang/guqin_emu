@@ -594,8 +594,8 @@
     const starts = Object.fromEntries(Object.entries(unigram).filter(([k]) => !REPEAT.has(k)));
     const count = targetLen || (8 + Math.floor(Math.random() * 9));
     const sec = section || 'middle';
-    // 用 LSTM 生成旋律轮廓（MIDI 序列），作为每个音的 targetMidi
-    const lstmMelody = lstm ? generateMelodyByLSTM(count, style) : null;
+    // 旧版引擎：拱形轮廓 + 音乐学选音（不使用 LSTM 旋律）
+    const lstmMelody = null;
     const secDist = sectionDist[sec] || {};
     const gp = globalPos != null ? globalPos : 0.5;
     // 拱形目标 MIDI：开头59 → 中间低谷56.8 → 结尾回升59
@@ -658,10 +658,9 @@
       const localPos = count > 1 ? i / (count - 1) : 0.5;
       // 优先用 LSTM 生成的旋律轮廓，否则用拱形
       const targetMidi = lstmMelody ? lstmMelody[i] : (archMidi - 0.8 * Math.sin(localPos * Math.PI));
-      const next = pickNextMusic(prev1, candidates, freqStore, prevDir, prevLeap, targetMidi, style);
+      const next = pickNextMusic(prev1, candidates, freqStore, prevDir, prevLeap, targetMidi);
       const tok = tokenStore[next];
-      // 曲风节奏放缓
-      const rhythm = pickRhythmDist(style && style.rhythmSlow);
+      const rhythm = pickRhythmDist();
       result.push({ token: tok ? cloneToken(tok) : null, rhythm });
       const pf = freqStore[prev1] || 0, nf = freqStore[next] || 0;
       if (pf > 0 && nf > 0) {
@@ -894,7 +893,7 @@
   /* 生成完整曲目：多行，行数和每行长度模仿语料库分布，按段落学习。
    * stylePrompt: 可选提示词（如"秋风""泛音"），控制曲风/技法 */
   function generateFullScore(stylePrompt) {
-    const style = parseStylePrompt(stylePrompt);
+    // 旧版引擎：不解析曲风参数，拱形轮廓 + ngram 生成
     if (!ngramModel || Object.keys(ngramModel.unigram).length === 0) {
       return [{ tokens: randomPhraseTokens() }];
     }
@@ -907,7 +906,7 @@
       // 全局位置 0~1，用于拱形音高轮廓
       const globalPos = lineCount > 1 ? li / (lineCount - 1) : 0.5;
       const targetLen = 5 + Math.floor(Math.random() * 6);
-      const tokens = randomPhraseTokens(targetLen, sec, globalPos, style);
+      const tokens = randomPhraseTokens(targetLen, sec, globalPos);
       if (tokens.length) lines.push({ tokens });
     }
     return lines;
